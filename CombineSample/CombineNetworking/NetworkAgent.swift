@@ -8,7 +8,6 @@ final class NetworkAgent<T: Decodable> {
         URLSession.shared.dataTaskPublisher(for: request)
             .tryMap { $0.data }
             .decode(type: T.self, decoder: JSONDecoder())
-            .receive(on: DispatchQueue(label: "some.background.queue", qos: .background))
             .eraseToAnyPublisher()
             .sink { completed in
                 switch completed {
