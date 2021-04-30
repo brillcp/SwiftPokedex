@@ -53,6 +53,7 @@ final class DetailCell: UITableViewCell, ConfigurableCell {
         self.data = item
         
         textLabel?.text = "\(item.title): \(item.value)"
+        textLabel?.font = .pixel17
         selectionStyle = .none
     }
 }

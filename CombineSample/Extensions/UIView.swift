@@ -29,8 +29,15 @@ extension UIView {
         let imageView = UIImageView(frame: frame)
         imageView.contentMode = .scaleAspectFit
         
-        UIImage.load(from: imageURL) { [weak imageView] image in
-            imageView?.image = image
+        DispatchQueue.global(qos: .userInteractive).async {
+            UIImage.load(from: imageURL) { [weak imageView, weak header] image in
+                let colors = image?.getColors()
+                
+                DispatchQueue.main.async {
+                    header?.backgroundColor = colors?.background
+                    imageView?.image = image
+                }
+            }
         }
         
         header.addSubview(imageView)

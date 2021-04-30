@@ -4,14 +4,12 @@ final class PokedexViewController: CollectionViewController<PokedexCell> {
     
     private let viewModel = ViewModel()
     
-    override var preferredStatusBarStyle: UIStatusBarStyle { .darkContent }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = viewModel.title
         
-        collectionView.backgroundColor = UIColor(hex: "222222")
+        collectionView.backgroundColor = .darkGrey
         collectionView.indicatorStyle = .white
         
         viewModel.requestPokemon { [weak self] result in
@@ -20,6 +18,15 @@ final class PokedexViewController: CollectionViewController<PokedexCell> {
             case let .failure(error): print(error.localizedDescription)
             }
         }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        
+        guard let cell = collectionView.cell(at: indexPath) as? PokedexCell, let item = cell.data else { return }
+        
+        let detailView = DetailViewController(viewModel: DetailViewController.ViewModel(pokemon: item))
+        navigationController?.pushViewController(detailView, animated: true)
     }
 }
 

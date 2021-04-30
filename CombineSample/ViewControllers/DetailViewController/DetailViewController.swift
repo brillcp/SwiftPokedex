@@ -16,6 +16,7 @@ final class DetailViewController: TableViewController<DetailCell> {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .darkGrey
         title = viewModel.title
         
         viewModel.requestPokemon { [weak self] result in

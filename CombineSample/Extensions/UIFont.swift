@@ -9,5 +9,5 @@ import UIKit
 
 extension UIFont {
     
-    static let pixel16 = UIFont(name: "pixelmix Regular", size: 16.0)!
+    static let pixel17 = UIFont(name: "pixelmix Regular", size: 17.0)!
 }

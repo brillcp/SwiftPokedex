@@ -9,6 +9,9 @@ import UIKit
 
 extension UIColor {
 
+    static let darkGrey = UIColor(hex: "222222")
+    static let pokedexRed = UIColor(hex: "d53b47")
+    
     convenience init(hex: String, alpha: CGFloat = 1.0) {
         let scanner = Scanner(string: hex)
         let hexStart = hex[hex.startIndex] == "#"

@@ -13,7 +13,7 @@ final class PokedexCell: UICollectionViewCell, ConfigurableCell {
         let label = UILabel(useAutolayout: true)
         label.textAlignment = .center
         label.textColor = .white
-        label.font = .pixel16
+        label.font = .pixel17
         return label
     }()
 
@@ -62,7 +62,7 @@ final class PokedexCell: UICollectionViewCell, ConfigurableCell {
         PokemonAPI.loadPokemonSprite(from: pokemon.url) { [weak self] result in
             switch result {
             case let .success(image):
-                DispatchQueue.global(qos: .userInitiated).async {
+                DispatchQueue.global(qos: .userInteractive).async {
                     let colors = image?.getColors()
                     
                     DispatchQueue.main.async {

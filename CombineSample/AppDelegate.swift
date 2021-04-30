@@ -4,7 +4,11 @@ import UIKit
 final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        true
+        
+        let attrs: [NSAttributedString.Key : Any] = [.font: UIFont.pixel17, .foregroundColor: UIColor.white]
+        UIBarButtonItem.appearance().setTitleTextAttributes(attrs, for: .normal)
+
+        return true
     }
 
     // MARK: UISceneSession Lifecycle
