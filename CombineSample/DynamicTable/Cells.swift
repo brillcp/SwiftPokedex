@@ -1,5 +1,16 @@
 import UIKit
 
+final class TypeCell: UITableViewCell, ConfigurableCell {
+    var data: PokemonAPI.PokemonType?
+    
+    func configure(with type: PokemonAPI.PokemonType) {
+        self.data = type
+        
+        textLabel?.text = type.rawValue.capitalized
+        accessoryType = .disclosureIndicator
+    }
+}
+
 final class PokemonCell: UITableViewCell, ConfigurableCell {
     var data: Pokemon?
     
@@ -30,15 +41,9 @@ final class PokemonCell: UITableViewCell, ConfigurableCell {
     }
 }
 
-final class TypeCell: UITableViewCell, ConfigurableCell {
-    var data: PokemonAPI.PokemonType?
-    
-    func configure(with type: PokemonAPI.PokemonType) {
-        self.data = type
-        
-        textLabel?.text = type.rawValue.capitalized
-        accessoryType = .disclosureIndicator
-    }
+struct DetailItem {
+    let title: String
+    let value: Int
 }
 
 final class DetailCell: UITableViewCell, ConfigurableCell {
@@ -50,9 +55,4 @@ final class DetailCell: UITableViewCell, ConfigurableCell {
         textLabel?.text = "\(item.title): \(item.value)"
         selectionStyle = .none
     }
-}
-
-struct DetailItem {
-    let title: String
-    let value: Int
 }
