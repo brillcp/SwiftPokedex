@@ -9,7 +9,6 @@ final class TypesViewController: TableViewController<TypeCell> {
         
         title = viewModel.title
         
-        
         viewModel.loadData { data in
             self.tableData = data
         }
