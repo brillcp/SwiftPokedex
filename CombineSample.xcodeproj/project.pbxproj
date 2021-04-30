@@ -109,7 +109,7 @@
 			children = (
 				6E80676C263BF24300FD38F0 /* AppDelegate.swift */,
 				6E80676E263BF24300FD38F0 /* SceneDelegate.swift */,
-				6E9D559A263BFE1500D0DA9D /* ViewController */,
+				6E9D559A263BFE1500D0DA9D /* ViewControllers */,
 				6E806798263BF5E600FD38F0 /* CombineNetworking */,
 				6E80678B263BF44100FD38F0 /* DynamicTable */,
 				6E24A838263C11780013F7E4 /* Extensions */,
@@ -139,14 +139,14 @@
 			path = CombineNetworking;
 			sourceTree = "<group>";
 		};
-		6E9D559A263BFE1500D0DA9D /* ViewController */ = {
+		6E9D559A263BFE1500D0DA9D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				6E9D55A6263C0C9200D0DA9D /* TypesViewController */,
 				6E9D55A9263C0CA000D0DA9D /* PokemonViewController */,
 				6E17061A263C22D300B67F37 /* DetailViewController */,
 			);
-			path = ViewController;
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		6E9D55A6263C0C9200D0DA9D /* TypesViewController */ = {
