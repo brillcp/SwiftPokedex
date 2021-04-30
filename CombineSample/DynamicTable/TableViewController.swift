@@ -16,6 +16,7 @@ class TableViewController<Cell: UITableViewCell>: UITableViewController {
         super.init(style: style)
 
         tableView.registerCell(Cell.self)
+        tableView.registerCell(PokemonCell.self)
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -27,6 +28,10 @@ class TableViewController<Cell: UITableViewCell>: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         tableData.numberOfItems(in: section)
+    }
+
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        tableData.title(in: section)
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

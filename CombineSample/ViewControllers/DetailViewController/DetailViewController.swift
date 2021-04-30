@@ -1,6 +1,6 @@
 import UIKit
 
-final class DetailViewController: TableViewController<DetailCell> {
+final class DetailViewController: TableViewController<IntCell> {
     
     private let viewModel: ViewModel
     
@@ -24,10 +24,20 @@ final class DetailViewController: TableViewController<DetailCell> {
             case let .failure(error): print(error.localizedDescription)
             }
         }
+        
+        let header = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 200))
+        header.backgroundColor = .red
+        tableView.tableHeaderView = header
     }
     
     //MARK: - TableView Delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        guard let cell = tableView.cell(at: indexPath) as? PokemonCell, let pokemon = cell.data else { return }
+
+        let viewModel = DetailViewController.ViewModel(pokemon: pokemon)
+        let detailView = DetailViewController(viewModel: viewModel)
+        navigationController?.pushViewController(detailView, animated: true)
     }
 }
