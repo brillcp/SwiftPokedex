@@ -12,6 +12,10 @@
 		6E806771263BF24400FD38F0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E806770263BF24300FD38F0 /* ViewController.swift */; };
 		6E806776263BF24800FD38F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E806775263BF24800FD38F0 /* Assets.xcassets */; };
 		6E806779263BF24800FD38F0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E806777263BF24800FD38F0 /* LaunchScreen.storyboard */; };
+		6E806787263BF43E00FD38F0 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E806784263BF43E00FD38F0 /* TableViewController.swift */; };
+		6E806788263BF43E00FD38F0 /* CellConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E806785263BF43E00FD38F0 /* CellConfiguration.swift */; };
+		6E806789263BF43E00FD38F0 /* TableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E806786263BF43E00FD38F0 /* TableDataSource.swift */; };
+		6E80678E263BF50900FD38F0 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E80678D263BF50900FD38F0 /* UITableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +26,10 @@
 		6E806775263BF24800FD38F0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6E806778263BF24800FD38F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6E80677A263BF24800FD38F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E806784263BF43E00FD38F0 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		6E806785263BF43E00FD38F0 /* CellConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellConfiguration.swift; sourceTree = "<group>"; };
+		6E806786263BF43E00FD38F0 /* TableDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableDataSource.swift; sourceTree = "<group>"; };
+		6E80678D263BF50900FD38F0 /* UITableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,11 +65,23 @@
 				6E80676C263BF24300FD38F0 /* AppDelegate.swift */,
 				6E80676E263BF24300FD38F0 /* SceneDelegate.swift */,
 				6E806770263BF24300FD38F0 /* ViewController.swift */,
+				6E80678B263BF44100FD38F0 /* DynamicTable */,
 				6E806775263BF24800FD38F0 /* Assets.xcassets */,
 				6E806777263BF24800FD38F0 /* LaunchScreen.storyboard */,
 				6E80677A263BF24800FD38F0 /* Info.plist */,
 			);
 			path = CombineSample;
+			sourceTree = "<group>";
+		};
+		6E80678B263BF44100FD38F0 /* DynamicTable */ = {
+			isa = PBXGroup;
+			children = (
+				6E806784263BF43E00FD38F0 /* TableViewController.swift */,
+				6E806785263BF43E00FD38F0 /* CellConfiguration.swift */,
+				6E806786263BF43E00FD38F0 /* TableDataSource.swift */,
+				6E80678D263BF50900FD38F0 /* UITableView.swift */,
+			);
+			path = DynamicTable;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -134,8 +154,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E806771263BF24400FD38F0 /* ViewController.swift in Sources */,
+				6E806789263BF43E00FD38F0 /* TableDataSource.swift in Sources */,
 				6E80676D263BF24300FD38F0 /* AppDelegate.swift in Sources */,
 				6E80676F263BF24300FD38F0 /* SceneDelegate.swift in Sources */,
+				6E806788263BF43E00FD38F0 /* CellConfiguration.swift in Sources */,
+				6E806787263BF43E00FD38F0 /* TableViewController.swift in Sources */,
+				6E80678E263BF50900FD38F0 /* UITableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
