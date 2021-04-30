@@ -2,7 +2,7 @@ import UIKit
 
 final class TypesViewController: TableViewController<TypeCell> {
     
-    private let viewModel = ViewModel(title: "Pokemon types")
+    private let viewModel = ViewModel(title: "Pokémon types")
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -5,7 +5,7 @@ extension PokemonViewController {
     struct ViewModel {
         let type: PokemonAPI.PokemonType
 
-        var title: String { "\(type.rawValue.capitalized) pokemon" }
+        var title: String { "\(type.rawValue.capitalized) pokémon" }
 
         func requestPokemon(_ completion: @escaping (Result<UITableView.DataSource, Error>) -> Swift.Void) {
             PokemonAPI.requestPokemon(type: type) { result in
