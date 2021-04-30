@@ -8,7 +8,6 @@ final class NetworkAgent {
         URLSession.shared.dataTaskPublisher(for: request)
             .tryMap { $0.data }
             .decode(type: T.self, decoder: JSONDecoder())
-            .eraseToAnyPublisher()
             .sink { completed in
                 switch completed {
                 case let .failure(error): completion(.failure(error))
