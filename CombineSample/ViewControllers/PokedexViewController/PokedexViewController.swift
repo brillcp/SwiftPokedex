@@ -4,10 +4,15 @@ final class PokedexViewController: CollectionViewController<PokedexCell> {
     
     private let viewModel = ViewModel()
     
+    override var preferredStatusBarStyle: UIStatusBarStyle { .darkContent }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = viewModel.title
+        
         collectionView.backgroundColor = UIColor(hex: "222222")
+        collectionView.indicatorStyle = .white
         
         viewModel.requestPokemon { [weak self] result in
             switch result {
