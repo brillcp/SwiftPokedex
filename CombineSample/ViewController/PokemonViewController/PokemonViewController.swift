@@ -20,8 +20,8 @@ final class PokemonViewController: TableViewController<PokemonCell> {
         
         viewModel.requestPokemon { result in
             switch result {
-            case .success(let tableData): self.tableData = tableData
-            case .failure(let error): print(error.localizedDescription)
+            case let .success(tableData): self.tableData = tableData
+            case let .failure(error): print(error.localizedDescription)
             }
         }
     }
