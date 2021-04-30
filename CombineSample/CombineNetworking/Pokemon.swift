@@ -1,10 +1,13 @@
 import Foundation
 
 struct PokemonResponse: Decodable {
-    let results: [Pokemon]
+    let pokemon: [TypePokemon]
 }
 
-struct Pokemon: Codable {
-    let id: String
+struct TypePokemon: Decodable {
+    let pokemon: Pokemon
+}
+
+struct Pokemon: Decodable {
     let name: String
 }

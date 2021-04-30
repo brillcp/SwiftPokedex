@@ -1,15 +1,21 @@
 import UIKit
 import Combine
 
-class TableViewController: UITableViewController {
+class TableViewController<Cell: UITableViewCell>: UITableViewController {
     
     //MARK: - Public properties
-    var tableData: TableDataSource
+    var tableData: TableDataSource {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
     // MARK: - Init
     init(style: UITableView.Style = .insetGrouped, tableData: TableDataSource = .init()) {
         self.tableData = tableData
         super.init(style: style)
+
+        tableView.registerCell(Cell.self)
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
