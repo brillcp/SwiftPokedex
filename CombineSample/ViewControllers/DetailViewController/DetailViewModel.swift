@@ -2,22 +2,27 @@ import UIKit
 
 extension DetailViewController {
 
-    struct ViewModel {
+    final class ViewModel {
         let pokemon: Pokemon
-        
         var title: String { pokemon.name.capitalized }
+        var spriteURL: String?
+        
+        init(pokemon: Pokemon) {
+            self.pokemon = pokemon
+        }
         
         func requestPokemon(_ completion: @escaping (Result<UITableView.DataSource, Error>) -> Swift.Void) {
             PokemonAPI.requestPokemonDetails(from: pokemon.url) { result in
                 switch result {
                 case let .success(response):
-                    let baseXp = CellConfiguration<IntCell, Int>(data: response.baseExperience)
-                    let section = UITableView.Section(title: "Stats", items: [baseXp])
+                    self.spriteURL = response.sprites.imageURL
                     
-                    let forms = response.forms.map { CellConfiguration<PokemonCell, Pokemon>(data: $0) }
-                    let formsSection = UITableView.Section(title: "Forms", items: forms)
-                    
-                    let tableData = UITableView.DataSource(sections: [section, formsSection])
+                    let weight = CellConfiguration<DetailCell, DetailItem>(data: DetailItem(title: "Weight", value: response.weight))
+                    let height = CellConfiguration<DetailCell, DetailItem>(data: DetailItem(title: "Height", value: response.height))
+                    let xp = CellConfiguration<DetailCell, DetailItem>(data: DetailItem(title: "Base XP", value: response.baseExperience))
+                    let section = UITableView.Section(title: "Stats", items: [weight, height, xp])
+
+                    let tableData = UITableView.DataSource(sections: [section])
 
                     DispatchQueue.main.async { completion(.success(tableData)) }
                 case let .failure(error):

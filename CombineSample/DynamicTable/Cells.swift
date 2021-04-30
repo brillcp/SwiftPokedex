@@ -42,24 +42,17 @@ final class TypeCell: UITableViewCell, ConfigurableCell {
 }
 
 final class DetailCell: UITableViewCell, ConfigurableCell {
-    var data: String?
+    var data: DetailItem?
     
-    func configure(with type: String) {
-        self.data = type
+    func configure(with item: DetailItem) {
+        self.data = item
         
-        textLabel?.text = type
+        textLabel?.text = "\(item.title): \(item.value)"
         selectionStyle = .none
     }
 }
 
-final class IntCell: UITableViewCell, ConfigurableCell {
-    var data: Int?
-    
-    func configure(with type: Int) {
-        self.data = type
-        
-        textLabel?.text = "\(type)"
-        selectionStyle = .none
-    }
+struct DetailItem {
+    let title: String
+    let value: Int
 }
-
