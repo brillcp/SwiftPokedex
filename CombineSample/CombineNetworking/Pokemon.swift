@@ -1,6 +1,6 @@
 import Foundation
 
-struct PlacesResponse: Decodable {
+struct PokemonResponse: Decodable {
     let results: [Pokemon]
 }
 

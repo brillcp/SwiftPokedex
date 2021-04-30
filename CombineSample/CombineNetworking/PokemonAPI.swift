@@ -1,12 +1,12 @@
 import Foundation
 import Combine
 
-struct PlacesAPI {
-    private static let agent = NetworkAgent()
-    private static let baseURL = URL(string: "")!
+struct PokemonAPI {
+    private static let baseURL = URL(string: "https://viktorgidlof.com")!
     
-    static func searchPokemons() -> AnyPublisher<PlacesResponse, Error> {
+    static func searchPokemons() throws -> PokemonResponse {
         let request = URLRequest(url: baseURL)
-        return agent.execute(request)
+        let response: PokemonResponse = try NetworkAgent.makeCall(to: request)
+        return response
     }
 }
