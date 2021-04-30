@@ -31,10 +31,10 @@ extension UIView {
         
         DispatchQueue.global(qos: .userInteractive).async {
             UIImage.load(from: imageURL) { [weak imageView, weak header] image in
-                let colors = image?.getColors()
+                let color = image?.dominantColor
                 
                 DispatchQueue.main.async {
-                    header?.backgroundColor = colors?.background
+                    header?.backgroundColor = color
                     imageView?.image = image
                 }
             }
