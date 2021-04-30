@@ -31,5 +31,9 @@ final class PokemonViewController: TableViewController<PokemonCell> {
     //MARK: - TableView Delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        guard let cell = tableView.cell(at: indexPath) as? PokemonCell, let item = cell.data else { return }
+
+        print()
     }
 }

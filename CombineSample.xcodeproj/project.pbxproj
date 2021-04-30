@@ -136,7 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				6E9D55A6263C0C9200D0DA9D /* TypesViewController */,
-				6E9D55A9263C0CA000D0DA9D /* TypeViewController */,
+				6E9D55A9263C0CA000D0DA9D /* PokemonViewController */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -150,13 +150,13 @@
 			path = TypesViewController;
 			sourceTree = "<group>";
 		};
-		6E9D55A9263C0CA000D0DA9D /* TypeViewController */ = {
+		6E9D55A9263C0CA000D0DA9D /* PokemonViewController */ = {
 			isa = PBXGroup;
 			children = (
 				6E806770263BF24300FD38F0 /* PokemonViewController.swift */,
 				6E9D5596263BFC0400D0DA9D /* ViewModel.swift */,
 			);
-			path = TypeViewController;
+			path = PokemonViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
