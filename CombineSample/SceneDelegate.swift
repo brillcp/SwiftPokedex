@@ -8,7 +8,9 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = scene as? UIWindowScene else { return }
         
         window = UIWindow(windowScene: scene)
-        window?.rootViewController = ViewController()
+        
+        let navigation = UINavigationController(rootViewController: TypesViewController())
+        window?.rootViewController = navigation
         window?.makeKeyAndVisible()
     }
 }

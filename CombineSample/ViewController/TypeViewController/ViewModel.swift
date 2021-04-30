@@ -1,11 +1,13 @@
 import UIKit
 
-extension ViewController {
+extension PokemonViewController {
 
     struct ViewModel {
-        let title: String
-        
-        func requestPokemon(type: PokemonAPI.PokemonType, _ completion: @escaping (Result<TableDataSource, Error>) -> Swift.Void) {
+        let type: PokemonAPI.PokemonType
+
+        var title: String { "\(type.rawValue.capitalized) pokemons" }
+
+        func requestPokemon(_ completion: @escaping (Result<TableDataSource, Error>) -> Swift.Void) {
             do {
                 let response = try PokemonAPI.requestPokemon(type: type)
                 let pokemon = response.pokemon.sorted(by: { $0.pokemon.name < $1.pokemon.name })

@@ -4,8 +4,8 @@ import Combine
 struct PokemonAPI {
     private static let baseURL = URL(string: "https://pokeapi.co/api/v2/")!
     
-    enum PokemonType: String {
-        case ground
+    enum PokemonType: String, CaseIterable {
+        case ground, flying, fire, water
     }
     
     static func requestPokemon(type: PokemonType) throws -> PokemonResponse {
