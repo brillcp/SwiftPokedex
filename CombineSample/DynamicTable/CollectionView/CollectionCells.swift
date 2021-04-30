@@ -25,7 +25,7 @@ final class PokedexCell: UICollectionViewCell, ConfigurableCell {
         super.init(frame: frame)
         
         contentView.addSubview(imageView)
-        imageView.pinToSuperview(with: UIEdgeInsets(top: 0, left: 0, bottom: 30, right: 0), edges: .all)
+        imageView.pinToSuperview(with: UIEdgeInsets(top: 0, left: 0, bottom: 35, right: 0), edges: .all)
         
         contentView.addSubview(titleLabel)
         NSLayoutConstraint.activate([
@@ -63,10 +63,10 @@ final class PokedexCell: UICollectionViewCell, ConfigurableCell {
             switch result {
             case let .success(image):
                 DispatchQueue.global(qos: .userInteractive).async {
-                    let colors = image?.getColors()
+                    let color = image?.dominantColor
                     
                     DispatchQueue.main.async {
-                        self?.backgroundColor = colors?.background
+                        self?.backgroundColor = color
                         self?.imageView.image = image
                     }
                 }
