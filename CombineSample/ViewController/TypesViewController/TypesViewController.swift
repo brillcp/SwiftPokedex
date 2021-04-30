@@ -20,7 +20,8 @@ final class TypesViewController: TableViewController<TypeCell> {
         
         guard let cell = tableView.cell(at: indexPath) as? TypeCell, let item = cell.data else { return }
 
-        let viewController = PokemonViewController(viewModel: PokemonViewController.ViewModel(type: item))
+        let viewModel = PokemonViewController.ViewModel(type: item)
+        let viewController = PokemonViewController(viewModel: viewModel)
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

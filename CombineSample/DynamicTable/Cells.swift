@@ -20,3 +20,14 @@ final class TypeCell: UITableViewCell, ConfigurableCell {
         accessoryType = .disclosureIndicator
     }
 }
+
+final class DetailCell: UITableViewCell, ConfigurableCell {
+    var data: String?
+    
+    func configure(with type: String) {
+        self.data = type
+        
+        textLabel?.text = type
+        selectionStyle = .none
+    }
+}

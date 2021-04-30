@@ -5,10 +5,10 @@ extension TypesViewController {
     struct ViewModel {
         let title: String
         
-        func loadData(_ completion: @escaping (TableDataSource) -> Swift.Void) {
+        func loadData(_ completion: @escaping (UITableView.DataSource) -> Swift.Void) {
             let cells = PokemonAPI.PokemonType.allCases.map { CellConfiguration<TypeCell, PokemonAPI.PokemonType>(data: $0) }
-            let section = TableSection(items: cells)
-            let tableData = TableDataSource(sections: [section])
+            let section = UITableView.Section(items: cells)
+            let tableData = UITableView.DataSource(sections: [section])
             completion(tableData)
         }
     }

@@ -1,15 +1,17 @@
-import Foundation
+import UIKit
 
-struct TableSection {
-    var title: String? = nil
-    let items: [CellConfigurator]
+extension UITableView {
+    struct Section {
+        var title: String? = nil
+        let items: [CellConfigurator]
+    }
+
+    struct DataSource {
+        var sections = [Section]()
+    }
 }
 
-struct TableDataSource {
-    var sections = [TableSection]()
-}
-
-extension TableDataSource {
+extension UITableView.DataSource {
     
     var hasData: Bool { !sections.isEmpty }
     

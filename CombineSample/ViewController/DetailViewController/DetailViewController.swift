@@ -1,7 +1,7 @@
 import UIKit
 
-final class PokemonViewController: TableViewController<PokemonCell> {
-
+final class DetailViewController: TableViewController<DetailCell> {
+    
     private let viewModel: ViewModel
     
     // MARK: - Init
@@ -11,7 +11,7 @@ final class PokemonViewController: TableViewController<PokemonCell> {
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-    
+
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,11 +29,5 @@ final class PokemonViewController: TableViewController<PokemonCell> {
     //MARK: - TableView Delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        guard let cell = tableView.cell(at: indexPath) as? PokemonCell, let pokemon = cell.data else { return }
-
-        let viewModel = DetailViewController.ViewModel(pokemon: pokemon)
-        let detailView = DetailViewController(viewModel: viewModel)
-        navigationController?.pushViewController(detailView, animated: true)
     }
 }

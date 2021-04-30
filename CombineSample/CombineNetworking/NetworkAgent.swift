@@ -1,10 +1,10 @@
 import Foundation
 import Combine
 
-final class NetworkAgent<T: Decodable> {
+final class NetworkAgent {
     private var cancellables = Set<AnyCancellable>()
     
-    func execute(_ request: URLRequest, _ completion: @escaping (Result<T, Error>) -> Swift.Void) {
+    func execute<T: Decodable>(_ request: URLRequest, completion: @escaping (Result<T, Error>) -> Swift.Void) {
         URLSession.shared.dataTaskPublisher(for: request)
             .tryMap { $0.data }
             .decode(type: T.self, decoder: JSONDecoder())

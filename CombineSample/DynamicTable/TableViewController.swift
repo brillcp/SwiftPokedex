@@ -4,14 +4,14 @@ import Combine
 class TableViewController<Cell: UITableViewCell>: UITableViewController {
     
     //MARK: - Public properties
-    var tableData: TableDataSource {
+    var tableData: UITableView.DataSource {
         didSet {
             tableView.reloadData()
         }
     }
     
     // MARK: - Init
-    init(style: UITableView.Style = .insetGrouped, tableData: TableDataSource = .init()) {
+    init(style: UITableView.Style = .insetGrouped, tableData: UITableView.DataSource = .init()) {
         self.tableData = tableData
         super.init(style: style)
 
