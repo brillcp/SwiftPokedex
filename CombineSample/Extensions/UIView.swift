@@ -6,8 +6,8 @@ extension UIView {
         let imageView = UIImageView(frame: frame)
         imageView.contentMode = .scaleAspectFit
         
-        UIImage.load(from: imageURL) { image in
-            imageView.image = image
+        UIImage.load(from: imageURL) { [weak imageView] image in
+            imageView?.image = image
         }
         
         header.addSubview(imageView)

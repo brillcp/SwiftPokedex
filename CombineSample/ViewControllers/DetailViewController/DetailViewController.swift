@@ -19,11 +19,10 @@ final class DetailViewController: TableViewController<DetailCell> {
         title = viewModel.title
         
         viewModel.requestPokemon { [weak self] result in
-            guard let self = self else { return }
             switch result {
             case let .success(tableData):
-                self.tableData = tableData
-                self.setupTableHeader()
+                self?.tableData = tableData
+                self?.setupTableHeader()
             case let .failure(error):
                 print(error.localizedDescription)
             }

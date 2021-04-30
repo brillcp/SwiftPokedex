@@ -9,8 +9,8 @@ final class TypesViewController: TableViewController<TypeCell> {
         
         title = viewModel.title
         
-        viewModel.loadData { data in
-            self.tableData = data
+        viewModel.loadData { [weak self] data in
+            self?.tableData = data
         }
     }
     
