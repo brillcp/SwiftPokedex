@@ -1,6 +1,15 @@
 import UIKit
 
 extension UITableView {
+    struct Section {
+        var title: String? = nil
+        let items: [CellConfigurator]
+    }
+
+    struct DataSource {
+        var sections = [Section]()
+    }
+
     func cell<Cell: UITableViewCell>(at indexPath: IndexPath) -> Cell? {
         cellForRow(at: indexPath) as? Cell
     }
@@ -15,5 +24,27 @@ extension UITableView {
 
     private func reuseIdentifier<Cell: UITableViewCell>(for cell: Cell.Type) -> String {
         String(describing: cell)
+    }
+}
+
+extension UITableView.DataSource {
+    
+    var hasData: Bool { !sections.isEmpty }
+    
+    func numberOfSections() -> Int {
+        sections.count
+    }
+    
+    func numberOfItems(in section: Int) -> Int {
+        guard section < sections.count else { return 0 }
+        return sections[section].items.count
+    }
+    
+    func title(in section: Int) -> String? {
+        sections[section].title
+    }
+    
+    func item(at indexPath: IndexPath) -> CellConfigurator {
+        sections[indexPath.section].items[indexPath.row]
     }
 }
