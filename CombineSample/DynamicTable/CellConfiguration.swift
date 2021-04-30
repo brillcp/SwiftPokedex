@@ -20,7 +20,7 @@ final class CellConfiguration<Cell: ConfigurableCell, Data>: CellConfigurator wh
     var rowHeight: CGFloat
     let data: Data
     
-    init(data: Data, rowHeight: CGFloat = 44.0) {
+    init(data: Data, rowHeight: CGFloat = 56.0) {
         self.data = data
         self.rowHeight = rowHeight
     }
