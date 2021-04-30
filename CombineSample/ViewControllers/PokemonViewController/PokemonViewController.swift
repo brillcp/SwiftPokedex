@@ -18,9 +18,12 @@ final class PokemonViewController: TableViewController<PokemonCell> {
         
         title = viewModel.title
         
-        viewModel.requestPokemon { result in
+        spinner.startAnimating()
+        
+        viewModel.requestPokemon { [weak self] result in
+            self?.tableView.backgroundView = nil
             switch result {
-            case let .success(tableData): self.tableData = tableData
+            case let .success(tableData): self?.tableData = tableData
             case let .failure(error): print(error.localizedDescription)
             }
         }

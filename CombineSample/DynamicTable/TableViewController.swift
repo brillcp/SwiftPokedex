@@ -3,9 +3,12 @@ import Combine
 
 class TableViewController<Cell: UITableViewCell>: UITableViewController {
     
+    let spinner = UIActivityIndicatorView()
+    
     //MARK: - Public properties
     var tableData: UITableView.DataSource {
         didSet {
+            spinner.stopAnimating()
             tableView.reloadData()
         }
     }
@@ -17,6 +20,8 @@ class TableViewController<Cell: UITableViewCell>: UITableViewController {
 
         tableView.registerCell(Cell.self)
         tableView.registerCell(PokemonCell.self)
+        
+        tableView.backgroundView = spinner
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
