@@ -8,8 +8,17 @@ struct PokemonAPI {
         case electric, ground, flying, fire, water, grass, psychic, normal, poison, ghost, fairy, fighting
     }
     
-    static func requestPokemon(type: PokemonType, _ completion: @escaping (Result<PokemonResponse, Error>) -> Swift.Void) {
-        let url = baseURL.appendingPathComponent("type/" + type.rawValue)
+    static func requestPokemon(_ completion: @escaping (Result<PokemonResponse, Error>) -> Swift.Void) {
+        var url = baseURL.appendingPathComponent("pokemon")
+        
+        let query = URLQueryItem(name: "limit", value: "151")
+        
+        guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true) else { return }
+        urlComponents.queryItems = [query]
+        
+        guard let finalURL = urlComponents.url else { return }
+        url = finalURL
+        
         let request = URLRequest(url: url)
         agent.execute(request, completion: completion)
     }

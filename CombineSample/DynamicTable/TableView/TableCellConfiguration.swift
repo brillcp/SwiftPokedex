@@ -7,13 +7,13 @@ protocol ConfigurableCell {
     func configure(with data: DataType)
 }
 
-protocol CellConfigurator {
+protocol TableCellConfigurator {
     static var reuseId: String { get }
     var rowHeight: CGFloat { get }
     func configureCell(_ cell: UITableViewCell)
 }
 
-final class CellConfiguration<Cell: ConfigurableCell, Data>: CellConfigurator where Data == Cell.DataType {
+final class TableCellConfiguration<Cell: ConfigurableCell, Data>: TableCellConfigurator where Data == Cell.DataType {
     
     static var reuseId: String { String(describing: Cell.self) }
     

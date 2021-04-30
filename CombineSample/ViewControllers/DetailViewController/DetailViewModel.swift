@@ -17,9 +17,9 @@ extension DetailViewController {
                 case let .success(response):
                     self.spriteURL = response.sprites.imageURL
                     
-                    let weight = CellConfiguration<DetailCell, DetailItem>(data: DetailItem(title: "Weight", value: response.weight))
-                    let height = CellConfiguration<DetailCell, DetailItem>(data: DetailItem(title: "Height", value: response.height))
-                    let xp = CellConfiguration<DetailCell, DetailItem>(data: DetailItem(title: "Base XP", value: response.baseExperience))
+                    let weight = TableCellConfiguration<DetailCell, DetailItem>(data: DetailItem(title: "Weight", value: response.weight))
+                    let height = TableCellConfiguration<DetailCell, DetailItem>(data: DetailItem(title: "Height", value: response.height))
+                    let xp = TableCellConfiguration<DetailCell, DetailItem>(data: DetailItem(title: "Base XP", value: response.baseExperience))
                     let section = UITableView.Section(title: "Stats", items: [weight, height, xp])
 
                     let tableData = UITableView.DataSource(sections: [section])

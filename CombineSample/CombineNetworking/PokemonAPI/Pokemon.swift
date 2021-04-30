@@ -1,7 +1,7 @@
 import Foundation
 
 struct PokemonResponse: Decodable {
-    let pokemon: [TypePokemon]
+    let results: [Pokemon]
 }
 
 struct TypePokemon: Decodable {
@@ -31,6 +31,6 @@ struct Sprite: Decodable {
     let imageURL: String
     
     private enum CodingKeys: String, CodingKey {
-        case imageURL = "front_shiny"
+        case imageURL = "front_default"
     }
 }

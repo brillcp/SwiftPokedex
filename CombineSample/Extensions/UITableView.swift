@@ -3,7 +3,7 @@ import UIKit
 extension UITableView {
     struct Section {
         var title: String? = nil
-        let items: [CellConfigurator]
+        let items: [TableCellConfigurator]
     }
 
     struct DataSource {
@@ -18,7 +18,7 @@ extension UITableView {
         register(Cell.self, forCellReuseIdentifier: reuseIdentifier(for: cell))
     }
 
-    func dequeueCell<Cell: UITableViewCell>(for item: CellConfigurator) -> Cell {
+    func dequeueCell<Cell: UITableViewCell>(for item: TableCellConfigurator) -> Cell {
         dequeueReusableCell(withIdentifier: type(of: item).reuseId) as! Cell
     }
 
@@ -44,7 +44,7 @@ extension UITableView.DataSource {
         sections[section].title
     }
     
-    func item(at indexPath: IndexPath) -> CellConfigurator {
+    func item(at indexPath: IndexPath) -> TableCellConfigurator {
         sections[indexPath.section].items[indexPath.row]
     }
 }

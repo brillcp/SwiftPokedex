@@ -6,7 +6,10 @@ final class NetworkAgent {
     
     func execute<T: Decodable>(_ request: URLRequest, completion: @escaping (Result<T, Error>) -> Swift.Void) {
         URLSession.shared.dataTaskPublisher(for: request)
-            .tryMap { $0.data }
+            .tryMap {
+//                print($0.data.prettyJSON ?? "no json")
+                return $0.data
+            }
             .decode(type: T.self, decoder: JSONDecoder())
             .sink { completed in
                 switch completed {
