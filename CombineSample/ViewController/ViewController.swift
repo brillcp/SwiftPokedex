@@ -1,6 +1,6 @@
 import UIKit
 
-final class ViewController<Cell: UITableViewCell>: TableViewController<Cell> {
+final class ViewController: TableViewController<PokemonCell> {
 
     private let viewModel = ViewModel(title: "Pokedex")
     
