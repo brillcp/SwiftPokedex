@@ -3,6 +3,12 @@ import UIKit
 final class PokedexCell: UICollectionViewCell, ConfigurableCell {
     
     // MARK: - Private properties
+    private lazy var imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
     private lazy var indexLabel: UILabel = {
         let label = UILabel(useAutolayout: true)
         label.textAlignment = .right
@@ -11,12 +17,6 @@ final class PokedexCell: UICollectionViewCell, ConfigurableCell {
         return label
     }()
 
-    private lazy var imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
-    
     private lazy var titleLabel: UILabel = {
         let label = UILabel(useAutolayout: true)
         label.textAlignment = .center
