@@ -16,10 +16,11 @@ final class DetailViewController: TableViewController<DetailCell> {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.separatorStyle = .none
         view.backgroundColor = .darkGrey
         title = viewModel.title
         
-        viewModel.requestPokemon { [weak self] result in
+        viewModel.requestPokemonDetails { [weak self] result in
             switch result {
             case let .success(tableData):
                 self?.tableData = tableData
@@ -30,23 +31,25 @@ final class DetailViewController: TableViewController<DetailCell> {
         }
     }
     
-    // MARK: - Functions
-    private func setupTableHeader() {
-        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 200)
-        
-        guard let imageURL = viewModel.spriteURL else { return }
-        
-        tableView.tableHeaderView = .detailHeader(frame: frame, imageURL: imageURL)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        navigationController?.navigationBar.barTintColor = viewModel.color
+        navigationController?.navigationBar.shadowImage = UIImage()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        navigationController?.navigationBar.barTintColor = .pokedexRed
+        navigationController?.navigationBar.shadowImage = nil
     }
     
-    // MARK: - TableView Delegate
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+    // MARK: - Functions
+    private func setupTableHeader() {
+        guard let imageURL = viewModel.spriteURL else { return }
         
-        guard let cell = tableView.cell(at: indexPath) as? PokemonCell, let pokemon = cell.data else { return }
-
-        let viewModel = DetailViewController.ViewModel(pokemon: pokemon)
-        let detailView = DetailViewController(viewModel: viewModel)
-        navigationController?.pushViewController(detailView, animated: true)
+        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 320)
+        tableView.tableHeaderView = .detailHeader(frame: frame, imageURL: imageURL, backgroundColor: viewModel.color)
     }
 }

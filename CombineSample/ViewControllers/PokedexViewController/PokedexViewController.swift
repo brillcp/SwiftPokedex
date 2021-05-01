@@ -12,7 +12,7 @@ final class PokedexViewController: CollectionViewController<PokedexCell> {
         collectionView.backgroundColor = .darkGrey
         collectionView.indicatorStyle = .white
         
-        viewModel.requestPokemon { [weak self] result in
+        viewModel.requestPokemons { [weak self] result in
             switch result {
             case let .success(dataSource): self?.collectionData = dataSource
             case let .failure(error): print(error.localizedDescription)
@@ -23,9 +23,10 @@ final class PokedexViewController: CollectionViewController<PokedexCell> {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         
-        guard let cell = collectionView.cell(at: indexPath) as? PokedexCell, let item = cell.data else { return }
+        guard let cell = collectionView.cell(at: indexPath) as? PokedexCell, let pokemon = cell.data else { return }
         
-        let detailView = DetailViewController(viewModel: DetailViewController.ViewModel(pokemon: item))
+        let viewModel = DetailViewController.ViewModel(pokemon: pokemon, color: cell.backgroundColor)
+        let detailView = DetailViewController(viewModel: viewModel)
         navigationController?.pushViewController(detailView, animated: true)
     }
 }

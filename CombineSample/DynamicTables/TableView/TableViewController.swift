@@ -19,7 +19,6 @@ class TableViewController<Cell: UITableViewCell>: UITableViewController {
         super.init(style: style)
 
         tableView.registerCell(Cell.self)
-        tableView.registerCell(PokemonCell.self)
         
         tableView.backgroundView = spinner
     }
@@ -35,8 +34,14 @@ class TableViewController<Cell: UITableViewCell>: UITableViewController {
         tableData.numberOfItems(in: section)
     }
 
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        tableData.title(in: section)
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let title = tableData.title(in: section) else { return nil }
+        return UIView.tableHeader(title: title, in: tableView)
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        guard let title = tableData.title(in: section) else { return 0.0 }
+        return UIView.tableHeader(title: title, in: tableView).frame.height
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

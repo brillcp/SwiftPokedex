@@ -8,10 +8,10 @@ struct PokemonAPI {
         case electric, ground, flying, fire, water, grass, psychic, normal, poison, ghost, fairy, fighting
     }
     
-    static func requestPokemon(_ completion: @escaping (Result<PokemonResponse, Error>) -> Swift.Void) {
+    static func requestPokemons(_ completion: @escaping (Result<PokemonResponse, Error>) -> Swift.Void) {
         var url = baseURL.appendingPathComponent("pokemon")
         
-        let query = URLQueryItem(name: "limit", value: "151")
+        let query = URLQueryItem(name: "limit", value: "2000")
         
         guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true) else { return }
         urlComponents.queryItems = [query]
@@ -30,12 +30,12 @@ struct PokemonAPI {
         agent.execute(request, completion: completion)
     }
     
-    static func loadPokemonSprite(from urlString: String, _ completion: @escaping (Result<UIImage?, Error>) -> Swift.Void) {
+    static func loadPokemonSprite(from urlString: String, _ completion: @escaping (Result<(UIImage?, Int), Error>) -> Swift.Void) {
         requestPokemonDetails(from: urlString) { result in
             switch result {
             case let .success(details):
                 UIImage.load(from: details.sprites.imageURL) { image in
-                    completion(.success(image))
+                    completion(.success((image, details.id)))
                 }
             case let .failure(error):
                 completion(.failure(error))
