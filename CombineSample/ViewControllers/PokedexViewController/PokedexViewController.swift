@@ -39,7 +39,6 @@ final class PokedexViewController: CollectionViewController<PokedexCell> {
 extension PokedexViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
         let size = (collectionView.bounds.width - 60) / 2
         return CGSize(width: size, height: size)
     }
