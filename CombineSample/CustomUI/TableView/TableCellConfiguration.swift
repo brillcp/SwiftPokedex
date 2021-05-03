@@ -34,7 +34,7 @@ final class TableCellConfiguration<Cell: ConfigurableCell, Data>: TableCellConfi
 typealias DetailCellConfig = TableCellConfiguration<DetailCell, DetailItem>
 
 extension TableCellConfiguration {
-        
+    
     static func weightCell(value: Int) -> DetailCellConfig {
         DetailCellConfig(data: DetailItem(title: "Weight", value: value.kilo), rowHeight: 50.0)
     }
@@ -42,7 +42,7 @@ extension TableCellConfiguration {
     static func heightCell(value: Int) -> DetailCellConfig {
         DetailCellConfig(data: DetailItem(title: "Height", value: value.meter), rowHeight: 50.0)
     }
-
+    
     static func abilitiesCell(values: [Ability]) -> DetailCellConfig {
         let abilities = values.map { $0.ability.name.cleaned }.joined(separator: "\n\n")
         return DetailCellConfig(data: DetailItem(title: "Abilities", value: abilities), rowHeight: UITableView.automaticDimension)
@@ -52,7 +52,7 @@ extension TableCellConfiguration {
         let types = values.map { $0.type.name.cleaned }.joined(separator: ", ")
         return DetailCellConfig(data: DetailItem(title: "Type", value: types), rowHeight: UITableView.automaticDimension)
     }
-
+    
     static func movesCell(values: [Move]) -> DetailCellConfig {
         let moves = values.map { $0.move.name.cleaned }.joined(separator: ", ")
         return DetailCellConfig(data: DetailItem(title: "Moves", value: moves), rowHeight: UITableView.automaticDimension)
