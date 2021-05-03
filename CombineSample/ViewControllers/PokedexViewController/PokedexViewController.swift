@@ -29,8 +29,7 @@ final class PokedexViewController: CollectionViewController<PokedexCell> {
         
         guard let cell = collectionView.cell(at: indexPath) as? PokedexCell, let pokemon = cell.data else { return }
         
-        let viewModel = DetailViewController.ViewModel(pokemon: pokemon, color: cell.backgroundColor)
-        let detailView = DetailViewController(viewModel: viewModel)
+        let detailView = DetailViewBuilder.build(pokemon: pokemon, color: cell.backgroundColor)
         navigationController?.pushViewController(detailView, animated: true)
     }
 }

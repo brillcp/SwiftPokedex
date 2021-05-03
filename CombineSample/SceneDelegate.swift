@@ -9,8 +9,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: scene)
         
-        let layout: UICollectionViewFlowLayout = .pokedexLayout
-        let navigation = NavigationController(rootViewController: PokedexViewController(layout: layout))
+        let viewController = PokedexViewBuilder.build()
+        let navigation = NavigationController(rootViewController: viewController)
 
         window?.rootViewController = navigation
         window?.makeKeyAndVisible()
