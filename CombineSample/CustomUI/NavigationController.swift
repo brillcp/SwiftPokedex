@@ -2,6 +2,10 @@ import UIKit
 
 final class NavigationController: UINavigationController {
     
+    override var childForStatusBarStyle: UIViewController? {
+        topViewController?.childForStatusBarStyle ?? topViewController
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -9,11 +13,5 @@ final class NavigationController: UINavigationController {
         navigationBar.barTintColor = .pokedexRed
         navigationBar.isTranslucent = false
         navigationBar.tintColor = .white
-    }
-}
-
-extension NavigationController {
-    public override var childForStatusBarStyle: UIViewController? {
-        topViewController?.childForStatusBarStyle ?? topViewController
     }
 }
