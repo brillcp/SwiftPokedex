@@ -73,7 +73,7 @@ final class PokedexCell: UICollectionViewCell, ConfigurableCell {
         
         titleLabel.text = pokemon.name.capitalized
         
-        PokemonAPI.loadPokemonSprite(from: pokemon.url) { [weak self] result in
+        PokemonAPI.loadSprite(from: pokemon.url) { [weak self] result in
             switch result {
             case let .success(tuple):
                 DispatchQueue.global(qos: .userInteractive).async {
