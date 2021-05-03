@@ -61,26 +61,3 @@ final class DetailCell: UITableViewCell, ConfigurableCell {
         selectionStyle = .none
     }
 }
-
-final class RegularCell: UITableViewCell, ConfigurableCell {
-    var data: String?
-    
-    func configure(with item: String) {
-        self.data = item
-        
-        textLabel?.text = item
-        textLabel?.font = .pixel17
-        selectionStyle = .none
-    }
-}
-
-extension Int {
-    
-    var meter: String {
-        String(format: "%.1f m", Double(self) / 10.0)
-    }
-    
-    var kilo: String {
-        String(format: "%.1f kg", Double(self) / 10.0)
-    }
-}
