@@ -1,10 +1,3 @@
-//
-//  UIColor.swift
-//  CombineSample
-//
-//  Created by Viktor Gidlöf on 2021-04-30.
-//
-
 import UIKit
 
 extension UIColor {
