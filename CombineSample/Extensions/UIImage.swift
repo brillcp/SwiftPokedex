@@ -1,9 +1,12 @@
 import UIKit
+import Combine
+
+fileprivate var cancellables = Set<AnyCancellable>()
 
 extension UIImage {
     
     static func load(from urlString: String, _ completion: @escaping (UIImage?) -> Swift.Void) {
-        DispatchQueue.global(qos: .userInteractive).async {
+        DispatchQueue.global(qos: .userInitiated).async {
             guard let imageURL = URL(string: urlString) else { DispatchQueue.main.async { completion(nil) }; return }
             let request = URLRequest(url: imageURL)
 
@@ -11,14 +14,20 @@ extension UIImage {
             if let data = cache.cachedResponse(for: request)?.data, let image = UIImage(data: data) {
                 DispatchQueue.main.async { completion(image) }
             } else {
-                URLSession.shared.dataTask(with: request) { data, response, _ in
-                    guard let data = data, let response = response, let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode < 300, let image = UIImage(data: data)
-                    else { DispatchQueue.main.async { completion(nil) }; return }
-
-                    let cachedImage = CachedURLResponse(response: response, data: data)
-                    cache.storeCachedResponse(cachedImage, for: request)
-                    DispatchQueue.main.async { completion(image) }
-                }.resume()
+                URLSession.shared.dataTaskPublisher(for: request)
+                    .tryMap { (response: $0.response, data: $0.data) }
+                    .sink { completed in
+                        switch completed {
+                        case .failure: DispatchQueue.main.async { completion(nil) }
+                        case .finished: break
+                        }
+                    } receiveValue: { value in
+                        let image = UIImage(data: value.data)
+                        let cachedImage = CachedURLResponse(response: value.response, data: value.data)
+                        cache.storeCachedResponse(cachedImage, for: request)
+                        DispatchQueue.main.async { completion(image) }
+                    }
+                    .store(in: &cancellables)
             }
         }
     }
