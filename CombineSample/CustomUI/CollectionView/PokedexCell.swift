@@ -26,7 +26,7 @@ final class PokedexCell: UICollectionViewCell, ConfigurableCell {
     }()
 
     // MARK: - Public properties
-    var data: Item?
+    var data: APIItem?
     
     // MARK: - Init
     override init(frame: CGRect) {
@@ -68,27 +68,23 @@ final class PokedexCell: UICollectionViewCell, ConfigurableCell {
     }
     
     // MARK: - Functions
-    func configure(with pokemon: Item) {
+    func configure(with pokemon: APIItem) {
         data = pokemon
         
         titleLabel.text = pokemon.name.capitalized
         
-        PokemonAPI.loadSprite(from: pokemon.url) { [weak self] result in
-            switch result {
-            case let .success(tuple):
-                DispatchQueue.global(qos: .userInteractive).async {
-                    let image = tuple.image
-                    let color = image?.dominantColor ?? .white
-                    
-                    DispatchQueue.main.async {
-                        self?.backgroundColor = color
-                        self?.indexLabel.text = "#\(tuple.index)"
-                        self?.imageView.image = image
-                        self?.titleLabel.textColor = color.isLight ? .black : .white
-                        self?.indexLabel.textColor = color.isLight ? .black : .white
-                    }
+        PokemonAPI.loadSprite(from: pokemon.url) { [weak self] tuple in
+            DispatchQueue.global(qos: .userInteractive).async {
+                let image = tuple.image
+                let color = image?.dominantColor ?? .white
+                
+                DispatchQueue.main.async {
+                    self?.backgroundColor = color
+                    self?.indexLabel.text = "#\(tuple.index)"
+                    self?.imageView.image = image
+                    self?.titleLabel.textColor = color.isLight ? .black : .white
+                    self?.indexLabel.textColor = color.isLight ? .black : .white
                 }
-            case .failure: break
             }
         }
     }

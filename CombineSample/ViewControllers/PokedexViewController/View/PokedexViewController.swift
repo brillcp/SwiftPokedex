@@ -22,9 +22,9 @@ final class PokedexViewController: CollectionViewController<PokedexCell> {
         title = viewModel.title
         
         collectionView.backgroundColor = .darkGrey
-        collectionView.indicatorStyle = .white
+        navigationItem.backButtonTitle = ""
         
-        viewModel.requestPokemons { [weak self] result in
+        viewModel.requestData { [weak self] result in
             switch result {
             case let .success(dataSource): self?.collectionData = dataSource
             case let .failure(error): print(error.localizedDescription)

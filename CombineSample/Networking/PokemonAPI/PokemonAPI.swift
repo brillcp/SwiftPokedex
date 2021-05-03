@@ -4,8 +4,13 @@ struct PokemonAPI {
     private static let agent = NetworkAgent()
     private static let baseURL = URL(string: "https://pokeapi.co/api/v2/")!
     
-    static func requestPokemons(_ completion: @escaping (Result<PokemonResponse, Error>) -> Swift.Void) {
-        var url = baseURL.appendingPathComponent("pokemon")
+    enum ItemType: String {
+        case pokemons = "pokemon"
+        case items = "item"
+    }
+    
+    static func request(_ type: ItemType, _ completion: @escaping (Result<APIResponse, Error>) -> Swift.Void) {
+        var url = baseURL.appendingPathComponent(type.rawValue)
         
         let query = URLQueryItem(name: "limit", value: "2000")
         
@@ -19,6 +24,13 @@ struct PokemonAPI {
         agent.execute(request, completion: completion)
     }
     
+    static func requestDetails<T: Decodable>(from urlString: String, completion: @escaping (Result<T, Error>) -> Swift.Void) {
+        guard let url = URL(string: urlString) else { return }
+        
+        let request = URLRequest(url: url)
+        agent.execute(request, completion: completion)
+    }
+
     static func requestPokemonDetails(from urlString: String, _ completion: @escaping (Result<PokemonDetails, Error>) -> Swift.Void) {
         guard let url = URL(string: urlString) else { return }
         
@@ -26,16 +38,31 @@ struct PokemonAPI {
         agent.execute(request, completion: completion)
     }
     
-    static func loadSprite(from urlString: String, _ completion: @escaping (Result<(image: UIImage?, index: Int), Error>) -> Swift.Void) {
-        requestPokemonDetails(from: urlString) { result in
+    static func loadItemSprite(from urlString: String, _ completion: @escaping (UIImage?) -> Swift.Void) {
+        let completion: (Result<Item, Error>) -> Swift.Void = { result in
+            switch result {
+            case let .success(item):
+                UIImage.load(from: item.sprites.default) { image in
+                    completion(image)
+                }
+            case .failure: completion(nil)
+            }
+        }
+        
+        requestDetails(from: urlString, completion: completion)
+    }
+
+    static func loadSprite(from urlString: String, _ completion: @escaping ((image: UIImage?, index: Int)) -> Swift.Void) {
+        let completion: (Result<PokemonDetails, Error>) -> Swift.Void = { result in
             switch result {
             case let .success(details):
                 UIImage.load(from: details.sprite.url) { image in
-                    completion(.success((image, details.id)))
+                    completion((image, details.id))
                 }
-            case let .failure(error):
-                completion(.failure(error))
+            case .failure: completion((nil, 0))
             }
         }
+        
+        requestDetails(from: urlString, completion: completion)
     }
 }

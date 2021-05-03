@@ -33,6 +33,7 @@
 		6EC5FCCB263CA5D1005B04ED /* UICollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC5FCCA263CA5D1005B04ED /* UICollectionViewFlowLayout.swift */; };
 		6EC5FCD0263CA824005B04ED /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC5FCCF263CA824005B04ED /* NavigationController.swift */; };
 		6EC94FE8263C84D4003E0117 /* PokedexViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC94FE7263C84D4003E0117 /* PokedexViewModel.swift */; };
+		6ED962BA2640923500D5F032 /* ItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED962B92640923500D5F032 /* ItemsViewController.swift */; };
 		6EFC2127263C7B19004389D9 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC2126263C7B19004389D9 /* CollectionViewController.swift */; };
 		6EFC212B263C7BA7004389D9 /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC212A263C7BA7004389D9 /* UICollectionView.swift */; };
 		6EFC2130263C7F2A004389D9 /* CollectionCellConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC212F263C7F2A004389D9 /* CollectionCellConfiguration.swift */; };
@@ -71,6 +72,7 @@
 		6EC5FCCA263CA5D1005B04ED /* UICollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		6EC5FCCF263CA824005B04ED /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		6EC94FE7263C84D4003E0117 /* PokedexViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokedexViewModel.swift; sourceTree = "<group>"; };
+		6ED962B92640923500D5F032 /* ItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsViewController.swift; sourceTree = "<group>"; };
 		6EFC2126263C7B19004389D9 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		6EFC212A263C7BA7004389D9 /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
 		6EFC212F263C7F2A004389D9 /* CollectionCellConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCellConfiguration.swift; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 		6E9D559A263BFE1500D0DA9D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				6ED962B92640923500D5F032 /* ItemsViewController.swift */,
 				6EC94FEA263C854B003E0117 /* PokedexViewController */,
 				6E17061A263C22D300B67F37 /* DetailViewController */,
 			);
@@ -362,6 +365,7 @@
 				6E806796263BF5E200FD38F0 /* NetworkAgent.swift in Sources */,
 				6E806788263BF43E00FD38F0 /* TableCellConfiguration.swift in Sources */,
 				6EFC2127263C7B19004389D9 /* CollectionViewController.swift in Sources */,
+				6ED962BA2640923500D5F032 /* ItemsViewController.swift in Sources */,
 				6E806787263BF43E00FD38F0 /* TableViewController.swift in Sources */,
 				6E55385826406B660060C25B /* DetailViewBuilder.swift in Sources */,
 				6E4752B5263C2101007888ED /* DetailViewModel.swift in Sources */,

@@ -1,10 +1,10 @@
 import Foundation
 
 struct PokemonResponse: Decodable {
-    let results: [Item]
+    let results: [APIItem]
 }
 
-struct Item: Decodable {
+struct APIItem: Decodable {
     let name: String
     let url: String
 }
@@ -15,7 +15,7 @@ struct PokemonDetails: Decodable {
     let weight: Int
     let height: Int
     let baseExperience: Int
-    let forms: [Item]
+    let forms: [APIItem]
     let sprite: Sprite
     let abilities: [Ability]
     let moves: [Move]
@@ -38,23 +38,36 @@ struct Sprite: Decodable {
 }
 
 struct Ability: Decodable {
-    let ability: Item
+    let ability: APIItem
 }
 
 struct Move: Decodable {
-    let move: Item
+    let move: APIItem
 }
 
 struct Type: Decodable {
-    let type: Item
+    let type: APIItem
 }
 
 struct Stat: Decodable {
     let baseStat: Int
-    let stat: Item
+    let stat: APIItem
     
     private enum CodingKeys: String, CodingKey {
         case stat
         case baseStat = "base_stat"
     }
+}
+
+struct APIResponse: Decodable {
+    let results: [APIItem]
+}
+
+struct Item: Decodable {
+    let sprites: ItemSprite
+    let category: APIItem
+}
+
+struct ItemSprite: Decodable {
+    let `default`: String
 }

@@ -15,3 +15,23 @@ final class NavigationController: UINavigationController {
         navigationBar.tintColor = .white
     }
 }
+
+final class TabbarController: UITabBarController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupTabbar()
+        
+        tabBar.barTintColor = .darkGrey
+        tabBar.isTranslucent = false
+        tabBar.tintColor = .white
+    }
+    
+    // MARK: - Private functions
+    private func setupTabbar() {
+        let wheelList = PokedexViewBuilder.build()
+        let list = ItemsViewBuilder.build()
+        setViewControllers([wheelList, list], animated: false)
+    }
+}

@@ -18,8 +18,8 @@ class TableViewController<Cell: UITableViewCell>: UITableViewController {
         super.init(style: style)
 
         tableView.registerCell(Cell.self)
-        
         tableView.backgroundView = spinner
+        tableView.indicatorStyle = .white
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }

@@ -22,7 +22,7 @@ final class DetailViewController: TableViewController<DetailCell> {
         view.backgroundColor = .darkGrey
         title = viewModel.title
         
-        viewModel.requestPokemonDetails { [weak self] result in
+        viewModel.requestData { [weak self] result in
             switch result {
             case let .success(tableData):
                 self?.tableData = tableData

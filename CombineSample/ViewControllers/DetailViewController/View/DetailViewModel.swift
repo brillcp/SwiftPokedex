@@ -2,20 +2,20 @@ import UIKit
 
 extension DetailViewController {
 
-    final class ViewModel {
-        let pokemon: Item
+    final class ViewModel: ViewModelProtocol {
+        let pokemon: APIItem
         let color: UIColor?
 
         var title: String { pokemon.name.capitalized }
         var isLight: Bool { color?.isLight ?? true }
         var spriteURL: String?
         
-        init(pokemon: Item, color: UIColor?) {
+        init(pokemon: APIItem, color: UIColor?) {
             self.pokemon = pokemon
             self.color = color
         }
         
-        func requestPokemonDetails(_ completion: @escaping (Result<UITableView.DataSource, Error>) -> Swift.Void) {
+        func requestData(_ completion: @escaping (Result<UITableView.DataSource, Error>) -> Void) {
             PokemonAPI.requestPokemonDetails(from: pokemon.url) { result in
                 switch result {
                 case let .success(response):

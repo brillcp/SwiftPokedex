@@ -15,6 +15,7 @@ class CollectionViewController<Cell: UICollectionViewCell>: UICollectionViewCont
         super.init(collectionViewLayout: layout)
 
         collectionView.registerCell(Cell.self)
+        collectionView.indicatorStyle = .white
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
