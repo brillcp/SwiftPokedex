@@ -4,6 +4,9 @@ final class PokedexViewController: CollectionViewController<PokedexCell> {
     
     private let viewModel = ViewModel()
     
+    override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
+
+    // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,6 +23,7 @@ final class PokedexViewController: CollectionViewController<PokedexCell> {
         }
     }
     
+    // MARK: - Collection View Delegate
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         
@@ -31,6 +35,7 @@ final class PokedexViewController: CollectionViewController<PokedexCell> {
     }
 }
 
+// MARK: - Collection View Layout
 extension PokedexViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

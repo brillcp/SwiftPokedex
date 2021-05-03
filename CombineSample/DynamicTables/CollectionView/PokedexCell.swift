@@ -78,12 +78,15 @@ final class PokedexCell: UICollectionViewCell, ConfigurableCell {
             case let .success(tuple):
                 DispatchQueue.global(qos: .userInteractive).async {
                     let image = tuple.0
-                    let color = image?.dominantColor
+                    let color = image?.dominantColor ?? .white
                     
+
                     DispatchQueue.main.async {
                         self?.backgroundColor = color
                         self?.indexLabel.text = "#\(tuple.1)"
                         self?.imageView.image = image
+                        self?.titleLabel.textColor = color.isLight ? .black : .white
+                        self?.indexLabel.textColor = color.isLight ? .black : .white
                     }
                 }
             case .failure: break

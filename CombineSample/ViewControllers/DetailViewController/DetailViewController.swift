@@ -4,6 +4,8 @@ final class DetailViewController: TableViewController<DetailCell> {
     
     private let viewModel: ViewModel
     
+    override var preferredStatusBarStyle: UIStatusBarStyle { viewModel.isLight ? .default : .lightContent }
+
     // MARK: - Init
     init(viewModel: ViewModel) {
         self.viewModel = viewModel
@@ -36,12 +38,23 @@ final class DetailViewController: TableViewController<DetailCell> {
 
         navigationController?.navigationBar.barTintColor = viewModel.color
         navigationController?.navigationBar.shadowImage = UIImage()
+        
+        if viewModel.isLight {
+            UIBarButtonItem.appearance().setTitleTextAttributes([.font: UIFont.pixel14, .foregroundColor: UIColor.red], for: .normal)
+            
+            UIBarButtonItem.appearance().setTitleTextAttributes([.font: UIFont.pixel17, .foregroundColor: UIColor.black], for: .normal)
+            navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.pixel17, .foregroundColor: UIColor.black]
+            navigationController?.navigationBar.tintColor = .black
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
+        UIBarButtonItem.appearance().setTitleTextAttributes([.font: UIFont.pixel17, .foregroundColor: UIColor.white], for: .normal)
+        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.pixel17, .foregroundColor: UIColor.white]
         navigationController?.navigationBar.barTintColor = .pokedexRed
+        navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.shadowImage = nil
     }
     

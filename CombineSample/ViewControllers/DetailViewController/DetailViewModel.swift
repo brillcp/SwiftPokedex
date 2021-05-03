@@ -7,6 +7,7 @@ extension DetailViewController {
         let color: UIColor?
 
         var title: String { pokemon.name.capitalized }
+        var isLight: Bool { color?.isLight ?? true }
         var spriteURL: String?
         
         init(pokemon: Item, color: UIColor?) {

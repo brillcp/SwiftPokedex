@@ -5,8 +5,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let attrs: [NSAttributedString.Key : Any] = [.font: UIFont.pixel17, .foregroundColor: UIColor.white]
-        UIBarButtonItem.appearance().setTitleTextAttributes(attrs, for: .normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes([.font: UIFont.pixel17, .foregroundColor: UIColor.white], for: .normal)
 
         return true
     }
