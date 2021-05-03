@@ -4,10 +4,10 @@ import Combine
 final class NetworkAgent {
     private var cancellables = Set<AnyCancellable>()
     
-    func execute<T: Decodable>(_ request: URLRequest, completion: @escaping (Result<T, Error>) -> Swift.Void) {
+    func execute<T: Decodable>(_ request: URLRequest, logJSON: Bool = false, completion: @escaping (Result<T, Error>) -> Swift.Void) {
         URLSession.shared.dataTaskPublisher(for: request)
             .tryMap {
-//                print($0.data.prettyJSON ?? "no json")
+                if logJSON { print($0.data.prettyJSON ?? "no json") }
                 return $0.data
             }
             .decode(type: T.self, decoder: JSONDecoder())
