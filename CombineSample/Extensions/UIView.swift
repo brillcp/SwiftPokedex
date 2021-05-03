@@ -51,7 +51,7 @@ extension UIView {
         let header = UIView(frame: CGRect(x: 0, y: 0, width: width, height: headerHeight))
 
         let labelHeight: CGFloat = 20.0
-        let label = UILabel(frame: CGRect(x: 0, y: header.frame.height - labelHeight, width: width - 40, height: labelHeight))
+        let label = UILabel(frame: CGRect(x: 15.0, y: header.frame.height - labelHeight, width: width - 40, height: labelHeight))
         label.textColor = .white
         label.font = .pixel14
         label.text = title
