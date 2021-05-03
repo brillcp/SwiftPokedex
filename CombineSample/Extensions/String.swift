@@ -2,7 +2,5 @@ import Foundation
 
 extension String {
     
-    var cleaned: String {
-        self.replacingOccurrences(of: "-", with: " ").capitalized
-    }
+    var cleaned: String { replacingOccurrences(of: "-", with: " ").capitalized }
 }
