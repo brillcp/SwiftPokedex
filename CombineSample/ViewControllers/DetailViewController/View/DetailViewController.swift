@@ -35,24 +35,12 @@ final class DetailViewController: TableViewController<DetailCell> {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        navigationController?.navigationBar.barTintColor = viewModel.color
-        navigationController?.navigationBar.shadowImage = UIImage()
-        
-        if viewModel.isLight {
-            navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.pixel17, .foregroundColor: UIColor.black]
-            navigationController?.navigationBar.tintColor = .black
-        }
+        viewWillAppear()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
-        UIBarButtonItem.appearance().setTitleTextAttributes([.font: UIFont.pixel17, .foregroundColor: UIColor.white], for: .normal)
-        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.pixel17, .foregroundColor: UIColor.white]
-        navigationController?.navigationBar.barTintColor = .pokedexRed
-        navigationController?.navigationBar.tintColor = .white
-        navigationController?.navigationBar.shadowImage = nil
+        viewWillDisappear()
     }
     
     // MARK: - Functions
@@ -61,5 +49,24 @@ final class DetailViewController: TableViewController<DetailCell> {
         
         let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 320)
         tableView.tableHeaderView = .detailHeader(frame: frame, imageURL: imageURL, backgroundColor: viewModel.color)
+    }
+    
+    private func viewWillAppear() {
+        navigationController?.navigationBar.barTintColor = viewModel.color
+        navigationController?.navigationBar.shadowImage = UIImage()
+        
+        if viewModel.isLight {
+            navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.pixel17, .foregroundColor: UIColor.black]
+            navigationController?.navigationBar.tintColor = .black
+        }
+    }
+    
+    private func viewWillDisappear() {
+        UIBarButtonItem.appearance().setTitleTextAttributes([.font: UIFont.pixel17, .foregroundColor: UIColor.white], for: .normal)
+        
+        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.pixel17, .foregroundColor: UIColor.white]
+        navigationController?.navigationBar.barTintColor = .pokedexRed
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.shadowImage = nil
     }
 }
