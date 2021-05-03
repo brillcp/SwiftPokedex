@@ -16,29 +16,31 @@ extension DetailViewController {
         }
         
         func requestData(_ completion: @escaping (Result<UITableView.DataSource, Error>) -> Void) {
-            PokemonAPI.requestPokemonDetails(from: pokemon.url) { result in
+            let completion: (Result<PokemonDetails, Error>) -> Swift.Void = { [weak self] result in
                 switch result {
                 case let .success(response):
-                    self.spriteURL = response.sprite.url
-                    
+                    self?.spriteURL = response.sprite.url
+
                     let types: DetailCellConfig = .typesCell(values: response.types)
                     let weight: DetailCellConfig = .weightCell(value: response.weight)
                     let height: DetailCellConfig = .heightCell(value: response.height)
                     let abilities: DetailCellConfig = .abilitiesCell(values: response.abilities)
                     let infoSection = UITableView.Section(title: "Info", items: [types, weight, height, abilities])
-                    
+
                     let stats = response.stats
                         .filter {$0.stat.name != "special-attack" && $0.stat.name != "special-defense" }
                         .map { DetailCellConfig(data: DetailItem(title: $0.stat.name.cleaned, value: "\($0.baseStat)" )) }
-                    
+
                     let statSection = UITableView.Section(title: "Base Stats", items: stats)
                     let tableData = UITableView.DataSource(sections: [infoSection, statSection])
-                    
+
                     DispatchQueue.main.async { completion(.success(tableData)) }
                 case let .failure(error):
                     DispatchQueue.main.async { completion(.failure(error)) }
                 }
             }
+            
+            PokemonAPI.requestDetails(from: pokemon.url, completion: completion)
         }
     }
 }

@@ -30,13 +30,6 @@ struct PokemonAPI {
         let request = URLRequest(url: url)
         agent.execute(request, completion: completion)
     }
-
-    static func requestPokemonDetails(from urlString: String, _ completion: @escaping (Result<PokemonDetails, Error>) -> Swift.Void) {
-        guard let url = URL(string: urlString) else { return }
-        
-        let request = URLRequest(url: url)
-        agent.execute(request, completion: completion)
-    }
     
     static func loadItemSprite(from urlString: String, _ completion: @escaping (UIImage?) -> Swift.Void) {
         let completion: (Result<Item, Error>) -> Swift.Void = { result in
