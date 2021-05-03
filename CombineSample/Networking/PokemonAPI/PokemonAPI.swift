@@ -26,7 +26,7 @@ struct PokemonAPI {
         agent.execute(request, completion: completion)
     }
     
-    static func loadPokemonSprite(from urlString: String, _ completion: @escaping (Result<(UIImage?, Int), Error>) -> Swift.Void) {
+    static func loadPokemonSprite(from urlString: String, _ completion: @escaping (Result<(image: UIImage?, index: Int), Error>) -> Swift.Void) {
         requestPokemonDetails(from: urlString) { result in
             switch result {
             case let .success(details):

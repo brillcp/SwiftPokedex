@@ -40,9 +40,6 @@ final class DetailViewController: TableViewController<DetailCell> {
         navigationController?.navigationBar.shadowImage = UIImage()
         
         if viewModel.isLight {
-            UIBarButtonItem.appearance().setTitleTextAttributes([.font: UIFont.pixel14, .foregroundColor: UIColor.red], for: .normal)
-            
-            UIBarButtonItem.appearance().setTitleTextAttributes([.font: UIFont.pixel17, .foregroundColor: UIColor.black], for: .normal)
             navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.pixel17, .foregroundColor: UIColor.black]
             navigationController?.navigationBar.tintColor = .black
         }

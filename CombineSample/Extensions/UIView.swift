@@ -40,8 +40,15 @@ extension UIView {
         fillerView.frame.origin.y -= fillerView.frame.height - frame.height
         
         header.addSubview(fillerView)
-        
         header.addSubview(imageView)
+        
+        let cornerHeight: CGFloat = 30.0
+        let cornerView = UIView(frame: CGRect(x: 0, y: 0, width: header.frame.width, height: cornerHeight))
+        cornerView.backgroundColor = .darkGrey
+        cornerView.frame.origin.y = header.frame.height - (cornerHeight / 2)
+        cornerView.roundedView(corners: [.topLeft, .topRight])
+        header.addSubview(cornerView)
+        
         return header
     }
     
@@ -57,5 +64,14 @@ extension UIView {
         label.text = title
         header.addSubview(label)
         return header
+    }
+    
+    
+    func roundedView(corners: UIRectCorner = .allCorners, radius: CGFloat = 30.0) {
+        let maskPath1 = UIBezierPath(roundedRect: bounds, byRoundingCorners: [.topLeft , .topRight], cornerRadii: CGSize(width: radius, height: radius))
+        let maskLayer1 = CAShapeLayer()
+        maskLayer1.frame = bounds
+        maskLayer1.path = maskPath1.cgPath
+        layer.mask = maskLayer1
     }
 }
