@@ -79,7 +79,7 @@ final class ItemCell: UITableViewCell, ConfigurableCell {
         
         contentView.addSubview(itemImageView)
         NSLayoutConstraint.activate([
-            itemImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            itemImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15.0),
             itemImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             itemImageView.widthAnchor.constraint(equalToConstant: 60.0),
             itemImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
@@ -116,7 +116,7 @@ final class ItemCell: UITableViewCell, ConfigurableCell {
 final class ItemsViewBuilder {
     
     static func build() -> NavigationController {
-        let viewController = ItemsViewController()
+        let viewController = ItemsViewController(style: .plain)
         let navigationController = NavigationController(rootViewController: viewController)
         return navigationController
     }
