@@ -44,7 +44,7 @@ extension TableCellConfiguration {
     }
 
     static func abilitiesCell(values: [Ability]) -> DetailCellConfig {
-        let abilities = values.map { $0.ability.name.cleaned }.joined(separator: ",\n\n")
+        let abilities = values.map { $0.ability.name.cleaned }.joined(separator: "\n\n")
         return DetailCellConfig(data: DetailItem(title: "Abilities", value: abilities), rowHeight: UITableView.automaticDimension)
     }
     
