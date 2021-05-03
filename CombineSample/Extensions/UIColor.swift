@@ -1,7 +1,6 @@
 import UIKit
 
 extension UIColor {
-
     static let darkGrey = UIColor(hex: "222222")
     static let pokedexRed = UIColor(hex: "d53b47")
     

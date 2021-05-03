@@ -1,7 +1,6 @@
 import UIKit
 
 extension UICollectionViewFlowLayout {
-    
     static var pokedexLayout: UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         let spacing: CGFloat = 20.0
