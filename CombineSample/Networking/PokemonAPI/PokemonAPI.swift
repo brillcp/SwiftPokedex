@@ -3,10 +3,6 @@ import UIKit
 struct PokemonAPI {
     private static let agent = NetworkAgent()
     private static let baseURL = URL(string: "https://pokeapi.co/api/v2/")!
-
-    enum PokemonType: String, CaseIterable {
-        case electric, ground, flying, fire, water, grass, psychic, normal, poison, ghost, fairy, fighting
-    }
     
     static func requestPokemons(_ completion: @escaping (Result<PokemonResponse, Error>) -> Swift.Void) {
         var url = baseURL.appendingPathComponent("pokemon")
