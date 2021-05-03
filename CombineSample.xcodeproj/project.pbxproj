@@ -244,9 +244,9 @@
 		6E9D559A263BFE1500D0DA9D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				6EF0F6E42640C11B00C2AED8 /* ItemsViewController */,
 				6EC94FEA263C854B003E0117 /* PokedexViewController */,
 				6E17061A263C22D300B67F37 /* DetailViewController */,
+				6EF0F6E42640C11B00C2AED8 /* ItemsViewController */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
