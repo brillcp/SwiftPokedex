@@ -21,7 +21,7 @@ extension UIColor {
     }
     
     var isLight: Bool {
-        guard let components = cgColor.components else { return false }
+        guard let components = cgColor.components, components.count > 2 else { return false }
         
         let r = components[0] * 299
         let b = components[1] * 587
