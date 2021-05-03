@@ -19,8 +19,8 @@ fileprivate struct UIImageColorsCounter {
 
 fileprivate extension Double {
     
-    private var r: Double { fmod(floor(self / 1000000),1000000) }
-    private var g: Double { fmod(floor(self / 1000),1000) }
+    private var r: Double { fmod(floor(self / 1000000), 1000000) }
+    private var g: Double { fmod(floor(self / 1000), 1000) }
     private var b: Double { fmod(self, 1000) }
     
     var uicolor: UIColor { UIColor(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: 1) }
