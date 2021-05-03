@@ -7,6 +7,7 @@ final class PokedexViewController: CollectionViewController<PokedexCell> {
     
     override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
     
+    // MARK: - Init
     init(interactor: PokedexInteractorProtocol) {
         self.interactor = interactor
         super.init(layout: UICollectionViewFlowLayout.pokedexLayout)
