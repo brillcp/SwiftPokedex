@@ -80,7 +80,6 @@ final class PokedexCell: UICollectionViewCell, ConfigurableCell {
                     let image = tuple.image
                     let color = image?.dominantColor ?? .white
                     
-
                     DispatchQueue.main.async {
                         self?.backgroundColor = color
                         self?.indexLabel.text = "#\(tuple.index)"
