@@ -3,9 +3,17 @@ import UIKit
 final class PokedexViewController: CollectionViewController<PokedexCell> {
     
     private let viewModel = ViewModel()
+    private let interactor: PokedexInteractorProtocol
     
     override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
-
+    
+    init(interactor: PokedexInteractorProtocol) {
+        self.interactor = interactor
+        super.init(layout: UICollectionViewFlowLayout.pokedexLayout)
+    }
+    
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,10 +35,7 @@ final class PokedexViewController: CollectionViewController<PokedexCell> {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         
-        guard let cell = collectionView.cell(at: indexPath) as? PokedexCell, let pokemon = cell.data else { return }
-        
-        let detailView = DetailViewBuilder.build(pokemon: pokemon, color: cell.backgroundColor)
-        navigationController?.pushViewController(detailView, animated: true)
+        interactor.selectPokemon(at: indexPath, in: collectionView)        
     }
 }
 

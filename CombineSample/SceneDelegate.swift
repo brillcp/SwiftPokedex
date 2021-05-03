@@ -8,11 +8,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = scene as? UIWindowScene else { return }
         
         window = UIWindow(windowScene: scene)
-        
-        let viewController = PokedexViewBuilder.build()
-        let navigation = NavigationController(rootViewController: viewController)
-
-        window?.rootViewController = navigation
+        window?.rootViewController = PokedexViewBuilder.build()
         window?.makeKeyAndVisible()
     }
 }
