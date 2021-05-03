@@ -16,23 +16,24 @@ struct PokemonDetails: Decodable {
     let height: Int
     let baseExperience: Int
     let forms: [Item]
-    let sprites: Sprite
+    let sprite: Sprite
     let abilities: [Ability]
     let moves: [Move]
     let types: [Type]
     let stats: [Stat]
     
     private enum CodingKeys: String, CodingKey {
-        case id, name, weight, height, forms, sprites, abilities, moves, types, stats
+        case id, name, weight, height, forms, abilities, moves, types, stats
         case baseExperience = "base_experience"
+        case sprite = "sprites"
     }
 }
 
 struct Sprite: Decodable {
-    let imageURL: String
+    let url: String
     
     private enum CodingKeys: String, CodingKey {
-        case imageURL = "front_default"
+        case url = "front_default"
     }
 }
 

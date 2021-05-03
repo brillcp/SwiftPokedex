@@ -18,7 +18,7 @@ extension DetailViewController {
             PokemonAPI.requestPokemonDetails(from: pokemon.url) { result in
                 switch result {
                 case let .success(response):
-                    self.spriteURL = response.sprites.imageURL
+                    self.spriteURL = response.sprite.url
                     
                     let types: DetailCellConfig = .typesCell(values: response.types)
                     let weight: DetailCellConfig = .weightCell(value: response.weight)

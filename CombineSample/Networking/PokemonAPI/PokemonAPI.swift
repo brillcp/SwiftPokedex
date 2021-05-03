@@ -34,7 +34,7 @@ struct PokemonAPI {
         requestPokemonDetails(from: urlString) { result in
             switch result {
             case let .success(details):
-                UIImage.load(from: details.sprites.imageURL) { image in
+                UIImage.load(from: details.sprite.url) { image in
                     completion(.success((image, details.id)))
                 }
             case let .failure(error):
