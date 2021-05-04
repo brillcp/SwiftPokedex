@@ -1,6 +1,8 @@
+![icon](https://user-images.githubusercontent.com/15960525/117062071-47808e00-ad23-11eb-83df-95d8efadac58.png)
+
 #SwiftPokedex
 
-Is a simple iOS app written by Viktor Gidlöf that implements the PokeAPI.
+Is a simple iOS app written by Viktor Gidlöf that implements the [PokeAPI](https://pokeapi.co).
 
 ##Architecture SwiftPokedex is written in my own interpretation of the RIB archtitecure created by Uber. The name RIBs is short for Router, Interactor and Builder, which are core components of the architecture.
 
