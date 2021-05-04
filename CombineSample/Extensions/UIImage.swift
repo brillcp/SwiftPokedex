@@ -4,6 +4,9 @@ import Combine
 fileprivate var cancellables = Set<AnyCancellable>()
 
 extension UIImage {
+    static let pokedex = UIImage(named: "pokedex-icon")
+    static let items = UIImage(named: "items-icon")
+
     static func load(from urlString: String, _ completion: @escaping (UIImage?) -> Swift.Void) {
         DispatchQueue.global(qos: .userInitiated).async {
             guard let imageURL = URL(string: urlString) else { DispatchQueue.main.async { completion(nil) }; return }
