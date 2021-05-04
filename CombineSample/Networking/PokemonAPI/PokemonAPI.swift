@@ -13,7 +13,7 @@ struct PokemonAPI {
     
     // MARK: - Public functions
     static func allItems(_ completion: @escaping (Result<[ItemDetails], Error>) -> Swift.Void) {
-        requestItems()?.flatMap { response in
+        request(.items, limit: 250)?.flatMap { response in
             Publishers.Sequence(sequence: response.results.compactMap { itemDetails(from: $0.url) })
                 .flatMap { $0 }
                 .collect()
@@ -25,7 +25,7 @@ struct PokemonAPI {
     }
 
     static func allPokemon(_ completion: @escaping (Result<[PokemonDetails], Error>) -> Swift.Void) {
-        requestPokemon()?.flatMap { response in
+        request(.pokemons)?.flatMap { response in
             Publishers.Sequence(sequence: response.results.compactMap { pokemonDetails(from: $0.url) })
                 .flatMap { $0 }
                 .collect()
@@ -37,19 +37,6 @@ struct PokemonAPI {
     }
 
     // MARK: - Private functions
-    private static func requestItems() -> AnyPublisher<APIResponse, Error>? {
-        var url = baseURL.appendingPathComponent("item")
-        guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true) else { return nil }
-
-        let query = URLQueryItem(name: "limit", value: "200")
-        urlComponents.queryItems = [query]
-        
-        guard let finalURL = urlComponents.url else { return nil }
-        url = finalURL
-        
-        return agent.execute(URLRequest(url: url))
-    }
-
     private static func itemDetails(from urlString: String) -> AnyPublisher<ItemDetails, Error>? {
         guard let url = URL(string: urlString) else { return nil }
         let request = URLRequest(url: url)
@@ -62,11 +49,11 @@ struct PokemonAPI {
         return agent.execute(request)
     }
     
-    private static func requestPokemon() -> AnyPublisher<APIResponse, Error>? {
-        var url = baseURL.appendingPathComponent("pokemon")
+    private static func request(_ type: ItemType, limit: Int = 151) -> AnyPublisher<APIResponse, Error>? {
+        var url = baseURL.appendingPathComponent(type.rawValue)
         guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true) else { return nil }
 
-        let query = URLQueryItem(name: "limit", value: "151")
+        let query = URLQueryItem(name: "limit", value: "\(151)")
         urlComponents.queryItems = [query]
         
         guard let finalURL = urlComponents.url else { return nil }
