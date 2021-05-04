@@ -9,7 +9,11 @@ import UIKit
 
 class TableViewController<Cell: UITableViewCell>: UITableViewController {
     
-    let spinner = UIActivityIndicatorView()
+    lazy var spinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView(style: .medium)
+        spinner.color = .white
+        return spinner
+    }()
     
     //MARK: - Public properties
     var tableData: UITableView.DataSource {
