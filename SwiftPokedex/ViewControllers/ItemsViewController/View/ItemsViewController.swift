@@ -9,27 +9,23 @@ import UIKit
 
 final class ItemsViewController: TableViewController<ItemCell> {
 
-    private let viewModel = ViewModel()
+    private let viewModel: ViewModel
     
     override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
 
+    init(viewModel: ViewModel, tableData: UITableView.DataSource) {
+        self.viewModel = viewModel
+        super.init(tableData: tableData)
+    }
+    
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        spinner.startAnimating()
-        
         tableView.backgroundColor = .darkGrey
         tableView.separatorColor = .darkGray
         title = viewModel.title
-        
-        viewModel.requestData { [weak self] result in
-            self?.spinner.stopAnimating()
-            
-            switch result {
-            case let .success(dataSource): self?.tableData = dataSource
-            case let .failure(error): print(error.localizedDescription)
-            }
-        }
     }
 }

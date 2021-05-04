@@ -16,7 +16,7 @@ final class TabBarController: UITabBarController {
         
         tabBar.barTintColor = .darkGrey
         tabBar.isTranslucent = false
-        tabBar.tintColor = .white
+        tabBar.tintColor = .pokedexRed
     }
     
     // MARK: - Private functions
@@ -24,7 +24,7 @@ final class TabBarController: UITabBarController {
         let pokedexView = PokedexViewBuilder.build()
         pokedexView.tabBarItem = .pokedex(title: "Pokedex")
 
-        let itemsView = ItemsViewBuilder.build()
+        let itemsView = ItemListBuilder.build()
         itemsView.tabBarItem = .items(title: "Items")
         setViewControllers([pokedexView, itemsView], animated: false)
     }
