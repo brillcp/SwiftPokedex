@@ -8,7 +8,7 @@ Is a simple Pokedex iOS app written by [Viktor Gidlöf](https://viktorgidlof.com
 ![pokedex2](https://user-images.githubusercontent.com/15960525/117063248-d4781700-ad24-11eb-8559-dcc9ebbd0ec7.png)
 
 
-## Architecture
+# Architecture
 
 SwiftPokedex is written in my own interpretation of the RIB archtitecure created by Uber. The name RIBs is short for Router, Interactor and Builder, which are core components of the architecture.
 
@@ -49,9 +49,9 @@ func routeToDetailView(pokemon: PokemonDetails, color: UIColor) {
 }
 ```
 
-## Simple networking with Combine
+# Networking with Combine
 
-SwiftPokedex uses Combine for all the API calls to the PokeAPI. This small structure is all that is needed to make any type of requests to the API.
+SwiftPokedex uses Combine for all the API calls to the PokeAPI. This small structure is all that's needed to make any type of requests to the API. Then the `PokemonAPI` is build around that and supports requesting pokemons and items at the moment.
 ```swift
 struct NetworkAgent {
     func execute<T: Decodable>(_ request: URLRequest, logJSON: Bool = false) -> AnyPublisher<T, Error> {
