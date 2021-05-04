@@ -37,6 +37,8 @@
 		6E9D559D263C003300D0DA9D /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9D559C263C003300D0DA9D /* DetailCell.swift */; };
 		6EA892272641C5AA00E4F269 /* RegularCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA892262641C5AA00E4F269 /* RegularCell.swift */; };
 		6EA8922B2641C5F600E4F269 /* CellConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA8922A2641C5F600E4F269 /* CellConfigurations.swift */; };
+		6EA892302641C8D700E4F269 /* ItemListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA8922F2641C8D700E4F269 /* ItemListInteractor.swift */; };
+		6EA892332641C8FB00E4F269 /* ItemListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA892322641C8FB00E4F269 /* ItemListRouter.swift */; };
 		6EC394C1263CC341009A2A2D /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC394C0263CC341009A2A2D /* String.swift */; };
 		6EC5FCC4263CA370005B04ED /* pixelmix.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EFE197A263CA09E00FD0A19 /* pixelmix.ttf */; };
 		6EC5FCCB263CA5D1005B04ED /* UICollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC5FCCA263CA5D1005B04ED /* UICollectionViewFlowLayout.swift */; };
@@ -89,6 +91,8 @@
 		6E9D559C263C003300D0DA9D /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
 		6EA892262641C5AA00E4F269 /* RegularCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularCell.swift; sourceTree = "<group>"; };
 		6EA8922A2641C5F600E4F269 /* CellConfigurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellConfigurations.swift; sourceTree = "<group>"; };
+		6EA8922F2641C8D700E4F269 /* ItemListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListInteractor.swift; sourceTree = "<group>"; };
+		6EA892322641C8FB00E4F269 /* ItemListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListRouter.swift; sourceTree = "<group>"; };
 		6EC394C0263CC341009A2A2D /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		6EC5FCCA263CA5D1005B04ED /* UICollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		6EC5FCCF263CA824005B04ED /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
@@ -123,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				6E006F912641C4BC009FC152 /* Builder */,
+				6EA892352641C98F00E4F269 /* Interactor */,
 				6E006F8C2641C47C009FC152 /* View */,
 			);
 			path = ItemListViewController;
@@ -252,6 +257,7 @@
 		6E806760263BF24300FD38F0 = {
 			isa = PBXGroup;
 			children = (
+				6EA892322641C8FB00E4F269 /* ItemListRouter.swift */,
 				6E80676B263BF24300FD38F0 /* SwiftPokedex */,
 				6E80676A263BF24300FD38F0 /* Products */,
 			);
@@ -300,6 +306,14 @@
 				6EF0F6E42640C11B00C2AED8 /* ItemsViewController */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		6EA892352641C98F00E4F269 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				6EA8922F2641C8D700E4F269 /* ItemListInteractor.swift */,
+			);
+			path = Interactor;
 			sourceTree = "<group>";
 		};
 		6EC94FEA263C854B003E0117 /* PokedexViewController */ = {
@@ -429,6 +443,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E006F6926414AAF009FC152 /* Publisher.swift in Sources */,
+				6EA892332641C8FB00E4F269 /* ItemListRouter.swift in Sources */,
 				6E006F862641C434009FC152 /* ItemListViewModel.swift in Sources */,
 				6EFC2130263C7F2A004389D9 /* CollectionCellConfiguration.swift in Sources */,
 				6EC5FCD0263CA824005B04ED /* NavigationController.swift in Sources */,
@@ -451,6 +466,7 @@
 				6E80676F263BF24300FD38F0 /* SceneDelegate.swift in Sources */,
 				6EF0F6E02640C0F800C2AED8 /* ItemsViewBuilder.swift in Sources */,
 				6EFC212B263C7BA7004389D9 /* UICollectionView.swift in Sources */,
+				6EA892302641C8D700E4F269 /* ItemListInteractor.swift in Sources */,
 				6E55385C26406BC80060C25B /* PokedexInteractor.swift in Sources */,
 				6EC394C1263CC341009A2A2D /* String.swift in Sources */,
 				6E806796263BF5E200FD38F0 /* NetworkAgent.swift in Sources */,

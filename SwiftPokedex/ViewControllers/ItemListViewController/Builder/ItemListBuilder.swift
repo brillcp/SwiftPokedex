@@ -10,8 +10,12 @@ import Foundation
 final class ItemListBuilder {
     
     static func build() -> NavigationController {
-        let viewController = ItemListViewController(style: .grouped)
+        let router = ItemListRouter()
+        let interactor = ItemListInteractor(router: router)
+        let viewController = ItemListViewController(interactor: interactor)
         let navigationController = NavigationController(rootViewController: viewController)
+        router.navigationController = navigationController
+        
         return navigationController
     }
 }
