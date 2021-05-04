@@ -53,7 +53,7 @@ func routeToDetailView(pokemon: PokemonDetails, color: UIColor) {
 # Networking with Combine
 
 SwiftPokedex uses Combine for all the API calls to the PokeAPI. This small structure is all that's needed to make any type of requests to the API. 
-The `PokemonAPI` is build around this network agent and supports requesting pokemons and items at the moment.
+The `PokemonAPI` is then build around this network agent. It supports requesting pokemons and items at the moment.
 ```swift
 struct NetworkAgent {
     func execute<T: Decodable>(_ request: URLRequest, logJSON: Bool = false) -> AnyPublisher<T, Error> {
@@ -66,6 +66,15 @@ struct NetworkAgent {
             .eraseToAnyPublisher()
     }
 }
+```
+
+# Data driven tables and collection views
+
+Finally all the data is setup in table views and collection views
+```swift
+let items = sorted.map { CollectionCellConfiguration<PokedexCell, PokemonDetails>(data: $0) }
+let section = UICollectionView.Section(items: items)
+let collectionData = UICollectionView.DataSource(sections: [section])
 ```
 
 # Requirements
