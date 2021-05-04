@@ -20,7 +20,10 @@ final class PokedexInteractor: PokedexInteractorProtocol {
     }
     
     func selectPokemon(at indexPath: IndexPath, in collectionView: UICollectionView) {
-        guard let cell = collectionView.cell(at: indexPath) as? PokedexCell, let pokemon = cell.data, let color = cell.backgroundColor else { return }
+        guard let cell = collectionView.cell(at: indexPath) as? PokedexCell,
+              let pokemon = cell.data,
+              let color = cell.backgroundColor
+        else { return }
 
         router.routeToDetailView(pokemon: pokemon, color: color)
     }
