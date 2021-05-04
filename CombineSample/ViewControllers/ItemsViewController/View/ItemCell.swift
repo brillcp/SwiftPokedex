@@ -44,7 +44,7 @@ final class ItemCell: UITableViewCell, ConfigurableCell {
         contentView.addSubview(itemImageView)
         NSLayoutConstraint.activate([
             itemImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10.0),
-            itemImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: margin),
+            itemImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10.0),
             itemImageView.widthAnchor.constraint(equalToConstant: 60.0),
             itemImageView.heightAnchor.constraint(equalTo: itemImageView.widthAnchor)
         ])
