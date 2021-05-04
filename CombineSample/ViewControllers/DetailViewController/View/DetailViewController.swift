@@ -7,9 +7,9 @@ final class DetailViewController: TableViewController<DetailCell> {
     override var preferredStatusBarStyle: UIStatusBarStyle { viewModel.isLight ? .default : .lightContent }
 
     // MARK: - Init
-    init(viewModel: ViewModel) {
+    init(viewModel: ViewModel, tableData: UITableView.DataSource) {
         self.viewModel = viewModel
-        super.init()
+        super.init(style: .grouped, tableData: tableData)
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -21,16 +21,8 @@ final class DetailViewController: TableViewController<DetailCell> {
         tableView.separatorStyle = .none
         view.backgroundColor = .darkGrey
         title = viewModel.title
-        
-        viewModel.requestData { [weak self] result in
-            switch result {
-            case let .success(tableData):
-                self?.tableData = tableData
-                self?.setupTableHeader()
-            case let .failure(error):
-                print(error.localizedDescription)
-            }
-        }
+  
+        setupTableHeader()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,10 +37,8 @@ final class DetailViewController: TableViewController<DetailCell> {
     
     // MARK: - Functions
     private func setupTableHeader() {
-        guard let imageURL = viewModel.spriteURL else { return }
-        
-        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 320)
-        tableView.tableHeaderView = .detailHeader(frame: frame, imageURL: imageURL, backgroundColor: viewModel.color)
+        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 300)
+        tableView.tableHeaderView = .detailHeader(frame: frame, imageURL: viewModel.spriteURL, backgroundColor: viewModel.color)
     }
     
     private func viewWillAppear() {

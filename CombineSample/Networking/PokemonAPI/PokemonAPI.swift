@@ -1,61 +1,55 @@
 import UIKit
+import Combine
 
 struct PokemonAPI {
     private static let agent = NetworkAgent()
     private static let baseURL = URL(string: "https://pokeapi.co/api/v2/")!
+    private static var cancellables = Set<AnyCancellable>()
     
     enum ItemType: String {
         case pokemons = "pokemon"
         case items = "item"
     }
     
-    static func request(_ type: ItemType, _ completion: @escaping (Result<APIResponse, Error>) -> Swift.Void) {
-        var url = baseURL.appendingPathComponent(type.rawValue)
-        
-        let query = URLQueryItem(name: "limit", value: "2000")
-        
-        guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true) else { return }
-        urlComponents.queryItems = [query]
-        
-        guard let finalURL = urlComponents.url else { return }
-        url = finalURL
-        
-        let request = URLRequest(url: url)
-        agent.execute(request, completion: completion)
-    }
-    
-    static func requestDetails<T: Decodable>(from urlString: String, completion: @escaping (Result<T, Error>) -> Swift.Void) {
-        guard let url = URL(string: urlString) else { return }
-        
-        let request = URLRequest(url: url)
-        agent.execute(request, completion: completion)
-    }
-    
-    static func loadItemSprite(from urlString: String, _ completion: @escaping (UIImage?) -> Swift.Void) {
-        let completion: (Result<Item, Error>) -> Swift.Void = { result in
-            switch result {
-            case let .success(item):
-                UIImage.load(from: item.sprites.default) { image in
-                    completion(image)
-                }
-            case .failure: completion(nil)
-            }
+    // MARK: - Public functions
+    static func allPokemon(_ completion: @escaping (Result<[PokemonDetails], Error>) -> Swift.Void) {
+        requestPokemon()?.flatMap { response in
+            Publishers.Sequence(sequence: response.results.map { pokemonDetails(from: $0.url) })
+                .flatMap { $0 }
+                .collect()
         }
-        
-        requestDetails(from: urlString, completion: completion)
+        .eraseToAnyPublisher()
+        .sink { completed in
+            switch completed {
+            case let .failure(error): completion(.failure(error))
+            case .finished: break
+            }
+        } receiveValue: { result in
+            completion(.success(result))
+        }.store(in: &cancellables)
     }
 
-    static func loadSprite(from urlString: String, _ completion: @escaping ((image: UIImage?, index: Int)) -> Swift.Void) {
-        let completion: (Result<PokemonDetails, Error>) -> Swift.Void = { result in
-            switch result {
-            case let .success(details):
-                UIImage.load(from: details.sprite.url) { image in
-                    completion((image, details.id))
-                }
-            case .failure: completion((nil, 0))
-            }
-        }
+    // MARK: - Private functions
+    private static func pokemonDetails(from urlString: String) -> AnyPublisher<PokemonDetails, Error> {
+        URLSession.shared.dataTaskPublisher(for: URLRequest(url: URL(string: urlString)!))
+            .tryMap { $0.data }
+            .decode(type: PokemonDetails.self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
+    }
+    
+    private static func requestPokemon() -> AnyPublisher<PokemonResponse, Error>? {
+        var url = baseURL.appendingPathComponent("pokemon")
+        guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true) else { return nil }
+
+        let query = URLQueryItem(name: "limit", value: "151")
+        urlComponents.queryItems = [query]
         
-        requestDetails(from: urlString, completion: completion)
+        guard let finalURL = urlComponents.url else { return nil }
+        url = finalURL
+        
+        return URLSession.shared.dataTaskPublisher(for: URLRequest(url: url))
+            .tryMap {$0.data }
+            .decode(type: PokemonResponse.self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
     }
 }

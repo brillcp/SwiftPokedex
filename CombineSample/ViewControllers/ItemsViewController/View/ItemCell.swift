@@ -61,8 +61,8 @@ final class ItemCell: UITableViewCell, ConfigurableCell {
         
         titleLabel.text = item.name.cleaned
         
-        PokemonAPI.loadItemSprite(from: item.url) { [weak self] image in
-            self?.itemImageView.image = image
-        }
+//        PokemonAPI.loadItemSprite(from: item.url) { [weak self] image in
+//            self?.itemImageView.image = image
+//        }
     }
 }
