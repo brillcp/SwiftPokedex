@@ -1,6 +1,6 @@
 //
 //  ItemCell.swift
-//  CombineSample
+//  SwiftPokedex
 //
 //  Created by Viktor Gidlöf on 2021-05-04.
 //
