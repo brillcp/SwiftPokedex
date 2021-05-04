@@ -13,10 +13,6 @@ final class ItemsViewController: TableViewController<ItemCell> {
         
         tableView.backgroundColor = .darkGrey
         title = viewModel.title
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
         viewModel.requestData { [weak self] result in
             switch result {

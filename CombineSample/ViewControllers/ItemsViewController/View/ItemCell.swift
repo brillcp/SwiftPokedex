@@ -36,8 +36,8 @@ final class ItemCell: UITableViewCell, ConfigurableCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        accessoryType = .disclosureIndicator
         backgroundColor = .clear
+        selectionStyle = .none
         
         contentView.addSubview(itemImageView)
         NSLayoutConstraint.activate([
@@ -61,7 +61,6 @@ final class ItemCell: UITableViewCell, ConfigurableCell {
             detailLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15.0),
             detailLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15.0)
         ])
-
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }

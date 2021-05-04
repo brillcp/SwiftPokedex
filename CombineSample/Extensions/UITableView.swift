@@ -3,7 +3,7 @@ import UIKit
 extension UITableView {
     struct Section {
         var title: String? = nil
-        let items: [TableCellConfigurator]
+        var items: [TableCellConfigurator] = []
     }
 
     struct DataSource {
