@@ -22,10 +22,10 @@ extension PokedexViewController {
                 switch result {
                 case let .success(pokemon):
                     let sorted = pokemon.sorted(by: { $0.id < $1.id })
-                    let cells = sorted.map { CollectionCellConfiguration<PokedexCell, PokemonDetails>(data: $0) }
-                    let section = UICollectionView.Section(items: cells)
-                    let tableData = UICollectionView.DataSource(sections: [section])
-                    DispatchQueue.main.async { completion(.success(tableData)) }
+                    let items = sorted.map { CollectionCellConfiguration<PokedexCell, PokemonDetails>(data: $0) }
+                    let section = UICollectionView.Section(items: items)
+                    let collectionData = UICollectionView.DataSource(sections: [section])
+                    DispatchQueue.main.async { completion(.success(collectionData)) }
                 case let .failure(error):
                     DispatchQueue.main.async { completion(.failure(error)) }
                 }
