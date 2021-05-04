@@ -22,6 +22,7 @@ final class PokedexCell: UICollectionViewCell, ConfigurableCell {
         label.textAlignment = .right
         label.textColor = .white
         label.font = .pixel14
+        label.alpha = 0.0
         return label
     }()
 
@@ -30,6 +31,7 @@ final class PokedexCell: UICollectionViewCell, ConfigurableCell {
         label.textAlignment = .center
         label.textColor = .white
         label.font = .pixel17
+        label.alpha = 0.0
         return label
     }()
 
@@ -40,6 +42,8 @@ final class PokedexCell: UICollectionViewCell, ConfigurableCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        backgroundColor = .darkGray
+
         contentView.addSubview(imageView)
         imageView.pinToSuperview(with: UIEdgeInsets(top: 0, left: 0, bottom: 35, right: 0), edges: .all)
         
@@ -71,7 +75,6 @@ final class PokedexCell: UICollectionViewCell, ConfigurableCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        backgroundColor = .darkGray
         imageView.image = nil
     }
     
@@ -84,16 +87,20 @@ final class PokedexCell: UICollectionViewCell, ConfigurableCell {
 
         DispatchQueue.global(qos: .userInteractive).async {
             UIImage.load(from: pokemon.sprite.url) { [weak self] image in
-                let color = image?.dominantColor ?? .gray
+                let color = image?.dominantColor ?? .darkGray
                 
                 DispatchQueue.main.async {
                     self?.titleLabel.textColor = color.isLight ? .black : .white
                     self?.indexLabel.textColor = color.isLight ? .black : .white
                     self?.imageView.image = image
+                    self?.backgroundColor = color
+
+                    guard self?.imageView.alpha != 1.0 else { return }
                     
                     UIView.animate(withDuration: 0.2) {
-                        self?.backgroundColor = color
                         self?.imageView.alpha = 1.0
+                        self?.indexLabel.alpha = 1.0
+                        self?.titleLabel.alpha = 1.0
                     }
                 }
             }
