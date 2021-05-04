@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6E806768263BF24300FD38F0"
-               BuildableName = "CombineSample.app"
-               BlueprintName = "CombineSample"
-               ReferencedContainer = "container:CombineSample.xcodeproj">
+               BuildableName = "SwiftPokedex.app"
+               BlueprintName = "SwiftPokedex"
+               ReferencedContainer = "container:SwiftPokedex.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6E806768263BF24300FD38F0"
-            BuildableName = "CombineSample.app"
-            BlueprintName = "CombineSample"
-            ReferencedContainer = "container:CombineSample.xcodeproj">
+            BuildableName = "SwiftPokedex.app"
+            BlueprintName = "SwiftPokedex"
+            ReferencedContainer = "container:SwiftPokedex.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6E806768263BF24300FD38F0"
-            BuildableName = "CombineSample.app"
-            BlueprintName = "CombineSample"
-            ReferencedContainer = "container:CombineSample.xcodeproj">
+            BuildableName = "SwiftPokedex.app"
+            BlueprintName = "SwiftPokedex"
+            ReferencedContainer = "container:SwiftPokedex.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

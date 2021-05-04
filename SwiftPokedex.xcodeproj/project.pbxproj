@@ -66,7 +66,7 @@
 		6E55385B26406BC80060C25B /* PokedexInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokedexInteractor.swift; sourceTree = "<group>"; };
 		6E55385E26406E530060C25B /* PokedexViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokedexViewRouter.swift; sourceTree = "<group>"; };
 		6E55386F26406FDB0060C25B /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
-		6E806769263BF24300FD38F0 /* CombineSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CombineSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E806769263BF24300FD38F0 /* SwiftPokedex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftPokedex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E80676C263BF24300FD38F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6E80676E263BF24300FD38F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		6E806775263BF24800FD38F0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -214,7 +214,7 @@
 		6E806760263BF24300FD38F0 = {
 			isa = PBXGroup;
 			children = (
-				6E80676B263BF24300FD38F0 /* CombineSample */,
+				6E80676B263BF24300FD38F0 /* SwiftPokedex */,
 				6E80676A263BF24300FD38F0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -222,12 +222,12 @@
 		6E80676A263BF24300FD38F0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6E806769263BF24300FD38F0 /* CombineSample.app */,
+				6E806769263BF24300FD38F0 /* SwiftPokedex.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		6E80676B263BF24300FD38F0 /* CombineSample */ = {
+		6E80676B263BF24300FD38F0 /* SwiftPokedex */ = {
 			isa = PBXGroup;
 			children = (
 				6E80676C263BF24300FD38F0 /* AppDelegate.swift */,
@@ -241,7 +241,7 @@
 				6EFE197A263CA09E00FD0A19 /* pixelmix.ttf */,
 				6E80677A263BF24800FD38F0 /* Info.plist */,
 			);
-			path = CombineSample;
+			path = SwiftPokedex;
 			sourceTree = "<group>";
 		};
 		6E806798263BF5E600FD38F0 /* Networking */ = {
@@ -322,9 +322,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6E806768263BF24300FD38F0 /* CombineSample */ = {
+		6E806768263BF24300FD38F0 /* SwiftPokedex */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6E80677D263BF24800FD38F0 /* Build configuration list for PBXNativeTarget "CombineSample" */;
+			buildConfigurationList = 6E80677D263BF24800FD38F0 /* Build configuration list for PBXNativeTarget "SwiftPokedex" */;
 			buildPhases = (
 				6E806765263BF24300FD38F0 /* Sources */,
 				6E806766263BF24300FD38F0 /* Frameworks */,
@@ -334,9 +334,9 @@
 			);
 			dependencies = (
 			);
-			name = CombineSample;
+			name = SwiftPokedex;
 			productName = CombineSample;
-			productReference = 6E806769263BF24300FD38F0 /* CombineSample.app */;
+			productReference = 6E806769263BF24300FD38F0 /* SwiftPokedex.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -353,7 +353,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 6E806764263BF24300FD38F0 /* Build configuration list for PBXProject "CombineSample" */;
+			buildConfigurationList = 6E806764263BF24300FD38F0 /* Build configuration list for PBXProject "SwiftPokedex" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -366,7 +366,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6E806768263BF24300FD38F0 /* CombineSample */,
+				6E806768263BF24300FD38F0 /* SwiftPokedex */,
 			);
 		};
 /* End PBXProject section */
@@ -568,12 +568,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YP4N79559M;
-				INFOPLIST_FILE = CombineSample/Info.plist;
+				INFOPLIST_FILE = SwiftPokedex/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.storytel.ios.CombineSample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.storytel.ios.SwiftPokedex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -587,12 +587,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YP4N79559M;
-				INFOPLIST_FILE = CombineSample/Info.plist;
+				INFOPLIST_FILE = SwiftPokedex/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.storytel.ios.CombineSample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.storytel.ios.SwiftPokedex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -602,7 +602,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6E806764263BF24300FD38F0 /* Build configuration list for PBXProject "CombineSample" */ = {
+		6E806764263BF24300FD38F0 /* Build configuration list for PBXProject "SwiftPokedex" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6E80677B263BF24800FD38F0 /* Debug */,
@@ -611,7 +611,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6E80677D263BF24800FD38F0 /* Build configuration list for PBXNativeTarget "CombineSample" */ = {
+		6E80677D263BF24800FD38F0 /* Build configuration list for PBXNativeTarget "SwiftPokedex" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6E80677E263BF24800FD38F0 /* Debug */,
