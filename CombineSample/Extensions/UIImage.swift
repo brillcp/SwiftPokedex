@@ -15,18 +15,17 @@ extension UIImage {
             } else {
                 URLSession.shared.dataTaskPublisher(for: request)
                     .tryMap { (response: $0.response, data: $0.data) }
-                    .sink { completed in
-                        switch completed {
-                        case .failure: DispatchQueue.main.async { completion(nil) }
-                        case .finished: break
+                    .sinkToResult { result in
+                        switch result {
+                        case let .success(value):
+                            let image = UIImage(data: value.data)
+                            let cachedImage = CachedURLResponse(response: value.response, data: value.data)
+                            cache.storeCachedResponse(cachedImage, for: request)
+                            DispatchQueue.main.async { completion(image) }
+                        case .failure:
+                            DispatchQueue.main.async { completion(nil) }
                         }
-                    } receiveValue: { value in
-                        let image = UIImage(data: value.data)
-                        let cachedImage = CachedURLResponse(response: value.response, data: value.data)
-                        cache.storeCachedResponse(cachedImage, for: request)
-                        DispatchQueue.main.async { completion(image) }
-                    }
-                    .store(in: &cancellables)
+                    }.store(in: &cancellables)
             }
         }
     }

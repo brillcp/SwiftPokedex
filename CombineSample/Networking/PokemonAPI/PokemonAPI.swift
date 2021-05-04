@@ -14,27 +14,21 @@ struct PokemonAPI {
     // MARK: - Public functions
     static func allPokemon(_ completion: @escaping (Result<[PokemonDetails], Error>) -> Swift.Void) {
         requestPokemon()?.flatMap { response in
-            Publishers.Sequence(sequence: response.results.map { pokemonDetails(from: $0.url) })
+            Publishers.Sequence(sequence: response.results.compactMap { pokemonDetails(from: $0.url) })
                 .flatMap { $0 }
                 .collect()
         }
         .eraseToAnyPublisher()
-        .sink { completed in
-            switch completed {
-            case let .failure(error): completion(.failure(error))
-            case .finished: break
-            }
-        } receiveValue: { result in
-            completion(.success(result))
+        .sinkToResult { result in
+            completion(result)
         }.store(in: &cancellables)
     }
 
     // MARK: - Private functions
-    private static func pokemonDetails(from urlString: String) -> AnyPublisher<PokemonDetails, Error> {
-        URLSession.shared.dataTaskPublisher(for: URLRequest(url: URL(string: urlString)!))
-            .tryMap { $0.data }
-            .decode(type: PokemonDetails.self, decoder: JSONDecoder())
-            .eraseToAnyPublisher()
+    private static func pokemonDetails(from urlString: String) -> AnyPublisher<PokemonDetails, Error>? {
+        guard let url = URL(string: urlString) else { return nil }
+        let request = URLRequest(url: url)
+        return agent.execute(request)
     }
     
     private static func requestPokemon() -> AnyPublisher<PokemonResponse, Error>? {
@@ -47,9 +41,6 @@ struct PokemonAPI {
         guard let finalURL = urlComponents.url else { return nil }
         url = finalURL
         
-        return URLSession.shared.dataTaskPublisher(for: URLRequest(url: url))
-            .tryMap {$0.data }
-            .decode(type: PokemonResponse.self, decoder: JSONDecoder())
-            .eraseToAnyPublisher()
+        return agent.execute(URLRequest(url: url))
     }
 }
