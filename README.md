@@ -4,6 +4,10 @@
 
 Is a simple Pokedex iOS app written by [Viktor Gidlöf](https://viktorgidlof.com) that implements the [PokeAPI](https://pokeapi.co).
 
+![pokdex1](https://user-images.githubusercontent.com/15960525/117063244-d3df8080-ad24-11eb-9293-83f8ba1a991a.png)
+![pokedex2](https://user-images.githubusercontent.com/15960525/117063248-d4781700-ad24-11eb-8559-dcc9ebbd0ec7.png)
+
+
 ## Architecture
 
 SwiftPokedex is written in my own interpretation of the RIB archtitecure created by Uber. The name RIBs is short for Router, Interactor and Builder, which are core components of the architecture.
