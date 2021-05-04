@@ -9,7 +9,7 @@ final class DetailViewController: TableViewController<DetailCell> {
     // MARK: - Init
     init(viewModel: ViewModel, tableData: UITableView.DataSource) {
         self.viewModel = viewModel
-        super.init(style: .grouped, tableData: tableData)
+        super.init(tableData: tableData)
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -37,14 +37,20 @@ final class DetailViewController: TableViewController<DetailCell> {
     
     // MARK: - Functions
     private func setupTableHeader() {
-        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 300)
-        tableView.tableHeaderView = .detailHeader(frame: frame, imageURL: viewModel.spriteURL, backgroundColor: viewModel.color)
+        let frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 300.0)
+        let header = DetailHeaderView(frame: frame, urlString: viewModel.spriteURL, color: viewModel.color)
+        tableView.tableHeaderView = header
     }
     
     private func viewWillAppear() {
         navigationController?.navigationBar.barTintColor = viewModel.color
         navigationController?.navigationBar.shadowImage = UIImage()
         
+        let idBarButton = UIBarButtonItem(title: viewModel.id, style: .plain, target: nil, action: nil)
+        let color: UIColor = viewModel.isLight ? .black : .white
+        idBarButton.setTitleTextAttributes([.font: UIFont.pixel17, .foregroundColor: color], for: .normal)
+        navigationItem.rightBarButtonItem = idBarButton
+
         if viewModel.isLight {
             navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.pixel17, .foregroundColor: UIColor.black]
             navigationController?.navigationBar.tintColor = .black

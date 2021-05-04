@@ -22,34 +22,6 @@ extension UIView {
             trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -insets.right).isActive = true
         }
     }
-
-    static func detailHeader(frame: CGRect, imageURL: String, backgroundColor: UIColor?) -> UIView {
-        let header = UIView(frame: frame)
-        header.backgroundColor = backgroundColor
-        
-        let imageView = UIImageView(frame: frame)
-        imageView.contentMode = .scaleAspectFit
-        
-        UIImage.load(from: imageURL) { [weak imageView] image in
-            imageView?.image = image
-        }
-        
-        let fillerView = UIView(frame: UIScreen.main.bounds)
-        fillerView.backgroundColor = backgroundColor
-        fillerView.frame.origin.y -= fillerView.frame.height - frame.height
-        
-        header.addSubview(fillerView)
-        header.addSubview(imageView)
-        
-        let cornerHeight: CGFloat = 30.0
-        let cornerView = UIView(frame: CGRect(x: 0, y: 0, width: header.frame.width, height: cornerHeight))
-        cornerView.backgroundColor = .darkGrey
-        cornerView.frame.origin.y = header.frame.height - (cornerHeight / 2)
-        cornerView.roundedView(corners: [.topLeft, .topRight])
-        header.addSubview(cornerView)
-        
-        return header
-    }
     
     static func tableHeader(title: String?, in tableView: UITableView) -> UIView {
         let width = tableView.frame.width
