@@ -32,7 +32,7 @@ final class PokedexViewBuilder {
 ```
 
 ## Interactor
-The interactor is the link between the user input and the view and includes all the interactors that the user can make. It also contains a router object.
+The interactor is the link between the user input and the view and includes all the interations the user can make. It also contains a router object.
 ```swift
 override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     collectionView.deselectItem(at: indexPath, animated: true)
