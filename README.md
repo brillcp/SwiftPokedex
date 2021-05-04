@@ -87,6 +87,7 @@ By configuring the cells using `CollectionCellConfiguration` we tell the collect
 - [x] Request items
 - [ ] Search items 
 - [x] Show item descriptions
+- [ ] List pagination
 - [ ] Implement other parts of the API such as:
     - Moves
     - Abilities
