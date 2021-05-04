@@ -77,6 +77,9 @@ let section = UICollectionView.Section(items: items)
 let collectionData = UICollectionView.DataSource(sections: [section])
 ```
 
+By configuring cell using `CollectionCellConfiguration` we tell the collection view that the data type we want to use is `PokemonDetails` and the custom cell is `PokedexCell` then the collection view automatically renders that data with those cells. No need to implement any of the delefate of data sourc functions in the view controller. That is done with the `CollectionCellConfigurator` protocol and with a subclass of `UICollectionViewController`.
+
+
 # Requirements
 
 + Xcode 12.0+
