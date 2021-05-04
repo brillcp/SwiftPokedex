@@ -24,6 +24,6 @@ final class ListInteractor: ListInteractorProtocol {
               let itemData = cell.data
         else { return }
 
-        router.routeToDetailView(data: itemData)
+        router.routeToItemList(with: itemData)
     }
 }
