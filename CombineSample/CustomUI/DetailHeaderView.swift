@@ -14,18 +14,19 @@ final class DetailHeaderView: UIView {
         return view
     }()
     
+    // MARK: - Init
     init(frame: CGRect, urlString: String, color: UIColor) {
         super.init(frame: frame)
         
-        backgroundColor = color
+        backgroundColor = .darkGrey
         
         let fillerView = UIView(frame: UIScreen.main.bounds)
-        fillerView.backgroundColor = backgroundColor
+        fillerView.backgroundColor = color
         fillerView.frame.origin.y -= fillerView.frame.height - frame.height
+        fillerView.roundedView(corners: [.bottomLeft, .bottomRight], radius: 40.0)
         addSubview(fillerView)
 
         addSubview(imageView)
-        addSubview(cornerView)
 
         UIImage.load(from: urlString) { [weak self] image in
             self?.imageView.image = image
@@ -34,14 +35,10 @@ final class DetailHeaderView: UIView {
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
+    // MARK: - Layout
     override func layoutSubviews() {
         super.layoutSubviews()
         
         imageView.frame = frame
-        
-        let cornerHeight: CGFloat = 30.0
-        cornerView.frame = CGRect(x: 0, y: 0, width: frame.width, height: cornerHeight)
-        cornerView.frame.origin.y = frame.height - (cornerHeight / 2)
-        cornerView.roundedView(corners: [.topLeft, .topRight])
     }
 }
