@@ -20,7 +20,7 @@ struct PokemonAPI {
     
     // MARK: - Public functions
     static func allItems(_ completion: @escaping (Result<[ItemDetails], Error>) -> Swift.Void) {
-        request(.items, limit: 500)?.flatMap { response in
+        request(.items, limit: 400)?.flatMap { response in
             Publishers.Sequence(sequence: response.results.compactMap { itemDetails(from: $0.url) })
                 .flatMap { $0 }
                 .collect()
