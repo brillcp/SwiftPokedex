@@ -35,8 +35,7 @@ final class DetailCell: UITableViewCell, ConfigurableCell {
         contentView.addSubview(titleLabel)
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15.0),
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
-            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15.0),
             titleLabel.widthAnchor.constraint(equalToConstant: 140.0)
         ])
         

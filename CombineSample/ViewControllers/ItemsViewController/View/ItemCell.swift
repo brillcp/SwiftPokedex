@@ -22,7 +22,15 @@ final class ItemCell: UITableViewCell, ConfigurableCell {
         return label
     }()
 
-    var data: APIItem?
+    private lazy var detailLabel: UILabel = {
+        let label = UILabel(useAutolayout: true)
+        label.textColor = .lightGray
+        label.numberOfLines = 0
+        label.font = .pixel12
+        return label
+    }()
+
+    var data: ItemDetails?
 
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -36,16 +44,24 @@ final class ItemCell: UITableViewCell, ConfigurableCell {
             itemImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15.0),
             itemImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             itemImageView.widthAnchor.constraint(equalToConstant: 60.0),
-            itemImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            itemImageView.heightAnchor.constraint(equalTo: itemImageView.widthAnchor)
         ])
         
         contentView.addSubview(titleLabel)
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: itemImageView.trailingAnchor, constant: 10.0),
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
-            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20.0)
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15.0),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15.0)
         ])
+        
+        contentView.addSubview(detailLabel)
+        NSLayoutConstraint.activate([
+            detailLabel.leadingAnchor.constraint(equalTo: itemImageView.trailingAnchor, constant: 10.0),
+            detailLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15.0),
+            detailLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15.0),
+            detailLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15.0)
+        ])
+
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -56,13 +72,14 @@ final class ItemCell: UITableViewCell, ConfigurableCell {
     }
     
     // MARK: - Functions
-    func configure(with item: APIItem) {
+    func configure(with item: ItemDetails) {
         self.data = item
         
         titleLabel.text = item.name.cleaned
+        detailLabel.text = item.effect.first?.description
         
-//        PokemonAPI.loadItemSprite(from: item.url) { [weak self] image in
-//            self?.itemImageView.image = image
-//        }
+        UIImage.load(from: item.sprites.default) { [weak self] image in
+            self?.itemImageView.image = image
+        }
     }
 }
