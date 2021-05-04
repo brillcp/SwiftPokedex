@@ -60,7 +60,7 @@ struct PokemonAPI {
         var url = baseURL.appendingPathComponent(type.rawValue)
         guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true) else { return nil }
 
-        let query = URLQueryItem(name: "limit", value: "\(151)")
+        let query = URLQueryItem(name: "limit", value: "\(limit)")
         urlComponents.queryItems = [query]
         
         guard let finalURL = urlComponents.url else { return nil }
