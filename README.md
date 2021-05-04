@@ -1,14 +1,14 @@
 ![icon](https://user-images.githubusercontent.com/15960525/117062071-47808e00-ad23-11eb-83df-95d8efadac58.png)
 
-#SwiftPokedex
+# SwiftPokedex
 
 Is a simple iOS app written by [Viktor Gidlöf](https://viktorgidlof.com) that implements the [PokeAPI](https://pokeapi.co).
 
-##Architecture
+## Architecture
 
 SwiftPokedex is written in my own interpretation of the RIB archtitecure created by Uber. The name RIBs is short for Router, Interactor and Builder, which are core components of the architecture.
 
-##Builder
+## Builder
 
 The builder build the views with all of their dependencies (if any):
 
@@ -27,10 +27,10 @@ final class PokedexViewBuilder {
 }
 ```
 
-##Interactor
+## Interactor
 The interactor is the link between the user input and the view and includes all the interactors that the user can make. It also contains a router object.
 
-##Router
+## Router
 The router is simply in charge of navigation. And since the router is decoupled from the view controller we can easily navigate to anywhere in the app.
 
 ```swift
@@ -40,7 +40,7 @@ func routeToDetailView(pokemon: PokemonDetails, color: UIColor) {
 }
 ```
 
-#Requirements
+# Requirements
 
 + Xcode 12.0+
 + iOS 14.1+
