@@ -1,3 +1,10 @@
+//
+//  PokedexRouter.swift
+//  SwiftPokedex
+//
+//  Created by Viktor Gidlöf on 2021-05-04.
+//
+
 import UIKit
 
 protocol PokedexRouterProtocol {
@@ -10,9 +17,6 @@ final class PokedexRouter: PokedexRouterProtocol {
     
     func routeToDetailView(pokemon: PokemonDetails, color: UIColor) {
         let detailView = DetailViewBuilder.build(from: pokemon, withColor: color)
-        
-        let viewController = ViewController(pokemon: pokemon)
-        
         navigationController?.pushViewController(detailView, animated: true)
     }
 }

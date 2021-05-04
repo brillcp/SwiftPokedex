@@ -1,9 +1,14 @@
+//
+//  NetworkAgent.swift
+//  SwiftPokedex
+//
+//  Created by Viktor Gidlöf on 2021-05-04.
+//
+
 import Foundation
 import Combine
 
-final class NetworkAgent {
-    private var cancellables = Set<AnyCancellable>()
-    
+struct NetworkAgent {
     func execute<T: Decodable>(_ request: URLRequest, logJSON: Bool = false) -> AnyPublisher<T, Error> {
         URLSession.shared.dataTaskPublisher(for: request)
             .tryMap {

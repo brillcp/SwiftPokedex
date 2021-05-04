@@ -1,3 +1,10 @@
+//
+//  SceneDelegate.swift
+//  SwiftPokedex
+//
+//  Created by Viktor Gidlöf on 2021-05-04.
+//
+
 import UIKit
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -8,7 +15,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = scene as? UIWindowScene else { return }
         
         window = UIWindow(windowScene: scene)
-        window?.rootViewController = TabbarController()
+        window?.rootViewController = TabBarController()
         window?.makeKeyAndVisible()
     }
 }
