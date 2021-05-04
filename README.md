@@ -30,6 +30,13 @@ final class PokedexViewBuilder {
 ## Interactor
 The interactor is the link between the user input and the view and includes all the interactors that the user can make. It also contains a router object.
 
+```swift
+override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    collectionView.deselectItem(at: indexPath, animated: true)
+
+    interactor.selectPokemon(at: indexPath, in: collectionView)
+}
+
 ## Router
 The router is simply in charge of navigation. And since the router is decoupled from the view controller we can easily navigate to anywhere in the app.
 
