@@ -26,7 +26,7 @@ final class ItemCell: UITableViewCell, ConfigurableCell {
         let label = UILabel(useAutolayout: true)
         label.textColor = .gray
         label.numberOfLines = 0
-        label.font = .pixel12
+        label.font = .pixel14
         return label
     }()
 
