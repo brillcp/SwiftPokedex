@@ -81,8 +81,18 @@ By configuring the cells using `CollectionCellConfiguration` we tell the collect
 
 # Todo
 
-[x] Request pokemon
-[x] Show pokemon details
+- [x] Request pokemon
+- [ ] Search pokemon
+- [x] Show pokemon details
+- [x] Request items
+- [ ] Search items 
+- [x] Show item descriptions
+- [ ] Implement other parts of the API such as:
+    - Moves
+    - Abilities
+    - Berries
+
+
 
 
 # Requirements
