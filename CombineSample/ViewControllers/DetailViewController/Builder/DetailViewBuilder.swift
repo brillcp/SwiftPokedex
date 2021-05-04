@@ -9,6 +9,7 @@ final class DetailViewBuilder {
         let weight: DetailCellConfig = .weightCell(value: pokemon.weight)
         let height: DetailCellConfig = .heightCell(value: pokemon.height)
         let abilities: DetailCellConfig = .abilitiesCell(values: pokemon.abilities)
+        let moves: DetailCellConfig = .movesCell(values: pokemon.moves)
         let infoSection = UITableView.Section(title: "Info", items: [types, weight, height, abilities])
 
         let stats = pokemon.stats
@@ -16,7 +17,9 @@ final class DetailViewBuilder {
             .map { DetailCellConfig(data: DetailItem(title: $0.stat.name.cleaned, value: "\($0.baseStat)" )) }
 
         let statSection = UITableView.Section(title: "Base Stats", items: stats)
-        let tableData = UITableView.DataSource(sections: [infoSection, statSection])
+        let movesSection = UITableView.Section(items: [moves])
+        
+        let tableData = UITableView.DataSource(sections: [infoSection, statSection, movesSection])
         
         return DetailViewController(viewModel: viewModel, tableData: tableData)
     }

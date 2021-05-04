@@ -49,12 +49,21 @@ extension TableCellConfiguration {
     }
     
     static func typesCell(values: [Type]) -> DetailCellConfig {
-        let types = values.map { $0.type.name.cleaned }.joined(separator: ", ")
+        let types = values.map { $0.type.name.cleaned }.joined(separator: "\n\n")
         return DetailCellConfig(data: DetailItem(title: "Type", value: types), rowHeight: UITableView.automaticDimension)
     }
     
     static func movesCell(values: [Move]) -> DetailCellConfig {
-        let moves = values.map { $0.move.name.cleaned }.joined(separator: ", ")
+        let limit = 10
+        let tooMany = values.count > limit
+        
+        var values = tooMany ? Array(values[0 ... limit]) : values
+        
+        if tooMany {
+            values.append(Move(move: APIItem(name: "...", url: "")))
+        }
+        
+        let moves = values.map { $0.move.name.cleaned }.joined(separator: "\n\n")
         return DetailCellConfig(data: DetailItem(title: "Moves", value: moves), rowHeight: UITableView.automaticDimension)
     }
 }
