@@ -123,7 +123,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6E006F8B2641C46F009FC152 /* ItemListViewController */ = {
+		6E006F8B2641C46F009FC152 /* ListViewController */ = {
 			isa = PBXGroup;
 			children = (
 				6E006F912641C4BC009FC152 /* Builder */,
@@ -131,7 +131,7 @@
 				6ECA09812641CAF000308F39 /* Router */,
 				6E006F8C2641C47C009FC152 /* View */,
 			);
-			path = ItemListViewController;
+			path = ListViewController;
 			sourceTree = "<group>";
 		};
 		6E006F8C2641C47C009FC152 /* View */ = {
@@ -300,9 +300,9 @@
 		6E9D559A263BFE1500D0DA9D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				6E006F8B2641C46F009FC152 /* ItemListViewController */,
 				6EC94FEA263C854B003E0117 /* PokedexViewController */,
 				6E17061A263C22D300B67F37 /* DetailViewController */,
+				6E006F8B2641C46F009FC152 /* ListViewController */,
 				6EF0F6E42640C11B00C2AED8 /* ItemsViewController */,
 			);
 			path = ViewControllers;
