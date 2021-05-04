@@ -1,4 +1,4 @@
-##SwiftPokedex
+#SwiftPokedex
 
 Is a simple iOS app written by Viktor Gidlöf that implements the PokeAPI.
 
