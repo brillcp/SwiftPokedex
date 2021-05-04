@@ -15,8 +15,8 @@ final class TabBarController: UITabBarController {
         setupTabbar()
         
         tabBar.barTintColor = .darkGrey
-        tabBar.isTranslucent = false
         tabBar.tintColor = .pokedexRed
+        tabBar.isTranslucent = false
     }
     
     // MARK: - Private functions
