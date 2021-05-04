@@ -1,5 +1,5 @@
 //
-//  ItemListRouter.swift
+//  ListRouter.swift
 //  SwiftPokedex
 //
 //  Created by Viktor Gidlöf on 2021-05-04.
@@ -7,11 +7,11 @@
 
 import UIKit
 
-protocol ItemListRouterProtocol {
+protocol ListRouterProtocol {
     func routeToDetailView(data: ItemData)
 }
 
-final class ItemListRouter: ItemListRouterProtocol {
+final class ListRouter: ListRouterProtocol {
     
     weak var navigationController: UINavigationController?
     

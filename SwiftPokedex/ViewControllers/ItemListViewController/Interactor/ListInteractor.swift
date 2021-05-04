@@ -1,5 +1,5 @@
 //
-//  ItemListInteractor.swift
+//  ListInteractor.swift
 //  SwiftPokedex
 //
 //  Created by Viktor Gidlöf on 2021-05-04.
@@ -7,15 +7,15 @@
 
 import UIKit
 
-protocol ItemListInteractorProtocol {
+protocol ListInteractorProtocol {
     func selectItem(at indexPath: IndexPath, in tableView: UITableView)
 }
 
-final class ItemListInteractor: ItemListInteractorProtocol {
+final class ListInteractor: ListInteractorProtocol {
     
-    private let router: ItemListRouterProtocol
+    private let router: ListRouterProtocol
     
-    init(router: ItemListRouterProtocol) {
+    init(router: ListRouterProtocol) {
         self.router = router
     }
     

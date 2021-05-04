@@ -1,5 +1,5 @@
 //
-//  ItemListViewController.swift
+//  ListViewController.swift
 //  SwiftPokedex
 //
 //  Created by Viktor Gidlöf on 2021-05-04.
@@ -7,15 +7,15 @@
 
 import UIKit
 
-final class ItemListViewController: TableViewController<RegularCell> {
+final class ListViewController: TableViewController<RegularCell> {
     
-    private let interactor: ItemListInteractorProtocol
+    private let interactor: ListInteractorProtocol
     private let viewModel = ViewModel()
 
     override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
     
     // MARK: - Init
-    init(interactor: ItemListInteractorProtocol) {
+    init(interactor: ListInteractorProtocol) {
         self.interactor = interactor
         super.init(style: .grouped)
     }

@@ -24,7 +24,7 @@ final class TabBarController: UITabBarController {
         let pokedexView = PokedexViewBuilder.build()
         pokedexView.tabBarItem = .pokedex(title: "Pokedex")
 
-        let itemsView = ItemListBuilder.build()
+        let itemsView = ListBuilder.build()
         itemsView.tabBarItem = .items(title: "Items")
         setViewControllers([pokedexView, itemsView], animated: false)
     }

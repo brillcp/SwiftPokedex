@@ -1,5 +1,5 @@
 //
-//  ItemListViewController.swift
+//  ListViewModel.swift
 //  SwiftPokedex
 //
 //  Created by Viktor Gidlöf on 2021-05-04.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension ItemListViewController {
+extension ListViewController {
     
     struct ViewModel: ViewModelProtocol {
         var title: String { "Items" }
