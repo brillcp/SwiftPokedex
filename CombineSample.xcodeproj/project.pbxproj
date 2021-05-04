@@ -261,9 +261,9 @@
 			isa = PBXGroup;
 			children = (
 				6E55386126406E690060C25B /* Builder */,
-				6E55386326406E700060C25B /* View */,
 				6E55386426406E770060C25B /* Interactor */,
 				6E55386626406E7C0060C25B /* Router */,
+				6E55386326406E700060C25B /* View */,
 			);
 			path = PokedexViewController;
 			sourceTree = "<group>";

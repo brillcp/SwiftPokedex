@@ -24,7 +24,7 @@ final class ItemCell: UITableViewCell, ConfigurableCell {
 
     private lazy var detailLabel: UILabel = {
         let label = UILabel(useAutolayout: true)
-        label.textColor = .lightGray
+        label.textColor = .gray
         label.numberOfLines = 0
         label.font = .pixel12
         return label
@@ -39,10 +39,12 @@ final class ItemCell: UITableViewCell, ConfigurableCell {
         backgroundColor = .clear
         selectionStyle = .none
         
+        let margin: CGFloat = 20.0
+        
         contentView.addSubview(itemImageView)
         NSLayoutConstraint.activate([
-            itemImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15.0),
-            itemImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            itemImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10.0),
+            itemImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: margin),
             itemImageView.widthAnchor.constraint(equalToConstant: 60.0),
             itemImageView.heightAnchor.constraint(equalTo: itemImageView.widthAnchor)
         ])
@@ -50,16 +52,16 @@ final class ItemCell: UITableViewCell, ConfigurableCell {
         contentView.addSubview(titleLabel)
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: itemImageView.trailingAnchor, constant: 10.0),
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15.0),
-            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15.0)
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: margin),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margin)
         ])
         
         contentView.addSubview(detailLabel)
         NSLayoutConstraint.activate([
             detailLabel.leadingAnchor.constraint(equalTo: itemImageView.trailingAnchor, constant: 10.0),
-            detailLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15.0),
-            detailLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15.0),
-            detailLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15.0)
+            detailLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: margin),
+            detailLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -margin),
+            detailLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margin)
         ])
     }
     

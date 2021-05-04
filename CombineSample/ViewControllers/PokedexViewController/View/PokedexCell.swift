@@ -6,6 +6,7 @@ final class PokedexCell: UICollectionViewCell, ConfigurableCell {
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
+        imageView.alpha = 0.0
         return imageView
     }()
     
@@ -63,7 +64,7 @@ final class PokedexCell: UICollectionViewCell, ConfigurableCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        backgroundColor = .lightGray
+        backgroundColor = .darkGray
         imageView.image = nil
     }
     
@@ -79,10 +80,14 @@ final class PokedexCell: UICollectionViewCell, ConfigurableCell {
                 let color = image?.dominantColor ?? .gray
                 
                 DispatchQueue.main.async {
-                    self?.backgroundColor = color
-                    self?.imageView.image = image
                     self?.titleLabel.textColor = color.isLight ? .black : .white
                     self?.indexLabel.textColor = color.isLight ? .black : .white
+                    self?.imageView.image = image
+                    
+                    UIView.animate(withDuration: 0.2) {
+                        self?.backgroundColor = color
+                        self?.imageView.alpha = 1.0
+                    }
                 }
             }
         }

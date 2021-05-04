@@ -12,6 +12,7 @@ final class ItemsViewController: TableViewController<ItemCell> {
         super.viewDidLoad()
         
         tableView.backgroundColor = .darkGrey
+        tableView.separatorColor = .darkGray
         title = viewModel.title
         
         viewModel.requestData { [weak self] result in
