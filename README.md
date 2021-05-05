@@ -2,7 +2,20 @@
 
 # SwiftPokedex
 
-SwiftPokedex is a simple Pokedex app written by [Viktor Gidlöf](https://viktorgidlof.com) in Swift that implements the [PokeAPI](https://pokeapi.co). For full documentation and implementation of the PokeAPI please have a look at the PokeAPI [documentation](https://pokeapi.co/docs/v2). It downloads an array of Pokemon and displays them in a grid. The most dominant color of the Pokemon sprite is detected and shown in the UI. It also shows a list of the most common items.
+SwiftPokedex is a simple Pokedex app written by [Viktor Gidlöf](https://viktorgidlof.com) in Swift that implements the [PokeAPI](https://pokeapi.co). For full documentation and implementation of the PokeAPI please have a look at the PokeAPI [documentation](https://pokeapi.co/docs/v2). 
+
+This sample app demonstrates:
+
++ Network capabilities using Combine
++ Data driven table and collection views
++ Async image download and caching
++ Swift dot syntax
++ RIB architecture
++ Light weight ViewModels
++ Custom navigation and tabbar
+
+
+It downloads an array of Pokemon and displays them in a grid. The most dominant color of the Pokemon sprite is detected and shown in the UI. It also shows a list of the most common items.
 
 
 ![pokdex1](https://user-images.githubusercontent.com/15960525/117063244-d3df8080-ad24-11eb-9293-83f8ba1a991a.png)
