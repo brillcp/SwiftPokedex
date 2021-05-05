@@ -21,18 +21,17 @@ extension UIImage {
             let cache = URLCache.shared
             let request = URLRequest(url: imageURL)
 
-            if let data = cache.cachedResponse(for: request)?.data, let image = UIImage(data: data) {
+            if let image = cache.image(from: request) {
                 DispatchQueue.main.async { completion(image) }
             } else {
                 URLSession.shared.dataTaskPublisher(for: request)
                     .tryMap { $0 }
                     .sinkToResult { result in
                         switch result {
-                        case let .success(response):
-                            let image = UIImage(data: response.data)
-                            let cachedImage = CachedURLResponse(response: response.response, data: response.data)
-                            cache.storeCachedResponse(cachedImage, for: request)
+                        case let .success(output):
+                            cache.cacheImage(from: output, for: request)
                             
+                            let image = UIImage(data: output.data)
                             DispatchQueue.main.async { completion(image) }
                         case .failure:
                             DispatchQueue.main.async { completion(nil) }
