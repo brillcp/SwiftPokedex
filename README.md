@@ -6,13 +6,13 @@ SwiftPokedex is a simple Pokedex app written by [Viktor Gidlöf](https://viktorg
 
 This sample app demonstrates:
 
-+ Network capabilities using Combine
-+ Data driven table and collection views
-+ Async image download and caching
-+ Swift dot syntax
-+ RIB architecture
-+ Custom navigation bar
-+ Custom fonts
+⚡️ Network capabilities using Combine
+💾 Data driven table and collection views
+🏞 Async image download and caching
+✏️ Swift dot syntax
+🏛 RIB architecture
+🗺 Custom navigation bar
+📖 Custom fonts
 
 It downloads an array of Pokemon and displays them in a grid. The most dominant color of the Pokemon sprite is detected and shown in the UI. It also shows a list of the most common items.
 
