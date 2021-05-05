@@ -11,7 +11,7 @@ This sample app demonstrates:
 + Data driven table and collection views 💾
 + Async image download and caching 🏞
 + Swift dot syntax ✏️
-+ Custom navigation bar 🗺
++ Custom navigation bar 🧭
 + Custom fonts 📖
 
 It downloads an array of Pokemon and displays them in a grid. The most dominant color of the Pokemon sprite is detected and shown in the UI. It also shows a list of the most common items.
