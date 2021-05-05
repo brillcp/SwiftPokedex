@@ -14,14 +14,20 @@ protocol ViewModelProtocol {
     
 extension PokedexViewController {
 
-    struct ViewModel: ViewModelProtocol {
-        var title: String { "Pokedex" }
+    final class ViewModel: ViewModelProtocol {
+        private var pokemon = [PokemonDetails]()
 
+        var title: String { "Pokedex" }
+        var isLoading: Bool { PokemonAPI.isLoading }
+        
         func requestData(_ completion: @escaping (Result<UICollectionView.DataSource, Error>) -> Void) {
-            PokemonAPI.allPokemon { result in
+            guard !isLoading else { return }
+            
+            PokemonAPI.requestPokemon { result in
                 switch result {
                 case let .success(pokemon):
-                    let collectionData: UICollectionView.DataSource = .pokemonDataSource(from: pokemon)
+                    self.pokemon += pokemon
+                    let collectionData: UICollectionView.DataSource = .pokemonDataSource(from: self.pokemon)
                     
                     DispatchQueue.main.async { completion(.success(collectionData)) }
                 case let .failure(error):

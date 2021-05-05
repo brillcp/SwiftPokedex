@@ -13,6 +13,11 @@ struct PokemonAPI {
     private static let baseURL = URL(string: "https://pokeapi.co/api/v2/")!
     private static var cancellables = Set<AnyCancellable>()
     
+    private static var pokemonResponse: APIResponse?
+    private static var itemResponse: APIResponse?
+    
+    static var isLoading: Bool = false
+    
     enum ItemType: String {
         case pokemons = "pokemon"
         case items = "item"
@@ -20,7 +25,7 @@ struct PokemonAPI {
     
     // MARK: - Public functions
     static func allItems(_ completion: @escaping (Result<[ItemDetails], Error>) -> Swift.Void) {
-        request(.items, limit: 400)?.flatMap { response in
+        requestItems(limit: 400)?.flatMap { response in
             Publishers.Sequence(sequence: response.results.compactMap { itemDetails(from: $0.url) })
                 .flatMap { $0 }
                 .collect()
@@ -31,14 +36,16 @@ struct PokemonAPI {
         }.store(in: &cancellables)
     }
 
-    static func allPokemon(_ completion: @escaping (Result<[PokemonDetails], Error>) -> Swift.Void) {
-        request(.pokemons)?.flatMap { response in
+    static func requestPokemon(_ completion: @escaping (Result<[PokemonDetails], Error>) -> Swift.Void) {
+        isLoading = true
+        requestPokemon(at: pokemonResponse?.next)?.flatMap { response in
             Publishers.Sequence(sequence: response.results.compactMap { pokemonDetails(from: $0.url) })
                 .flatMap { $0 }
                 .collect()
         }
         .eraseToAnyPublisher()
         .sinkToResult { result in
+            self.isLoading = false
             completion(result)
         }.store(in: &cancellables)
     }
@@ -56,8 +63,8 @@ struct PokemonAPI {
         return agent.execute(request)
     }
     
-    private static func request(_ type: ItemType, limit: Int = 151) -> AnyPublisher<APIResponse, Error>? {
-        var url = baseURL.appendingPathComponent(type.rawValue)
+    private static func requestItems(limit: Int = 200) -> AnyPublisher<APIResponse, Error>? {
+        var url = baseURL.appendingPathComponent(PokemonAPI.ItemType.items.rawValue)
         guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true) else { return nil }
 
         let query = URLQueryItem(name: "limit", value: "\(limit)")
@@ -67,5 +74,20 @@ struct PokemonAPI {
         url = finalURL
         
         return agent.execute(URLRequest(url: url))
+    }
+    
+    private static func requestPokemon(at urlString: String?) -> AnyPublisher<APIResponse, Error>? {
+        let finalURL: URL
+        
+        if let urlString = urlString, let url = URL(string: urlString) {
+            finalURL = url
+        } else {
+            finalURL = baseURL.appendingPathComponent(PokemonAPI.ItemType.pokemons.rawValue)
+        }
+                
+        return agent.execute(URLRequest(url: finalURL)).map { (response: APIResponse) -> APIResponse in
+            self.pokemonResponse = response
+            return response
+        }.eraseToAnyPublisher()
     }
 }

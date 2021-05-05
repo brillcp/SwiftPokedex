@@ -80,7 +80,7 @@ final class ItemCell: UITableViewCell, ConfigurableCell {
         detailLabel.attributedText = item.effect.first?.description.lineHeight(4)
         
         UIImage.load(from: item.sprites.default) { [weak self] image in
-            self?.itemImageView.image = image
+            DispatchQueue.main.async { self?.itemImageView.image = image }
         }
     }
 }

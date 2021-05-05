@@ -8,6 +8,8 @@
 import UIKit
 
 extension UICollectionView {
+    static let footer = UICollectionView.elementKindSectionFooter
+    
     struct Section {
         var title: String? = nil
         let items: [CollectionCellConfigurator]
@@ -25,6 +27,14 @@ extension UICollectionView {
         register(Cell.self, forCellWithReuseIdentifier: reuseIdentifier(for: cell))
     }
 
+    func registerReusableFooter<View: UICollectionReusableView>(view: View.Type) {
+        register(View.self, forSupplementaryViewOfKind: UICollectionView.footer, withReuseIdentifier: String(describing: View.self))
+    }
+    
+    func dequeueReusableView<View: UICollectionReusableView>(ofKind kind: String, at indexPath: IndexPath) -> View {
+        dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: View.self), for: indexPath) as! View
+    }
+    
     func dequeueCell<Cell: UICollectionViewCell>(for item: CollectionCellConfigurator, at indexPath: IndexPath) -> Cell {
         dequeueReusableCell(withReuseIdentifier: type(of: item).reuseId, for: indexPath) as! Cell
     }

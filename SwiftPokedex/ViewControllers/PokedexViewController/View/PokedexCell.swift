@@ -84,24 +84,22 @@ final class PokedexCell: UICollectionViewCell, ConfigurableCell {
         
         titleLabel.text = pokemon.name.capitalized
         indexLabel.text = "#\(pokemon.id)"
-
-        DispatchQueue.global(qos: .userInteractive).async {
-            UIImage.load(from: pokemon.sprite.url) { [weak self] image in
-                let color = image?.dominantColor ?? .darkGray
+        
+        UIImage.load(from: pokemon.sprite.url) { [weak self] image in
+            let color = image?.dominantColor ?? .darkGray
+            
+            DispatchQueue.main.async {
+                self?.titleLabel.textColor = color.isLight ? .black : .white
+                self?.indexLabel.textColor = color.isLight ? .black : .white
+                self?.imageView.image = image
+                self?.backgroundColor = color
                 
-                DispatchQueue.main.async {
-                    self?.titleLabel.textColor = color.isLight ? .black : .white
-                    self?.indexLabel.textColor = color.isLight ? .black : .white
-                    self?.imageView.image = image
-                    self?.backgroundColor = color
-
-                    guard self?.imageView.alpha != 1.0 else { return }
-                    
-                    UIView.animate(withDuration: 0.2) {
-                        self?.imageView.alpha = 1.0
-                        self?.indexLabel.alpha = 1.0
-                        self?.titleLabel.alpha = 1.0
-                    }
+                guard self?.imageView.alpha != 1.0 else { return }
+                
+                UIView.animate(withDuration: 0.2) {
+                    self?.imageView.alpha = 1.0
+                    self?.indexLabel.alpha = 1.0
+                    self?.titleLabel.alpha = 1.0
                 }
             }
         }

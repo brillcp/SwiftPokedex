@@ -31,6 +31,11 @@ final class PokedexViewController: CollectionViewController<PokedexCell> {
         collectionView.backgroundColor = .darkGrey
         navigationItem.backButtonTitle = ""
         
+        requestData()
+    }
+    
+    // MARK: - Private functions
+    private func requestData() {
         viewModel.requestData { [weak self] result in
             switch result {
             case let .success(dataSource): self?.collectionData = dataSource
@@ -53,5 +58,16 @@ extension PokedexViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let size = (collectionView.bounds.width - 60) / 2
         return CGSize(width: size, height: size)
+    }
+}
+
+// MARK: - Scroll View Delegate
+extension PokedexViewController {
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard scrollView.hasScrolledToBottom else { return }
+        
+        spinner.startAnimating()
+        requestData()
     }
 }

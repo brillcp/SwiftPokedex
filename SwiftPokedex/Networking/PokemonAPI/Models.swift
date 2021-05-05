@@ -9,6 +9,7 @@ import Foundation
 
 // MARK: - API
 struct APIResponse: Decodable {
+    let next: String
     let results: [APIItem]
 }
 

@@ -36,7 +36,7 @@ final class DetailHeaderView: UIView {
         addSubview(imageView)
 
         UIImage.load(from: urlString) { [weak self] image in
-            self?.imageView.image = image
+            DispatchQueue.main.async { self?.imageView.image = image }
         }
     }
     

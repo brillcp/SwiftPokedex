@@ -15,22 +15,22 @@ extension UIImage {
     static let items = UIImage(named: "items-icon")
 
     static func load(from urlString: String, _ completion: @escaping (UIImage?) -> Swift.Void) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            guard let imageURL = URL(string: urlString) else { DispatchQueue.main.async { completion(nil) }; return }
+        DispatchQueue.global(qos: .userInteractive).async {
+            guard let imageURL = URL(string: urlString) else { completion(nil); return }
 
             let cache = URLCache.shared
             let request = URLRequest(url: imageURL)
 
             if let image = cache.image(from: request) {
-                DispatchQueue.main.async { completion(image) }
+                completion(image)
             } else {
                 URLSession.shared.dataTaskPublisher(for: request).tryMap { $0 }.sinkToResult { result in
                     switch result {
                     case let .success(output):
                         cache.cacheImage(from: output, for: request)
-                        DispatchQueue.main.async { completion( UIImage(data: output.data)) }
+                        completion( UIImage(data: output.data))
                     case .failure:
-                        DispatchQueue.main.async { completion(nil) }
+                        completion(nil)
                     }
                 }.store(in: &cancellables)
             }
