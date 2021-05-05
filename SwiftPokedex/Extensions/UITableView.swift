@@ -55,3 +55,21 @@ extension UITableView.DataSource {
         sections[indexPath.section].items[indexPath.row]
     }
 }
+
+extension UITableView.DataSource {
+    
+    static func itemsDataSource(from items: [ItemDetails]) -> UITableView.DataSource {
+        let organizedItems = items.reduce([String: [ItemDetails]]()) { itemsDict, item -> [String: [ItemDetails]] in
+            var itemsDict = itemsDict
+            let items = items.filter { $0.category.name == item.category.name }
+            let sorted = items.sorted(by: { $0.name < $1.name })
+            itemsDict[item.category.name] = sorted
+            return itemsDict
+        }
+        
+        let cells: [RegularCellConfig] = organizedItems.sorted(by: { $0.key < $1.key }).map { .itemCell(title: $0.key, items: $0.value) }
+        let section = UITableView.Section(items: cells)
+        
+        return UITableView.DataSource(sections: [section])
+    }
+}

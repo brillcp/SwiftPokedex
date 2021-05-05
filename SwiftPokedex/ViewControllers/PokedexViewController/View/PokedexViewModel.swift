@@ -21,10 +21,8 @@ extension PokedexViewController {
             PokemonAPI.allPokemon { result in
                 switch result {
                 case let .success(pokemon):
-                    let sorted = pokemon.sorted(by: { $0.id < $1.id })
-                    let items = sorted.map { CollectionCellConfiguration<PokedexCell, PokemonDetails>(data: $0) }
-                    let section = UICollectionView.Section(items: items)
-                    let collectionData = UICollectionView.DataSource(sections: [section])
+                    let collectionData: UICollectionView.DataSource = .pokemonDataSource(from: pokemon)
+                    
                     DispatchQueue.main.async { completion(.success(collectionData)) }
                 case let .failure(error):
                     DispatchQueue.main.async { completion(.failure(error)) }

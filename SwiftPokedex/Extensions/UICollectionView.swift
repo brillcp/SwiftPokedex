@@ -51,3 +51,14 @@ extension UICollectionView.DataSource {
         sections[indexPath.section].items[indexPath.row]
     }
 }
+
+extension UICollectionView.DataSource {
+    
+    static func pokemonDataSource(from pokemon: [PokemonDetails]) -> UICollectionView.DataSource {
+        let sorted = pokemon.sorted(by: { $0.id < $1.id })
+        let items: [CollectionCell] = sorted.map { .pokemonCell(from: $0) }
+        let section = UICollectionView.Section(items: items)
+        let collectionData = UICollectionView.DataSource(sections: [section])
+        return collectionData
+    }
+}
