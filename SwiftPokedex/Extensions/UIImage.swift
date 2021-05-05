@@ -17,9 +17,10 @@ extension UIImage {
     static func load(from urlString: String, _ completion: @escaping (UIImage?) -> Swift.Void) {
         DispatchQueue.global(qos: .userInitiated).async {
             guard let imageURL = URL(string: urlString) else { DispatchQueue.main.async { completion(nil) }; return }
-            let request = URLRequest(url: imageURL)
 
             let cache = URLCache.shared
+            let request = URLRequest(url: imageURL)
+
             if let data = cache.cachedResponse(for: request)?.data, let image = UIImage(data: data) {
                 DispatchQueue.main.async { completion(image) }
             } else {
