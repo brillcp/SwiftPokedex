@@ -11,7 +11,7 @@ This sample app demonstrates:
 + Async image download and caching
 + Swift dot syntax
 + RIB architecture
-+ Light weight ViewModels
++ ViewModels
 + Custom navigation and tabbar
 
 
