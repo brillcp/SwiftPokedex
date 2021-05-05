@@ -2,7 +2,7 @@
 
 # SwiftPokedex 
 
-SwiftPokedex is a simple Pokedex app written by [Viktor Gidlöf](https://viktorgidlof.com) in Swift that implements the [PokeAPI](https://pokeapi.co). For full documentation and implementation of the PokeAPI please have a look at the PokeAPI [documentation](https://pokeapi.co/docs/v2). 
+SwiftPokedex is a simple Pokedex app written by [Viktor Gidlöf](https://viktorgidlof.com) in Swift that implements the [PokeAPI](https://pokeapi.co). For full documentation and implementation of API have a look at the their [documentation](https://pokeapi.co/docs/v2). 
 
 This sample app demonstrates:
 
