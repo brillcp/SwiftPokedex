@@ -96,11 +96,11 @@ By configuring the cells using `CollectionCellConfiguration` we tell the collect
 The PokeAPI is very extensive and it contains a lot of things. Here are some things that I plan to implement further down the line:
 - [x] Request pokemon
 - [ ] Search pokemon
+- [x] Pokedex pagination
 - [x] Show pokemon details
 - [x] Request items
 - [ ] Search items 
 - [x] Show item descriptions
-- [ ] List pagination
 - [ ] Implement other parts of the API such as:
     - Moves
     - Abilities
