@@ -12,7 +12,7 @@ This sample app demonstrates:
 + Swift dot syntax
 + RIB architecture
 + ViewModels
-+ Custom navigation and tabbar
++ Custom navigation bar
 
 
 It downloads an array of Pokemon and displays them in a grid. The most dominant color of the Pokemon sprite is detected and shown in the UI. It also shows a list of the most common items.
