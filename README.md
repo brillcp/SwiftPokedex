@@ -6,11 +6,11 @@ SwiftPokedex is a simple Pokedex app written by [Viktor Gidlöf](https://viktorg
 
 This sample app demonstrates:
 
++ RIB architecture 🏛
 + Network capabilities using Combine ⚡️
 + Data driven table and collection views 💾
 + Async image download and caching 🏞
 + Swift dot syntax ✏️
-+ RIB architecture 🏛
 + Custom navigation bar 🗺
 + Custom fonts 📖
 
