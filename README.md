@@ -15,7 +15,7 @@ SwiftPokedex is written in my own interpretation of the RIB archtitecure created
 
 ## Builder
 
-The builder build the views with all of their dependencies (if any):
+The builder build the views with all of their dependencies.
 ```swift
 final class PokedexViewBuilder {
     
@@ -42,7 +42,7 @@ override func collectionView(_ collectionView: UICollectionView, didSelectItemAt
 ```
 
 ## Router
-The router is simply in charge of navigation. And since the router is decoupled from the view controller we can easily navigate to anywhere in the app.
+The router is simply in charge of navigation. And since routers are decoupled from view controllers we can easily navigate to anywhere in the app.
 ```swift
 func routeToDetailView(pokemon: PokemonDetails, color: UIColor) {
     let detailView = DetailViewBuilder.build(from: pokemon, withColor: color)
@@ -92,9 +92,6 @@ By configuring the cells using `CollectionCellConfiguration` we tell the collect
     - Moves
     - Abilities
     - Berries
-
-
-
 
 # Requirements
 
