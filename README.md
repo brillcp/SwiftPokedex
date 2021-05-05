@@ -2,7 +2,7 @@
 
 # SwiftPokedex
 
-SwiftPokedex is a simple Pokedex app written by [Viktor Gidlöf](https://viktorgidlof.com) in Swift that implements the [PokeAPI](https://pokeapi.co). For full documentation and implementation of the PokeAPI please have a look at the PokeAPI [documentation](https://pokeapi.co/docs/v2).
+SwiftPokedex is a simple Pokedex app written by [Viktor Gidlöf](https://viktorgidlof.com) in Swift that implements the [PokeAPI](https://pokeapi.co). For full documentation and implementation of the PokeAPI please have a look at the PokeAPI [documentation](https://pokeapi.co/docs/v2). It downloads an array of Pokemon and displays them in a grid. The most dominant color of the Pokemon sprite is detected and shown in the UI. It also shows a list of the most common items.
 
 
 ![pokdex1](https://user-images.githubusercontent.com/15960525/117063244-d3df8080-ad24-11eb-9293-83f8ba1a991a.png)
@@ -32,7 +32,7 @@ final class PokedexViewBuilder {
 ```
 
 ## Interactor
-The interactor is the link between the user input and the view and includes all the interations the user can make. It also contains a router object.
+The interactor is the link between the user input and the view and includes all the interations the user can make. It also contains a router object. So when the user interacts with the view we call the interactor to make the appropriate interaction.
 ```swift
 override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     collectionView.deselectItem(at: indexPath, animated: true)
@@ -42,7 +42,7 @@ override func collectionView(_ collectionView: UICollectionView, didSelectItemAt
 ```
 
 ## Router
-The router is simply in charge of navigation. And since routers are decoupled from view controllers we can easily navigate to anywhere in the app.
+The router is in charge of navigation. And since routers are decoupled from view controllers we can easily navigate to anywhere in the app.
 ```swift
 func routeToDetailView(pokemon: PokemonDetails, color: UIColor) {
     let detailView = DetailViewBuilder.build(from: pokemon, withColor: color)
@@ -50,9 +50,9 @@ func routeToDetailView(pokemon: PokemonDetails, color: UIColor) {
 }
 ```
 
-# Networking with Combine
+# Networking
 
-SwiftPokedex uses Combine for all the API calls to the PokeAPI. This small structure is all that's needed to make any type of requests to the API. 
+SwiftPokedex uses Combine for all the API calls to the PokeAPI. This small structure is all that's needed to make any type of request to the API. 
 The `PokemonAPI` is then build around this network agent. It supports requesting pokemons and items at the moment.
 ```swift
 struct NetworkAgent {
@@ -70,14 +70,14 @@ struct NetworkAgent {
 
 # Data driven tables and collection views
 
-The table views and collection views are data driven which means they setup their own UI based on the data we give them. So setting up a collection view data source can be done like this:
+The table views and collection views are data driven and they setup their own UI based on the data they are given. So setting up a collection view data source is done like this:
 ```swift
 let items = pokemon.map { CollectionCellConfiguration<PokedexCell, PokemonDetails>(data: $0) }
 let section = UICollectionView.Section(items: items)
 let collectionData = UICollectionView.DataSource(sections: [section])
 ```
 
-By configuring the cells using `CollectionCellConfiguration` we tell the collection view that the data type we want to use is `PokemonDetails` and the custom cell is `PokedexCell`. Then the collection view automatically renders that data with those cells. No need to implement any of the delefate of data source methods in the view controller. That is done with the `CollectionCellConfigurator` protocol and with a subclass of `UICollectionViewController`.
+By configuring the cells using `CollectionCellConfiguration` we tell the collection view that the data type we want to use is `PokemonDetails` and the custom cell is `PokedexCell`. This make setting up cells type safe as well. Then the collection view automatically renders that data with those cells. No need to implement any of the collection delegate or data source methods in the view controller. That is done with the `CollectionCellConfigurator` protocol and a subclass of `UICollectionViewController`.
 
 # Todo
 
