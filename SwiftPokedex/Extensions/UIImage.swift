@@ -24,13 +24,14 @@ extension UIImage {
                 DispatchQueue.main.async { completion(image) }
             } else {
                 URLSession.shared.dataTaskPublisher(for: request)
-                    .tryMap { (response: $0.response, data: $0.data) }
+                    .tryMap { $0 }
                     .sinkToResult { result in
                         switch result {
-                        case let .success(value):
-                            let image = UIImage(data: value.data)
-                            let cachedImage = CachedURLResponse(response: value.response, data: value.data)
+                        case let .success(response):
+                            let image = UIImage(data: response.data)
+                            let cachedImage = CachedURLResponse(response: response.response, data: response.data)
                             cache.storeCachedResponse(cachedImage, for: request)
+                            
                             DispatchQueue.main.async { completion(image) }
                         case .failure:
                             DispatchQueue.main.async { completion(nil) }
