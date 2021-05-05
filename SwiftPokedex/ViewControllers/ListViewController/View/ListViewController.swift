@@ -28,8 +28,6 @@ final class ListViewController: TableViewController<RegularCell> {
         
         spinner.startAnimating()
         
-        tableView.backgroundColor = .darkGrey
-        tableView.separatorColor = .darkGray
         navigationItem.backButtonTitle = ""
 
         title = viewModel.title

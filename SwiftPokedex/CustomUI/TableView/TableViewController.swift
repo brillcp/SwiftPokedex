@@ -28,9 +28,11 @@ class TableViewController<Cell: UITableViewCell>: UITableViewController {
         self.tableData = tableData
         super.init(style: style)
 
-        tableView.registerCell(Cell.self)
+        tableView.backgroundColor = .darkGrey
+        tableView.separatorColor = .darkGray
         tableView.backgroundView = spinner
         tableView.indicatorStyle = .white
+        tableView.registerCell(Cell.self)
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }

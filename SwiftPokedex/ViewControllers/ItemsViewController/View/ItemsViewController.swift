@@ -24,8 +24,6 @@ final class ItemsViewController: TableViewController<ItemCell> {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.backgroundColor = .darkGrey
-        tableView.separatorColor = .darkGray
         title = viewModel.title
     }
 }
