@@ -13,6 +13,7 @@ This sample app demonstrates:
 + Swift dot syntax ✏️
 + Custom navigation bar 🧭
 + Custom fonts 📖
++ Infinite scrolling 📜
 
 It downloads an array of Pokemon and displays them in a grid. The most dominant color of the Pokemon sprite is detected and shown in the UI. It also shows a list of the most common items.
 
