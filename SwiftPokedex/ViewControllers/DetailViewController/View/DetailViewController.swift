@@ -9,6 +9,13 @@ import UIKit
 
 final class DetailViewController: TableViewController<DetailCell> {
     
+    private lazy var idButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(title: viewModel.id, style: .plain, target: nil, action: nil)
+        let color: UIColor = viewModel.isLight ? .black : .white
+        button.setTitleTextAttributes([.font: UIFont.pixel17, .foregroundColor: color], for: .normal)
+        return button
+    }()
+
     private let viewModel: ViewModel
     
     override var preferredStatusBarStyle: UIStatusBarStyle { viewModel.isLight ? .default : .lightContent }
@@ -52,11 +59,7 @@ final class DetailViewController: TableViewController<DetailCell> {
     private func viewWillAppear() {
         navigationController?.navigationBar.barTintColor = viewModel.color
         navigationController?.navigationBar.shadowImage = UIImage()
-        
-        let idBarButton = UIBarButtonItem(title: viewModel.id, style: .plain, target: nil, action: nil)
-        let color: UIColor = viewModel.isLight ? .black : .white
-        idBarButton.setTitleTextAttributes([.font: UIFont.pixel17, .foregroundColor: color], for: .normal)
-        navigationItem.rightBarButtonItem = idBarButton
+        navigationItem.rightBarButtonItem = idButton
 
         if viewModel.isLight {
             navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.pixel17, .foregroundColor: UIColor.black]
