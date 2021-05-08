@@ -38,7 +38,7 @@ extension TableCellConfiguration {
         let limit = 10
         let tooMany = values.count > limit
         
-        var values = tooMany ? Array(values[0 ... limit]) : values
+        var values = tooMany ? Array(values[0 ..< limit]) : values
         
         if tooMany {
             values.append(Move(move: APIItem(name: "...", url: "")))
