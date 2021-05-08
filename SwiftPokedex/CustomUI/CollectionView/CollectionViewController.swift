@@ -44,17 +44,10 @@ class CollectionViewController<Cell: UICollectionViewCell>: UICollectionViewCont
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
-        switch kind {
-        case UICollectionView.footer:
-            let footer = collectionView.dequeueReusableView(ofKind: kind, at: indexPath)
-            footer.addSubview(spinner)
-            spinner.center = CGPoint(x: collectionView.center.x, y: footer.frame.height / 2.0)
-            return footer
-        default: break
-        }
-        
-        fatalError("Unable to dequeue reusable view")
+        let footer = collectionView.dequeueReusableView(ofKind: kind, at: indexPath)
+        footer.addSubview(spinner)
+        spinner.center = CGPoint(x: collectionView.center.x, y: footer.frame.height / 2.0)
+        return footer
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

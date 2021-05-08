@@ -36,11 +36,25 @@ final class PokedexViewController: CollectionViewController<PokedexCell> {
     
     // MARK: - Private functions
     private func requestData() {
+        startSpinner()
+        
         viewModel.requestData { [weak self] result in
+            self?.spinner.stopAnimating()
+            
             switch result {
             case let .success(dataSource): self?.collectionData = dataSource
             case let .failure(error): print(error.localizedDescription)
             }
+        }
+    }
+    
+    private func startSpinner() {
+        if collectionData.hasData {
+            collectionView.backgroundView = nil
+            spinner.startAnimating()
+        } else {
+            collectionView.backgroundView = spinner
+            spinner.startAnimating()
         }
     }
     
