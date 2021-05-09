@@ -12,13 +12,11 @@ final class ListViewController: TableViewController<RegularCell> {
     private let interactor: ListInteractorProtocol
     private let viewModel = ViewModel()
 
-    private lazy var resultsViewController = ItemsViewBuilder.build(with: ItemData(title: "", items: []))
+    private lazy var resultsViewController = ItemsViewBuilder.build(with: ItemData())
     
     private lazy var searchController: SearchController = {
         let controller = SearchController(searchResultsController: resultsViewController)
-        controller.searchResultsUpdater = self
         controller.searchBar.delegate = self
-        controller.searchBar.sizeToFit()
         return controller
     }()
 
@@ -56,12 +54,9 @@ final class ListViewController: TableViewController<RegularCell> {
     }
     
     // MARK: - Private functions
-    private func search(for text: String) {
-        let lowercase = text.lowercased()
-        
+    private func search(for string: String) {
         let results = viewModel.items.filter {
-            $0.name.cleaned.lowercased().contains(lowercase) ||
-            $0.effect.description.cleaned.lowercased().contains(lowercase)
+            $0.name.foundMatch(for: string) || $0.effect.description.foundMatch(for: string)
         }.sorted(by: { $0.name < $1.name })
         
         resultsViewController.tableData = .detailedItemsDataSource(from: results)
@@ -79,12 +74,5 @@ extension ListViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         search(for: searchText)
-    }
-}
-
-extension ListViewController: UISearchResultsUpdating {
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        
     }
 }

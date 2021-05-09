@@ -10,7 +10,7 @@ import UIKit
 extension ItemsViewController {
     
     struct ViewModel {
-        let title: String
-        var cleanTitle: String { title.cleaned }
+        let title: String?
+        var cleanTitle: String? { title?.cleaned }
     }
 }
