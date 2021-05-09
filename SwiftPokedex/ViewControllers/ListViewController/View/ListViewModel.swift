@@ -9,13 +9,16 @@ import UIKit
 
 extension ListViewController {
     
-    struct ViewModel: ViewModelProtocol {
+    final class ViewModel: ViewModelProtocol {
         var title: String { "Items" }
+        var items = [ItemDetails]()
         
         func requestData(_ completion: @escaping (Result<UITableView.DataSource, Error>) -> Void) {
             PokemonAPI.allItems { result in
                 switch result {
                 case let .success(items):
+                    self.items = items
+                    
                     let tableData: UITableView.DataSource = .itemsDataSource(from: items)
                     DispatchQueue.main.async { completion(.success(tableData)) }
                     

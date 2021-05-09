@@ -22,15 +22,11 @@ extension UITableView {
     }
     
     func registerCell<Cell: UITableViewCell>(_ cell: Cell.Type) {
-        register(Cell.self, forCellReuseIdentifier: reuseIdentifier(for: cell))
+        register(Cell.self, forCellReuseIdentifier: String(describing: cell))
     }
 
     func dequeueCell<Cell: UITableViewCell>(for item: TableCellConfigurator) -> Cell {
         dequeueReusableCell(withIdentifier: type(of: item).reuseId) as! Cell
-    }
-
-    private func reuseIdentifier<Cell: UITableViewCell>(for cell: Cell.Type) -> String {
-        String(describing: cell)
     }
 }
 
@@ -58,6 +54,12 @@ extension UITableView.DataSource {
 
 extension UITableView.DataSource {
     
+    static func detailedItemsDataSource(from result: [ItemDetails]) -> UITableView.DataSource {
+        let cells: [ItemCellConfig] = result.map { .itemCell(data: $0) }
+        let section = UITableView.Section(items: cells)
+        return UITableView.DataSource(sections: [section])
+    }
+
     static func itemsDataSource(from items: [ItemDetails]) -> UITableView.DataSource {
         let organizedItems = items.reduce([String: [ItemDetails]]()) { itemsDict, item -> [String: [ItemDetails]] in
             var itemsDict = itemsDict
