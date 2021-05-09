@@ -77,7 +77,7 @@ final class ItemCell: UITableViewCell, ConfigurableCell {
         self.data = item
         
         titleLabel.text = item.name.cleaned
-        detailLabel.attributedText = item.effect.first?.description.lineHeight(4)
+        detailLabel.attributedText = item.effect.first?.description.cleaned.lineHeight(4)
         
         UIImage.load(from: item.sprites.default) { [weak self] image in
             DispatchQueue.main.async { self?.itemImageView.image = image }

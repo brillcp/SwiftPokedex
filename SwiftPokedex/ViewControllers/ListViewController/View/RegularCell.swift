@@ -8,8 +8,8 @@
 import UIKit
 
 struct ItemData {
-    let title: String
-    let items: [ItemDetails]
+    var title: String? = nil
+    var items: [ItemDetails] = []
 }
 
 final class RegularCell: UITableViewCell, ConfigurableCell {
@@ -19,7 +19,7 @@ final class RegularCell: UITableViewCell, ConfigurableCell {
         self.data = data
         
         accessoryType = .disclosureIndicator
-        textLabel?.text = data.title.cleaned
+        textLabel?.text = data.title?.cleaned
         textLabel?.textColor = .white
         textLabel?.font = .pixel14
         backgroundColor = .clear
