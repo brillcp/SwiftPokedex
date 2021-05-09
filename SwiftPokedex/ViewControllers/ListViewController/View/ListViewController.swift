@@ -9,10 +9,9 @@ import UIKit
 
 final class ListViewController: TableViewController<RegularCell> {
     
+    private lazy var resultsViewController = ItemsViewBuilder.build()
     private let interactor: ListInteractorProtocol
     private let viewModel = ViewModel()
-
-    private lazy var resultsViewController = ItemsViewBuilder.build(with: ItemData())
     
     private lazy var searchController: SearchController = {
         let controller = SearchController(searchResultsController: resultsViewController)
@@ -34,15 +33,14 @@ final class ListViewController: TableViewController<RegularCell> {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        spinner.startAnimating()
-        
-        extendedLayoutIncludesOpaqueBars = true
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.backButtonTitle = ""
 
         title = viewModel.title
         
+        spinner.startAnimating()
+
         viewModel.requestData { [weak self] result in
             self?.spinner.stopAnimating()
             
@@ -55,10 +53,7 @@ final class ListViewController: TableViewController<RegularCell> {
     
     // MARK: - Private functions
     private func search(for string: String) {
-        let results = viewModel.items.filter {
-            $0.name.foundMatch(for: string) || $0.effect.description.foundMatch(for: string)
-        }.sorted(by: { $0.name < $1.name })
-        
+        let results = viewModel.items.filtered(from: string)
         resultsViewController.tableData = .detailedItemsDataSource(from: results)
     }
     
