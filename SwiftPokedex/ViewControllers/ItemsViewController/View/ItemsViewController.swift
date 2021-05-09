@@ -24,6 +24,6 @@ final class ItemsViewController: TableViewController<ItemCell> {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = viewModel.title
+        title = viewModel.cleanTitle
     }
 }

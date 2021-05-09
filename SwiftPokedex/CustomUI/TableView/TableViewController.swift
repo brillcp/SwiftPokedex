@@ -28,6 +28,7 @@ class TableViewController<Cell: UITableViewCell>: UITableViewController {
         self.tableData = tableData
         super.init(style: style)
 
+        tableView.keyboardDismissMode = .onDrag
         tableView.backgroundColor = .darkGrey
         tableView.separatorColor = .darkGray
         tableView.backgroundView = spinner

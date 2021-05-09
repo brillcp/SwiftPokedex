@@ -59,6 +59,7 @@
 		6EFE1977263C8F0400FD0A19 /* UIImageColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFE1976263C8F0400FD0A19 /* UIImageColors.swift */; };
 		6EFE197E263CA0FC00FD0A19 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFE197D263CA0FC00FD0A19 /* UIFont.swift */; };
 		D57C6B882643359000A8D829 /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57C6B872643359000A8D829 /* UIScrollView.swift */; };
+		D58B7468264761180046E7EB /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58B7467264761180046E7EB /* SearchController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -116,6 +117,7 @@
 		6EFE197A263CA09E00FD0A19 /* pixelmix.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pixelmix.ttf; sourceTree = "<group>"; };
 		6EFE197D263CA0FC00FD0A19 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		D57C6B872643359000A8D829 /* UIScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollView.swift; sourceTree = "<group>"; };
+		D58B7467264761180046E7EB /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -256,6 +258,7 @@
 			isa = PBXGroup;
 			children = (
 				6EC5FCCF263CA824005B04ED /* NavigationController.swift */,
+				D58B7467264761180046E7EB /* SearchController.swift */,
 				6E006F732641989D009FC152 /* TabBarController.swift */,
 				6E006F6C26416239009FC152 /* DetailHeaderView.swift */,
 				6EFC2135263C8422004389D9 /* CollectionView */,
@@ -460,6 +463,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E006F6926414AAF009FC152 /* Publisher.swift in Sources */,
+				D58B7468264761180046E7EB /* SearchController.swift in Sources */,
 				6EA892332641C8FB00E4F269 /* ItemListRouter.swift in Sources */,
 				6E006F862641C434009FC152 /* ListViewModel.swift in Sources */,
 				6EFC2130263C7F2A004389D9 /* CollectionCellConfiguration.swift in Sources */,
