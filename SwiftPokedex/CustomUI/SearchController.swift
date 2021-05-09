@@ -15,12 +15,13 @@ final class SearchController: UISearchController {
         super.viewDidLoad()
         
         obscuresBackgroundDuringPresentation = false
-        automaticallyShowsSearchResultsController = true
         searchBar.placeholder = "Search…"
         searchBar.tintColor = .pokedexRed
         searchBar.searchTextField.font = .pixel14
         searchBar.searchTextField.textColor = .black
         searchBar.searchTextField.keyboardAppearance = .dark
         searchBar.searchTextField.backgroundColor = .white
+        searchBar.searchBarStyle = .prominent
+        searchBar.isTranslucent = false
     }
 }

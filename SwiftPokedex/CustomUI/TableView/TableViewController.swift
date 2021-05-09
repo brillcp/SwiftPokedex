@@ -8,7 +8,7 @@
 import UIKit
 
 class TableViewController<Cell: UITableViewCell>: UITableViewController {
-    
+
     lazy var spinner: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView(style: .medium)
         spinner.color = .white
@@ -27,7 +27,9 @@ class TableViewController<Cell: UITableViewCell>: UITableViewController {
     init(style: UITableView.Style = .insetGrouped, tableData: UITableView.DataSource = .init()) {
         self.tableData = tableData
         super.init(style: style)
-
+        
+        extendedLayoutIncludesOpaqueBars = true
+        
         tableView.keyboardDismissMode = .onDrag
         tableView.backgroundColor = .darkGrey
         tableView.separatorColor = .darkGray
@@ -46,7 +48,7 @@ class TableViewController<Cell: UITableViewCell>: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         tableData.numberOfItems(in: section)
     }
-
+    
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let title = tableData.title(in: section) else { return nil }
         return UIView.tableHeader(title: title, in: tableView)
