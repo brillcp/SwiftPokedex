@@ -85,7 +85,7 @@ struct NetworkAgent {
 
 The table views and collection views are data driven and they setup their own UI based on the data they are given. So setting up a collection view data source is done like this:
 ```swift
-let items: [CollectionCell] = pokemon.map { .pokemonCell(from: $0) }
+let items = pokemon.map { CollectionCellConfiguration<PokedexCell, PokemonDetails>(data: $0) }
 let section = UICollectionView.Section(items: items)
 let collectionData = UICollectionView.DataSource(sections: [section])
 ```
