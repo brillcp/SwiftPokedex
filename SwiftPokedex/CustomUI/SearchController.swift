@@ -23,5 +23,6 @@ final class SearchController: UISearchController {
         searchBar.searchTextField.backgroundColor = .white
         searchBar.searchBarStyle = .prominent
         searchBar.isTranslucent = false
+        searchBar.isOpaque = true
     }
 }

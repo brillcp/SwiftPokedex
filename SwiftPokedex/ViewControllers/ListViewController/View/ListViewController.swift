@@ -34,7 +34,7 @@ final class ListViewController: TableViewController<RegularCell> {
         super.viewDidLoad()
         
         navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
+//        navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.backButtonTitle = ""
 
         title = viewModel.title
@@ -42,8 +42,6 @@ final class ListViewController: TableViewController<RegularCell> {
         spinner.startAnimating()
 
         viewModel.requestData { [weak self] result in
-            self?.spinner.stopAnimating()
-            
             switch result {
             case let .success(dataSource): self?.tableData = dataSource
             case let .failure(error): print(error.localizedDescription)
