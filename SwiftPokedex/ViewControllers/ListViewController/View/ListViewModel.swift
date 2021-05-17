@@ -14,7 +14,7 @@ extension ListViewController {
         var items = [ItemDetails]()
         
         func requestData(_ completion: @escaping (Result<UITableView.DataSource, Error>) -> Void) {
-            PokemonAPI.allItems { result in
+            ItemAPI.allItems { result in
                 switch result {
                 case let .success(items):
                     self.items = items

@@ -7,18 +7,6 @@
 
 import Foundation
 
-// MARK: - API
-struct APIResponse: Decodable {
-    let next: String
-    let results: [APIItem]
-}
-
-struct APIItem: Decodable {
-    let name: String
-    let url: String
-}
-
-// MARK: - Pokemon
 struct PokemonDetails: Decodable {
     let id: Int
     let name: String
@@ -66,30 +54,5 @@ struct Stat: Decodable {
     private enum CodingKeys: String, CodingKey {
         case stat
         case baseStat = "base_stat"
-    }
-}
-
-// MARK: - Items
-struct ItemDetails: Decodable {
-    let name: String
-    let sprites: ItemSprite
-    let category: APIItem
-    let effect: [Effect]
-    
-    private enum CodingKeys: String, CodingKey {
-        case name, sprites, category
-        case effect = "effect_entries"
-    }
-}
-
-struct ItemSprite: Decodable {
-    let `default`: String
-}
-
-struct Effect: Decodable {
-    let description: String
-    
-    private enum CodingKeys: String, CodingKey {
-        case description = "effect"
     }
 }

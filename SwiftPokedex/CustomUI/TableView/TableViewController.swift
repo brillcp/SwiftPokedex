@@ -9,13 +9,13 @@ import UIKit
 
 class TableViewController: UITableViewController {
 
+    // MARK: - Public properties
     lazy var spinner: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView(style: .medium)
         spinner.color = .white
         return spinner
     }()
     
-    //MARK: - Public properties
     var tableData: UITableView.DataSource {
         didSet {
             registerCellsIfNeeded()
