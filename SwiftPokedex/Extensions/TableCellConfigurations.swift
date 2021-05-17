@@ -16,6 +16,7 @@ extension TableCellConfiguration {
     static func itemCell(data: ItemDetails) -> ItemCellConfig {
         ItemCellConfig(data: data, rowHeight: UITableView.automaticDimension)
     }
+    
     static func itemCell(title: String, items: [ItemDetails]) -> RegularCellConfig {
         RegularCellConfig(data: ItemData(title: title, items: items), rowHeight: 70.0)
     }
