@@ -8,9 +8,10 @@
 import UIKit
 import Combine
 
-fileprivate var cancellables = Set<AnyCancellable>()
 
 extension UIImage {
+    private static var cancellables = Set<AnyCancellable>()
+
     static let pokedex = UIImage(named: "pokedex-icon")
     static let items = UIImage(named: "items-icon")
 
