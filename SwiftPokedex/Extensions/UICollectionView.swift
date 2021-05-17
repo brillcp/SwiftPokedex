@@ -24,11 +24,11 @@ extension UICollectionView {
     }
     
     func registerCell<Cell: UICollectionViewCell>(_ cell: Cell.Type) {
-        register(Cell.self, forCellWithReuseIdentifier: reuseIdentifier(for: cell))
+        register(cell.self, forCellWithReuseIdentifier: String(describing: cell))
     }
 
     func registerReusableFooter<View: UICollectionReusableView>(view: View.Type) {
-        register(View.self, forSupplementaryViewOfKind: UICollectionView.footer, withReuseIdentifier: String(describing: View.self))
+        register(view.self, forSupplementaryViewOfKind: UICollectionView.footer, withReuseIdentifier: String(describing: view))
     }
     
     func dequeueReusableView<View: UICollectionReusableView>(ofKind kind: String, at indexPath: IndexPath) -> View {
@@ -37,10 +37,6 @@ extension UICollectionView {
     
     func dequeueCell<Cell: UICollectionViewCell>(for item: CollectionCellConfigurator, at indexPath: IndexPath) -> Cell {
         dequeueReusableCell(withReuseIdentifier: type(of: item).reuseId, for: indexPath) as! Cell
-    }
-
-    private func reuseIdentifier<Cell: UICollectionViewCell>(for cell: Cell.Type) -> String {
-        String(describing: cell)
     }
 }
 
@@ -59,6 +55,22 @@ extension UICollectionView.DataSource {
     
     func item(at indexPath: IndexPath) -> CollectionCellConfigurator {
         sections[indexPath.section].items[indexPath.row]
+    }
+}
+
+extension UICollectionView.DataSource {
+    
+    private typealias UniqueCellTypes = [String: UICollectionViewCell.Type]
+    
+    var cellTypes: [UICollectionViewCell.Type] {
+        let cellTypes = sections.flatMap { $0.items.compactMap { type(of: $0).cellType }}
+        
+        let uniqueTypes = cellTypes.reduce(UniqueCellTypes()) {
+            var cellTypes = $0
+            cellTypes[String(describing: $1)] = $1
+            return cellTypes
+        }
+        return Array(uniqueTypes.values)
     }
 }
 

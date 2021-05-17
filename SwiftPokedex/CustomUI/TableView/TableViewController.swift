@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TableViewController<Cell: UITableViewCell>: UITableViewController {
+class TableViewController: UITableViewController {
 
     lazy var spinner: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView(style: .medium)
@@ -18,6 +18,7 @@ class TableViewController<Cell: UITableViewCell>: UITableViewController {
     //MARK: - Public properties
     var tableData: UITableView.DataSource {
         didSet {
+            registerCellsIfNeeded()
             spinner.stopAnimating()
             tableView.reloadData()
         }
@@ -35,10 +36,17 @@ class TableViewController<Cell: UITableViewCell>: UITableViewController {
         tableView.separatorColor = .darkGray
         tableView.backgroundView = spinner
         tableView.indicatorStyle = .white
-        tableView.registerCell(Cell.self)
+        
+        registerCellsIfNeeded()
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    
+    // MARK: - Private functions
+    private func registerCellsIfNeeded() {
+        guard tableData.hasData else { return }
+        tableData.cellTypes.forEach { tableView.registerCell($0) }
+    }
     
     // MARK: - TableView Data Source
     override func numberOfSections(in tableView: UITableView) -> Int {

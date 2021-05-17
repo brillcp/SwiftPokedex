@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DetailViewController: TableViewController<DetailCell> {
+final class DetailViewController: TableViewController {
     
     private lazy var idButton: UIBarButtonItem = {
         let button = UIBarButtonItem(title: viewModel.id, style: .plain, target: nil, action: nil)

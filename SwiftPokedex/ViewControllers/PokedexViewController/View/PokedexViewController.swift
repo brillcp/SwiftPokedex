@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class PokedexViewController: CollectionViewController<PokedexCell> {
+final class PokedexViewController: CollectionViewController {
     
     private let interactor: PokedexInteractorProtocol
     private let viewModel = ViewModel()

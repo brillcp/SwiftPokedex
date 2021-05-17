@@ -15,6 +15,7 @@ protocol ConfigurableCell {
 }
 
 protocol TableCellConfigurator {
+    static var cellType: UITableViewCell.Type? { get }
     static var reuseId: String { get }
     var rowHeight: CGFloat { get }
     func configureCell(_ cell: UITableViewCell)
@@ -22,6 +23,7 @@ protocol TableCellConfigurator {
 
 final class TableCellConfiguration<Cell: ConfigurableCell, Data>: TableCellConfigurator where Data == Cell.DataType {
     
+    static var cellType: UITableViewCell.Type? { Cell.self as? UITableViewCell.Type }
     static var reuseId: String { String(describing: Cell.self) }
     
     var rowHeight: CGFloat

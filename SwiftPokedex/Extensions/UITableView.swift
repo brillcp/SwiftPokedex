@@ -22,7 +22,7 @@ extension UITableView {
     }
     
     func registerCell<Cell: UITableViewCell>(_ cell: Cell.Type) {
-        register(Cell.self, forCellReuseIdentifier: String(describing: cell))
+        register(cell, forCellReuseIdentifier: String(describing: cell))
     }
 
     func dequeueCell<Cell: UITableViewCell>(for item: TableCellConfigurator) -> Cell {
@@ -54,6 +54,22 @@ extension UITableView.DataSource {
 
 extension UITableView.DataSource {
     
+    private typealias UniqueCellTypes = [String: UITableViewCell.Type]
+    
+    var cellTypes: [UITableViewCell.Type] {
+        let cellTypes = sections.flatMap { $0.items.compactMap { type(of: $0).cellType }}
+        
+        let uniqueTypes = cellTypes.reduce(UniqueCellTypes()) {
+            var cellTypes = $0
+            cellTypes[String(describing: $1)] = $1
+            return cellTypes
+        }
+        return Array(uniqueTypes.values)
+    }
+}
+
+extension UITableView.DataSource {
+    
     static func detailedItemsDataSource(from result: [ItemDetails]) -> UITableView.DataSource {
         let cells: [ItemCellConfig] = result.map { .itemCell(data: $0) }
         let section = UITableView.Section(items: cells)
@@ -63,15 +79,21 @@ extension UITableView.DataSource {
     static func itemsDataSource(from items: [ItemDetails]) -> UITableView.DataSource {
         let organizedItems = items.reduce([String: [ItemDetails]]()) { itemsDict, item -> [String: [ItemDetails]] in
             var itemsDict = itemsDict
-            let items = items.filter { $0.category.name == item.category.name }
-            let sorted = items.sorted(by: { $0.name < $1.name })
-            itemsDict[item.category.name] = sorted
+            let items = items
+                .filter { $0.category.name == item.category.name }
+                .sorted(by: { $0.name < $1.name })
+            
+            itemsDict[item.category.name] = items
             return itemsDict
         }
         
-        let cells: [RegularCellConfig] = organizedItems.sorted(by: { $0.key < $1.key }).map { .itemCell(title: $0.key, items: $0.value) }
-        let section = UITableView.Section(items: cells)
+        let cells: [RegularCellConfig] = organizedItems
+            .sorted(by: { $0.key < $1.key })
+            .map { .itemCell(title: $0.key, items: $0.value) }
         
-        return UITableView.DataSource(sections: [section])
+        let section = UITableView.Section(items: cells)
+        let dataSource = UITableView.DataSource(sections: [section])
+        
+        return dataSource
     }
 }

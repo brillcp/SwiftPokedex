@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ItemsViewController: TableViewController<ItemCell> {
+final class ItemsViewController: TableViewController {
 
     private let viewModel: ViewModel
     
