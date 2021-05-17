@@ -89,7 +89,7 @@ extension UITableView.DataSource {
         
         let cells: [RegularCellConfig] = organizedItems
             .sorted(by: { $0.key < $1.key })
-            .map { .itemCell(title: $0.key, items: $0.value) }
+            .map { .regularCell(title: $0.key, items: $0.value) }
         
         let section = UITableView.Section(items: cells)
         let dataSource = UITableView.DataSource(sections: [section])
