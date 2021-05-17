@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CollectionViewController<Cell: UICollectionViewCell>: UICollectionViewController {
+class CollectionViewController: UICollectionViewController {
     
     //MARK: - Public properties
     lazy var spinner: UIActivityIndicatorView = {
@@ -18,6 +18,7 @@ class CollectionViewController<Cell: UICollectionViewCell>: UICollectionViewCont
 
     var collectionData: UICollectionView.DataSource {
         didSet {
+            registerCellsIfNeeded()
             collectionView.reloadData()
         }
     }
@@ -27,12 +28,18 @@ class CollectionViewController<Cell: UICollectionViewCell>: UICollectionViewCont
         self.collectionData = tableData
         super.init(collectionViewLayout: layout)
 
-        collectionView.registerCell(Cell.self)
         collectionView.registerReusableFooter(view: UICollectionReusableView.self)
         collectionView.indicatorStyle = .white
+        registerCellsIfNeeded()
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    
+    // MARK: - Private functions
+    private func registerCellsIfNeeded() {
+        guard collectionData.hasData else { return }
+        collectionData.cellTypes.forEach { collectionView.registerCell($0) }
+    }
     
     // MARK: - TableView Data Source
     override func numberOfSections(in collectionView: UICollectionView) -> Int {

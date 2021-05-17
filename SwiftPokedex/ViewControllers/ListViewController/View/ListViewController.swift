@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ListViewController: TableViewController<RegularCell> {
+final class ListViewController: TableViewController {
     
     private lazy var resultsViewController = ItemsViewBuilder.build()
     private let interactor: ListInteractorProtocol
@@ -34,7 +34,6 @@ final class ListViewController: TableViewController<RegularCell> {
         super.viewDidLoad()
         
         navigationItem.searchController = searchController
-//        navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.backButtonTitle = ""
 
         title = viewModel.title

@@ -8,12 +8,14 @@
 import UIKit
 
 protocol CollectionCellConfigurator {
+    static var cellType: UICollectionViewCell.Type? { get }
     static var reuseId: String { get }
     func configureCell(_ cell: UICollectionViewCell)
 }
 
 final class CollectionCellConfiguration<Cell: ConfigurableCell, Data>: CollectionCellConfigurator where Data == Cell.DataType {
     
+    static var cellType: UICollectionViewCell.Type? { Cell.self as? UICollectionViewCell.Type }
     static var reuseId: String { String(describing: Cell.self) }
     
     let data: Data
