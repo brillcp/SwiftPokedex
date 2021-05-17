@@ -9,7 +9,7 @@ import UIKit
 
 final class PokedexCell: UICollectionViewCell, ConfigurableCell {
     
-    // MARK: - Private properties
+    // MARK: Private properties
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -78,7 +78,7 @@ final class PokedexCell: UICollectionViewCell, ConfigurableCell {
         imageView.image = nil
     }
     
-    // MARK: - Functions
+    // MARK: - Public functions
     func configure(with pokemon: PokemonDetails) {
         data = pokemon
         

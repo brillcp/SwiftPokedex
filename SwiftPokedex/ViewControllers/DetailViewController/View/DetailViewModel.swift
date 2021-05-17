@@ -9,7 +9,10 @@ import UIKit
 
 extension DetailViewController {
 
+    // MARK: -
     struct ViewModel {
+        
+        // MARK: Public properties
         let pokemon: PokemonDetails
         let color: UIColor
 

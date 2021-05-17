@@ -12,9 +12,10 @@ struct DetailItem {
     let value: String
 }
 
+// MARK: -
 final class DetailCell: UITableViewCell, ConfigurableCell {
 
-    // MARK: - Private properties
+    // MARK: Private properties
     private lazy var titleLabel: UILabel = {
         let label = UILabel(useAutolayout: true)
         label.textColor = .gray
@@ -58,7 +59,7 @@ final class DetailCell: UITableViewCell, ConfigurableCell {
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
-    // MARK: - Functions
+    // MARK: - Public functions
     func configure(with item: DetailItem) {
         self.data = item
         

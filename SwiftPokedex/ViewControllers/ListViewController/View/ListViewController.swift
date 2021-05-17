@@ -9,6 +9,7 @@ import UIKit
 
 final class ListViewController: TableViewController {
     
+    // MARK: Private properties
     private lazy var resultsViewController = ItemsViewBuilder.build()
     private let interactor: ListInteractorProtocol
     private let viewModel = ViewModel()
@@ -19,6 +20,7 @@ final class ListViewController: TableViewController {
         return controller
     }()
 
+    // MARK: - Public properties
     override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
     
     // MARK: - Init
@@ -62,6 +64,7 @@ final class ListViewController: TableViewController {
     }
 }
 
+// MARK: - Search Bar Delegate
 extension ListViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

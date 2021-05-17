@@ -9,9 +9,11 @@ import UIKit
 
 final class PokedexViewController: CollectionViewController {
     
+    // MARK: Private properties
     private let interactor: PokedexInteractorProtocol
     private let viewModel = ViewModel()
 
+    // MARK: - Public properties
     override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
     
     // MARK: - Init

@@ -14,6 +14,7 @@ protocol ConfigurableCell {
     func configure(with data: DataType)
 }
 
+// MARK: -
 protocol TableCellConfigurator {
     static var cellType: UITableViewCell.Type? { get }
     static var reuseId: String { get }
@@ -21,19 +22,23 @@ protocol TableCellConfigurator {
     func configureCell(_ cell: UITableViewCell)
 }
 
+// MARK: -
 final class TableCellConfiguration<Cell: ConfigurableCell, Data>: TableCellConfigurator where Data == Cell.DataType {
     
+    // MARK: Public properties
     static var cellType: UITableViewCell.Type? { Cell.self as? UITableViewCell.Type }
     static var reuseId: String { String(describing: Cell.self) }
     
     var rowHeight: CGFloat
     let data: Data
     
+    // MARK: - Init
     init(data: Data, rowHeight: CGFloat = 60.0) {
         self.data = data
         self.rowHeight = rowHeight
     }
     
+    // MARK: - Public functions
     func configureCell(_ cell: UITableViewCell) {
         guard let cell = cell as? Cell else { return }
         cell.configure(with: data)

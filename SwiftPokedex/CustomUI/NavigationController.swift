@@ -9,10 +9,12 @@ import UIKit
 
 final class NavigationController: UINavigationController {
     
+    // MARK: Public properties
     override var childForStatusBarStyle: UIViewController? {
         topViewController?.childForStatusBarStyle ?? topViewController
     }
     
+    // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         

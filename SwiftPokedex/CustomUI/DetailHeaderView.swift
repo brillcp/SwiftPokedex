@@ -9,6 +9,7 @@ import UIKit
 
 final class DetailHeaderView: UIView {
     
+    // MARK: Private properties
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit

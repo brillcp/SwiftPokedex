@@ -10,7 +10,7 @@ import Combine
 
 final class ItemAPI: API {
     
-    // MARK: - Public functions
+    // MARK: Public functions
     static func allItems(_ completion: @escaping (Result<[ItemDetails], Error>) -> Swift.Void) {
         requestItems(limit: 450)?.flatMap { response in
             Publishers.Sequence(sequence: response.results.compactMap { itemDetails(from: $0.url) })
@@ -24,9 +24,10 @@ final class ItemAPI: API {
     }
 }
 
+// MARK: -
 extension ItemAPI {
     
-    // MARK: - Private functions
+    // MARK: Private functions
     private static func itemDetails(from urlString: String) -> AnyPublisher<ItemDetails, Error>? {
         guard let url = URL(string: urlString) else { return nil }
         let request = URLRequest(url: url)

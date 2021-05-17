@@ -18,6 +18,7 @@ extension UICollectionView {
     }
 }
 
+// MARK: -
 extension UICollectionView.DataSource {
     
     var hasData: Bool { !sections.isEmpty }
@@ -36,6 +37,7 @@ extension UICollectionView.DataSource {
     }
 }
 
+// MARK: -
 extension UICollectionView.DataSource {
     
     private typealias UniqueCellTypes = [String: CellType]
@@ -55,6 +57,7 @@ extension UICollectionView.DataSource {
     }
 }
 
+// MARK: -
 extension UICollectionView.DataSource {
     
     static func pokemonDataSource(from pokemon: [PokemonDetails]) -> UICollectionView.DataSource {

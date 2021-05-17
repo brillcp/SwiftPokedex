@@ -15,7 +15,6 @@ final class ListBuilder {
         let viewController = ListViewController(interactor: interactor)
         let navigationController = NavigationController(rootViewController: viewController)
         router.navigationController = navigationController
-        
         return navigationController
     }
 }

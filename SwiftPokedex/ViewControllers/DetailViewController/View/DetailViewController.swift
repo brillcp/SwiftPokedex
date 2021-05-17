@@ -9,6 +9,7 @@ import UIKit
 
 final class DetailViewController: TableViewController {
     
+    // MARK: Private properties
     private lazy var idButton: UIBarButtonItem = {
         let button = UIBarButtonItem(title: viewModel.id, style: .plain, target: nil, action: nil)
         let color: UIColor = viewModel.isLight ? .black : .white
@@ -18,6 +19,7 @@ final class DetailViewController: TableViewController {
 
     private let viewModel: ViewModel
     
+    // MARK: - Public properties
     override var preferredStatusBarStyle: UIStatusBarStyle { viewModel.isLight ? .default : .lightContent }
 
     // MARK: - Init
@@ -49,7 +51,7 @@ final class DetailViewController: TableViewController {
         viewWillDisappear()
     }
     
-    // MARK: - Functions
+    // MARK: - Private functions
     private func setupTableHeader() {
         let frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 300.0)
         let header = DetailHeaderView(frame: frame, urlString: viewModel.spriteURL, color: viewModel.color)

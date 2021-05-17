@@ -10,7 +10,7 @@ import Combine
 
 final class PokemonAPI: API {
     
-    // MARK: - Private properties
+    // MARK: Private properties
     private static var pokemonResponse: APIResponse?
     
     // MARK: - Public functions
@@ -27,9 +27,10 @@ final class PokemonAPI: API {
     }
 }
 
+// MARK: -
 extension PokemonAPI {
     
-    // MARK: - Private functions
+    // MARK: Private functions
     private static func pokemonDetails(from urlString: String) -> AnyPublisher<PokemonDetails, Error>? {
         guard let url = URL(string: urlString) else { return nil }
         let request = URLRequest(url: url)

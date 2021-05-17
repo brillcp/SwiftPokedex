@@ -18,6 +18,7 @@ fileprivate struct UIImageColorsCounter {
     }
 }
 
+// MARK: -
 fileprivate extension Double {
     
     private var r: Double { fmod(floor(self / 1000000), 1000000) }
@@ -102,6 +103,7 @@ fileprivate extension Double {
     }
 }
 
+// MARK: -
 extension UIImage {
     
     public var dominantColor: UIColor? {

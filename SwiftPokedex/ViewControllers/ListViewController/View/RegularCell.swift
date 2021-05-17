@@ -12,9 +12,13 @@ struct ItemData {
     var items: [ItemDetails] = []
 }
 
+// MARK: -
 final class RegularCell: UITableViewCell, ConfigurableCell {
+
+    // MARK: Public properties
     var data: ItemData?
     
+    // MARK: - Public functions
     func configure(with data: ItemData) {
         self.data = data
         

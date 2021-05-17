@@ -9,6 +9,7 @@ import UIKit
 
 final class ItemCell: UITableViewCell, ConfigurableCell {
 
+    // MARK: Private properties
     private lazy var itemImageView: UIImageView = {
         let imageView = UIImageView(useAutolayout: true)
         imageView.contentMode = .scaleAspectFit
@@ -30,6 +31,7 @@ final class ItemCell: UITableViewCell, ConfigurableCell {
         return label
     }()
 
+    // MARK: - Public properties
     var data: ItemDetails?
 
     // MARK: - Init
@@ -67,12 +69,13 @@ final class ItemCell: UITableViewCell, ConfigurableCell {
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
+    // MARK: - Layout
     override func prepareForReuse() {
         super.prepareForReuse()
         itemImageView.image = nil
     }
     
-    // MARK: - Functions
+    // MARK: - Public functions
     func configure(with item: ItemDetails) {
         self.data = item
         

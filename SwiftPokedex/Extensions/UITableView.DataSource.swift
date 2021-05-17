@@ -18,6 +18,7 @@ extension UITableView {
     }
 }
 
+// MARK: -
 extension UITableView.DataSource {
     
     var hasData: Bool { !sections.isEmpty }
@@ -40,6 +41,7 @@ extension UITableView.DataSource {
     }
 }
 
+// MARK: -
 extension UITableView.DataSource {
     
     private typealias UniqueCellTypes = [String: CellType]
@@ -59,6 +61,7 @@ extension UITableView.DataSource {
     }
 }
 
+// MARK: -
 extension UITableView.DataSource {
     
     static func detailedItemsDataSource(from result: [ItemDetails]) -> UITableView.DataSource {

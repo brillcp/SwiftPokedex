@@ -9,8 +9,10 @@ import UIKit
 
 final class SearchController: UISearchController {
     
+    // MARK: Public properties
     override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
 
+    // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
