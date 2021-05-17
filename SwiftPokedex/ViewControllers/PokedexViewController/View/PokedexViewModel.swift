@@ -18,14 +18,18 @@ extension PokedexViewController {
         private var pokemon = [PokemonDetails]()
 
         var title: String { "Pokedex" }
-        var isLoading: Bool { PokemonAPI.isLoading }
+        var isLoading: Bool = false
         
         func requestData(_ completion: @escaping (Result<UICollectionView.DataSource, Error>) -> Void) {
             guard !isLoading else { return }
+            isLoading = true
             
-            PokemonAPI.requestPokemon { result in
+            PokemonAPI.requestPokemon { [weak self] result in
+                guard let self = self else { return }
+                
                 switch result {
                 case let .success(pokemon):
+                    self.isLoading = false
                     self.pokemon += pokemon
                     let collectionData: UICollectionView.DataSource = .pokemonDataSource(from: self.pokemon)
                     

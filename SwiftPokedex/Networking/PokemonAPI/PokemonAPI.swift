@@ -16,8 +16,6 @@ struct PokemonAPI {
     private static var pokemonResponse: APIResponse?
     private static var itemResponse: APIResponse?
     
-    static var isLoading: Bool = false
-    
     enum ItemType: String {
         case pokemons = "pokemon"
         case items = "item"
@@ -37,7 +35,6 @@ struct PokemonAPI {
     }
 
     static func requestPokemon(_ completion: @escaping (Result<[PokemonDetails], Error>) -> Swift.Void) {
-        isLoading = true
         requestPokemon(at: pokemonResponse?.next)?.flatMap { response in
             Publishers.Sequence(sequence: response.results.compactMap { pokemonDetails(from: $0.url) })
                 .flatMap { $0 }
@@ -45,7 +42,6 @@ struct PokemonAPI {
         }
         .eraseToAnyPublisher()
         .sinkToResult { result in
-            self.isLoading = false
             completion(result)
         }.store(in: &cancellables)
     }
