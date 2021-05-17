@@ -47,9 +47,9 @@ extension UITableView.DataSource {
     typealias CellType = UITableViewCell.Type
     
     var cellTypes: [CellType] {
-        let cellTypes = sections.flatMap { $0.items.compactMap { type(of: $0).cellType }}
+        let allCellTypes = sections.flatMap { $0.items.compactMap { type(of: $0).cellType }}
         
-        let uniqueTypes = cellTypes.reduce(UniqueCellTypes()) {
+        let uniqueTypes = allCellTypes.reduce(UniqueCellTypes()) {
             var cellTypes = $0
             let key = String(describing: $1)
             cellTypes[key] = $1
