@@ -100,7 +100,7 @@ The PokeAPI is very extensive and it contains a lot of things. Here are some thi
 - [x] Pokedex pagination
 - [x] Show pokemon details
 - [x] Request items
-- [ ] Search items 
+- [x] Search items 
 - [x] Show item descriptions
 - [ ] Implement other parts of the API such as:
     - Moves
