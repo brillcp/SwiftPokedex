@@ -22,10 +22,10 @@ final class TabBarController: UITabBarController {
     // MARK: - Private functions
     private func setupTabbar() {
         let pokedexView = PokedexViewBuilder.build()
-        pokedexView.tabBarItem = .pokedex(title: "Pokedex")
+        pokedexView.tabBarItem = .pokedex(title: pokedexView.title)
 
         let itemsView = ListBuilder.build()
-        itemsView.tabBarItem = .items(title: "Items")
+        itemsView.tabBarItem = .items(title: itemsView.title)
         setViewControllers([pokedexView, itemsView], animated: false)
     }
 }
