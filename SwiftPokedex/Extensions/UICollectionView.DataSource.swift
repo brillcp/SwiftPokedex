@@ -38,14 +38,17 @@ extension UICollectionView.DataSource {
 
 extension UICollectionView.DataSource {
     
-    private typealias UniqueCellTypes = [String: UICollectionViewCell.Type]
+    private typealias UniqueCellTypes = [String: CellType]
     
-    var cellTypes: [UICollectionViewCell.Type] {
+    typealias CellType = UICollectionViewCell.Type
+    
+    var cellTypes: [CellType] {
         let cellTypes = sections.flatMap { $0.items.compactMap { type(of: $0).cellType }}
         
         let uniqueTypes = cellTypes.reduce(UniqueCellTypes()) {
             var cellTypes = $0
-            cellTypes[String(describing: $1)] = $1
+            let key = String(describing: $1)
+            cellTypes[key] = $1
             return cellTypes
         }
         return Array(uniqueTypes.values)

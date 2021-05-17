@@ -42,14 +42,17 @@ extension UITableView.DataSource {
 
 extension UITableView.DataSource {
     
-    private typealias UniqueCellTypes = [String: UITableViewCell.Type]
+    private typealias UniqueCellTypes = [String: CellType]
     
-    var cellTypes: [UITableViewCell.Type] {
+    typealias CellType = UITableViewCell.Type
+    
+    var cellTypes: [CellType] {
         let cellTypes = sections.flatMap { $0.items.compactMap { type(of: $0).cellType }}
         
         let uniqueTypes = cellTypes.reduce(UniqueCellTypes()) {
             var cellTypes = $0
-            cellTypes[String(describing: $1)] = $1
+            let key = String(describing: $1)
+            cellTypes[key] = $1
             return cellTypes
         }
         return Array(uniqueTypes.values)
