@@ -8,7 +8,6 @@
 import UIKit
 import Combine
 
-
 extension UIImage {
     private static var cancellables = Set<AnyCancellable>()
 
