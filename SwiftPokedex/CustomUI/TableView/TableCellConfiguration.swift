@@ -29,7 +29,7 @@ final class TableCellConfiguration<Cell: ConfigurableCell, Data>: TableCellConfi
     static var cellType: UITableViewCell.Type? { Cell.self as? UITableViewCell.Type }
     static var reuseId: String { String(describing: Cell.self) }
     
-    var rowHeight: CGFloat
+    let rowHeight: CGFloat
     let data: Data
     
     // MARK: - Init
