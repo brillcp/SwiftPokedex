@@ -9,9 +9,7 @@ import UIKit
 
 extension UIScrollView {
     var hasScrolledToBottom: Bool {
-        let height = frame.size.height
-        let contentYoffset = contentOffset.y
-        let distanceFromBottom = contentSize.height - contentYoffset
-        return distanceFromBottom < (height * 1.6)
+        let distanceFromBottom = contentSize.height - contentOffset.y
+        return distanceFromBottom < frame.size.height * 1.6
     }
 }
