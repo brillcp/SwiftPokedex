@@ -10,6 +10,10 @@ import UIKit
 extension UIColor {
     static let darkGrey = UIColor(hex: "222222")
     static let pokedexRed = UIColor(hex: "d53b47")
+    static let orange = UIColor(hex: "f89e2e")
+    static let blue = UIColor(hex: "3898fe")
+    static let grey = UIColor(hex: "8db6d2")
+    static let green = UIColor(hex: "5ba74f")
     
     convenience init(hex: String, alpha: CGFloat = 1.0) {
         let scanner = Scanner(string: hex)
