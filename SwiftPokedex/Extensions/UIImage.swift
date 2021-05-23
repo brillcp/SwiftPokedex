@@ -28,7 +28,7 @@ extension UIImage {
                     switch result {
                     case let .success(output):
                         cache.cacheImage(from: output, for: request)
-                        completion( UIImage(data: output.data))
+                        completion(UIImage(data: output.data))
                     case .failure:
                         completion(nil)
                     }
