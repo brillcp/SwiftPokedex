@@ -49,12 +49,11 @@ final class DetailCell: UITableViewCell, ConfigurableCell {
         
         contentView.addSubview(valueLabel)
         NSLayoutConstraint.activate([
-            valueLabel.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: -15.0),
+            valueLabel.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 15.0),
             valueLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15.0),
             valueLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15.0),
             valueLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15.0)
         ])
-
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
