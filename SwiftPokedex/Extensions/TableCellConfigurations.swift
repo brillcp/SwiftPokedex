@@ -9,6 +9,7 @@ import UIKit
 
 typealias RegularCellConfig = TableCellConfiguration<RegularCell, ItemData>
 typealias DetailCellConfig = TableCellConfiguration<DetailCell, DetailItem>
+typealias StatCellConfig = TableCellConfiguration<StatCell, StatItem>
 typealias ItemCellConfig = TableCellConfiguration<ItemCell, ItemDetails>
 
 extension TableCellConfiguration {
@@ -27,6 +28,16 @@ extension TableCellConfiguration {
     
     static func heightCell(value: Int) -> DetailCellConfig {
         DetailCellConfig(data: DetailItem(title: "Height", value: value.meter), rowHeight: 50.0)
+    }
+    
+    static func statCell(title: String, value: Int) -> StatCellConfig {
+        switch title {
+        case "Hp": return StatCellConfig(data: StatItem(title: "HP", value: value, color: .pokedexRed))
+        case "Attack": return StatCellConfig(data: StatItem(title: "ATK", value: value, color: .orange))
+        case "Defense": return StatCellConfig(data: StatItem(title: "DEF", value: value, color: .blue))
+        case "Speed": return StatCellConfig(data: StatItem(title: "SPD", value: value, color: .green))
+        default: return StatCellConfig(data: StatItem(title: "", value: 0, color: .clear))
+        }
     }
     
     static func abilitiesCell(values: [Ability]) -> DetailCellConfig {

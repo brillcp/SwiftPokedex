@@ -19,9 +19,9 @@ final class DetailViewBuilder {
         let moves: DetailCellConfig = .movesCell(values: pokemon.moves)
         let infoSection = UITableView.Section(title: "Info", items: [types, weight, height, abilities])
 
-        let stats = pokemon.stats
+        let stats: [TableCellConfiguration] = pokemon.stats
             .filter {$0.stat.name != "special-attack" && $0.stat.name != "special-defense" }
-            .map { DetailCellConfig(data: DetailItem(title: $0.stat.name.cleaned, value: "\($0.baseStat)" )) }
+            .map { .statCell(title: $0.stat.name.cleaned, value: $0.baseStat) }
 
         let statSection = UITableView.Section(title: "Base Stats", items: stats)
         let movesSection = UITableView.Section(items: [moves])
