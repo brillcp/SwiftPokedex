@@ -28,7 +28,7 @@ SwiftPokedex is written in my own interpretation of the RIB archtitecure created
 
 ## Builder 🛠
 
-The builder build the views with all of their dependencies.
+The builder builds the views with all of their dependencies.
 ```swift
 final class PokedexViewBuilder {
     
