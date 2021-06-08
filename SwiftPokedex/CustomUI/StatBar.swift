@@ -10,7 +10,7 @@ import UIKit
 final class StatBar: UIView {
     
     //MARK: Private properties
-    var color: UIColor? = .clear { didSet { setNeedsDisplay() } }
+    var color: UIColor? = .clear { didSet { setNeedsDisplay() }}
     var value: Int = 0 { didSet { setNeedsDisplay() }}
     var maxValue: Int = 0 { didSet { setNeedsDisplay() }}
     
