@@ -33,10 +33,10 @@ class TableViewController: UITableViewController {
         
         tableView.keyboardDismissMode = .onDrag
         tableView.backgroundColor = .darkGrey
-        tableView.separatorColor = .darkGray
         tableView.backgroundView = spinner
         tableView.indicatorStyle = .white
-        
+        tableView.separatorStyle = .none
+
         registerCellsIfNeeded()
     }
     
