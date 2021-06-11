@@ -90,7 +90,7 @@ let section = UICollectionView.Section(items: items)
 let collectionData = UICollectionView.DataSource(sections: [section])
 ```
 
-By configuring the cells using `CollectionCellConfiguration` we tell the collection view that the data type we want to use is `PokemonDetails` and the custom cell is `PokedexCell`. This make setting up cells type safe as well. Then the collection view automatically renders that data with those cells. No need to implement any of the collection delegate or data source methods in the view controller. That is done with the `CollectionCellConfigurator` protocol and a subclass of `UICollectionViewController`.
+By configuring the cells using `CollectionCellConfiguration` we tell the collection view that the data type we want to use is `PokemonDetails` and the custom cell is `PokedexCell`. This make setting up cells type safe as well. Then the collection view automatically renders that data with those cells. No need to implement any of the collection delegate or data source methods in the view controller. That is done with the [CollectionCellConfigurator](https://github.com/brillcp/SwiftPokedex/blob/493e4f78f46005da6ec6f8354888b32bccff31fa/SwiftPokedex/CustomUI/CollectionView/CollectionCellConfiguration.swift#L10) protocol and a subclass of [UICollectionViewController](https://github.com/brillcp/SwiftPokedex/blob/master/SwiftPokedex/CustomUI/CollectionView/CollectionViewController.swift).
 
 # Todo 📝
 
