@@ -26,7 +26,7 @@ final class StatBar: UIView {
     // MARK: - Draw
     override func draw(_ rect: CGRect) {
         let radius = rect.height / 2.0
-        drawWhitePath(in: rect, radius: radius)
+        drawBackgroundPath(in: rect, radius: radius)
         
         var newRect = rect
         let maxVal: CGFloat = CGFloat(max(value, maxValue))
@@ -43,7 +43,7 @@ final class StatBar: UIView {
     }
     
     // MARK: - Private functions
-    private func drawWhitePath(in rect: CGRect, radius: CGFloat) {
+    private func drawBackgroundPath(in rect: CGRect, radius: CGFloat) {
         let whitePath = UIBezierPath(roundedRect: rect, cornerRadius: radius)
         UIColor.darkGray.setFill()
         whitePath.fill()
