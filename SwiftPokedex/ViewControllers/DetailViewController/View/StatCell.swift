@@ -24,10 +24,10 @@ final class StatCell: UITableViewCell, ConfigurableCell {
         return label
     }()
     
-    private lazy var progressBar: StatBar = {
-        let view = StatBar()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    private lazy var statBar: StatBar = {
+        let statBar = StatBar()
+        statBar.translatesAutoresizingMaskIntoConstraints = false
+        return statBar
     }()
     
     // MARK: - Public properties
@@ -46,12 +46,12 @@ final class StatCell: UITableViewCell, ConfigurableCell {
             titleLabel.widthAnchor.constraint(equalToConstant: 50.0)
         ])
         
-        contentView.addSubview(progressBar)
+        contentView.addSubview(statBar)
         NSLayoutConstraint.activate([
-            progressBar.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 20.0),
-            progressBar.heightAnchor.constraint(equalToConstant: 16.0),
-            progressBar.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            progressBar.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15.0)
+            statBar.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 20.0),
+            statBar.heightAnchor.constraint(equalToConstant: 16.0),
+            statBar.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            statBar.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15.0)
         ])
     }
     
@@ -62,7 +62,7 @@ final class StatCell: UITableViewCell, ConfigurableCell {
         self.data = item
         
         titleLabel.text = item.title
-        progressBar.configure(with: item)
+        statBar.configure(with: item)
         
         selectionStyle = .none
     }
