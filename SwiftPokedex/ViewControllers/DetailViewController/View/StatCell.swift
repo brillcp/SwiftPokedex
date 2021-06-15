@@ -62,8 +62,7 @@ final class StatCell: UITableViewCell, ConfigurableCell {
         self.data = item
         
         titleLabel.text = item.title
-        progressBar.value = item.value
-        progressBar.color = item.color
+        progressBar.configure(with: item)
         
         selectionStyle = .none
     }

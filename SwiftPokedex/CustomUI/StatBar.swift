@@ -10,9 +10,9 @@ import UIKit
 final class StatBar: UIView {
     
     // MARK: Private properties
-    var color: UIColor? = .clear { didSet { setNeedsDisplay() }}
-    var value: Int = 0 { didSet { setNeedsDisplay() }}
-    var maxValue: Int = 0 { didSet { setNeedsDisplay() }}
+    private var color: UIColor = .clear
+    private var value: Int = 0
+    private let maxValue: Int
     
     // MARK: - Init
     init(frame: CGRect = .zero, maxValue: Int = 100) {
@@ -37,7 +37,13 @@ final class StatBar: UIView {
         drawText(in: newRect)
     }
     
-    //MARK: - Private functions
+    // MARK: - Public functions
+    func configure(with item: StatItem) {
+        value = item.value
+        color = item.color
+        setNeedsDisplay()
+    }
+    
     // MARK: - Private functions
     private func drawWhitePath(in rect: CGRect, radius: CGFloat) {
         let whitePath = UIBezierPath(roundedRect: rect, cornerRadius: radius)
@@ -47,7 +53,7 @@ final class StatBar: UIView {
     
     private func drawProgress(in rect: CGRect, radius: CGFloat) {
         let progressPath = UIBezierPath(roundedRect: rect, cornerRadius: radius)
-        color?.setFill()
+        color.setFill()
         progressPath.fill()
     }
     
