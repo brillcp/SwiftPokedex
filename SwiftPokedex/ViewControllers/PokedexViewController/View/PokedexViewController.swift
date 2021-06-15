@@ -51,13 +51,8 @@ final class PokedexViewController: CollectionViewController {
     }
     
     private func startSpinner() {
-        if collectionData.hasData {
-            collectionView.backgroundView = nil
-            spinner.startAnimating()
-        } else {
-            collectionView.backgroundView = spinner
-            spinner.startAnimating()
-        }
+        collectionView.backgroundView = collectionData.hasData ? nil : spinner
+        spinner.startAnimating()
     }
     
     // MARK: - Collection View Delegate
