@@ -9,12 +9,12 @@ import UIKit
 
 final class StatBar: UIView {
     
-    //MARK: Private properties
+    // MARK: Private properties
     var color: UIColor? = .clear { didSet { setNeedsDisplay() }}
     var value: Int = 0 { didSet { setNeedsDisplay() }}
     var maxValue: Int = 0 { didSet { setNeedsDisplay() }}
     
-    //MARK: - Init
+    // MARK: - Init
     init(frame: CGRect = .zero, maxValue: Int = 100) {
         self.maxValue = maxValue
         
@@ -25,7 +25,7 @@ final class StatBar: UIView {
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
-    //MARK: - Draw
+    // MARK: - Draw
     override func draw(_ rect: CGRect) {
         let radius = rect.height / 2.0
         drawWhitePath(in: rect, radius: radius)
@@ -38,6 +38,7 @@ final class StatBar: UIView {
     }
     
     //MARK: - Private functions
+    // MARK: - Private functions
     private func drawWhitePath(in rect: CGRect, radius: CGFloat) {
         let whitePath = UIBezierPath(roundedRect: rect, cornerRadius: radius)
         UIColor.darkGray.setFill()
