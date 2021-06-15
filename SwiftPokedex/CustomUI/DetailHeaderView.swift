@@ -16,12 +16,6 @@ final class DetailHeaderView: UIView {
         return imageView
     }()
     
-    private lazy var cornerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .darkGrey
-        return view
-    }()
-    
     // MARK: - Init
     init(frame: CGRect, urlString: String, color: UIColor) {
         super.init(frame: frame)
