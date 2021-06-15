@@ -38,6 +38,7 @@ final class StatCell: UITableViewCell, ConfigurableCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         backgroundColor = .clear
+        selectionStyle = .none
         
         contentView.addSubview(titleLabel)
         NSLayoutConstraint.activate([
@@ -63,7 +64,5 @@ final class StatCell: UITableViewCell, ConfigurableCell {
         
         titleLabel.text = item.title
         statBar.configure(with: item)
-        
-        selectionStyle = .none
     }
 }
