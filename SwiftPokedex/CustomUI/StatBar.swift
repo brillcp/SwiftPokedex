@@ -17,9 +17,7 @@ final class StatBar: UIView {
     // MARK: - Init
     init(frame: CGRect = .zero, maxValue: Int = 100) {
         self.maxValue = maxValue
-        
         super.init(frame: frame)
-        
         backgroundColor = .clear
     }
     
