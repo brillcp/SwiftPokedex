@@ -9,6 +9,7 @@ import UIKit
 
 protocol ViewModelProtocol {
     associatedtype Data
+    var title: String { get }
     func requestData(_ completion: @escaping (Result<Data, Error>) -> Swift.Void)
 }
 
