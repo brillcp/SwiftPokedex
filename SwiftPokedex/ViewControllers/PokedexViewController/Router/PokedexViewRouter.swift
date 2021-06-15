@@ -8,7 +8,7 @@
 import UIKit
 
 protocol PokedexRouterProtocol {
-    func routeToDetailView(pokemon: PokemonDetails, color: UIColor)
+    func routeToDetailView(transition: CardTransition, pokemon: PokemonDetails, color: UIColor)
 }
 
 // MARK: -
@@ -18,8 +18,11 @@ final class PokedexRouter: PokedexRouterProtocol {
     weak var navigationController: UINavigationController?
     
     // MARK: - Public functions
-    func routeToDetailView(pokemon: PokemonDetails, color: UIColor) {
+    func routeToDetailView(transition: CardTransition, pokemon: PokemonDetails, color: UIColor) {
         let detailView = DetailViewBuilder.build(from: pokemon, withColor: color)
-        navigationController?.pushViewController(detailView, animated: true)
+        detailView.transitioningDelegate = transition
+        detailView.modalPresentationCapturesStatusBarAppearance = true
+        detailView.modalPresentationStyle = .custom
+        navigationController?.present(detailView, animated: true)
     }
 }

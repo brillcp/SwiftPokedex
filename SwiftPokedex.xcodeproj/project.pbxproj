@@ -52,6 +52,11 @@
 		6EF0F6DD2640C0BE00C2AED8 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF0F6DC2640C0BE00C2AED8 /* ItemCell.swift */; };
 		6EF0F6E02640C0F800C2AED8 /* ItemsViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF0F6DF2640C0F800C2AED8 /* ItemsViewBuilder.swift */; };
 		6EF463232678A4C8003B52C5 /* CGSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF463222678A4C8003B52C5 /* CGSize.swift */; };
+		6EF4633426791E50003B52C5 /* CardTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF4633026791E50003B52C5 /* CardTransition.swift */; };
+		6EF4633526791E50003B52C5 /* CardPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF4633126791E50003B52C5 /* CardPresentationController.swift */; };
+		6EF4633626791E50003B52C5 /* DismissCardAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF4633226791E50003B52C5 /* DismissCardAnimator.swift */; };
+		6EF4633726791E50003B52C5 /* PresentCardAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF4633326791E50003B52C5 /* PresentCardAnimator.swift */; };
+		6EF4633926791F49003B52C5 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF4633826791F48003B52C5 /* GlobalConstants.swift */; };
 		6EFC2127263C7B19004389D9 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC2126263C7B19004389D9 /* CollectionViewController.swift */; };
 		6EFC212B263C7BA7004389D9 /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC212A263C7BA7004389D9 /* UICollectionView.swift */; };
 		6EFC2130263C7F2A004389D9 /* CollectionCellConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFC212F263C7F2A004389D9 /* CollectionCellConfiguration.swift */; };
@@ -120,6 +125,11 @@
 		6EF0F6DC2640C0BE00C2AED8 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		6EF0F6DF2640C0F800C2AED8 /* ItemsViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsViewBuilder.swift; sourceTree = "<group>"; };
 		6EF463222678A4C8003B52C5 /* CGSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSize.swift; sourceTree = "<group>"; };
+		6EF4633026791E50003B52C5 /* CardTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardTransition.swift; sourceTree = "<group>"; };
+		6EF4633126791E50003B52C5 /* CardPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardPresentationController.swift; sourceTree = "<group>"; };
+		6EF4633226791E50003B52C5 /* DismissCardAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissCardAnimator.swift; sourceTree = "<group>"; };
+		6EF4633326791E50003B52C5 /* PresentCardAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentCardAnimator.swift; sourceTree = "<group>"; };
+		6EF4633826791F48003B52C5 /* GlobalConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		6EFC2126263C7B19004389D9 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		6EFC212A263C7BA7004389D9 /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
 		6EFC212F263C7F2A004389D9 /* CollectionCellConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCellConfiguration.swift; sourceTree = "<group>"; };
@@ -344,6 +354,11 @@
 		6E9D559A263BFE1500D0DA9D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				6EF4633826791F48003B52C5 /* GlobalConstants.swift */,
+				6EF4633126791E50003B52C5 /* CardPresentationController.swift */,
+				6EF4633026791E50003B52C5 /* CardTransition.swift */,
+				6EF4633226791E50003B52C5 /* DismissCardAnimator.swift */,
+				6EF4633326791E50003B52C5 /* PresentCardAnimator.swift */,
 				6EC94FEA263C854B003E0117 /* PokedexViewController */,
 				6E17061A263C22D300B67F37 /* DetailViewController */,
 				6E006F8B2641C46F009FC152 /* ListViewController */,
@@ -508,6 +523,7 @@
 				D58B7468264761180046E7EB /* SearchController.swift in Sources */,
 				6EA892332641C8FB00E4F269 /* ItemListRouter.swift in Sources */,
 				D542C766265956E00047CC44 /* StatCell.swift in Sources */,
+				6EF4633626791E50003B52C5 /* DismissCardAnimator.swift in Sources */,
 				6E006F862641C434009FC152 /* ListViewModel.swift in Sources */,
 				6EFC2130263C7F2A004389D9 /* CollectionCellConfiguration.swift in Sources */,
 				6EC5FCD0263CA824005B04ED /* NavigationController.swift in Sources */,
@@ -515,8 +531,10 @@
 				6EFE197E263CA0FC00FD0A19 /* UIFont.swift in Sources */,
 				6EEA69C1267206920004F7A6 /* UILabel.swift in Sources */,
 				6EFE1977263C8F0400FD0A19 /* UIImageColors.swift in Sources */,
+				6EF4633526791E50003B52C5 /* CardPresentationController.swift in Sources */,
 				6E55387026406FDB0060C25B /* Int.swift in Sources */,
 				6EF463232678A4C8003B52C5 /* CGSize.swift in Sources */,
+				6EF4633926791F49003B52C5 /* GlobalConstants.swift in Sources */,
 				6EA892272641C5AA00E4F269 /* RegularCell.swift in Sources */,
 				6EC5FCCB263CA5D1005B04ED /* UICollectionViewFlowLayout.swift in Sources */,
 				6E80676D263BF24300FD38F0 /* AppDelegate.swift in Sources */,
@@ -532,6 +550,7 @@
 				6E55385F26406E530060C25B /* PokedexViewRouter.swift in Sources */,
 				6E80676F263BF24300FD38F0 /* SceneDelegate.swift in Sources */,
 				D58F7B3E26530F8D00FE841D /* APIModels.swift in Sources */,
+				6EF4633726791E50003B52C5 /* PresentCardAnimator.swift in Sources */,
 				6EF0F6E02640C0F800C2AED8 /* ItemsViewBuilder.swift in Sources */,
 				6EFC212B263C7BA7004389D9 /* UICollectionView.swift in Sources */,
 				6EA892302641C8D700E4F269 /* ListInteractor.swift in Sources */,
@@ -563,6 +582,7 @@
 				6EFC2139263C844F004389D9 /* PokedexCell.swift in Sources */,
 				6EF0F6DA2640C08D00C2AED8 /* ItemsViewModel.swift in Sources */,
 				D57C6B882643359000A8D829 /* UIScrollView.swift in Sources */,
+				6EF4633426791E50003B52C5 /* CardTransition.swift in Sources */,
 				6E006F892641C455009FC152 /* ListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

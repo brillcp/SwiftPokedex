@@ -38,6 +38,7 @@ final class PokedexCell: UICollectionViewCell, ConfigurableCell {
     // MARK: - Public properties
     override var isHighlighted: Bool { didSet { animateHighlight(isHighlighted) }}
 
+    var image: UIImage? { imageView.image }
     var data: PokemonDetails?
     
     // MARK: - Init
