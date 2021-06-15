@@ -29,6 +29,7 @@ class CollectionViewController: UICollectionViewController {
         super.init(collectionViewLayout: layout)
 
         collectionView.registerReusableFooter(view: UICollectionReusableView.self)
+        collectionView.delaysContentTouches = false
         collectionView.indicatorStyle = .white
         registerCellsIfNeeded()
     }

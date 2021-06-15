@@ -36,6 +36,8 @@ final class PokedexCell: UICollectionViewCell, ConfigurableCell {
     }()
 
     // MARK: - Public properties
+    override var isHighlighted: Bool { didSet { animateHighlight(isHighlighted) }}
+
     var data: PokemonDetails?
     
     // MARK: - Init
@@ -103,5 +105,13 @@ final class PokedexCell: UICollectionViewCell, ConfigurableCell {
                 }
             }
         }
+    }
+    
+    // MARK: - Private functions
+    func animateHighlight(_ isHighlighted: Bool) {
+        UIView.animate(withDuration: 0.1, delay: 0.0, options: .allowUserInteraction, animations: {
+            let scale: CGFloat = 0.95
+            self.transform = isHighlighted ? CGAffineTransform(scaleX: scale, y: scale) : .identity
+        }, completion: nil)
     }
 }
