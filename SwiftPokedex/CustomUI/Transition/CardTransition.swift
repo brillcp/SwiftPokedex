@@ -1,9 +1,8 @@
 //
 //  CardTransition.swift
-//  AppStoreInteractiveTransition
+//  SwiftPokedex
 //
-//  Created by Wirawit Rueopas on 31/7/18.
-//  Copyright © 2018 Wirawit Rueopas. All rights reserved.
+//  Created by Viktor Gidlöf on 2021-06-16.
 //
 
 import UIKit
@@ -25,20 +24,22 @@ final class CardTransition: NSObject, UIViewControllerTransitioningDelegate {
     }
 
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        let params = PresentCardAnimator.Params.init(
-            fromCardFrame: params.fromCardFrame,
-            fromCell: params.fromCell,
-            image: params.image,
-            color: params.color
+        let params = PresentCardAnimator.Params(
+            fromCardFrame: self.params.fromCardFrame,
+            fromCell: self.params.fromCell,
+            image: self.params.image,
+            color: self.params.color
         )
         return PresentCardAnimator(params: params)
     }
 
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        let params = DismissCardAnimator.Params.init(
+        let params = DismissCardAnimator.Params(
             fromCardFrame: self.params.fromCardFrame,
             fromCardFrameWithoutTransform: self.params.fromCardFrameWithoutTransform,
-            fromCell: self.params.fromCell
+            fromCell: self.params.fromCell,
+            image: self.params.image,
+            color: self.params.color
         )
         return DismissCardAnimator(params: params)
     }
@@ -53,6 +54,6 @@ final class CardTransition: NSObject, UIViewControllerTransitioningDelegate {
 
     // IMPORTANT: Must set modalPresentationStyle to `.custom` for this to be used.
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-        return CardPresentationController(presentedViewController: presented, presenting: presenting)
+        CardPresentationController(presentedViewController: presented, presenting: presenting)
     }
 }

@@ -45,7 +45,7 @@ extension UIView {
     }
     
     
-    func roundedView(corners: UIRectCorner = .allCorners, radius: CGFloat = 30.0) {
+    func roundedView(corners: UIRectCorner = .allCorners, radius: CGFloat) {
         let maskPath1 = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         let maskLayer1 = CAShapeLayer()
         maskLayer1.frame = bounds

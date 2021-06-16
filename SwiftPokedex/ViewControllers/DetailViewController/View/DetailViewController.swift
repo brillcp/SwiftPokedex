@@ -11,7 +11,7 @@ final class DetailViewController: TableViewController {
     
     // MARK: Private properties
     private lazy var idButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(title: viewModel.id, style: .plain, target: nil, action: nil)
+        let button = UIBarButtonItem(title: viewModel.id, style: .plain, target: self, action: #selector(close))
         let color: UIColor = viewModel.isLight ? .black : .white
         button.setTitleTextAttributes([.font: UIFont.pixel17, .foregroundColor: color], for: .normal)
         return button
@@ -34,10 +34,9 @@ final class DetailViewController: TableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.separatorStyle = .none
         view.backgroundColor = .darkGrey
         title = viewModel.title
-  
+        
         setupTableHeader()
     }
     
@@ -45,13 +44,17 @@ final class DetailViewController: TableViewController {
         super.viewWillAppear(animated)
         viewWillAppear()
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         viewWillDisappear()
     }
     
     // MARK: - Private functions
+    @objc private func close() {
+        dismiss(animated: true)
+    }
+    
     private func setupTableHeader() {
         let frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 300.0)
         let header = DetailHeaderView(frame: frame, urlString: viewModel.spriteURL, color: viewModel.color)

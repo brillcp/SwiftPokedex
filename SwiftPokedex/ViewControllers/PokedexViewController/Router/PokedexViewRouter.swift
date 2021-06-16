@@ -21,7 +21,6 @@ final class PokedexRouter: PokedexRouterProtocol {
     func routeToDetailView(transition: CardTransition, pokemon: PokemonDetails, color: UIColor) {
         let detailView = DetailViewBuilder.build(from: pokemon, withColor: color)
         detailView.transitioningDelegate = transition
-        detailView.modalPresentationCapturesStatusBarAppearance = true
         detailView.modalPresentationStyle = .custom
         navigationController?.present(detailView, animated: true)
     }

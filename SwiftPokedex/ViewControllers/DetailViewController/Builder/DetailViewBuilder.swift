@@ -9,7 +9,7 @@ import UIKit
 
 final class DetailViewBuilder {
     
-    static func build(from pokemon: PokemonDetails, withColor color: UIColor) -> DetailViewController {
+    static func build(from pokemon: PokemonDetails, withColor color: UIColor) -> NavigationController {
         let viewModel = DetailViewController.ViewModel(pokemon: pokemon, color: color)
         
         let types: DetailCellConfig = .typesCell(values: pokemon.types)
@@ -28,6 +28,6 @@ final class DetailViewBuilder {
         
         let tableData = UITableView.DataSource(sections: [infoSection, statSection, movesSection])
         
-        return DetailViewController(viewModel: viewModel, tableData: tableData)
+        return NavigationController(rootViewController: DetailViewController(viewModel: viewModel, tableData: tableData))
     }
 }

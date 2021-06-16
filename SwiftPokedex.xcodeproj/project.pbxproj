@@ -300,6 +300,7 @@
 				D58B7467264761180046E7EB /* SearchController.swift */,
 				6E006F732641989D009FC152 /* TabBarController.swift */,
 				D542C761265942BA0047CC44 /* StatBar.swift */,
+				D5F4D4B62679898D0052C79C /* Transition */,
 				6EFC2135263C8422004389D9 /* CollectionView */,
 				6EFC2137263C842A004389D9 /* TableView */,
 			);
@@ -354,11 +355,6 @@
 		6E9D559A263BFE1500D0DA9D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				6EF4633826791F48003B52C5 /* GlobalConstants.swift */,
-				6EF4633126791E50003B52C5 /* CardPresentationController.swift */,
-				6EF4633026791E50003B52C5 /* CardTransition.swift */,
-				6EF4633226791E50003B52C5 /* DismissCardAnimator.swift */,
-				6EF4633326791E50003B52C5 /* PresentCardAnimator.swift */,
 				6EC94FEA263C854B003E0117 /* PokedexViewController */,
 				6E17061A263C22D300B67F37 /* DetailViewController */,
 				6E006F8B2641C46F009FC152 /* ListViewController */,
@@ -446,6 +442,18 @@
 				D58F7B3A26530F6600FE841D /* ItemModels.swift */,
 			);
 			path = ItemAPI;
+			sourceTree = "<group>";
+		};
+		D5F4D4B62679898D0052C79C /* Transition */ = {
+			isa = PBXGroup;
+			children = (
+				6EF4633826791F48003B52C5 /* GlobalConstants.swift */,
+				6EF4633126791E50003B52C5 /* CardPresentationController.swift */,
+				6EF4633026791E50003B52C5 /* CardTransition.swift */,
+				6EF4633226791E50003B52C5 /* DismissCardAnimator.swift */,
+				6EF4633326791E50003B52C5 /* PresentCardAnimator.swift */,
+			);
+			path = Transition;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -1,9 +1,8 @@
 //
-//  Constants.swift
-//  AppStoreInteractiveTransition
+//  GlobalConstants.swift
+//  SwiftPokedex
 //
-//  Created by Wirawit Rueopas on 31/7/18.
-//  Copyright © 2018 Wirawit Rueopas. All rights reserved.
+//  Created by Viktor Gidlöf on 2021-06-16.
 //
 
 import UIKit
