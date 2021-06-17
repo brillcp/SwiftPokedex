@@ -11,14 +11,10 @@ final class DismissTransition: NSObject {
 
     // MARK: Private properties
     private var transitionContext: UIViewControllerContextTransitioning?
-    private var backgroundAnimation: UIViewPropertyAnimator?
     private let parameters: TransitionController.Parameters
 
-    private lazy var transitionImageView: UIView? = {
-        let imageView = UIView()
-        imageView.clipsToBounds = true
-        return imageView
-    }()
+    private lazy var transitionImageView: UIImageView = UIImageView.detailImageView(parameters: parameters)
+    private lazy var transitionView: UIView = UIView()
 
     // MARK: - Init
     init(parameters: TransitionController.Parameters) {
@@ -31,60 +27,66 @@ final class DismissTransition: NSObject {
         guard let transitionContext = transitionContext else { return }
         
         let translation = gesture.translation(in: nil)
-        let translationVertical = translation.x
+        let progress = percentageComplete(for: translation.x)
+        let scale = transitionScale(for: progress)
 
-        // For a given vertical-drag, we calculate our percentage complete
-        // and how shrunk-down the transition-image should be.
-        let percentageComplete = self.percentageComplete(forVerticalDrag: translationVertical)
-        let transitionImageScale = transitionImageScaleFor(percentageComplete: percentageComplete)
-
+        print(progress)
+        
         switch gesture.state {
-        case .possible, .began:
-            break
-        case .cancelled, .failed:
-            completeTransition(didCancel: true)
-
         case .changed:
-            transitionImageView?.transform = CGAffineTransform.identity
-                .scaledBy(x: transitionImageScale, y: transitionImageScale)
+            transitionView.transform = CGAffineTransform.identity
+                .scaledBy(x: scale, y: scale)
                 .translatedBy(x: translation.x, y: translation.y)
             
-            transitionContext.updateInteractiveTransition(percentageComplete)
-            self.backgroundAnimation?.fractionComplete = percentageComplete
-
+            transitionImageView.transform = transitionView.transform
+            
+            transitionContext.updateInteractiveTransition(progress)
         case .ended:
-            // Here, we decide whether to complete or cancel the transition.
             let fingerIsMovingDownwards = gesture.velocity(in: nil).x > 0
-            let transitionMadeSignificantProgress = percentageComplete > 0.1
+            let transitionMadeSignificantProgress = progress > 0.7
             let shouldComplete = fingerIsMovingDownwards && transitionMadeSignificantProgress
-            self.completeTransition(didCancel: !shouldComplete)
-        @unknown default:
+            completeTransition(didCancel: !shouldComplete)
+        case .cancelled, .failed:
+            completeTransition(didCancel: true)
+        default:
             break
         }
     }
 
     // MARK: - Private functions
     private func completeTransition(didCancel: Bool) {
-        guard let transitionContext = transitionContext, let backgroundAnimation = backgroundAnimation else { return }
+        guard let transitionContext = transitionContext else { return }
+
+        transitionContext.containerView.addSubview(self.transitionImageView)
+
+        transitionImageView.alpha = 0.0
         
-        let completionDuration: Double
-        let completionDamping: CGFloat
-        
-        if didCancel {
-            completionDuration = 0.2
-            completionDamping = 0.75
-        } else {
-            completionDuration = 0.2
-            completionDamping = 0.90
+        let animator = UIViewPropertyAnimator(duration: 0.2, dampingRatio: 0.8) {
+            UIView.animateKeyframes(withDuration: 0, delay: 0) {
+                UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.5) {
+                    self.transitionImageView.alpha = 1.0
+                }
+
+                UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 1.0) {
+                    self.transitionView.frame = self.parameters.cellFrame
+                    self.transitionView.layer.cornerRadius = 20.0
+                    
+                    var imageFrame = self.parameters.cellFrame
+                    imageFrame.size.height -= 35
+
+                    self.transitionImageView.frame = imageFrame
+                    self.transitionImageView.layer.cornerRadius = 20.0
+                }
+                
+                UIView.addKeyframe(withRelativeStartTime: 0.9, relativeDuration: 0.1) {
+                    self.transitionView.alpha = 0.0
+                }
+            }
         }
 
-        let foregroundAnimation = UIViewPropertyAnimator(duration: completionDuration, dampingRatio: completionDamping) {
-            self.transitionImageView?.transform = .identity
-            self.transitionImageView?.frame = self.parameters.cellFrame
-        }
-
-        foregroundAnimation.addCompletion { [weak self] position in
-            self?.transitionImageView?.removeFromSuperview()
+        animator.addCompletion { [weak self] position in
+            self?.transitionView.removeFromSuperview()
+            self?.transitionImageView.removeFromSuperview()
 
             if didCancel {
                 transitionContext.cancelInteractiveTransition()
@@ -94,21 +96,16 @@ final class DismissTransition: NSObject {
             transitionContext.completeTransition(!didCancel)
             self?.transitionContext = nil
         }
-
-        let durationFactor = CGFloat(foregroundAnimation.duration / backgroundAnimation.duration)
-        backgroundAnimation.continueAnimation(withTimingParameters: nil, durationFactor: durationFactor)
-        foregroundAnimation.startAnimation()
+        
+        animator.startAnimation()
     }
 
-    private func percentageComplete(forVerticalDrag verticalDrag: CGFloat) -> CGFloat {
-        let maximumDelta = CGFloat(200)
-        return CGFloat.scaleAndShift(value: verticalDrag, inRange: (min: CGFloat(0), max: maximumDelta))
+    private func percentageComplete(for horizontalDrag: CGFloat) -> CGFloat {
+        CGFloat.scaleAndShift(value: horizontalDrag, inRange: (min: 0.0, max: 100.0))
     }
 
-    private func transitionImageScaleFor(percentageComplete: CGFloat) -> CGFloat {
-        let minScale = CGFloat(0.68)
-        let result = 1 - (1 - minScale) * percentageComplete
-        return result
+    private func transitionScale(for percentage: CGFloat) -> CGFloat {
+        1 - (1 - 0.94) * percentage
     }
 }
 
@@ -127,16 +124,25 @@ extension DismissTransition: UIViewControllerAnimatedTransitioning {
 extension DismissTransition: UIViewControllerInteractiveTransitioning {
 
     func startInteractiveTransition(_ transitionContext: UIViewControllerContextTransitioning) {
+        guard let toView = transitionContext.view(forKey: .to) else { return }
+
         self.transitionContext = transitionContext
         
         let containerView = transitionContext.containerView
         
-        backgroundAnimation = UIViewPropertyAnimator.dismissAnimator(from: transitionContext, params: parameters)
-        
+        containerView.addSubview(toView)
+
         if let fromViewController = transitionContext.viewController(forKey: .from) {
-            transitionImageView = fromViewController.view.snapshotView(afterScreenUpdates: false)
-            transitionImageView?.frame = transitionContext.finalFrame(for: fromViewController)
-            containerView.addSubview(transitionImageView!)
+            transitionView = fromViewController.view.snapshotView(afterScreenUpdates: false) ?? UIView()
+            transitionView.frame = transitionContext.finalFrame(for: fromViewController)
+            transitionView.layer.cornerRadius = 40.0
+            transitionView.clipsToBounds = true
+            
+            let width = transitionContext.view(forKey: .from)?.frame.width ?? 0.0
+            let frame = CGRect(x: 0, y: 90, width: width, height: 310)
+            transitionImageView.frame = frame
+            
+            containerView.addSubview(transitionView)
         }
         
         if let nav = transitionContext.viewController(forKey: .from) as? NavigationController, let detail = nav.topViewController as? DetailViewController {
@@ -146,13 +152,9 @@ extension DismissTransition: UIViewControllerInteractiveTransitioning {
 }
 
 extension CGFloat {
-    /// Returns the value, scaled-and-shifted to the targetRange.
-    /// If no target range is provided, we assume the unit range (0, 1)
-    static func scaleAndShift(
-        value: CGFloat,
-        inRange: (min: CGFloat, max: CGFloat),
-        toRange: (min: CGFloat, max: CGFloat) = (min: 0.0, max: 1.0)
-        ) -> CGFloat {
+    typealias Range = (min: CGFloat, max: CGFloat)
+    
+    static func scaleAndShift(value: CGFloat, inRange: Range, toRange: Range = (min: 0.0, max: 1.0)) -> CGFloat {
         assert(inRange.max > inRange.min)
         assert(toRange.max > toRange.min)
 

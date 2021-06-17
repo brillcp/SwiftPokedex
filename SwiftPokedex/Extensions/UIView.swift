@@ -52,4 +52,13 @@ extension UIView {
         maskLayer1.path = maskPath1.cgPath
         layer.mask = maskLayer1
     }
+    
+    func snapshot(frame: CGRect) -> UIView? {
+        let snapshot = snapshotView(afterScreenUpdates: true)
+        snapshot?.frame = frame
+        snapshot?.layer.cornerRadius = 20.0
+        snapshot?.clipsToBounds = true
+        snapshot?.alpha = 0.0
+        return snapshot
+    }
 }

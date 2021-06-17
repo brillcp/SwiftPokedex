@@ -9,6 +9,7 @@ import UIKit
 
 final class PresentationController: UIPresentationController {
 
+    // MARK: Private properties
     private lazy var blurView: UIView = {
         let view = UIView(useAutolayout: true)
         view.backgroundColor = .black
@@ -16,10 +17,10 @@ final class PresentationController: UIPresentationController {
         return view
     }()
 
-    override var shouldRemovePresentersView: Bool {
-        true
-    }
+    // MARK: - Public properties
+    override var shouldRemovePresentersView: Bool { true }
     
+    // MARK: - Public functions
     override func presentationTransitionWillBegin() {
         guard let container = containerView else { return }
         
@@ -28,10 +29,8 @@ final class PresentationController: UIPresentationController {
 
         presentingViewController.beginAppearanceTransition(false, animated: false)
         
-        presentedViewController.transitionCoordinator?.animate(alongsideTransition: { (ctx) in
-            UIView.animate(withDuration: 0.5, animations: {
-                self.blurView.alpha = 0.5
-            })
+        presentedViewController.transitionCoordinator?.animate(alongsideTransition: { _ in
+            UIView.animate(withDuration: 0.5) { self.blurView.alpha = 0.5 }
         }, completion: nil)
     }
 
@@ -42,7 +41,7 @@ final class PresentationController: UIPresentationController {
     override func dismissalTransitionWillBegin() {
         presentingViewController.beginAppearanceTransition(true, animated: true)
         
-        presentedViewController.transitionCoordinator?.animate(alongsideTransition: { (ctx) in
+        presentedViewController.transitionCoordinator?.animate(alongsideTransition: { _ in
             self.blurView.alpha = 0.0
         }, completion: nil)
     }

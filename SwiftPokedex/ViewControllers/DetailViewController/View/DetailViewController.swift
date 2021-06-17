@@ -17,7 +17,12 @@ final class DetailViewController: TableViewController {
         return button
     }()
 
-    private lazy var panGesutre = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+    private lazy var panGesutre: UIPanGestureRecognizer = {
+        let gesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+        gesture.delegate = self
+        return gesture
+    }()
+    
     private let viewModel: ViewModel
     
     // MARK: - Public properties
@@ -93,5 +98,21 @@ final class DetailViewController: TableViewController {
         navigationController?.navigationBar.barTintColor = .pokedexRed
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.shadowImage = nil
+    }
+}
+
+extension DetailViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        guard gestureRecognizer == panGesutre else { return true }
+        
+        if let gestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer {
+            let velocity = gestureRecognizer.velocity(in: view)
+            return abs(velocity.x) > abs(velocity.y)
+        }
+        return true
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        true
     }
 }
