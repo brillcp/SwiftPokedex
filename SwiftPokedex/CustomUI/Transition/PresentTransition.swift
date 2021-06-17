@@ -27,7 +27,7 @@ extension PresentTransition: UIViewControllerAnimatedTransitioning {
     }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        let presentAnimator = UIViewPropertyAnimator.presentAnimator(from: transitionContext, params: parameters)
-        presentAnimator.startAnimation()
+        let presentAnimator = UIViewPropertyAnimator.presentAnimator(from: transitionContext, parameters: parameters)
+        presentAnimator?.startAnimation()
     }
 }

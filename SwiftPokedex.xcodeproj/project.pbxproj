@@ -66,7 +66,7 @@
 		D542C762265942BA0047CC44 /* StatBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D542C761265942BA0047CC44 /* StatBar.swift */; };
 		D542C766265956E00047CC44 /* StatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D542C765265956E00047CC44 /* StatCell.swift */; };
 		D57C6B882643359000A8D829 /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57C6B872643359000A8D829 /* UIScrollView.swift */; };
-		D57CFDE3267B680400EF31D1 /* InteractiveDismissTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57CFDE2267B680400EF31D1 /* InteractiveDismissTransition.swift */; };
+		D57CFDE3267B680400EF31D1 /* DismissTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57CFDE2267B680400EF31D1 /* DismissTransition.swift */; };
 		D57CFDEB267BE63500EF31D1 /* UIViewPropertyAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57CFDEA267BE63500EF31D1 /* UIViewPropertyAnimator.swift */; };
 		D57CFDF0267BE6CA00EF31D1 /* PresentTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57CFDEF267BE6CA00EF31D1 /* PresentTransition.swift */; };
 		D58B7468264761180046E7EB /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58B7467264761180046E7EB /* SearchController.swift */; };
@@ -140,7 +140,7 @@
 		D542C761265942BA0047CC44 /* StatBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatBar.swift; sourceTree = "<group>"; };
 		D542C765265956E00047CC44 /* StatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatCell.swift; sourceTree = "<group>"; };
 		D57C6B872643359000A8D829 /* UIScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollView.swift; sourceTree = "<group>"; };
-		D57CFDE2267B680400EF31D1 /* InteractiveDismissTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveDismissTransition.swift; sourceTree = "<group>"; };
+		D57CFDE2267B680400EF31D1 /* DismissTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissTransition.swift; sourceTree = "<group>"; };
 		D57CFDEA267BE63500EF31D1 /* UIViewPropertyAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPropertyAnimator.swift; sourceTree = "<group>"; };
 		D57CFDEF267BE6CA00EF31D1 /* PresentTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentTransition.swift; sourceTree = "<group>"; };
 		D58B7467264761180046E7EB /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
@@ -451,7 +451,7 @@
 				6EF4633126791E50003B52C5 /* PresentationController.swift */,
 				6EF4633026791E50003B52C5 /* TransitionController.swift */,
 				D57CFDEF267BE6CA00EF31D1 /* PresentTransition.swift */,
-				D57CFDE2267B680400EF31D1 /* InteractiveDismissTransition.swift */,
+				D57CFDE2267B680400EF31D1 /* DismissTransition.swift */,
 			);
 			path = Transition;
 			sourceTree = "<group>";
@@ -565,7 +565,7 @@
 				6EC394C1263CC341009A2A2D /* String.swift in Sources */,
 				6E806796263BF5E200FD38F0 /* NetworkAgent.swift in Sources */,
 				6E006F8F2641C4B4009FC152 /* ItemListBuilder.swift in Sources */,
-				D57CFDE3267B680400EF31D1 /* InteractiveDismissTransition.swift in Sources */,
+				D57CFDE3267B680400EF31D1 /* DismissTransition.swift in Sources */,
 				6E806788263BF43E00FD38F0 /* TableCellConfiguration.swift in Sources */,
 				D58F7B3726530D6E00FE841D /* ItemAPI.swift in Sources */,
 				6EFC2127263C7B19004389D9 /* CollectionViewController.swift in Sources */,

@@ -15,8 +15,8 @@ protocol PokedexInteractorProtocol {
 final class PokedexInteractor: PokedexInteractorProtocol {
     
     // MARK: Private properties
+    private var transition: UIViewControllerTransitioningDelegate?
     private let router: PokedexRouterProtocol
-    private var transition: UIViewControllerTransitioningDelegate!
     
     // MARK: - Init
     init(router: PokedexRouterProtocol) {

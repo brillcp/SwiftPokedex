@@ -1,5 +1,5 @@
 //
-//  InteractiveDismissTransition.swift
+//  DismissTransition.swift
 //  SwiftPokedex
 //
 //  Created by Viktor Gidlöf on 2021-06-17.
@@ -7,11 +7,12 @@
 
 import UIKit
 
-final class InteractiveDismissTransition: NSObject {
+final class DismissTransition: NSObject {
 
     // MARK: Private properties
-    private var backgroundAnimation: UIViewPropertyAnimator? = nil
-    private var transitionContext: UIViewControllerContextTransitioning? = nil
+    private var transitionContext: UIViewControllerContextTransitioning?
+    private var backgroundAnimation: UIViewPropertyAnimator?
+    private let parameters: TransitionController.Parameters
 
     private lazy var transitionImageView: UIView? = {
         let imageView = UIView()
@@ -19,19 +20,17 @@ final class InteractiveDismissTransition: NSObject {
         return imageView
     }()
 
-    private let params: TransitionController.Parameters
-
     // MARK: - Init
-    init(params: TransitionController.Parameters) {
-        self.params = params
+    init(parameters: TransitionController.Parameters) {
+        self.parameters = parameters
         super.init()
     }
 
     // MARK: - Public functions
-    func didPanWith(gestureRecognizer: UIPanGestureRecognizer) {
+    func didPan(with gesture: UIPanGestureRecognizer) {
         guard let transitionContext = transitionContext else { return }
         
-        let translation = gestureRecognizer.translation(in: nil)
+        let translation = gesture.translation(in: nil)
         let translationVertical = translation.x
 
         // For a given vertical-drag, we calculate our percentage complete
@@ -39,7 +38,7 @@ final class InteractiveDismissTransition: NSObject {
         let percentageComplete = self.percentageComplete(forVerticalDrag: translationVertical)
         let transitionImageScale = transitionImageScaleFor(percentageComplete: percentageComplete)
 
-        switch gestureRecognizer.state {
+        switch gesture.state {
         case .possible, .began:
             break
         case .cancelled, .failed:
@@ -55,7 +54,7 @@ final class InteractiveDismissTransition: NSObject {
 
         case .ended:
             // Here, we decide whether to complete or cancel the transition.
-            let fingerIsMovingDownwards = gestureRecognizer.velocity(in: nil).x > 0
+            let fingerIsMovingDownwards = gesture.velocity(in: nil).x > 0
             let transitionMadeSignificantProgress = percentageComplete > 0.1
             let shouldComplete = fingerIsMovingDownwards && transitionMadeSignificantProgress
             self.completeTransition(didCancel: !shouldComplete)
@@ -68,29 +67,20 @@ final class InteractiveDismissTransition: NSObject {
     private func completeTransition(didCancel: Bool) {
         guard let transitionContext = transitionContext, let backgroundAnimation = backgroundAnimation else { return }
         
-//        backgroundAnimation.addCompletion { _ in
-//            self.transitionImageView?.removeFromSuperview()
-//
-//            transitionContext.finishInteractiveTransition()
-//            transitionContext.completeTransition(true)
-//
-//            self.transitionContext = nil
-//        }
-        
         let completionDuration: Double
         let completionDamping: CGFloat
         
         if didCancel {
-            completionDuration = 0.45
+            completionDuration = 0.2
             completionDamping = 0.75
         } else {
-            completionDuration = 0.37
+            completionDuration = 0.2
             completionDamping = 0.90
         }
 
         let foregroundAnimation = UIViewPropertyAnimator(duration: completionDuration, dampingRatio: completionDamping) {
             self.transitionImageView?.transform = .identity
-            self.transitionImageView?.frame = self.params.cellFrame
+            self.transitionImageView?.frame = self.parameters.cellFrame
         }
 
         foregroundAnimation.addCompletion { [weak self] position in
@@ -123,7 +113,7 @@ final class InteractiveDismissTransition: NSObject {
 }
 
 // MARK: -
-extension InteractiveDismissTransition: UIViewControllerAnimatedTransitioning {
+extension DismissTransition: UIViewControllerAnimatedTransitioning {
 
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         0.2
@@ -134,14 +124,14 @@ extension InteractiveDismissTransition: UIViewControllerAnimatedTransitioning {
     }
 }
 
-extension InteractiveDismissTransition: UIViewControllerInteractiveTransitioning {
+extension DismissTransition: UIViewControllerInteractiveTransitioning {
 
     func startInteractiveTransition(_ transitionContext: UIViewControllerContextTransitioning) {
         self.transitionContext = transitionContext
         
         let containerView = transitionContext.containerView
         
-        backgroundAnimation = UIViewPropertyAnimator.dismissAnimator(from: transitionContext, params: params)
+        backgroundAnimation = UIViewPropertyAnimator.dismissAnimator(from: transitionContext, params: parameters)
         
         if let fromViewController = transitionContext.viewController(forKey: .from) {
             transitionImageView = fromViewController.view.snapshotView(afterScreenUpdates: false)

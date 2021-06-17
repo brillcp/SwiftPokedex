@@ -9,28 +9,22 @@ import UIKit
 
 extension UIViewPropertyAnimator {
 
-    static func presentAnimator( from transitionContext: UIViewControllerContextTransitioning, params: TransitionController.Parameters) -> UIViewPropertyAnimator {
-        let context = transitionContext
+    typealias Parameters = TransitionController.Parameters
+    typealias Context = UIViewControllerContextTransitioning
+
+    static func presentAnimator(from context: Context, parameters: Parameters) -> UIViewPropertyAnimator? {
+        guard let toViewController = context.viewController(forKey: .to),
+              let toView = toViewController.view,
+              let snapshot = toView.snapshot(frame: parameters.cellFrame)
+        else { return nil }
+        
         let container = context.containerView
-        let fromCardFrame = params.cellFrame
         
-        let toViewController = context.viewController(forKey: .to)!
-        let tt = toViewController.view!
+        container.addSubview(snapshot)
         
-        let toView = tt.snapshotView(afterScreenUpdates: true)!
-        toView.frame = fromCardFrame
-        toView.layer.cornerRadius = 20.0
-        toView.clipsToBounds = true
-        toView.alpha = 0.0
-        container.addSubview(toView)
-        
-        var imageFrame = fromCardFrame
+        var imageFrame = snapshot.frame
         imageFrame.size.height -= 35.0
-        let imageView = UIImageView(frame: imageFrame)
-        imageView.layer.cornerRadius = toView.layer.cornerRadius
-        imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = params.color
-        imageView.image = params.image
+        let imageView = UIImageView.detailImageView(frame: imageFrame, parameters: parameters)
         container.addSubview(imageView)
         
         let final = context.finalFrame(for: toViewController)
@@ -52,57 +46,52 @@ extension UIViewPropertyAnimator {
         animator.addCompletion { _ in
             imageView.removeFromSuperview()
             toView.removeFromSuperview()
-            container.addSubview(tt)
+            container.addSubview(toView)
             context.completeTransition(!context.transitionWasCancelled)
         }
 
         return animator
     }
     
-    static func dismissAnimator(from transitionContext: UIViewControllerContextTransitioning, params: TransitionController.Parameters) -> UIViewPropertyAnimator {
-        let context = transitionContext
+    static func dismissAnimator(from context: Context, params: Parameters) -> UIViewPropertyAnimator {
         let container = context.containerView
         let fromCardFrame = params.cellFrame
         
-        let to = context.view(forKey: .to)!
-        container.addSubview(to)
-        
-        let from = context.view(forKey: .from)!
-        let snap = from.snapshotView(afterScreenUpdates: false)!
-        snap.layer.cornerRadius = 40.0
-        snap.clipsToBounds = true
-        container.addSubview(snap)
-        
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 80, width: snap.frame.width, height: 310))
-        imageView.layer.cornerRadius = snap.layer.cornerRadius
-        imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = params.color
-        imageView.image = params.image
-        container.addSubview(imageView)
+        let toView = context.view(forKey: .to)!
+        container.addSubview(toView)
         
         var imageFrame = fromCardFrame
         imageFrame.size.height -= 35
         
         let animator = UIViewPropertyAnimator(duration: 0, curve: .linear) {
-            UIView.animateKeyframes(withDuration: 0, delay: 0) {
-                UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 1.0) {
-                    snap.layer.cornerRadius = 20.0
-                    snap.frame = fromCardFrame
-                    imageView.frame = imageFrame
-                    imageView.layer.cornerRadius = snap.layer.cornerRadius
-                }
-                
-                UIView.addKeyframe(withRelativeStartTime: 0.8, relativeDuration: 0.2) {
-                    snap.alpha = 0.0
-                }
-            }
         }
         
         animator.addCompletion { _ in
-            imageView.removeFromSuperview()
-//            context.completeTransition(!context.transitionWasCancelled)
         }
 
         return animator
+    }
+}
+
+extension UIView {
+    func snapshot(frame: CGRect) -> UIView? {
+        let snapshot = snapshotView(afterScreenUpdates: true)
+        snapshot?.frame = frame
+        snapshot?.layer.cornerRadius = 20.0
+        snapshot?.clipsToBounds = true
+        snapshot?.alpha = 0.0
+        return snapshot
+    }
+}
+
+extension UIImageView {
+    
+    static func detailImageView(frame: CGRect, parameters: TransitionController.Parameters) -> UIImageView {
+        let imageView = UIImageView(frame: frame)
+        imageView.layer.cornerRadius = 40.0
+        imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = parameters.color
+        imageView.image = parameters.image
+        return imageView
     }
 }
