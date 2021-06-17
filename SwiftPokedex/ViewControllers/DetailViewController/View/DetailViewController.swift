@@ -17,6 +17,12 @@ final class DetailViewController: TableViewController {
         return button
     }()
 
+    private lazy var panGesutre: UIPanGestureRecognizer = {
+        let gesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+        gesture.delegate = self
+        return gesture
+    }()
+    
     private let viewModel: ViewModel
     
     // MARK: - Public properties
@@ -38,6 +44,8 @@ final class DetailViewController: TableViewController {
         title = viewModel.title
         
         setupTableHeader()
+        
+        view.addGestureRecognizer(panGesutre)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,7 +58,26 @@ final class DetailViewController: TableViewController {
         viewWillDisappear()
     }
     
+    var transitionController: InteractiveDismissTransition? = nil
+
     // MARK: - Private functions
+    @objc private func handlePan(_ gesture: UIScreenEdgePanGestureRecognizer) {
+        let location = gesture.location(in: view)
+        let translation = gesture.translation(in: view)
+        var progress = translation.x / 100
+        
+        progress = min(progress, 1.0)
+        print(progress)
+        
+        switch gesture.state {
+        case .began:
+            dismiss(animated: true)
+        default: break
+        }
+        
+        transitionController?.didPanWith(gestureRecognizer: gesture)
+    }
+    
     @objc private func close() {
         dismiss(animated: true)
     }
@@ -79,5 +106,21 @@ final class DetailViewController: TableViewController {
         navigationController?.navigationBar.barTintColor = .pokedexRed
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.shadowImage = nil
+    }
+}
+
+extension DetailViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        guard gestureRecognizer == panGesutre else { return true }
+        
+        if let gestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer {
+            let velocity = gestureRecognizer.velocity(in: view)
+            return abs(velocity.x) > abs(velocity.y)
+        }
+        return true
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        true
     }
 }

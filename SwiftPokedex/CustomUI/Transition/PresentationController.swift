@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CardPresentationController: UIPresentationController {
+final class PresentationController: UIPresentationController {
 
     private lazy var blurView: UIView = {
         let view = UIView(useAutolayout: true)
@@ -32,7 +32,7 @@ final class CardPresentationController: UIPresentationController {
             UIView.animate(withDuration: 0.5, animations: {
                 self.blurView.alpha = 0.5
             })
-        }) { (ctx) in }
+        }, completion: nil)
     }
 
     override func presentationTransitionDidEnd(_ completed: Bool) {

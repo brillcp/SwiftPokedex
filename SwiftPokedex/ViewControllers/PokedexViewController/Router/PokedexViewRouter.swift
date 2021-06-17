@@ -8,7 +8,7 @@
 import UIKit
 
 protocol PokedexRouterProtocol {
-    func routeToDetailView(transition: CardTransition, pokemon: PokemonDetails, color: UIColor)
+    func routeToDetailView(transition: UIViewControllerTransitioningDelegate, pokemon: PokemonDetails, color: UIColor)
 }
 
 // MARK: -
@@ -18,7 +18,7 @@ final class PokedexRouter: PokedexRouterProtocol {
     weak var navigationController: UINavigationController?
     
     // MARK: - Public functions
-    func routeToDetailView(transition: CardTransition, pokemon: PokemonDetails, color: UIColor) {
+    func routeToDetailView(transition: UIViewControllerTransitioningDelegate, pokemon: PokemonDetails, color: UIColor) {
         let detailView = DetailViewBuilder.build(from: pokemon, withColor: color)
         detailView.transitioningDelegate = transition
         detailView.modalPresentationStyle = .custom
