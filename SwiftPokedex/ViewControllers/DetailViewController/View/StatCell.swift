@@ -49,7 +49,7 @@ final class StatCell: UITableViewCell, ConfigurableCell {
         
         contentView.addSubview(statBar)
         NSLayoutConstraint.activate([
-            statBar.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 20.0),
+            statBar.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 10.0),
             statBar.heightAnchor.constraint(equalToConstant: 16.0),
             statBar.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             statBar.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15.0)
