@@ -57,47 +57,13 @@ final class DismissTransition: NSObject {
     private func completeTransition(didCancel: Bool) {
         guard let transitionContext = transitionContext else { return }
 
-        transitionContext.containerView.addSubview(self.transitionImageView)
-
-        transitionImageView.alpha = 0.0
-        
-        let animator = UIViewPropertyAnimator(duration: 0.2, dampingRatio: 0.8) {
-            UIView.animateKeyframes(withDuration: 0, delay: 0) {
-                UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.5) {
-                    self.transitionImageView.alpha = 1.0
-                }
-
-                UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 1.0) {
-                    self.transitionView.frame = self.parameters.cellFrame
-                    self.transitionView.layer.cornerRadius = 20.0
-                    
-                    var imageFrame = self.parameters.cellFrame
-                    imageFrame.size.height -= 35
-
-                    self.transitionImageView.frame = imageFrame
-                    self.transitionImageView.layer.cornerRadius = 20.0
-                }
-                
-                UIView.addKeyframe(withRelativeStartTime: 0.9, relativeDuration: 0.1) {
-                    self.transitionView.alpha = 0.0
-                }
-            }
+        if didCancel {
+            let aa = UIViewPropertyAnimator.cancelAnimator(from: transitionContext, view: transitionView)
+            aa?.startAnimation()
+        } else {
+            let aanim: UIViewPropertyAnimator = .dismissAnimator(from: transitionContext, view: transitionView, imageView: transitionImageView, frame: parameters.cellFrame)
+            aanim.startAnimation()
         }
-
-        animator.addCompletion { [weak self] position in
-            self?.transitionView.removeFromSuperview()
-            self?.transitionImageView.removeFromSuperview()
-
-            if didCancel {
-                transitionContext.cancelInteractiveTransition()
-            } else {
-                transitionContext.finishInteractiveTransition()
-            }
-            transitionContext.completeTransition(!didCancel)
-            self?.transitionContext = nil
-        }
-        
-        animator.startAnimation()
     }
 
     private func percentageComplete(for horizontalDrag: CGFloat) -> CGFloat {

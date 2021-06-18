@@ -27,7 +27,7 @@ final class PresentationController: UIPresentationController {
         container.addSubview(blurView)
         blurView.pinToSuperview()
 
-        presentingViewController.beginAppearanceTransition(false, animated: false)
+        presentingViewController.beginAppearanceTransition(true, animated: true)
         
         presentedViewController.transitionCoordinator?.animate(alongsideTransition: { _ in
             UIView.animate(withDuration: 0.5) { self.blurView.alpha = 0.5 }
