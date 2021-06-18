@@ -76,7 +76,7 @@ final class DetailViewController: TableViewController {
     
     private func setupTableHeader() {
         let frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 300.0)
-        let header = DetailHeaderView(frame: frame, urlString: viewModel.spriteURL, color: viewModel.color)
+        let header = DetailHeaderView(frame: frame, pokemon: viewModel.pokemon, color: viewModel.color)
         tableView.tableHeaderView = header
     }
     

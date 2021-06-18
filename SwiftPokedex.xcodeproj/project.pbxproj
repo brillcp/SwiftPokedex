@@ -290,6 +290,7 @@
 			isa = PBXGroup;
 			children = (
 				6E4752B1263C20E9007888ED /* DetailViewController.swift */,
+				6E006F6C26416239009FC152 /* DetailHeaderView.swift */,
 				6E4752B4263C2101007888ED /* DetailViewModel.swift */,
 				6E9D559C263C003300D0DA9D /* DetailCell.swift */,
 				D542C765265956E00047CC44 /* StatCell.swift */,
@@ -301,7 +302,6 @@
 			isa = PBXGroup;
 			children = (
 				6EC5FCCF263CA824005B04ED /* NavigationController.swift */,
-				6E006F6C26416239009FC152 /* DetailHeaderView.swift */,
 				D58B7467264761180046E7EB /* SearchController.swift */,
 				6E006F732641989D009FC152 /* TabBarController.swift */,
 				D542C761265942BA0047CC44 /* StatBar.swift */,
