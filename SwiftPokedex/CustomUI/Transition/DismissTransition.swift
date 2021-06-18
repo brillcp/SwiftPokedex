@@ -57,13 +57,14 @@ final class DismissTransition: NSObject {
     private func completeTransition(didCancel: Bool) {
         guard let transitionContext = transitionContext else { return }
 
+        let animator: UIViewPropertyAnimator?
         if didCancel {
-            let aa = UIViewPropertyAnimator.cancelAnimator(from: transitionContext, view: transitionView)
-            aa?.startAnimation()
+            animator = .cancelAnimator(from: transitionContext, view: transitionView)
         } else {
-            let aanim: UIViewPropertyAnimator = .dismissAnimator(from: transitionContext, view: transitionView, imageView: transitionImageView, frame: parameters.cellFrame)
-            aanim.startAnimation()
+            animator = .dismissAnimator(from: transitionContext, view: transitionView, imageView: transitionImageView, frame: parameters.cellFrame)
         }
+        
+        animator?.startAnimation()
     }
 
     private func percentageComplete(for horizontalDrag: CGFloat) -> CGFloat {

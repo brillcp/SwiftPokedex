@@ -34,7 +34,7 @@ extension UIViewPropertyAnimator {
         return animator
     }
     
-    static func dismissAnimator(from context: Context, view: UIView, imageView: UIImageView, frame: CGRect) -> UIViewPropertyAnimator {
+    static func dismissAnimator(from context: Context, view: UIView, imageView: UIImageView, frame: CGRect) -> UIViewPropertyAnimator? {
         
         imageView.alpha = 0.0
         
