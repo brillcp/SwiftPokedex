@@ -27,4 +27,8 @@ extension String {
     func foundMatch(for string: String) -> Bool {
         (cleaned as NSString).range(of: string, options: .caseInsensitive).location != NSNotFound
     }
+    
+    static func types(from types: [Type]) -> String {
+        types.compactMap { $0.type.name.cleaned }.joined(separator: "\n")
+    }
 }

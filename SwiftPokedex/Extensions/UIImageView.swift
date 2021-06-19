@@ -9,12 +9,12 @@ import UIKit
 
 extension UIImageView {
 
-    static func detailImageView(frame: CGRect = .zero, parameters: TransitionController.Parameters) -> UIImageView {
+    static func detailImageView(frame: CGRect = .zero, image: UIImage? = nil) -> UIImageView {
         let imageView = UIImageView(frame: frame)
-        imageView.layer.cornerRadius = 40.0
         imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = parameters.color
-        imageView.image = parameters.image
+        imageView.layer.cornerRadius = 40.0
+        imageView.clipsToBounds = true
+        imageView.image = image
         return imageView
     }
 }

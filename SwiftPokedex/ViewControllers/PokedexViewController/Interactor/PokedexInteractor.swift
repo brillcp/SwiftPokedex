@@ -33,7 +33,7 @@ final class PokedexInteractor: PokedexInteractorProtocol {
         else { return }
 
         let convertedCellFrame = cellSuperview.convert(cellFrame, to: nil)
-        let params = TransitionController.Parameters(cellFrame: convertedCellFrame, image: cell.image, color: color)
+        let params = TransitionController.Parameters(cellFrame: convertedCellFrame, image: cell.asImage(), color: color)
         transition = TransitionController(parameters: params)
         
         router.routeToDetailView(transition: transition, pokemon: pokemon, color: color)

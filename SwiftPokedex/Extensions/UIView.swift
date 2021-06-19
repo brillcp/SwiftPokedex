@@ -53,12 +53,19 @@ extension UIView {
         layer.mask = maskLayer1
     }
     
-    func snapshot(frame: CGRect) -> UIView? {
+    func snapshot(frame: CGRect? = nil) -> UIView? {
         let snapshot = snapshotView(afterScreenUpdates: true)
-        snapshot?.frame = frame
+        snapshot?.frame = frame ?? self.frame
         snapshot?.layer.cornerRadius = 20.0
         snapshot?.clipsToBounds = true
-        snapshot?.alpha = 0.0
         return snapshot
+    }
+    
+    func asImage(frame: CGRect? = nil) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(frame?.size ?? bounds.size, false, 1.0)
+        drawHierarchy(in: bounds, afterScreenUpdates: false)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
     }
 }
