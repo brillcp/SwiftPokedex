@@ -26,7 +26,7 @@ final class InteractionController: NSObject, InteractionControlling {
     private weak var viewController: PresentableView?
     
     private var transitionProgress: CGFloat = 0.0
-    private let animDuration: TimeInterval = 0.2
+    private let animDuration: TimeInterval = 0.25
     
     // MARK: - Private properties
     var initialFrame: CGRect
@@ -134,7 +134,7 @@ final class InteractionController: NSObject, InteractionControlling {
               let fromView = fromViewController.view
         else { return }
         
-        let cancelAnimator = UIViewPropertyAnimator(duration: animDuration, dampingRatio: 1.0) {
+        let cancelAnimator = UIViewPropertyAnimator(duration: animDuration, dampingRatio: 0.7) {
             fromView.layer.cornerRadius = 0.0
             fromView.transform = .identity
             

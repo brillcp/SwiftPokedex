@@ -35,7 +35,7 @@ final class PresentTransition: NSObject {
         snap.frame = initialFrame
         containerView.addSubview(snap)
         
-        let animator = UIViewPropertyAnimator(duration: transitionDuration(using: transitionContext), dampingRatio: 0.8) {
+        let animator = UIViewPropertyAnimator(duration: transitionDuration(using: transitionContext), dampingRatio: 0.7) {
             snap.frame = transitionContext.finalFrame(for: toViewController)
         }
         
@@ -51,7 +51,7 @@ final class PresentTransition: NSObject {
     private func dismissAnimation(using transitionContext: UIViewControllerContextTransitioning) {
         guard let fromViewController = transitionContext.viewController(forKey: .from) else { return }
         
-        let animator = UIViewPropertyAnimator(duration: transitionDuration(using: transitionContext), dampingRatio: 0.9) {
+        let animator = UIViewPropertyAnimator(duration: transitionDuration(using: transitionContext), dampingRatio: 0.8) {
             fromViewController.view.frame = self.initialFrame
         }
         
@@ -67,7 +67,7 @@ final class PresentTransition: NSObject {
 extension PresentTransition: UIViewControllerAnimatedTransitioning {
 
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        0.3
+        0.4
     }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
