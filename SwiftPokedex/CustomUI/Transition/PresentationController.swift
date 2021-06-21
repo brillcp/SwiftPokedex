@@ -10,7 +10,7 @@ import UIKit
 final class PresentationController: UIPresentationController {
 
     // MARK: Private properties
-    private lazy var blurView: UIView = {
+    private lazy var fadeView: UIView = {
         let view = UIView(useAutolayout: true)
         view.backgroundColor = .black
         view.alpha = 0.0
@@ -18,39 +18,37 @@ final class PresentationController: UIPresentationController {
     }()
 
     // MARK: - Public properties
-    override var shouldRemovePresentersView: Bool { true }
-    
+    static let finalAlpha: CGFloat = 0.6
+
     // MARK: - Public functions
+    func setAlpha(_ alpha: CGFloat) {
+        fadeView.alpha = alpha
+    }
+    
     override func presentationTransitionWillBegin() {
         guard let container = containerView else { return }
         
-        container.addSubview(blurView)
-        blurView.pinToSuperview()
+        container.addSubview(fadeView)
+        fadeView.pinToSuperview()
 
-        presentingViewController.beginAppearanceTransition(true, animated: true)
-        
-        presentedViewController.transitionCoordinator?.animate(alongsideTransition: { _ in
-            UIView.animate(withDuration: 0.5) { self.blurView.alpha = 0.5 }
-        }, completion: nil)
-    }
+        guard let coordinator = presentedViewController.transitionCoordinator else {
+            fadeView.alpha = PresentationController.finalAlpha
+            return
+        }
 
-    override func presentationTransitionDidEnd(_ completed: Bool) {
-        presentingViewController.endAppearanceTransition()
+        coordinator.animate(alongsideTransition: { _ in
+            self.fadeView.alpha = PresentationController.finalAlpha
+        })
     }
 
     override func dismissalTransitionWillBegin() {
-        presentingViewController.beginAppearanceTransition(true, animated: true)
-        
-        presentedViewController.transitionCoordinator?.animate(alongsideTransition: { _ in
-            self.blurView.alpha = 0.0
-        }, completion: nil)
-    }
+        guard let coordinator = presentedViewController.transitionCoordinator, !coordinator.isInteractive else {
+            fadeView.alpha = 0.0
+            return
+        }
 
-    override func dismissalTransitionDidEnd(_ completed: Bool) {
-        presentingViewController.endAppearanceTransition()
-        
-        guard completed else { return }
-        
-        blurView.removeFromSuperview()
+        coordinator.animate(alongsideTransition: { _ in
+            self.fadeView.alpha = 0.0
+        })
     }
 }

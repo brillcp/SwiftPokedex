@@ -10,17 +10,15 @@ import UIKit
 final class TransitionController: NSObject {
 
     // MARK: Private properties
-    private let parameters: Parameters
+    private var interactionController: InteractionControlling?
     
-    struct Parameters {
-        let cellFrame: CGRect
-        let image: UIImage?
-        let color: UIColor?
+    private var initialFrame: CGRect {
+        interactionController?.initialFrame ?? .zero
     }
 
     // MARK: - Init
-    init(parameters: Parameters) {
-        self.parameters = parameters
+    init(interactionController: InteractionControlling) {
+        self.interactionController = interactionController
         super.init()
     }
 }
@@ -28,19 +26,19 @@ final class TransitionController: NSObject {
 // MARK: -
 extension TransitionController: UIViewControllerTransitioningDelegate {
 
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        PresentationController(presentedViewController: presented, presenting: presenting)
+    }
+
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        PresentTransition(parameters: parameters)
+        PresentTransition(presenting: true, initialFrame: initialFrame)
     }
 
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        DismissTransition(parameters: parameters)
+        PresentTransition(presenting: false, initialFrame: initialFrame)
     }
 
     func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        DismissTransition(parameters: parameters)
-    }
-
-    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-        PresentationController(presentedViewController: presented, presenting: presenting)
+        interactionController
     }
 }

@@ -16,19 +16,11 @@ final class DetailViewController: TableViewController {
         button.setTitleTextAttributes([.font: UIFont.pixel17, .foregroundColor: color], for: .normal)
         return button
     }()
-
-    private lazy var panGesutre: UIPanGestureRecognizer = {
-        let gesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
-        gesture.delegate = self
-        return gesture
-    }()
     
     private let viewModel: ViewModel
     
     // MARK: - Public properties
     override var preferredStatusBarStyle: UIStatusBarStyle { viewModel.isLight ? .default : .lightContent }
-
-    var transitionController: DismissTransition? = nil
 
     // MARK: - Init
     init(viewModel: ViewModel, tableData: UITableView.DataSource) {
@@ -45,31 +37,12 @@ final class DetailViewController: TableViewController {
         view.backgroundColor = .darkGrey
         title = viewModel.title
         
+        navigationItem.rightBarButtonItem = idButton
+
         setupTableHeader()
-        
-        view.addGestureRecognizer(panGesutre)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        viewWillAppear()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        viewWillDisappear()
     }
     
     // MARK: - Private functions
-    @objc private func handlePan(_ gesture: UIScreenEdgePanGestureRecognizer) {
-        switch gesture.state {
-        case .began: dismiss(animated: true)
-        default: break
-        }
-        
-        transitionController?.didPan(with: gesture)
-    }
-    
     @objc private func close() {
         dismiss(animated: true)
     }
@@ -78,41 +51,5 @@ final class DetailViewController: TableViewController {
         let frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 300.0)
         let header = DetailHeaderView(frame: frame, pokemon: viewModel.pokemon, color: viewModel.color)
         tableView.tableHeaderView = header
-    }
-    
-    private func viewWillAppear() {
-        navigationController?.navigationBar.barTintColor = viewModel.color
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationItem.rightBarButtonItem = idButton
-
-        if viewModel.isLight {
-            navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.pixel17, .foregroundColor: UIColor.black]
-            navigationController?.navigationBar.tintColor = .black
-        }
-    }
-    
-    private func viewWillDisappear() {
-        UIBarButtonItem.appearance().setTitleTextAttributes([.font: UIFont.pixel17, .foregroundColor: UIColor.white], for: .normal)
-        
-        navigationController?.navigationBar.titleTextAttributes = [.font: UIFont.pixel17, .foregroundColor: UIColor.white]
-        navigationController?.navigationBar.barTintColor = .pokedexRed
-        navigationController?.navigationBar.tintColor = .white
-        navigationController?.navigationBar.shadowImage = nil
-    }
-}
-
-extension DetailViewController: UIGestureRecognizerDelegate {
-    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        guard gestureRecognizer == panGesutre else { return true }
-        
-        if let gestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer {
-            let velocity = gestureRecognizer.velocity(in: view)
-            return abs(velocity.x) > abs(velocity.y)
-        }
-        return true
-    }
-    
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        true
     }
 }

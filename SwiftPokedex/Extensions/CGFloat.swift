@@ -10,7 +10,9 @@ import UIKit
 extension CGFloat {
     typealias Range = (min: CGFloat, max: CGFloat)
     
-    static func scaleAndShift(value: CGFloat, inRange: Range, toRange: Range = (min: 0.0, max: 1.0)) -> CGFloat {
+    static func scale(value: CGFloat, xValue: CGFloat, toRange: Range = (min: 0.0, max: 1.0)) -> CGFloat {
+        let inRange = Range(min: 0.0, max: xValue)
+        
         assert(inRange.max > inRange.min)
         assert(toRange.max > toRange.min)
 

@@ -10,12 +10,56 @@ import UIKit
 final class PresentTransition: NSObject {
 
     // MARK: Private properties
-    private let parameters: TransitionController.Parameters
+    private let initialFrame: CGRect
+    private let presenting: Bool
     
     // MARK: - Init
-    init(parameters: TransitionController.Parameters) {
-        self.parameters = parameters
+    init(presenting: Bool, initialFrame: CGRect) {
+        self.initialFrame = initialFrame
+        self.presenting = presenting
         super.init()
+    }
+    
+    // MARK: - Private functions
+    private func presentAnimation(using transitionContext: UIViewControllerContextTransitioning) {
+        guard let toViewController = transitionContext.viewController(forKey: .to) as? PresentableView,
+              let toView = toViewController.view,
+              let snap = toView.snapshotView(afterScreenUpdates: true)
+        else { return }
+        
+        let containerView = transitionContext.containerView
+        
+        toView.isHidden = true
+        containerView.addSubview(toView)
+        
+        snap.frame = initialFrame
+        containerView.addSubview(snap)
+        
+        let animator = UIViewPropertyAnimator(duration: transitionDuration(using: transitionContext), dampingRatio: 0.8) {
+            snap.frame = transitionContext.finalFrame(for: toViewController)
+        }
+        
+        animator.addCompletion { _ in
+            toView.isHidden = false
+            snap.removeFromSuperview()
+            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+        }
+        
+        animator.startAnimation()
+    }
+    
+    private func dismissAnimation(using transitionContext: UIViewControllerContextTransitioning) {
+        guard let fromViewController = transitionContext.viewController(forKey: .from) else { return }
+        
+        let animator = UIViewPropertyAnimator(duration: transitionDuration(using: transitionContext), dampingRatio: 0.9) {
+            fromViewController.view.frame = self.initialFrame
+        }
+        
+        animator.addCompletion { _ in
+            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+        }
+        
+        animator.startAnimation()
     }
 }
 
@@ -23,27 +67,14 @@ final class PresentTransition: NSObject {
 extension PresentTransition: UIViewControllerAnimatedTransitioning {
 
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        0.2
+        0.3
     }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        let cellFrame = parameters.cellFrame
-        
-        guard let toView = transitionContext.view(forKey: .to),
-              let snapshot = toView.snapshot(frame: cellFrame)
-        else { return }
-        
-        let containerView = transitionContext.containerView
-        containerView.addSubview(snapshot)
-        
-        let imageView = UIImageView.detailImageView(frame: cellFrame, image: parameters.image)
-        containerView.addSubview(imageView)
-                
-        let animator = UIViewPropertyAnimator.present(using: transitionContext,
-                                                              duration: transitionDuration(using: transitionContext),
-                                                              snapshot: snapshot,
-                                                              imageView: imageView,
-                                                              cellFrame: cellFrame)
-        animator?.startAnimation()
+        if presenting {
+            presentAnimation(using: transitionContext)
+        } else {
+            dismissAnimation(using: transitionContext)
+        }
     }
 }

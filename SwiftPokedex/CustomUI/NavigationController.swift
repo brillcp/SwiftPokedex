@@ -7,9 +7,16 @@
 
 import UIKit
 
-final class NavigationController: UINavigationController {
+final class NavigationController: UINavigationController, PresentableView {
     
     // MARK: Public properties
+    var transitionManager: UIViewControllerTransitioningDelegate?
+
+    var receivingFrame: CGRect? {
+        guard let detailView = topViewController as? DetailViewController else { return nil }
+        return detailView.tableView.tableHeaderView?.frame
+    }
+    
     override var childForStatusBarStyle: UIViewController? {
         topViewController?.childForStatusBarStyle ?? topViewController
     }

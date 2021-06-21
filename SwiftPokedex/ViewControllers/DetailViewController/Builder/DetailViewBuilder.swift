@@ -12,9 +12,6 @@ final class DetailViewBuilder {
     static func build(from pokemon: PokemonDetails, withColor color: UIColor) -> NavigationController {
         let viewModel = DetailViewController.ViewModel(pokemon: pokemon, color: color)
         
-//        let types: DetailCellConfig = .typesCell(values: pokemon.types)
-//        let weight: DetailCellConfig = .weightCell(value: pokemon.weight)
-//        let height: DetailCellConfig = .heightCell(value: pokemon.height)
         let abilities: DetailCellConfig = .abilitiesCell(values: pokemon.abilities)
         let moves: DetailCellConfig = .movesCell(values: pokemon.moves)
         let infoSection = UITableView.Section(title: "Info", items: [abilities])
@@ -28,6 +25,16 @@ final class DetailViewBuilder {
         
         let tableData = UITableView.DataSource(sections: [statSection, infoSection, movesSection])
         
-        return NavigationController(rootViewController: DetailViewController(viewModel: viewModel, tableData: tableData))
+        let detailView = DetailViewController(viewModel: viewModel, tableData: tableData)
+        let navigationController = NavigationController(rootViewController: detailView)
+        navigationController.navigationBar.barTintColor = viewModel.color
+        navigationController.navigationBar.shadowImage = UIImage()
+
+        if viewModel.isLight {
+            navigationController.navigationBar.titleTextAttributes = [.font: UIFont.pixel17, .foregroundColor: UIColor.black]
+            navigationController.navigationBar.tintColor = .black
+        }
+
+        return navigationController
     }
 }

@@ -38,6 +38,11 @@ final class PokedexCell: UICollectionViewCell, ConfigurableCell {
     // MARK: - Public properties
     override var isHighlighted: Bool { didSet { animateHighlight(isHighlighted) }}
 
+    struct CornerRadius {
+        static let large: CGFloat = 40.0
+        static let small: CGFloat = 20.0
+    }
+    
     var image: UIImage? { imageView.image }
     var data: PokemonDetails?
     
@@ -71,7 +76,7 @@ final class PokedexCell: UICollectionViewCell, ConfigurableCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        layer.cornerRadius = 20.0
+        layer.cornerRadius = PokedexCell.CornerRadius.small
         clipsToBounds = true
     }
     

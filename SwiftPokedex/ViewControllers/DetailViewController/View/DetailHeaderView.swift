@@ -16,9 +16,6 @@ final class DetailHeaderView: UIView {
         return imageView
     }()
     
-    private let pokemon: PokemonDetails
-    private let isLight: Bool
-    
     private lazy var stackView: UIStackView = {
         let stack = UIStackView(useAutolayout: true)
         
@@ -49,6 +46,9 @@ final class DetailHeaderView: UIView {
         return stack
     }()
     
+    private let pokemon: PokemonDetails
+    private let isLight: Bool
+    
     // MARK: - Init
     init(frame: CGRect, pokemon: PokemonDetails, color: UIColor) {
         self.pokemon = pokemon
@@ -61,18 +61,18 @@ final class DetailHeaderView: UIView {
         let fillerView = UIView(frame: UIScreen.main.bounds)
         fillerView.backgroundColor = color
         fillerView.frame.origin.y -= fillerView.frame.height - frame.height
-        fillerView.roundedView(corners: [.bottomLeft, .bottomRight], radius: 40.0)
+        fillerView.roundedView(corners: [.bottomLeft, .bottomRight], radius: PokedexCell.CornerRadius.large)
         addSubview(fillerView)
 
         addSubview(imageView)
         imageView.pinToSuperview(with: UIEdgeInsets(top: 0, left: 0, bottom: 56, right: 0), edges: .all)
 
+        let padding: CGFloat = 20.0
         addSubview(stackView)
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20.0),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20.0),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20.0),
-//            stackView.heightAnchor.constraint(equalToConstant: 42.0)
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
         ])
         
         UIImage.load(from: pokemon.sprite.url) { [weak self] image in
@@ -81,11 +81,4 @@ final class DetailHeaderView: UIView {
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-    
-    // MARK: - Layout
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-//        imageView.frame = frame
-    }
 }

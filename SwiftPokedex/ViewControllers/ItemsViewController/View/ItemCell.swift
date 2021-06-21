@@ -42,25 +42,26 @@ final class ItemCell: UITableViewCell, ConfigurableCell {
         selectionStyle = .none
         
         let margin: CGFloat = 20.0
+        let padding: CGFloat = 10.0
         
         contentView.addSubview(itemImageView)
         NSLayoutConstraint.activate([
-            itemImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10.0),
-            itemImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10.0),
+            itemImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
+            itemImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
             itemImageView.widthAnchor.constraint(equalToConstant: 60.0),
             itemImageView.heightAnchor.constraint(equalTo: itemImageView.widthAnchor)
         ])
         
         contentView.addSubview(titleLabel)
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: itemImageView.trailingAnchor, constant: 10.0),
+            titleLabel.leadingAnchor.constraint(equalTo: itemImageView.trailingAnchor, constant: padding),
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: margin),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margin)
         ])
         
         contentView.addSubview(detailLabel)
         NSLayoutConstraint.activate([
-            detailLabel.leadingAnchor.constraint(equalTo: itemImageView.trailingAnchor, constant: 10.0),
+            detailLabel.leadingAnchor.constraint(equalTo: itemImageView.trailingAnchor, constant: padding),
             detailLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: margin),
             detailLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -margin),
             detailLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margin)

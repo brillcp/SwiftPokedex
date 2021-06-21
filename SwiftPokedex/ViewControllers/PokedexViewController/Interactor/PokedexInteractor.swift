@@ -28,14 +28,10 @@ final class PokedexInteractor: PokedexInteractorProtocol {
         guard let cell = collectionView.cell(at: indexPath) as? PokedexCell,
               let pokemon = cell.data,
               let color = cell.backgroundColor,
-              let cellSuperview = cell.superview,
-              let cellFrame = cell.layer.presentation()?.frame
+              let cellFrame = cell.layer.presentation()?.frame,
+              let convertedFrame = cell.superview?.convert(cellFrame, to: nil)
         else { return }
 
-        let convertedCellFrame = cellSuperview.convert(cellFrame, to: nil)
-        let params = TransitionController.Parameters(cellFrame: convertedCellFrame, image: cell.asImage(), color: color)
-        transition = TransitionController(parameters: params)
-        
-        router.routeToDetailView(transition: transition, pokemon: pokemon, color: color)
+        router.routeToDetailView(pokemon: pokemon, cellImage: cell.asImage(), cellFrame: convertedFrame, color: color)
     }
 }
