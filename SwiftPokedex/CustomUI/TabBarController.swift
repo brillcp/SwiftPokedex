@@ -14,14 +14,14 @@ final class TabBarController: UITabBarController {
         super.viewDidLoad()
         
         setupTabbar()
-        
-        tabBar.barTintColor = .darkGrey
-        tabBar.tintColor = .pokedexRed
-        tabBar.isTranslucent = false
     }
     
     // MARK: - Private functions
     private func setupTabbar() {
+        tabBar.barTintColor = .darkGrey
+        tabBar.tintColor = .pokedexRed
+        tabBar.isTranslucent = false
+
         let pokedexView = PokedexViewBuilder.build()
         pokedexView.tabBarItem = .pokedex(title: pokedexView.title)
 
