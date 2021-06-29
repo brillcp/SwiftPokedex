@@ -7,7 +7,8 @@
 
 import UIKit
 
-protocol InteractionControlling: UIViewControllerInteractiveTransitioning {
+protocol InteractableTransition: UIViewControllerInteractiveTransitioning {
+    var interactionInProgress: Bool { get }
     var initialFrame: CGRect { get }
     var image: UIImage? { get }
 }
@@ -19,7 +20,7 @@ protocol PresentableView: UIViewController {
 }
 
 // MARK: -
-final class InteractionController: NSObject, InteractionControlling {
+final class InteractionController: NSObject, InteractableTransition {
 
     // MARK: Private properties
     private weak var transitionContext: UIViewControllerContextTransitioning?
@@ -29,6 +30,7 @@ final class InteractionController: NSObject, InteractionControlling {
     private let animDuration: TimeInterval = 0.25
     
     // MARK: - Private properties
+    var interactionInProgress: Bool = false
     var initialFrame: CGRect
     var image: UIImage?
 
@@ -94,7 +96,7 @@ final class InteractionController: NSObject, InteractionControlling {
         snap.transform = fromView.transform
         containerView.addSubview(snap)
         
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 80.0, width: receivingFrame.width, height: receivingFrame.height))
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 130.0, width: receivingFrame.width, height: receivingFrame.height))
         imageView.image = image
         imageView.alpha = 0.0
         imageView.transform = fromView.transform
@@ -102,7 +104,7 @@ final class InteractionController: NSObject, InteractionControlling {
         containerView.addSubview(imageView)
         
         UIView.animateKeyframes(withDuration: self.animDuration, delay: 0.0, options: .allowUserInteraction, animations: {
-            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.1) {
+            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.5) {
                 imageView.alpha = 1.0
             }
             
@@ -115,16 +117,14 @@ final class InteractionController: NSObject, InteractionControlling {
                     presentation.setAlpha(0.0)
                 }
             }
-            UIView.addKeyframe(withRelativeStartTime: 0.7, relativeDuration: 0.2) {
-                snap.alpha = 0.0
-            }
             
-            UIView.addKeyframe(withRelativeStartTime: 0.9, relativeDuration: 0.1) {
-                imageView.alpha = 0.0
+            UIView.addKeyframe(withRelativeStartTime: 0.7, relativeDuration: 0.3) {
+                snap.alpha = 0.0
             }
         }, completion: { _ in
             transitionContext.finishInteractiveTransition()
             transitionContext.completeTransition(true)
+            self.interactionInProgress = false
         })
     }
     
@@ -146,6 +146,7 @@ final class InteractionController: NSObject, InteractionControlling {
         cancelAnimator.addCompletion { _ in
             transitionContext.cancelInteractiveTransition()
             transitionContext.completeTransition(false)
+            self.interactionInProgress = false
             self.transitionProgress = 0.0
         }
         
@@ -172,6 +173,9 @@ extension InteractionController {
     }
 
     private func beginGesture() {
+        guard !interactionInProgress else { return }
+        
+        interactionInProgress = true
         viewController?.dismiss(animated: true)
     }
 

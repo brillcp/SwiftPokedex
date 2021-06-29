@@ -10,8 +10,15 @@ import UIKit
 final class DetailViewController: TableViewController {
     
     // MARK: Private properties
+    private lazy var closeButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(close))
+        let color: UIColor = viewModel.isLight ? .black : .white
+        button.setTitleTextAttributes([.font: UIFont.pixel17, .foregroundColor: color], for: .normal)
+        return button
+    }()
+
     private lazy var idButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(title: viewModel.id, style: .plain, target: self, action: #selector(close))
+        let button = UIBarButtonItem(title: viewModel.id, style: .plain, target: nil, action: nil)
         let color: UIColor = viewModel.isLight ? .black : .white
         button.setTitleTextAttributes([.font: UIFont.pixel17, .foregroundColor: color], for: .normal)
         return button
@@ -37,6 +44,7 @@ final class DetailViewController: TableViewController {
         view.backgroundColor = .darkGrey
         title = viewModel.title
         
+        navigationItem.leftBarButtonItem = closeButton
         navigationItem.rightBarButtonItem = idButton
 
         setupTableHeader()

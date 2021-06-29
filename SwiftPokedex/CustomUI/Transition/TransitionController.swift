@@ -10,14 +10,10 @@ import UIKit
 final class TransitionController: NSObject {
 
     // MARK: Private properties
-    private var interactionController: InteractionControlling?
+    private let interactionController: InteractableTransition
     
-    private var initialFrame: CGRect {
-        interactionController?.initialFrame ?? .zero
-    }
-
     // MARK: - Init
-    init(interactionController: InteractionControlling) {
+    init(interactionController: InteractableTransition) {
         self.interactionController = interactionController
         super.init()
     }
@@ -31,14 +27,15 @@ extension TransitionController: UIViewControllerTransitioningDelegate {
     }
 
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        PresentTransition(presenting: true, initialFrame: initialFrame)
+        TransitionAnimator(presenting: true, interactionController: interactionController)
     }
 
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        PresentTransition(presenting: false, initialFrame: initialFrame)
+        TransitionAnimator(presenting: false, interactionController: interactionController)
     }
 
     func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        interactionController
+        guard interactionController.interactionInProgress else { return nil }
+        return interactionController
     }
 }

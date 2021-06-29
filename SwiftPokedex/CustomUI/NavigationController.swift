@@ -21,6 +21,11 @@ final class NavigationController: UINavigationController, PresentableView {
         topViewController?.childForStatusBarStyle ?? topViewController
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        guard let top = topViewController as? DetailViewController else { return .default }
+        return top.preferredStatusBarStyle
+    }
+    
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
