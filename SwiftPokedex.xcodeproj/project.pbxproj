@@ -409,8 +409,8 @@
 		6EFC2135263C8422004389D9 /* CollectionView */ = {
 			isa = PBXGroup;
 			children = (
-				6EFC2126263C7B19004389D9 /* CollectionViewController.swift */,
 				6EFC212F263C7F2A004389D9 /* CollectionCellConfiguration.swift */,
+				6EFC2126263C7B19004389D9 /* CollectionViewController.swift */,
 			);
 			path = CollectionView;
 			sourceTree = "<group>";
@@ -418,8 +418,8 @@
 		6EFC2137263C842A004389D9 /* TableView */ = {
 			isa = PBXGroup;
 			children = (
-				6E806784263BF43E00FD38F0 /* TableViewController.swift */,
 				6E806785263BF43E00FD38F0 /* TableCellConfiguration.swift */,
+				6E806784263BF43E00FD38F0 /* TableViewController.swift */,
 			);
 			path = TableView;
 			sourceTree = "<group>";
