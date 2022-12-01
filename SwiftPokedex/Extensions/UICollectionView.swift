@@ -15,18 +15,14 @@ extension UICollectionView {
     }
     
     func registerCell<Cell: UICollectionViewCell>(_ cell: Cell.Type) {
-        register(cell.self, forCellWithReuseIdentifier: String(describing: cell))
+        register(cell.self, forCellWithReuseIdentifier: cell.identifier)
     }
 
     func registerReusableFooter<View: UICollectionReusableView>(view: View.Type) {
-        register(view.self, forSupplementaryViewOfKind: UICollectionView.footer, withReuseIdentifier: String(describing: view))
+        register(view.self, forSupplementaryViewOfKind: UICollectionView.footer, withReuseIdentifier: view.identifier)
     }
     
     func dequeueReusableView<View: UICollectionReusableView>(ofKind kind: String, at indexPath: IndexPath) -> View {
-        dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: View.self), for: indexPath) as! View
-    }
-    
-    func dequeueCell<Cell: UICollectionViewCell>(for item: CollectionCellConfigurator, at indexPath: IndexPath) -> Cell {
-        dequeueReusableCell(withReuseIdentifier: type(of: item).reuseId, for: indexPath) as! Cell
+        dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: View.identifier, for: indexPath) as! View
     }
 }

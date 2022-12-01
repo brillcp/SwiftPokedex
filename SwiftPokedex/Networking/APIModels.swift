@@ -12,6 +12,7 @@ struct APIResponse: Decodable {
     let results: [APIItem]
 }
 
+// MARK: -
 struct APIItem: Decodable {
     let name: String
     let url: String

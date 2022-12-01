@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import Networking
 
 class API {
     static let agent = NetworkAgent()
@@ -16,5 +17,12 @@ class API {
     enum ItemType: String {
         case pokemons = "pokemon"
         case items = "item"
+    }
+}
+
+extension Network.Service {
+
+    static var `default`: Network.Service {
+        Network.Service(server: ServerConfig(baseURL: "https://pokeapi.co/api/v2/"))
     }
 }

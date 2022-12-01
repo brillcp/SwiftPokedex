@@ -27,6 +27,23 @@ struct PokemonDetails: Decodable {
     }
 }
 
+// MARK: -
+extension PokemonDetails: Hashable {
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}
+
+// MARK: -
+extension PokemonDetails: Equatable {
+
+    static func == (lhs: PokemonDetails, rhs: PokemonDetails) -> Bool {
+        lhs.id == rhs.id
+    }
+}
+
+// MARK: -
 struct Sprite: Decodable {
     let url: String
     
@@ -35,18 +52,22 @@ struct Sprite: Decodable {
     }
 }
 
+// MARK: -
 struct Ability: Decodable {
     let ability: APIItem
 }
 
+// MARK: -
 struct Move: Decodable {
     let move: APIItem
 }
 
+// MARK: -
 struct Type: Decodable {
     let type: APIItem
 }
 
+// MARK: -
 struct Stat: Decodable {
     let baseStat: Int
     let stat: APIItem
