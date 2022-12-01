@@ -78,4 +78,24 @@ final class PokedexCell: UICollectionViewCell {
         super.prepareForReuse()
         imageView.image = nil
     }
+
+    // MARK: - Public functions
+    func setupImage(_ image: UIImage?) {
+        imageView.image = image
+
+        let color = image?.dominantColor ?? .darkGray
+        titleLabel.textColor = color.isLight ? .black : .white
+        indexLabel.textColor = color.isLight ? .black : .white
+        imageView.image = image
+        backgroundColor = color
+
+        guard imageView.alpha != 1.0 else { return }
+
+        UIView.animate(withDuration: 0.2) {
+            self.imageView.alpha = 1.0
+            self.indexLabel.alpha = 1.0
+            self.titleLabel.alpha = 1.0
+        }
+
+    }
 }
