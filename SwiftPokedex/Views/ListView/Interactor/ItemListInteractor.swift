@@ -9,22 +9,22 @@ import UIKit
 import Combine
 import Networking
 
-protocol ListInteractable {
+protocol ItemListInteractable {
     func loadItems()
 }
 
 // MARK: -
-final class ListInteractor: ListInteractable {
+final class ItemListInteractor: ItemListInteractable {
 
     // MARK: Private properties
     private var cancellables = Set<AnyCancellable>()
     private let service: Network.Service
-    private let router: ListRoutable
+    private let router: ItemListRoutable
 
     // MARK: - Public properties
-    weak var view: ListViewProtocol? { didSet { } }
+    weak var view: ItemListViewProtocol? { didSet { } }
     // MARK: - Init
-    init(router: ListRoutable, service: Network.Service) {
+    init(router: ItemListRoutable, service: Network.Service) {
         self.router = router
         self.service = service
     }

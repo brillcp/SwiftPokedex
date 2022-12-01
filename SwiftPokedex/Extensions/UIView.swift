@@ -14,6 +14,14 @@ extension UIView {
         translatesAutoresizingMaskIntoConstraints = !useAutolayout
     }
 
+    // MARK: Public functions
+    /// Initialize a new `UIView` from a nib
+    /// - returns: An instantiated view
+    class func instanceFromNib() -> Self {
+        guard let view = UINib(view: Self.self).instantiate(withOwner: nil)[0] as? Self else { fatalError(".viewFailed") }
+        return view
+    }
+
     func pinToSuperview(with insets: UIEdgeInsets = .zero, edges: UIRectEdge = .all) {
         guard let superview = superview else { return }
         translatesAutoresizingMaskIntoConstraints = false
@@ -61,3 +69,6 @@ extension UIView {
         return image
     }
 }
+
+// MARK: -
+extension UIView: Identifiable {}

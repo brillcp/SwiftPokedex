@@ -1,5 +1,5 @@
 //
-//  ListController.swift
+//  ItemListController.swift
 //  SwiftPokedex
 //
 //  Created by Viktor Gidlöf on 2021-05-04.
@@ -8,22 +8,22 @@
 import UIKit
 import Combine
 
-protocol ListViewProtocol: AnyObject {
-    var interaction: AnyPublisher<ListView.Interaction, Never> { get }
-    var viewModel: ListView.ViewModel { get }
+protocol ItemListViewProtocol: AnyObject {
+    var interaction: AnyPublisher<ItemListView.Interaction, Never> { get }
+    var viewModel: ItemListView.ViewModel { get }
 }
 
 // MARK: -
-final class ListController: ViewController<ListView>, ListViewProtocol {
+final class ItemListController: ViewController<ItemListView>, ItemListViewProtocol {
 
     // MARK: Private properties
-    private let interactor: ListInteractable
+    private let interactor: ItemListInteractable
 
     // MARK: - Public properties
 //    override var preferredStatusBarStyle: UIStatusBarStyle { viewModel.isLight ? .default : .lightContent }
 
     // MARK: - Init
-    init(interactor: ListInteractable, viewModel: ListView.ViewModel) {
+    init(interactor: ItemListInteractable, viewModel: ItemListView.ViewModel) {
         self.interactor = interactor
         super.init(viewModel: viewModel)
     }

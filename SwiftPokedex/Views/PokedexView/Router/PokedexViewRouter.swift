@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol PokedexRoutable {
+protocol PokedexRoutable: Routable {
     func routeToDetailView(pokemon: PokemonDetails, cellImage: UIImage?, cellFrame: CGRect, color: UIColor)
 }
 

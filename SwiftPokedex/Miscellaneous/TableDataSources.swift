@@ -51,13 +51,13 @@ extension UITableView {
 // MARK: -
 extension UITableView {
 
-    typealias ListViewDataSource = UITableViewDiffableDataSource<ListView.Section, ListView.Item>
+    typealias ListViewDataSource = UITableViewDiffableDataSource<ItemListView.Section, ItemListView.Item>
 
     /// A diffable data source object registered with a `RegularCell` cell.
     /// Used in the table view in the `ListView`.
     /// - parameter viewModel: The view model of the view
     /// - returns: A diffable data source for the table view
-    func listViewDataSource(viewModel: ListView.ViewModel, delegate del: UITableViewDelegate) -> ListViewDataSource {
+    func listViewDataSource(viewModel: ItemListView.ViewModel, delegate del: UITableViewDelegate) -> ListViewDataSource {
         registerCell(RegularCell.self)
         rowHeight = 60.0
         delegate = del
@@ -68,7 +68,7 @@ extension UITableView {
             return cell
         }
 
-        var snapshot = NSDiffableDataSourceSnapshot<ListView.Section, ListView.Item>()
+        var snapshot = NSDiffableDataSourceSnapshot<ItemListView.Section, ItemListView.Item>()
         snapshot.appendSections(["main"])
         snapshot.appendItems(viewModel.categories)
         dataSource.apply(snapshot, animatingDifferences: false)

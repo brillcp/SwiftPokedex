@@ -1,5 +1,5 @@
 //
-//  ListView.swift
+//  ItemListView.swift
 //  SwiftPokedex
 //
 //  Created by Viktor Gidlöf on 2022-12-01.
@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-final class ListView: UIView, ViewModable, Interactable, TableViewable {
+final class ItemListView: UIView, ViewModable, Interactable, TableViewable {
 
     typealias Item = ItemData
     typealias Section = String
@@ -45,7 +45,8 @@ final class ListView: UIView, ViewModable, Interactable, TableViewable {
     }
 }
 
-extension ListView: UITableViewDelegate {
+// MARK: -
+extension ItemListView: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)

@@ -1,5 +1,5 @@
 //
-//  ListRouter.swift
+//  ItemListRouter.swift
 //  SwiftPokedex
 //
 //  Created by Viktor Gidlöf on 2021-05-04.
@@ -7,12 +7,12 @@
 
 import UIKit
 
-protocol ListRoutable {
+protocol ItemListRoutable: Routable {
     func routeToItemList(with data: ItemData)
 }
 
 // MARK: -
-final class ListRouter: ListRoutable {
+final class ItemListRouter: ItemListRoutable {
     
     // MARK: Public properties
     weak var navigationController: UINavigationController?

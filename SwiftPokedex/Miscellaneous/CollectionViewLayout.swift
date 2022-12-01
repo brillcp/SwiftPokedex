@@ -1,5 +1,5 @@
 //
-//  UICollectionViewLayout.swift
+//  CollectionViewLayout.swift
 //  SwiftPokedex
 //
 //  Created by Viktor Gidlöf on 2022-03-05.
