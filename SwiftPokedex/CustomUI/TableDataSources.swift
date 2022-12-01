@@ -57,19 +57,20 @@ extension UITableView {
     /// Used in the table view in the `ListView`.
     /// - parameter viewModel: The view model of the view
     /// - returns: A diffable data source for the table view
-    func listViewDataSource(viewModel: ListView.ViewModel) -> ListViewDataSource {
+    func listViewDataSource(viewModel: ListView.ViewModel, delegate del: UITableViewDelegate) -> ListViewDataSource {
         registerCell(RegularCell.self)
         rowHeight = 60.0
+        delegate = del
 
         let dataSource = ListViewDataSource(tableView: self) { tableView, indexPath, item in
             let cell = tableView.dequeueCell(for: RegularCell.self)
-//            cell.configure(with: item)
+            cell.configure(with: item)
             return cell
         }
 
         var snapshot = NSDiffableDataSourceSnapshot<ListView.Section, ListView.Item>()
         snapshot.appendSections(["main"])
-        snapshot.appendItems(viewModel.items)
+        snapshot.appendItems(viewModel.categories)
         dataSource.apply(snapshot, animatingDifferences: false)
         return dataSource
     }

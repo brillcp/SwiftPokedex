@@ -10,7 +10,7 @@ import UIKit
 extension ListView {
 
     final class ViewModel {
-        @Published var items = [ItemDetails]()
+        @Published var categories = [ItemData]()
     }
 }
 

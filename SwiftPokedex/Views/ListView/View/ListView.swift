@@ -10,7 +10,7 @@ import Combine
 
 final class ListView: UIView, ViewModable, Interactable, TableViewable {
 
-    typealias Item = ItemDetails
+    typealias Item = ItemData
     typealias Section = String
 
     // MARK: Private properties
@@ -25,20 +25,32 @@ final class ListView: UIView, ViewModable, Interactable, TableViewable {
     var dataSource: UITableViewDiffableDataSource<Section, Item>!
     var tableView: UITableView { listTableView }
 
-    enum Interaction {}
+    enum Interaction {
+        case selectItem(ItemData)
+    }
 
     // MARK: - Public functions
     func setViewModel(_ viewModel: ViewModel) {
-        dataSource = tableView.listViewDataSource(viewModel: viewModel)
+        dataSource = tableView.listViewDataSource(viewModel: viewModel, delegate: self)
         tableView.backgroundColor = .darkGrey
 
-        viewModel.$items.sink { [weak self] newItems in
+        viewModel.$categories.sink { [weak self] newCategories in
             guard let self = self else { return }
             var snapshot = self.dataSource.snapshot()
             var items = snapshot.itemIdentifiers
-            items.append(contentsOf: newItems)
+            items.append(contentsOf: newCategories)
             snapshot.appendItems(items)
             self.dataSource.apply(snapshot, animatingDifferences: true)
         }.store(in: &cancellables)
+    }
+}
+
+extension ListView: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+
+        guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
+        subject.send(.selectItem(item))
     }
 }

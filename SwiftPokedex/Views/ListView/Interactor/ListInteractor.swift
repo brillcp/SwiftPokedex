@@ -44,8 +44,8 @@ final class ListInteractor: ListInteractable {
             }
             .sink { [weak self] result in
                 switch result {
-                case .success(let data):
-                    self?.view?.viewModel.items = data
+                case .success(let items):
+                    self?.view?.viewModel.categories = items.categories
                 case .failure(let error):
                     print(error.localizedDescription)
                     print()
@@ -56,6 +56,10 @@ final class ListInteractor: ListInteractable {
     }
 
     // MARK: - Private functions
+    private func katt() {
+        
+    }
+
     private func setupInteractionPublisher() {
 //        view?.interaction.sink { [weak self] interaction in
 //
