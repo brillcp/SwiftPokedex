@@ -18,18 +18,19 @@ final class PokedexInteractor: PokedexInteractable {
 
     // MARK: Private properties
     private var cancellables = Set<AnyCancellable>()
-    private let router: PokedexRouterProtocol
     private var apiResponse: APIResponse?
     private let service: Network.Service
+    private let router: PokedexRoutable
 
     // MARK: - Public properties
     weak var view: PokedexViewProtocol? { didSet { setupInteractionPublisher() } }
+
     // MARK: - Init
-    init(router: PokedexRouterProtocol, service: Network.Service) {
+    init(router: PokedexRoutable, service: Network.Service) {
         self.router = router
         self.service = service
     }
-    
+
     // MARK: - Public functions
     func loadPokemon() {
         try! service.request(createRequest(), logResponse: false)

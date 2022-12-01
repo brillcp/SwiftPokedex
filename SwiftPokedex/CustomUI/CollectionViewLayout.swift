@@ -15,6 +15,7 @@ private typealias Size = NSCollectionLayoutSize
 private typealias Item = NSCollectionLayoutItem
 
 typealias Layout = UICollectionViewLayout
+
 // MARK: -
 extension Layout {
 
@@ -28,7 +29,7 @@ extension Layout {
         group.interItemSpacing = .fixed(spacing)
         let section = Section(group: group)
         section.interGroupSpacing = spacing
-        section.contentInsets = EdgeInsets(top: 16.0, leading: 16.0, bottom: 30.0, trailing: 16.0)
+        section.contentInsets = EdgeInsets(top: padding, leading: padding, bottom: 30.0, trailing: padding)
         return CompositionalLayout(section: section)
     }
 }

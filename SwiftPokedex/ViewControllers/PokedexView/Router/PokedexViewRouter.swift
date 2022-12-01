@@ -7,12 +7,12 @@
 
 import UIKit
 
-protocol PokedexRouterProtocol {
+protocol PokedexRoutable {
     func routeToDetailView(pokemon: PokemonDetails, cellImage: UIImage?, cellFrame: CGRect, color: UIColor)
 }
 
 // MARK: -
-final class PokedexRouter: PokedexRouterProtocol {
+final class PokedexRouter: PokedexRoutable {
     
     // MARK: Public properties
     weak var navigationController: UINavigationController?

@@ -12,6 +12,10 @@ struct ItemData {
     var items: [ItemDetails] = []
 }
 
+extension ItemData: Hashable {
+
+}
+
 // MARK: -
 final class RegularCell: UITableViewCell {
 

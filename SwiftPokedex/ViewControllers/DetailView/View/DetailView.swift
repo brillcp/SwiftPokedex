@@ -16,13 +16,13 @@ final class DetailView: UIView, ViewModable, Interactable, TableViewable {
     private let subject: PassthroughSubject<Interaction, Never> = .init()
     private var cancellables = Set<AnyCancellable>()
 
-    @IBOutlet private weak var pokedexCollectionView: UITableView!
+    @IBOutlet private weak var detailTableView: UITableView!
 
     // MARK: - Public properties
     var interaction: AnyPublisher<Interaction, Never> { subject.eraseToAnyPublisher() }
     var viewModel: ViewModel! { didSet { setViewModel(viewModel) } }
     var dataSource: UITableViewDiffableDataSource<Section, Item>!
-    var tableView: UITableView { pokedexCollectionView }
+    var tableView: UITableView { detailTableView }
 
     enum Interaction {}
 

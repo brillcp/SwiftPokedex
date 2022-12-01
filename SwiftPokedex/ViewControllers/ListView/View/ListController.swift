@@ -1,12 +1,50 @@
 //
-//  ListViewController.swift
+//  ListController.swift
 //  SwiftPokedex
 //
 //  Created by Viktor Gidlöf on 2021-05-04.
 //
 
 import UIKit
+import Combine
 
+protocol ListViewProtocol: AnyObject {
+    var interaction: AnyPublisher<ListView.Interaction, Never> { get }
+    var viewModel: ListView.ViewModel { get }
+}
+
+// MARK: -
+final class ListController: ViewController<ListView>, ListViewProtocol {
+
+    // MARK: Private properties
+    private let interactor: ListInteractable
+
+    // MARK: - Public properties
+//    override var preferredStatusBarStyle: UIStatusBarStyle { viewModel.isLight ? .default : .lightContent }
+
+    // MARK: - Init
+    init(interactor: ListInteractable, viewModel: ListView.ViewModel) {
+        self.interactor = interactor
+        super.init(viewModel: viewModel)
+    }
+
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+
+    // MARK: - Life cycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        view.backgroundColor = .darkGrey
+        title = viewModel.title
+
+        interactor.loadItems()
+    }
+
+    // MARK: - Private functions
+    @objc private func close() {
+        dismiss(animated: true)
+    }
+}
 /*
 final class ListViewController: TableViewController {
     

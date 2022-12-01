@@ -12,7 +12,6 @@ final class TabBarController: UITabBarController {
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupTabbar()
     }
 
@@ -25,8 +24,8 @@ final class TabBarController: UITabBarController {
         let pokedexView = PokedexViewBuilder.build()
         pokedexView.tabBarItem = .pokedex(title: pokedexView.title)
 
-//        let itemsView = ListBuilder.build()
-//        itemsView.tabBarItem = .items(title: itemsView.title)
-        setViewControllers([pokedexView], animated: false)
+        let itemsView = ListBuilder.build()
+        itemsView.tabBarItem = .items(title: itemsView.title)
+        setViewControllers([pokedexView, itemsView], animated: false)
     }
 }

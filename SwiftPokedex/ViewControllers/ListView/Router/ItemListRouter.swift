@@ -7,12 +7,12 @@
 
 import UIKit
 
-protocol ListRouterProtocol {
+protocol ListRoutable {
     func routeToItemList(with data: ItemData)
 }
 
 // MARK: -
-final class ListRouter: ListRouterProtocol {
+final class ListRouter: ListRoutable {
     
     // MARK: Public properties
     weak var navigationController: UINavigationController?

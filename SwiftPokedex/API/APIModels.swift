@@ -5,7 +5,7 @@
 //  Created by Viktor Gidlöf on 2021-05-17.
 //
 
-import Foundation
+import Networking
 
 struct APIResponse: Decodable {
     let next: String
@@ -16,4 +16,11 @@ struct APIResponse: Decodable {
 struct APIItem: Decodable {
     let name: String
     let url: String
+}
+
+// MARK: -
+extension Network.Service {
+    static var `default`: Network.Service {
+        Network.Service(server: ServerConfig(baseURL: "https://pokeapi.co/api/v2/"))
+    }
 }
