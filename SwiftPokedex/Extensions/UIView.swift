@@ -8,6 +8,7 @@
 import UIKit
 
 extension UIView {
+
     convenience init(useAutolayout: Bool) {
         self.init()
         translatesAutoresizingMaskIntoConstraints = !useAutolayout
@@ -29,7 +30,7 @@ extension UIView {
             trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -insets.right).isActive = true
         }
     }
-    
+
     static func tableHeader(title: String?, in tableView: UITableView) -> UIView {
         let width = tableView.frame.width
         let headerHeight: CGFloat = 40.0
@@ -43,8 +44,7 @@ extension UIView {
         header.addSubview(label)
         return header
     }
-    
-    
+
     func roundedView(corners: UIRectCorner = .allCorners, radius: CGFloat) {
         let maskPath1 = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         let maskLayer1 = CAShapeLayer()
@@ -52,7 +52,7 @@ extension UIView {
         maskLayer1.path = maskPath1.cgPath
         layer.mask = maskLayer1
     }
-    
+
     func asImage(frame: CGRect? = nil) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(frame?.size ?? bounds.size, false, 1.0)
         drawHierarchy(in: bounds, afterScreenUpdates: false)

@@ -1,22 +1,20 @@
 //
 //  UICollectionViewLayout.swift
-//  Embla
+//  SwiftPokedex
 //
 //  Created by Viktor Gidlöf on 2022-03-05.
 //
 
 import UIKit
 
-private typealias SupplementaryItem = NSCollectionLayoutBoundarySupplementaryItem
 private typealias CompositionalLayout = UICollectionViewCompositionalLayout
+private typealias EdgeInsets = NSDirectionalEdgeInsets
 private typealias Section = NSCollectionLayoutSection
 private typealias Group = NSCollectionLayoutGroup
 private typealias Size = NSCollectionLayoutSize
+private typealias Item = NSCollectionLayoutItem
 
-typealias EdgeInsets = NSDirectionalEdgeInsets
 typealias Layout = UICollectionViewLayout
-typealias Item = NSCollectionLayoutItem
-
 // MARK: -
 extension Layout {
 

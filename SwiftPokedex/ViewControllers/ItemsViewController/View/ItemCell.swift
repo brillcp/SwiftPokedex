@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ItemCell: UITableViewCell, ConfigurableCell {
+final class ItemCell: UITableViewCell {
 
     // MARK: Private properties
     private lazy var itemImageView: UIImageView = {
@@ -30,9 +30,6 @@ final class ItemCell: UITableViewCell, ConfigurableCell {
         label.font = .pixel14
         return label
     }()
-
-    // MARK: - Public properties
-    var data: ItemDetails?
 
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -78,13 +75,13 @@ final class ItemCell: UITableViewCell, ConfigurableCell {
     
     // MARK: - Public functions
     func configure(with item: ItemDetails) {
-        self.data = item
-        
-        titleLabel.text = item.name.cleaned
-        detailLabel.attributedText = item.effect.first?.description.cleaned.lineHeight(4)
-        
-        UIImage.load(from: item.sprites.default) { [weak self] image in
-            DispatchQueue.main.async { self?.itemImageView.image = image }
-        }
+//        self.data = item
+//        
+//        titleLabel.text = item.name.cleaned
+//        detailLabel.attributedText = item.effect.first?.description.cleaned.lineHeight(4)
+//        
+//        UIImage.load(from: item.sprites.default) { [weak self] image in
+//            DispatchQueue.main.async { self?.itemImageView.image = image }
+//        }
     }
 }

@@ -1,6 +1,6 @@
 //
 //  Interactable.swift
-//  EBerry
+//  SwiftPokedex
 //
 //  Created by Viktor Gidlöf on 2022-11-23.
 //

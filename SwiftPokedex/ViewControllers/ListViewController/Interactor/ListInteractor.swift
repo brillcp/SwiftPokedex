@@ -24,10 +24,10 @@ final class ListInteractor: ListInteractorProtocol {
     
     // MARK: - Public functions
     func selectItem(at indexPath: IndexPath, in tableView: UITableView) {
-        guard let cell = tableView.cell(at: indexPath) as? RegularCell,
-              let itemData = cell.data
-        else { return }
-
-        router.routeToItemList(with: itemData)
+//        guard let cell = tableView.cell(at: indexPath) as? RegularCell,
+//              let itemData = cell.data
+//        else { return }
+//
+//        router.routeToItemList(with: itemData)
     }
 }

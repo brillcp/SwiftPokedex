@@ -11,6 +11,7 @@ import Combine
 final class ItemAPI: API {
     
     // MARK: Public functions
+    /*
     static func allItems(_ completion: @escaping (Result<[ItemDetails], Error>) -> Swift.Void) {
         requestItems(limit: 450)?.flatMap { response in
             Publishers.Sequence(sequence: response.results.compactMap { itemDetails(from: $0.url) })
@@ -18,15 +19,16 @@ final class ItemAPI: API {
                 .collect()
         }
         .eraseToAnyPublisher()
-        .sinkToResult { result in
+        .sink { result in
             completion(result)
         }.store(in: &cancellables)
     }
+     */
 }
 
 // MARK: -
 extension ItemAPI {
-    
+    /*
     // MARK: Private functions
     private static func itemDetails(from urlString: String) -> AnyPublisher<ItemDetails, Error>? {
         guard let url = URL(string: urlString) else { return nil }
@@ -46,4 +48,5 @@ extension ItemAPI {
         
         return agent.execute(URLRequest(url: url))
     }
+     */
 }

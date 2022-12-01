@@ -15,7 +15,7 @@ protocol DetailViewProtocol: AnyObject {
 
 // MARK: -
 final class DetailController: ViewController<DetailView>, DetailViewProtocol {
-    
+
     // MARK: Private properties
     private lazy var closeButton: UIBarButtonItem = {
         let button = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(close))
@@ -30,7 +30,7 @@ final class DetailController: ViewController<DetailView>, DetailViewProtocol {
         button.setTitleTextAttributes([.font: UIFont.pixel17, .foregroundColor: color], for: .normal)
         return button
     }()
-    
+
     // MARK: - Public properties
     override var preferredStatusBarStyle: UIStatusBarStyle { viewModel.isLight ? .default : .lightContent }
 
@@ -38,30 +38,22 @@ final class DetailController: ViewController<DetailView>, DetailViewProtocol {
     override init(viewModel: DetailView.ViewModel) {
         super.init(viewModel: viewModel)
     }
-    
+
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         view.backgroundColor = .darkGrey
         title = viewModel.title
-        
+
         navigationItem.leftBarButtonItem = closeButton
         navigationItem.rightBarButtonItem = idButton
-
-        setupTableHeader()
     }
-    
+
     // MARK: - Private functions
     @objc private func close() {
         dismiss(animated: true)
-    }
-    
-    private func setupTableHeader() {
-//        let frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 300.0)
-//        let header = DetailHeaderView(frame: frame, pokemon: viewModel.pokemon, color: viewModel.color)
-//        tableView.tableHeaderView = header
     }
 }

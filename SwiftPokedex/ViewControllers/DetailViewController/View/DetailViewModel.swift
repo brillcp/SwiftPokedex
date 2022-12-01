@@ -22,17 +22,15 @@ extension DetailView.ViewModel {
     var isLight: Bool { color.isLight }
 
     var stats: [StatItem] {
-        pokemon.stats
-            .filter { $0.stat.name != "special-attack" && $0.stat.name != "special-defense" }
-            .compactMap {
-                switch $0.stat.name {
-                case "hp": return StatItem(title: "HP", value: $0.baseStat, color: .pokedexRed)
-                case "attack": return StatItem(title: "ATK", value: $0.baseStat, color: .orange)
-                case "defense": return StatItem(title: "DEF", value: $0.baseStat, color: .blue)
-                case "speed": return StatItem(title: "SPD", value: $0.baseStat, color: .green)
-                default: return nil
-                }
+        pokemon.stats.compactMap {
+            switch $0.stat.name {
+            case "hp": return StatItem(title: "HP", value: $0.baseStat, color: .pokedexRed)
+            case "attack": return StatItem(title: "ATK", value: $0.baseStat, color: .orange)
+            case "defense": return StatItem(title: "DEF", value: $0.baseStat, color: .blue)
+            case "speed": return StatItem(title: "SPD", value: $0.baseStat, color: .green)
+            default: return nil
             }
+        }
     }
 
     var abilities: DetailItem {
@@ -47,11 +45,5 @@ extension DetailView.ViewModel {
         if tooMany { values.append(Move(move: APIItem(name: "...", url: ""))) }
         let moves = values.map { $0.move.name.cleaned }.joined(separator: "\n\n")
         return DetailItem(title: "Moves", value: moves)
-    }
-
-    var types: DetailItem {
-        let types = pokemon.types.map { $0.type.name.cleaned }.joined(separator: "\n\n")
-        return DetailItem(title: "Type", value: types)
-
     }
 }

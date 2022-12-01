@@ -24,10 +24,10 @@ final class PresentationController: UIPresentationController {
     func setAlpha(_ alpha: CGFloat) {
         fadeView.alpha = alpha
     }
-    
+
     override func presentationTransitionWillBegin() {
         guard let container = containerView else { return }
-        
+
         container.addSubview(fadeView)
         fadeView.pinToSuperview()
 

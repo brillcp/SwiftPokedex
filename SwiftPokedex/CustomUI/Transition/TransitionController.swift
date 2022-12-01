@@ -11,7 +11,7 @@ final class TransitionController: NSObject {
 
     // MARK: Private properties
     private let interactionController: InteractableTransition
-    
+
     // MARK: - Init
     init(interactionController: InteractableTransition) {
         self.interactionController = interactionController

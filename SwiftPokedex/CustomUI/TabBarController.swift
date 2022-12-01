@@ -8,14 +8,14 @@
 import UIKit
 
 final class TabBarController: UITabBarController {
-    
+
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupTabbar()
     }
-    
+
     // MARK: - Private functions
     private func setupTabbar() {
         tabBar.barTintColor = .darkGrey

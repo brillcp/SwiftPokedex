@@ -8,7 +8,7 @@
 import UIKit
 
 final class DetailHeaderView: UICollectionReusableView {
-    
+
     // MARK: Private properties
     private lazy var stackView: UIStackView = {
         let stack = UIStackView(useAutolayout: true)
@@ -76,8 +76,8 @@ final class DetailHeaderView: UICollectionReusableView {
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
         ])
 
-        UIImage.load(from: pokemon.sprite.url) { [weak self] image in
-            DispatchQueue.main.async { self?.imageView.image = image }
+        ImageCache.default.loadImage(from: pokemon.sprite.url, item: pokemon) { [weak self] item, image in
+            self?.imageView.image = image
         }
     }
 

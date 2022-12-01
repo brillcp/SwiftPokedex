@@ -1,6 +1,6 @@
 //
 //  TableViewable.swift
-//  EBerry
+//  SwiftPokedex
 //
 //  Created by Viktor Gidlöf on 2022-11-23.
 //
@@ -15,7 +15,7 @@ protocol TableViewable where Self: UIView {
     associatedtype Item: Hashable
 
     /// The data source for the collection view
-    var dataSource: DiffableTableDataSource<Section, Item>! { get }
+    var dataSource: UITableViewDiffableDataSource<Section, Item>! { get }
     /// The table view in the view
     var tableView: UITableView { get }
 }

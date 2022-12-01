@@ -1,6 +1,6 @@
 //
 //  CollectionViewable.swift
-//  Embla
+//  SwiftPokedex
 //
 //  Created by Viktor Gidlöf on 2022-03-07.
 //

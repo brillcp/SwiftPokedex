@@ -8,7 +8,7 @@
 import UIKit
 
 final class NavigationController: UINavigationController, PresentableView {
-    
+
     // MARK: Public properties
     var transitionManager: UIViewControllerTransitioningDelegate?
 
@@ -16,20 +16,20 @@ final class NavigationController: UINavigationController, PresentableView {
         guard let detailView = topViewController as? DetailController else { return nil }
         return detailView.nib.tableView.tableHeaderView?.frame
     }
-    
+
     override var childForStatusBarStyle: UIViewController? {
         topViewController?.childForStatusBarStyle ?? topViewController
     }
-    
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         guard let top = topViewController as? DetailController else { return .default }
         return top.preferredStatusBarStyle
     }
-    
+
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         navigationBar.titleTextAttributes = [.font: UIFont.pixel17, .foregroundColor: UIColor.white]
         navigationBar.barTintColor = .pokedexRed
         navigationBar.isTranslucent = false

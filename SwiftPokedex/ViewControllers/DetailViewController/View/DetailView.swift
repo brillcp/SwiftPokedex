@@ -21,16 +21,13 @@ final class DetailView: UIView, ViewModable, Interactable, TableViewable {
     // MARK: - Public properties
     var interaction: AnyPublisher<Interaction, Never> { subject.eraseToAnyPublisher() }
     var viewModel: ViewModel! { didSet { setViewModel(viewModel) } }
-    var dataSource: DiffableTableDataSource<Section, Item>!
+    var dataSource: UITableViewDiffableDataSource<Section, Item>!
     var tableView: UITableView { pokedexCollectionView }
 
     enum Interaction {}
 
-    enum Section: Int, Hashable {
-        case stats
-        case abilities
-        case moves
-        case types
+    enum Section: Int {
+        case stats, details
     }
 
     // MARK: - Public functions

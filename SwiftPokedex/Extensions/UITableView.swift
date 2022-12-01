@@ -9,10 +9,6 @@ import UIKit
 
 extension UITableView {
 
-    func cell<Cell: UITableViewCell>(at indexPath: IndexPath) -> Cell? {
-        cellForRow(at: indexPath) as? Cell
-    }
-    
     func registerCell<Cell: UITableViewCell>(_ cell: Cell.Type) {
         register(cell, forCellReuseIdentifier: cell.identifier)
     }
