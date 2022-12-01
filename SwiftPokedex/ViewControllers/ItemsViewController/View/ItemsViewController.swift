@@ -7,6 +7,7 @@
 
 import UIKit
 
+/*
 final class ItemsViewController: TableViewController {
 
     // MARK: Private properties
@@ -30,3 +31,4 @@ final class ItemsViewController: TableViewController {
         title = viewModel.cleanTitle
     }
 }
+*/

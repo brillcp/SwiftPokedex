@@ -6,8 +6,15 @@
 //
 
 import UIKit
+import Combine
 
-final class DetailViewController: TableViewController {
+protocol DetailViewProtocol: AnyObject {
+    var interaction: AnyPublisher<DetailView.Interaction, Never> { get }
+    var viewModel: DetailView.ViewModel { get }
+}
+
+// MARK: -
+final class DetailController: ViewController<DetailView>, DetailViewProtocol {
     
     // MARK: Private properties
     private lazy var closeButton: UIBarButtonItem = {
@@ -24,15 +31,12 @@ final class DetailViewController: TableViewController {
         return button
     }()
     
-    private let viewModel: ViewModel
-    
     // MARK: - Public properties
     override var preferredStatusBarStyle: UIStatusBarStyle { viewModel.isLight ? .default : .lightContent }
 
     // MARK: - Init
-    init(viewModel: ViewModel, tableData: UITableView.DataSource) {
-        self.viewModel = viewModel
-        super.init(tableData: tableData)
+    override init(viewModel: DetailView.ViewModel) {
+        super.init(viewModel: viewModel)
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -56,8 +60,8 @@ final class DetailViewController: TableViewController {
     }
     
     private func setupTableHeader() {
-        let frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 300.0)
-        let header = DetailHeaderView(frame: frame, pokemon: viewModel.pokemon, color: viewModel.color)
-        tableView.tableHeaderView = header
+//        let frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 300.0)
+//        let header = DetailHeaderView(frame: frame, pokemon: viewModel.pokemon, color: viewModel.color)
+//        tableView.tableHeaderView = header
     }
 }

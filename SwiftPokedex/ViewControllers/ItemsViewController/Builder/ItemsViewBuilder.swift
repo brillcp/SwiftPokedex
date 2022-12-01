@@ -7,6 +7,7 @@
 
 import UIKit
 
+/*
 final class ItemsViewBuilder {
     
     static func build(with itemData: ItemData = .init()) -> ItemsViewController {
@@ -14,3 +15,4 @@ final class ItemsViewBuilder {
         return ItemsViewController(viewModel: viewModel, tableData: .detailedItemsDataSource(from: itemData.items))
     }
 }
+*/

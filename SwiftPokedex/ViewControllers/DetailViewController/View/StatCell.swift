@@ -8,13 +8,22 @@
 import UIKit
 
 struct StatItem {
+    let id = UUID()
     let title: String
     let value: Int
     let color: UIColor
 }
 
 // MARK: -
-final class StatCell: UITableViewCell, ConfigurableCell {
+extension StatItem: Hashable {
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}
+
+// MARK: -
+final class StatCell: UITableViewCell {
 
     // MARK: Private properties
     private lazy var titleLabel: UILabel = {
@@ -29,24 +38,21 @@ final class StatCell: UITableViewCell, ConfigurableCell {
         statBar.translatesAutoresizingMaskIntoConstraints = false
         return statBar
     }()
-    
-    // MARK: - Public properties
-    var data: StatItem?
-    
+
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+
         backgroundColor = .clear
         selectionStyle = .none
-        
+
         contentView.addSubview(titleLabel)
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15.0),
             titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             titleLabel.widthAnchor.constraint(equalToConstant: 50.0)
         ])
-        
+
         contentView.addSubview(statBar)
         NSLayoutConstraint.activate([
             statBar.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 10.0),
@@ -55,14 +61,14 @@ final class StatCell: UITableViewCell, ConfigurableCell {
             statBar.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15.0)
         ])
     }
-    
+
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-    
+
     // MARK: - Public functions
-    func configure(with item: StatItem) {
-        self.data = item
-        
+    func configure(withStat item: StatItem?) {
+        guard let item = item else { return }
         titleLabel.text = item.title
         statBar.configure(with: item)
+        selectionStyle = .none
     }
 }

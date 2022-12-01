@@ -7,6 +7,7 @@
 
 import UIKit
 
+/*
 final class ListViewController: TableViewController {
     
     // MARK: Private properties
@@ -42,12 +43,12 @@ final class ListViewController: TableViewController {
         
         spinner.startAnimating()
 
-        viewModel.requestData { [weak self] result in
-            switch result {
-            case let .success(dataSource): self?.tableData = dataSource
-            case let .failure(error): print(error.localizedDescription)
-            }
-        }
+//        viewModel.requestData { [weak self] result in
+//            switch result {
+//            case let .success(dataSource): self?.tableData = dataSource
+//            case let .failure(error): print(error.localizedDescription)
+//            }
+//        }
     }
     
     // MARK: - Private functions
@@ -71,3 +72,4 @@ extension ListViewController: UISearchBarDelegate {
         search(for: searchText)
     }
 }
+*/

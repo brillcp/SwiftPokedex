@@ -19,7 +19,7 @@ final class ListRouter: ListRouterProtocol {
     
     // MARK: - Public functions
     func routeToItemList(with data: ItemData) {
-        let view = ItemsViewBuilder.build(with: data)
-        navigationController?.pushViewController(view, animated: true)
+//        let view = ItemsViewBuilder.build(with: data)
+//        navigationController?.pushViewController(view, animated: true)
     }
 }

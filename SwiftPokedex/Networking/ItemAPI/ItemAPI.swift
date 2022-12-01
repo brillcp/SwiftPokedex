@@ -35,7 +35,7 @@ extension ItemAPI {
     }
     
     private static func requestItems(limit: Int = 200) -> AnyPublisher<APIResponse, Error>? {
-        var url = baseURL.appendingPathComponent(PokemonAPI.ItemType.items.rawValue)
+        var url = baseURL.appendingPathComponent("PokemonAPI.ItemType.items.rawValue")
         guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true) else { return nil }
 
         let query = URLQueryItem(name: "limit", value: "\(limit)")

@@ -7,6 +7,7 @@
 
 import UIKit
 
+/*
 class TableViewController: UITableViewController {
 
     // MARK: Public properties
@@ -74,8 +75,8 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = tableData.item(at: indexPath)
         let cell = tableView.dequeueCell(for: item)
-        
         item.configureCell(cell)
         return cell
     }
 }
+*/

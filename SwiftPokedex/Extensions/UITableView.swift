@@ -14,10 +14,10 @@ extension UITableView {
     }
     
     func registerCell<Cell: UITableViewCell>(_ cell: Cell.Type) {
-        register(cell, forCellReuseIdentifier: String(describing: cell))
+        register(cell, forCellReuseIdentifier: cell.identifier)
     }
 
-    func dequeueCell<Cell: UITableViewCell>(for item: TableCellConfigurator) -> Cell {
-        dequeueReusableCell(withIdentifier: type(of: item).reuseId) as! Cell
+    func dequeueCell<Cell: UITableViewCell>(for type: Cell.Type) -> Cell {
+        dequeueReusableCell(withIdentifier: type.identifier) as! Cell
     }
 }

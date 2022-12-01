@@ -7,18 +7,12 @@
 
 import UIKit
 
-final class DetailHeaderView: UIView {
+final class DetailHeaderView: UICollectionReusableView {
     
     // MARK: Private properties
-    private lazy var imageView: UIImageView = {
-        let imageView = UIImageView(useAutolayout: true)
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
-    
     private lazy var stackView: UIStackView = {
         let stack = UIStackView(useAutolayout: true)
-        
+
         let typeLabel = UILabel(useAutolayout: true)
         typeLabel.textAlignment = .center
         typeLabel.text = "Type\n\n\(String.types(from: pokemon.types))"
@@ -26,7 +20,7 @@ final class DetailHeaderView: UIView {
         typeLabel.numberOfLines = 4
         typeLabel.font = .pixel14
         stack.addArrangedSubview(typeLabel)
-        
+
         let weightLabel = UILabel(useAutolayout: true)
         weightLabel.textAlignment = .center
         weightLabel.text = "Weight\n\n\(pokemon.weight.kilo)"
@@ -34,7 +28,7 @@ final class DetailHeaderView: UIView {
         weightLabel.textColor = isLight ? .black : .white
         weightLabel.font = typeLabel.font
         stack.addArrangedSubview(weightLabel)
-        
+
         let heightLabel = UILabel(useAutolayout: true)
         heightLabel.textAlignment = .center
         heightLabel.text = "Height\n\n\(pokemon.height.meter)"
@@ -45,19 +39,26 @@ final class DetailHeaderView: UIView {
 
         return stack
     }()
-    
+
     private let pokemon: PokemonDetails
     private let isLight: Bool
-    
+
+    // MARK: - Public properties
+    lazy var imageView: UIImageView = {
+        let imageView = UIImageView(useAutolayout: true)
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+
     // MARK: - Init
     init(frame: CGRect, pokemon: PokemonDetails, color: UIColor) {
         self.pokemon = pokemon
         self.isLight = color.isLight
-        
+
         super.init(frame: frame)
-        
+
         backgroundColor = .darkGrey
-        
+
         let fillerView = UIView(frame: UIScreen.main.bounds)
         fillerView.backgroundColor = color
         fillerView.frame.origin.y -= fillerView.frame.height - frame.height
@@ -74,11 +75,11 @@ final class DetailHeaderView: UIView {
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
         ])
-        
+
         UIImage.load(from: pokemon.sprite.url) { [weak self] image in
             DispatchQueue.main.async { self?.imageView.image = image }
         }
     }
-    
+
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 }

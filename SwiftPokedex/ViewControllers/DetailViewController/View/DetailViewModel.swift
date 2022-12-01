@@ -7,17 +7,51 @@
 
 import UIKit
 
-extension DetailViewController {
+extension DetailView {
 
-    // MARK: -
     struct ViewModel {
-        
-        // MARK: Public properties
         let pokemon: PokemonDetails
         let color: UIColor
+    }
+}
 
-        var id: String { "#\(pokemon.id)" }
-        var title: String { pokemon.name.capitalized }
-        var isLight: Bool { color.isLight }
+// MARK: -
+extension DetailView.ViewModel {
+    var title: String { pokemon.name.capitalized }
+    var id: String { "#\(pokemon.id)" }
+    var isLight: Bool { color.isLight }
+
+    var stats: [StatItem] {
+        pokemon.stats
+            .filter { $0.stat.name != "special-attack" && $0.stat.name != "special-defense" }
+            .compactMap {
+                switch $0.stat.name {
+                case "hp": return StatItem(title: "HP", value: $0.baseStat, color: .pokedexRed)
+                case "attack": return StatItem(title: "ATK", value: $0.baseStat, color: .orange)
+                case "defense": return StatItem(title: "DEF", value: $0.baseStat, color: .blue)
+                case "speed": return StatItem(title: "SPD", value: $0.baseStat, color: .green)
+                default: return nil
+                }
+            }
+    }
+
+    var abilities: DetailItem {
+        let abilities = pokemon.abilities.map { $0.ability.name.cleaned }.joined(separator: "\n\n")
+        return DetailItem(title: "Abilities", value: abilities)
+    }
+
+    var moves: DetailItem {
+        let limit = 6
+        let tooMany = pokemon.moves.count > limit
+        var values = tooMany ? Array(pokemon.moves[0 ..< limit]) : pokemon.moves
+        if tooMany { values.append(Move(move: APIItem(name: "...", url: ""))) }
+        let moves = values.map { $0.move.name.cleaned }.joined(separator: "\n\n")
+        return DetailItem(title: "Moves", value: moves)
+    }
+
+    var types: DetailItem {
+        let types = pokemon.types.map { $0.type.name.cleaned }.joined(separator: "\n\n")
+        return DetailItem(title: "Type", value: types)
+
     }
 }

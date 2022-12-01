@@ -13,8 +13,8 @@ final class NavigationController: UINavigationController, PresentableView {
     var transitionManager: UIViewControllerTransitioningDelegate?
 
     var receivingFrame: CGRect? {
-        guard let detailView = topViewController as? DetailViewController else { return nil }
-        return detailView.tableView.tableHeaderView?.frame
+        guard let detailView = topViewController as? DetailController else { return nil }
+        return detailView.nib.tableView.tableHeaderView?.frame
     }
     
     override var childForStatusBarStyle: UIViewController? {
@@ -22,7 +22,7 @@ final class NavigationController: UINavigationController, PresentableView {
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        guard let top = topViewController as? DetailViewController else { return .default }
+        guard let top = topViewController as? DetailController else { return .default }
         return top.preferredStatusBarStyle
     }
     
