@@ -22,10 +22,10 @@ final class TabBarController: UITabBarController {
         tabBar.isTranslucent = false
 
         let pokedexView = PokedexViewBuilder.build()
-        pokedexView.tabBarItem = .pokedex(title: pokedexView.title)
+        pokedexView.tabBarItem = UITabBarItem(title: pokedexView.title, image: UIImage(named: "pokedex-icon"), tag: 0)
 
         let itemsView = ItemListBuilder.build()
-        itemsView.tabBarItem = .items(title: itemsView.title)
+        itemsView.tabBarItem = UITabBarItem(title: itemsView.title, image: UIImage(named: "items-icon"), tag: 1)
         setViewControllers([pokedexView, itemsView], animated: false)
     }
 }

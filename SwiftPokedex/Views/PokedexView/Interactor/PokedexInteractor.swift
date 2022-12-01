@@ -63,7 +63,7 @@ final class PokedexInteractor: PokedexInteractable {
     private func createRequest() -> Requestable {
         guard let apiResponse = apiResponse else { return PokemonRequest.pokemon }
 
-        let parameters = apiResponse.next.asURL().queryParameters
+        let parameters = apiResponse.next.asURL().queryParameters()
         let offset = parameters[NextPokemonRequest.ParameterKey.offset.rawValue] ?? ""
         let limit = parameters[NextPokemonRequest.ParameterKey.limit.rawValue] ?? ""
         return NextPokemonRequest.next(offset: offset, limit: limit)
