@@ -19,7 +19,11 @@ extension UICollectionView {
         register(cell.self, forCellWithReuseIdentifier: cell.identifier)
     }
 
-    func registerReusableFooter<View: UICollectionReusableView>(view: View.Type) {
+    func registerReusableFooterView<View: UICollectionReusableView>(_ view: View.Type) {
         register(view.self, forSupplementaryViewOfKind: UICollectionView.footer, withReuseIdentifier: view.identifier)
+    }
+
+    func dequeueFooterView<View: UICollectionReusableView>(_ view: View.Type, at indexPath: IndexPath) -> UICollectionReusableView {
+        dequeueReusableSupplementaryView(ofKind: UICollectionView.footer, withReuseIdentifier: view.identifier, for: indexPath)
     }
 }

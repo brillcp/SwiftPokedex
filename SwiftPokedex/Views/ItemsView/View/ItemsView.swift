@@ -33,11 +33,10 @@ final class ItemsView: UIView, ViewModable, Interactable, TableViewable {
         tableView.backgroundColor = .darkGrey
 
         viewModel.$items.sink { data in
-            print(data)
             var snap = NSDiffableDataSourceSnapshot<ItemsView.Section, ItemsView.Item>()
             snap.appendSections(["main"])
             snap.appendItems(data)
-            self.dataSource.apply(snap)
+            self.dataSource.apply(snap, animatingDifferences: false)
         }.store(in: &cancellables)
     }
 }

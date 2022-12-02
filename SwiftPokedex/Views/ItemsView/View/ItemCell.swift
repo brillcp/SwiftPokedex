@@ -75,7 +75,7 @@ final class ItemCell: UITableViewCell {
 
     // MARK: - Public functions
     func configure(withItem item: ItemDetails) {
-        titleLabel.text = item.name.capitalized
+        titleLabel.text = item.name.cleaned.capitalized
         detailLabel.attributedText = item.effect.first?.description.cleaned.lineHeight(4.0)
 
         ImageCache.default.loadImage(from: item.sprites.default, item: item) { [weak self] currentItem, image in

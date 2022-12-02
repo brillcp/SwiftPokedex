@@ -74,6 +74,7 @@
 		D5600F5A2937B5160053E332 /* ViewModable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5600F552937B5160053E332 /* ViewModable.swift */; };
 		D5600F5B2937B5160053E332 /* TableViewable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5600F562937B5160053E332 /* TableViewable.swift */; };
 		D5600F5E2937B5450053E332 /* TableDataSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5600F5D2937B5450053E332 /* TableDataSources.swift */; };
+		D5791C3E293A941F00030D44 /* SpinnerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5791C3D293A941E00030D44 /* SpinnerFooterView.swift */; };
 		D57C6B882643359000A8D829 /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57C6B872643359000A8D829 /* UIScrollView.swift */; };
 		D57CFDF0267BE6CA00EF31D1 /* TransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57CFDEF267BE6CA00EF31D1 /* TransitionAnimator.swift */; };
 		D5846CD4267F6D0100542F8D /* InteractionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5846CD3267F6D0100542F8D /* InteractionController.swift */; };
@@ -157,6 +158,7 @@
 		D5600F552937B5160053E332 /* ViewModable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModable.swift; sourceTree = "<group>"; };
 		D5600F562937B5160053E332 /* TableViewable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewable.swift; sourceTree = "<group>"; };
 		D5600F5D2937B5450053E332 /* TableDataSources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableDataSources.swift; sourceTree = "<group>"; };
+		D5791C3D293A941E00030D44 /* SpinnerFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerFooterView.swift; sourceTree = "<group>"; };
 		D57C6B872643359000A8D829 /* UIScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollView.swift; sourceTree = "<group>"; };
 		D57CFDEF267BE6CA00EF31D1 /* TransitionAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionAnimator.swift; sourceTree = "<group>"; };
 		D5846CD3267F6D0100542F8D /* InteractionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionController.swift; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 			isa = PBXGroup;
 			children = (
 				6EC5FCCF263CA824005B04ED /* NavigationController.swift */,
+				D5791C3D293A941E00030D44 /* SpinnerFooterView.swift */,
 				6E006F732641989D009FC152 /* TabBarController.swift */,
 				D58B7467264761180046E7EB /* SearchController.swift */,
 				D5600F502937B5100053E332 /* ViewController.swift */,
@@ -648,6 +651,7 @@
 				D53E93092937B8FB00AD415C /* CollectionViewLayout.swift in Sources */,
 				D59AE6932938EB0C0072F9A8 /* ItemRequest.swift in Sources */,
 				D5600F5A2937B5160053E332 /* ViewModable.swift in Sources */,
+				D5791C3E293A941F00030D44 /* SpinnerFooterView.swift in Sources */,
 				6EF0F6DA2640C08D00C2AED8 /* ItemsViewModel.swift in Sources */,
 				D57C6B882643359000A8D829 /* UIScrollView.swift in Sources */,
 				6EF4633426791E50003B52C5 /* TransitionController.swift in Sources */,

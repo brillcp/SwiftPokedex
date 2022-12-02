@@ -7,6 +7,7 @@
 
 import UIKit
 
+private typealias SupplementaryItem = NSCollectionLayoutBoundarySupplementaryItem
 private typealias CompositionalLayout = UICollectionViewCompositionalLayout
 private typealias EdgeInsets = NSDirectionalEdgeInsets
 private typealias Section = NSCollectionLayoutSection
@@ -30,6 +31,9 @@ extension Layout {
         let section = Section(group: group)
         section.interGroupSpacing = spacing
         section.contentInsets = EdgeInsets(top: padding, leading: padding, bottom: 30.0, trailing: padding)
+        let headerSize = Size(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(60.0))
+        let sectionHeader = SupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.footer, alignment: .bottom)
+        section.boundarySupplementaryItems = [sectionHeader]
         return CompositionalLayout(section: section)
     }
 }
