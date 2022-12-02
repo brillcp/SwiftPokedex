@@ -34,4 +34,9 @@ class ViewController<View>: UIViewController where View: ViewModable & Interacta
     override func loadView() {
         view = nib
     }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationItem.backButtonTitle = ""
+    }
 }

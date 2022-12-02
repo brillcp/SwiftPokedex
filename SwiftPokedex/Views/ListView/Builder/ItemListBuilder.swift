@@ -7,9 +7,8 @@
 
 import Foundation
 
-
 final class ItemListBuilder {
-    
+
     static func build() -> NavigationController {
         let router = ItemListRouter()
         let interactor = ItemListInteractor(router: router, service: .default)

@@ -77,3 +77,30 @@ extension UITableView {
         return dataSource
     }
 }
+
+// MARK: -
+extension UITableView {
+
+    typealias ItemsDataSource = UITableViewDiffableDataSource<ItemsView.Section, ItemsView.Item>
+
+    /// A diffable data source object registered with a `RegularCell` cell.
+    /// Used in the table view in the `ItemsView`.
+    /// - parameter viewModel: The view model of the view
+    /// - returns: A diffable data source for the table view
+    func itemsDataSource(viewModel: ItemsView.ViewModel) -> ItemsDataSource {
+        registerCell(ItemCell.self)
+        rowHeight = UITableView.automaticDimension
+
+        let dataSource = ItemsDataSource(tableView: self) { tableView, indexPath, item in
+            let cell = tableView.dequeueCell(for: ItemCell.self)
+            cell.configure(withItem: item)
+            return cell
+        }
+
+        var snapshot = NSDiffableDataSourceSnapshot<ItemsView.Section, ItemsView.Item>()
+        snapshot.appendSections(["main"])
+        snapshot.appendItems(viewModel.itemData.items)
+        dataSource.apply(snapshot, animatingDifferences: false)
+        return dataSource
+    }
+}

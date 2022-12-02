@@ -34,17 +34,12 @@ final class ItemListController: ViewController<ItemListView>, ItemListViewProtoc
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .darkGrey
         title = viewModel.title
 
         interactor.loadItems()
     }
-
-    // MARK: - Private functions
-    @objc private func close() {
-        dismiss(animated: true)
-    }
 }
+
 /*
 final class ListViewController: TableViewController {
     

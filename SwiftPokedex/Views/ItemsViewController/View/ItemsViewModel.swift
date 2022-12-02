@@ -7,13 +7,14 @@
 
 import UIKit
 
-/*
-extension ItemsViewController {
-    
-    // MARK: -
+extension ItemsView {
+
     struct ViewModel {
-        let title: String?
-        var cleanTitle: String? { title?.cleaned }
+        let itemData: ItemData
     }
 }
-*/
+
+// MARK: -
+extension ItemsView.ViewModel {
+    var cleanTitle: String? { itemData.title?.cleaned }
+}

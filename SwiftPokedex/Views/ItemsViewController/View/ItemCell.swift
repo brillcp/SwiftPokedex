@@ -34,28 +34,28 @@ final class ItemCell: UITableViewCell {
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+
         backgroundColor = .clear
         selectionStyle = .none
-        
+
         let margin: CGFloat = 20.0
         let padding: CGFloat = 10.0
-        
+
         contentView.addSubview(itemImageView)
         NSLayoutConstraint.activate([
             itemImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
             itemImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
-            itemImageView.widthAnchor.constraint(equalToConstant: 60.0),
+            itemImageView.widthAnchor.constraint(equalToConstant: 50.0),
             itemImageView.heightAnchor.constraint(equalTo: itemImageView.widthAnchor)
         ])
-        
+
         contentView.addSubview(titleLabel)
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: itemImageView.trailingAnchor, constant: padding),
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: margin),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margin)
         ])
-        
+
         contentView.addSubview(detailLabel)
         NSLayoutConstraint.activate([
             detailLabel.leadingAnchor.constraint(equalTo: itemImageView.trailingAnchor, constant: padding),
@@ -64,17 +64,17 @@ final class ItemCell: UITableViewCell {
             detailLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margin)
         ])
     }
-    
+
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-    
+
     // MARK: - Layout
     override func prepareForReuse() {
         super.prepareForReuse()
         itemImageView.image = nil
     }
-    
+
     // MARK: - Public functions
-    func configure(with item: ItemDetails) {
+    func configure(withItem item: ItemDetails) {
         titleLabel.text = item.name.capitalized
         detailLabel.attributedText = item.effect.first?.description.cleaned.lineHeight(4.0)
 

@@ -8,6 +8,8 @@
 import UIKit
 
 protocol ItemListRoutable: Routable {
+    /// Route to the item list
+    /// - parameter data: The data item to show in the list
     func routeToItemList(with data: ItemData)
 }
 
@@ -19,7 +21,7 @@ final class ItemListRouter: ItemListRoutable {
     
     // MARK: - Public functions
     func routeToItemList(with data: ItemData) {
-//        let view = ItemsViewBuilder.build(with: data)
-//        navigationController?.pushViewController(view, animated: true)
+        let view = ItemsBuilder.build(with: data)
+        navigationController?.pushViewController(view, animated: true)
     }
 }

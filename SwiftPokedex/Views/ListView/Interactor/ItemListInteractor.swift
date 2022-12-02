@@ -10,6 +10,7 @@ import Combine
 import Networking
 
 protocol ItemListInteractable {
+    /// Download items from the backend
     func loadItems()
 }
 
@@ -22,7 +23,8 @@ final class ItemListInteractor: ItemListInteractable {
     private let router: ItemListRoutable
 
     // MARK: - Public properties
-    weak var view: ItemListViewProtocol? { didSet { } }
+    weak var view: ItemListViewProtocol? { didSet { setupInteractionPublisher() } }
+
     // MARK: - Init
     init(router: ItemListRoutable, service: Network.Service) {
         self.router = router
@@ -31,7 +33,7 @@ final class ItemListInteractor: ItemListInteractable {
 
     // MARK: - Public functions
     func loadItems() {
-        let request = ItemRequest.items(limit: 30)
+        let request = ItemRequest.items(limit: 420)
         try! service.request(request, logResponse: true)
             .flatMap { (response: APIResponse) in
                 Publishers.Sequence<[APIItem], Error>(sequence: response.results)
@@ -52,17 +54,15 @@ final class ItemListInteractor: ItemListInteractable {
                 }
             }
             .store(in: &cancellables)
-
     }
 
     // MARK: - Private functions
-    private func katt() {
-        
-    }
-
     private func setupInteractionPublisher() {
-//        view?.interaction.sink { [weak self] interaction in
-//
-//        }.store(in: &cancellables)
+        view?.interaction.sink { [weak self] interaction in
+            switch interaction {
+            case .selectItem(let item):
+                self?.router.routeToItemList(with: item)
+            }
+        }.store(in: &cancellables)
     }
 }
