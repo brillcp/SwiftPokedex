@@ -374,7 +374,7 @@
 				6EC94FEA263C854B003E0117 /* PokedexView */,
 				6E17061A263C22D300B67F37 /* DetailView */,
 				6E006F8B2641C46F009FC152 /* ListView */,
-				6EF0F6E42640C11B00C2AED8 /* ItemsViewController */,
+				6EF0F6E42640C11B00C2AED8 /* ItemsView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -426,13 +426,13 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		6EF0F6E42640C11B00C2AED8 /* ItemsViewController */ = {
+		6EF0F6E42640C11B00C2AED8 /* ItemsView */ = {
 			isa = PBXGroup;
 			children = (
 				6EF0F6E22640C10200C2AED8 /* Builder */,
 				6EF0F6E32640C11400C2AED8 /* View */,
 			);
-			path = ItemsViewController;
+			path = ItemsView;
 			sourceTree = "<group>";
 		};
 		D51C2CE3293901130081B053 /* App */ = {
