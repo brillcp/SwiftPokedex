@@ -27,6 +27,7 @@ extension UICollectionView {
         let dataSource = SearchDataSource(collectionView: self) { collectionView, indexPath, pokemon in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PokedexCell.identifier, for: indexPath) as? PokedexCell else { fatalError("no way jose") }
             cell.titleLabel.text = pokemon.name.capitalized
+            cell.indexLabel.text = "#\(pokemon.id)"
 
             ImageCache.default.loadImage(from: pokemon.sprite.url, item: pokemon) { fetchedPokemon, image in
                 guard let currentPokemon = fetchedPokemon as? PokemonDetails, currentPokemon == pokemon else { return }
