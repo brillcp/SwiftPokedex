@@ -55,7 +55,9 @@ extension UITableView {
 
     /// A diffable data source object registered with a `RegularCell` cell.
     /// Used in the table view in the `ListView`.
-    /// - parameter viewModel: The view model of the view
+    /// - parameters:
+    ///     - viewModel: The view model of the view
+    ///     - delegate: The table view delegate
     /// - returns: A diffable data source for the table view
     func listViewDataSource(viewModel: ItemListView.ViewModel, delegate del: UITableViewDelegate) -> ListViewDataSource {
         registerCell(RegularCell.self)
