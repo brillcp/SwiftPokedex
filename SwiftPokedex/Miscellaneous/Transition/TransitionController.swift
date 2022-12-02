@@ -27,11 +27,11 @@ extension TransitionController: UIViewControllerTransitioningDelegate {
     }
 
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        TransitionAnimator(presenting: true, interactionController: interactionController)
+        TransitionAnimator(isPresenting: true, interactionController: interactionController)
     }
 
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        TransitionAnimator(presenting: false, interactionController: interactionController)
+        TransitionAnimator(isPresenting: false, interactionController: interactionController)
     }
 
     func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {

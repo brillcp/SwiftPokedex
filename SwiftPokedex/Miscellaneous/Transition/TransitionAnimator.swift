@@ -12,13 +12,13 @@ final class TransitionAnimator: NSObject {
     // MARK: Private properties
     private let initialFrame: CGRect
     private let image: UIImage?
-    private let presenting: Bool
+    private let isPresenting: Bool
 
     // MARK: - Init
-    init(presenting: Bool, interactionController: InteractableTransition) {
+    init(isPresenting: Bool, interactionController: InteractableTransition) {
         self.initialFrame = interactionController.initialFrame
         self.image = interactionController.image
-        self.presenting = presenting
+        self.isPresenting = isPresenting
         super.init()
     }
 
@@ -40,35 +40,50 @@ final class TransitionAnimator: NSObject {
         snap.frame = initialFrame
         containerView.addSubview(snap)
 
+        let headerView = UIView(frame: initialFrame)
+        headerView.layer.cornerRadius = PokedexCell.CornerRadius.small
+        headerView.backgroundColor = image?.dominantColor
+        containerView.addSubview(headerView)
+
         let imageView = UIImageView(frame: initialFrame)
-        imageView.image = image
-        imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
-        imageView.layer.cornerRadius = PokedexCell.CornerRadius.small
+        imageView.image = image
         containerView.addSubview(imageView)
 
         var newRect = receivingFrame
-        newRect.origin.y += 130
+        newRect.size.height += receivingFrame.height / 2
+
+        let newPoint: CGPoint = CGPoint(x: newRect.midX - 60.0, y: newRect.midY)
+        let multiplier: CGFloat = 1.7
+        let newWidth: CGFloat = imageView.frame.size.width * multiplier
+        let newHeight: CGFloat = imageView.frame.size.height * multiplier
+        let newSize: CGSize = CGSize(width: newWidth, height: newHeight)
 
         let animator = UIViewPropertyAnimator(duration: transitionDuration(using: transitionContext), dampingRatio: 0.7) {
             UIView.animateKeyframes(withDuration: 0.0, delay: 0.0, options: .allowUserInteraction, animations: {
                 UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.8) {
-                    imageView.layer.cornerRadius = PokedexCell.CornerRadius.large
-                    imageView.alpha = 0.0
-                    imageView.frame = newRect
+                    headerView.layer.cornerRadius = PokedexCell.CornerRadius.large
+                    headerView.frame = newRect
+                    imageView.center = newPoint
+                    imageView.frame.size = newSize
                 }
 
-                UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 1.0) {
+                UIView.addKeyframe(withRelativeStartTime: 0.6, relativeDuration: 0.4) {
+                    headerView.alpha = 0.0
+                    imageView.alpha = 0.0
+                }
+
+                UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.8) {
                     snap.frame = transitionContext.finalFrame(for: toViewController)
-                    imageView.center.x = snap.center.x
                 }
             })
         }
 
         animator.addCompletion { _ in
-            toView.isHidden = false
-            snap.removeFromSuperview()
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+            headerView.removeFromSuperview()
+            snap.removeFromSuperview()
+            toView.isHidden = false
         }
 
         animator.startAnimation()
@@ -130,7 +145,7 @@ extension TransitionAnimator: UIViewControllerAnimatedTransitioning {
     }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        if presenting {
+        if isPresenting {
             presentAnimation(using: transitionContext)
         } else {
             dismissAnimation(using: transitionContext)
