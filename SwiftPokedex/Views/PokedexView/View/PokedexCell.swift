@@ -47,7 +47,7 @@ final class PokedexCell: UICollectionViewCell {
         backgroundColor = .darkGray
 
         contentView.addSubview(imageView)
-        imageView.pinToSuperview(with: UIEdgeInsets(top: 0, left: 0, bottom: 35, right: 0), edges: .all)
+        imageView.pinToSuperview(with: UIEdgeInsets(top: 0, left: 0, bottom: 14.0, right: 0), edges: .all)
 
         contentView.addSubview(indexLabel)
         NSLayoutConstraint.activate([
@@ -58,9 +58,8 @@ final class PokedexCell: UICollectionViewCell {
         contentView.addSubview(titleLabel)
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15.0)
+            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -14.0)
         ])
     }
 
