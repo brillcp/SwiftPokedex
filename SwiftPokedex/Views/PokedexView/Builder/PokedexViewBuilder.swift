@@ -15,6 +15,7 @@ final class PokedexViewBuilder {
         let interactor = PokedexInteractor(router: router, service: .default)
         let viewController = PokedexController(viewModel: .init(), interactor: interactor)
         let navigationController = NavigationController(rootViewController: viewController)
+        navigationController.setNavbarApp(color: .pokedexRed)
         interactor.view = viewController
         router.navigationController = navigationController
         return navigationController

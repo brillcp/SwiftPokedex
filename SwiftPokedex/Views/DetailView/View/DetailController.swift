@@ -32,7 +32,9 @@ final class DetailController: ViewController<DetailView>, DetailViewProtocol {
     }()
 
     // MARK: - Public properties
-    override var preferredStatusBarStyle: UIStatusBarStyle { viewModel.isLight ? .default : .lightContent }
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        viewModel.isLight ? .default : .lightContent
+    }
 
     // MARK: - Init
     override init(viewModel: DetailView.ViewModel) {
@@ -50,6 +52,11 @@ final class DetailController: ViewController<DetailView>, DetailViewProtocol {
 
         navigationItem.leftBarButtonItem = closeButton
         navigationItem.rightBarButtonItem = idButton
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavbarApp(color: .pokedexRed)
     }
 
     // MARK: - Private functions

@@ -13,14 +13,7 @@ final class DetailViewBuilder {
         let viewModel = DetailView.ViewModel(pokemon: pokemon, color: color)
         let detailView = DetailController(viewModel: viewModel)
         let navigationController = NavigationController(rootViewController: detailView)
-        navigationController.navigationBar.barTintColor = viewModel.color
-        navigationController.navigationBar.shadowImage = UIImage()
-
-        if viewModel.isLight {
-            navigationController.navigationBar.titleTextAttributes = [.font: UIFont.pixel17, .foregroundColor: UIColor.black]
-            navigationController.navigationBar.tintColor = .black
-        }
-
+        navigationController.setNavbarApp(color: viewModel.color)
         return navigationController
     }
 }

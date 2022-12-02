@@ -37,6 +37,6 @@ extension UIColor {
         let b = components[1] * 587
         let g = components[2] * 114
         let brightness = (r + b + g) / 1000
-        return brightness > 0.8
+        return brightness > 0.7
     }
 }

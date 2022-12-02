@@ -28,7 +28,7 @@ final class InteractionController: NSObject, InteractableTransition {
     private var transitionProgress: CGFloat = 0.0
     private let animDuration: TimeInterval = 0.25
 
-    // MARK: - Private properties
+    // MARK: - Public properties
     var interactionInProgress: Bool = false
     var initialFrame: CGRect
     var image: UIImage?
