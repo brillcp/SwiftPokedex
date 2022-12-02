@@ -9,12 +9,18 @@ import UIKit
 
 extension ItemsView {
 
-    struct ViewModel {
-        let itemData: ItemData
+    final class ViewModel {
+        @Published var title: String? = nil
+        @Published var items: [ItemDetails] = []
+
+        init(title: String? = nil, items: [ItemDetails] = []) {
+            self.title = title
+            self.items = items
+        }
     }
 }
 
 // MARK: -
 extension ItemsView.ViewModel {
-    var cleanTitle: String? { itemData.title?.cleaned }
+    var cleanTitle: String? { title?.cleaned }
 }

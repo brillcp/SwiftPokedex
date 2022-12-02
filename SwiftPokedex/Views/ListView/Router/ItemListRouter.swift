@@ -15,13 +15,13 @@ protocol ItemListRoutable: Routable {
 
 // MARK: -
 final class ItemListRouter: ItemListRoutable {
-    
+
     // MARK: Public properties
     weak var navigationController: UINavigationController?
-    
+
     // MARK: - Public functions
     func routeToItemList(with data: ItemData) {
-        let view = ItemsBuilder.build(with: data)
-        navigationController?.pushViewController(view, animated: true)
+        let itemsView = ItemsBuilder.build(withItemData: data)
+        navigationController?.pushViewController(itemsView, animated: true)
     }
 }

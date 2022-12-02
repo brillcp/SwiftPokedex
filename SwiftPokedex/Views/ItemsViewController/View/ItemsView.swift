@@ -31,5 +31,13 @@ final class ItemsView: UIView, ViewModable, Interactable, TableViewable {
     func setViewModel(_ viewModel: ViewModel) {
         dataSource = tableView.itemsDataSource(viewModel: viewModel)
         tableView.backgroundColor = .darkGrey
+
+        viewModel.$items.sink { data in
+            print(data)
+            var snap = NSDiffableDataSourceSnapshot<ItemsView.Section, ItemsView.Item>()
+            snap.appendSections(["main"])
+            snap.appendItems(data)
+            self.dataSource.apply(snap)
+        }.store(in: &cancellables)
     }
 }

@@ -62,6 +62,8 @@ final class ItemListInteractor: ItemListInteractable {
             switch interaction {
             case .selectItem(let item):
                 self?.router.routeToItemList(with: item)
+            case .search(let text):
+                print(text)
             }
         }.store(in: &cancellables)
     }

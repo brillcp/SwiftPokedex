@@ -16,6 +16,7 @@ final class SearchController: UISearchController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let app = UISearchBar.appearance()
         obscuresBackgroundDuringPresentation = false
         searchBar.placeholder = "Search…"
         searchBar.tintColor = .pokedexRed

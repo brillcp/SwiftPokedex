@@ -14,6 +14,7 @@ final class ItemListView: UIView, ViewModable, Interactable, TableViewable {
     typealias Section = String
 
     // MARK: Private properties
+    private lazy var resultsViewController = ItemsBuilder.build(withItemData: nil)
     private let subject: PassthroughSubject<Interaction, Never> = .init()
     private var cancellables = Set<AnyCancellable>()
 
@@ -25,8 +26,15 @@ final class ItemListView: UIView, ViewModable, Interactable, TableViewable {
     var dataSource: UITableViewDiffableDataSource<Section, Item>!
     var tableView: UITableView { listTableView }
 
+    lazy var searchController: SearchController = {
+        let controller = SearchController(searchResultsController: resultsViewController)
+        controller.searchBar.delegate = self
+        return controller
+    }()
+
     enum Interaction {
         case selectItem(ItemData)
+        case search(String)
     }
 
     // MARK: - Public functions
@@ -53,5 +61,15 @@ extension ItemListView: UITableViewDelegate {
 
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
         subject.send(.selectItem(item))
+    }
+}
+
+// MARK: -
+extension ItemListView: UISearchBarDelegate {
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        let categories = viewModel.categories.flatMap { $0.items }
+        let filter = categories.filtered(from: searchText)
+        resultsViewController.viewModel.items = filter
     }
 }

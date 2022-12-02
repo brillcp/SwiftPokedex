@@ -99,7 +99,7 @@ extension UITableView {
 
         var snapshot = NSDiffableDataSourceSnapshot<ItemsView.Section, ItemsView.Item>()
         snapshot.appendSections(["main"])
-        snapshot.appendItems(viewModel.itemData.items)
+        snapshot.appendItems(viewModel.items)
         dataSource.apply(snapshot, animatingDifferences: false)
         return dataSource
     }
