@@ -25,12 +25,6 @@ final class NavigationController: UINavigationController, PresentableView {
         guard let top = topViewController as? DetailController else { return .default }
         return top.preferredStatusBarStyle
     }
-
-    // MARK: - Life cycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        navigationBar.isTranslucent = false
-    }
 }
 
 // MARK: -
@@ -40,13 +34,14 @@ extension UINavigationController {
     func setNavbarApp(color: UIColor) {
         let attributes: [NSAttributedString.Key: Any] = [.font: UIFont.pixel17, .foregroundColor: color.isLight ? UIColor.black : UIColor.white]
         UIBarButtonItem.appearance().setTitleTextAttributes(attributes, for: .normal)
-        let navigationBarAppearance = UINavigationBarAppearance()
-        navigationBarAppearance.configureWithOpaqueBackground()
-        navigationBarAppearance.titleTextAttributes = attributes
-        navigationBarAppearance.backgroundColor = color
-        navigationBarAppearance.shadowColor = .clear
-        UINavigationBar.appearance().standardAppearance = navigationBarAppearance
-        UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.titleTextAttributes = attributes
+        appearance.backgroundColor = color
+        appearance.shadowColor = .clear
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().isTranslucent = false
     }
 }
 
