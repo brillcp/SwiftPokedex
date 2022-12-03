@@ -40,15 +40,6 @@ extension Transition.Presentation {
 
         container.addSubview(fadeView)
         fadeView.pinToSuperview()
-
-        guard let coordinator = presentedViewController.transitionCoordinator else {
-            fadeView.alpha = Self.finalAlpha
-            return
-        }
-
-        coordinator.animate { _ in
-            self.fadeView.alpha = Self.finalAlpha
-        }
     }
 
     override func dismissalTransitionWillBegin() {
