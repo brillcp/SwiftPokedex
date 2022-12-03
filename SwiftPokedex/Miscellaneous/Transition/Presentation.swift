@@ -7,31 +7,33 @@
 
 import UIKit
 
-/// A custom presentation controller used when presenting the pokemon detail view
-final class PresentationController: UIPresentationController {
+extension Transition {
+    /// A custom presentation controller used when presenting the pokemon detail view
+    final class Presentation: UIPresentationController {
 
-    // MARK: Private properties
-    private lazy var fadeView: UIView = {
-        let view = UIView(useAutolayout: true)
-        view.backgroundColor = .black
-        view.alpha = 0.0
-        return view
-    }()
+        // MARK: Private properties
+        private lazy var fadeView: UIView = {
+            let view = UIView(useAutolayout: true)
+            view.backgroundColor = .black
+            view.alpha = 0.0
+            return view
+        }()
 
-    // MARK: - Public properties
-    /// A static property for the final alpha value
-    static let finalAlpha: CGFloat = 0.6
+        // MARK: - Public properties
+        /// A static property for the final alpha value
+        static let finalAlpha: CGFloat = 0.6
 
-    // MARK: - Public functions
-    /// Set the alpha for the fade view
-    /// - parameter alpha: The given alpha value
-    func setAlpha(_ alpha: CGFloat) {
-        fadeView.alpha = alpha
+        // MARK: - Public functions
+        /// Set the alpha for the fade view
+        /// - parameter alpha: The given alpha value
+        func setAlpha(_ alpha: CGFloat) {
+            fadeView.alpha = alpha
+        }
     }
 }
 
 // MARK: - UIPresentationController delegate
-extension PresentationController {
+extension Transition.Presentation {
 
     override func presentationTransitionWillBegin() {
         guard let container = containerView else { return }

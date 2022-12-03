@@ -30,7 +30,7 @@ final class Transition: NSObject {
 extension Transition: UIViewControllerTransitioningDelegate {
 
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-        PresentationController(presentedViewController: presented, presenting: presenting)
+        Presentation(presentedViewController: presented, presenting: presenting)
     }
 
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
