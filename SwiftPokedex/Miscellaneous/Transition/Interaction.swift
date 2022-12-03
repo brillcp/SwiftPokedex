@@ -194,7 +194,7 @@ extension Transition.Interaction {
 
         switch gesture.state {
         case .began: beginGesture()
-        case .changed: changeGesture(translation: translation)
+        case .changed: gestureChanged(translation: translation)
         case .cancelled: gestureCancelled(translation: translation.x + interruptedTranslation, velocity: velocity)
         case .ended: gestureEnded(translation: translation.x + interruptedTranslation, velocity: velocity)
         default: break
@@ -208,7 +208,7 @@ extension Transition.Interaction {
         viewController?.dismiss(animated: true)
     }
 
-    private func changeGesture(translation: CGPoint) {
+    private func gestureChanged(translation: CGPoint) {
         let progress = CGFloat.scale(value: translation.x, xValue: 250.0)
         updateTransition(progress: progress, translation: translation)
     }
