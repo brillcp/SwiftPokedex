@@ -19,7 +19,7 @@ extension UIView {
     /// Initialize a new `UIView` from a nib
     /// - returns: An instantiated view
     class func instanceFromNib() -> Self {
-        guard let view = UINib(view: Self.self).instantiate(withOwner: nil)[0] as? Self else { fatalError(".viewFailed") }
+        guard let view = UINib(view: Self.self).instantiate(withOwner: nil)[0] as? Self else { fatalError("The view couldn't be instansiated. Maybe there is no nib for this view type?") }
         return view
     }
 

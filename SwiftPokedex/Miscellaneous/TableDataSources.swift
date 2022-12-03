@@ -31,7 +31,7 @@ extension UITableView {
                 cell.configure(withItem: item as? DetailItem)
                 self.rowHeight = UITableView.automaticDimension
                 return cell
-            case .none:
+            default:
                 fatalError("Cell can't be dequeued. Shouldn't happen")
             }
         }
