@@ -16,14 +16,14 @@ final class SearchController: UISearchController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        obscuresBackgroundDuringPresentation = false
-        searchBar.placeholder = "Search…"
-        searchBar.tintColor = .pokedexRed
-        searchBar.searchTextField.font = .pixel14
-        searchBar.searchTextField.textColor = .black
         searchBar.searchTextField.keyboardAppearance = .dark
         searchBar.searchTextField.backgroundColor = .white
+        searchBar.searchTextField.textColor = .black
+        obscuresBackgroundDuringPresentation = false
+        searchBar.searchTextField.font = .pixel14
         searchBar.searchBarStyle = .prominent
+        searchBar.tintColor = .pokedexRed
+        searchBar.placeholder = "Search…"
         searchBar.isTranslucent = false
         searchBar.isOpaque = true
     }
