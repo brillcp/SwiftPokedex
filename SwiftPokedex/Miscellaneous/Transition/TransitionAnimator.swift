@@ -43,22 +43,26 @@ final class TransitionAnimator: NSObject {
         snap.clipsToBounds = true
         snap.layer.cornerRadius = PokedexCell.CornerRadius.large
         snap.frame = initialFrame
+        snap.alpha = 0.0
         containerView.addSubview(snap)
 
         let headerView = UIView(frame: initialFrame)
         headerView.layer.cornerRadius = PokedexCell.CornerRadius.small
         headerView.backgroundColor = image?.dominantColor
+        headerView.alpha = 0.0
         containerView.addSubview(headerView)
 
-        let imageView = UIImageView(frame: initialFrame)
+        let imageView = UIImageView(frame: initialFrame.inset(by: .init(top: 0, left: 10, bottom: 15, right: 10)))
         imageView.contentMode = .scaleAspectFill
         imageView.image = image
+        imageView.alpha = 0.0
         containerView.addSubview(imageView)
 
         var newRect = receivingFrame
         newRect.size.height += receivingFrame.height / 2
+        newRect.origin.y -= 10.0
 
-        let newPoint: CGPoint = CGPoint(x: newRect.midX - 60.0, y: newRect.midY)
+        let newPoint: CGPoint = CGPoint(x: newRect.midX - 50.0, y: newRect.midY - 3.0)
         let multiplier: CGFloat = 1.7
         let newWidth: CGFloat = imageView.frame.size.width * multiplier
         let newHeight: CGFloat = imageView.frame.size.height * multiplier
@@ -66,19 +70,23 @@ final class TransitionAnimator: NSObject {
 
         let animator = UIViewPropertyAnimator(duration: transitionDuration(using: transitionContext), dampingRatio: 0.7) {
             UIView.animateKeyframes(withDuration: 0.0, delay: 0.0, options: .allowUserInteraction, animations: {
-                UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.8) {
+                UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.1) {
+                    headerView.alpha = 1.0
+                    imageView.alpha = 1.0
+                }
+
+                UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 0.1) {
+                    snap.alpha = 1.0
+                }
+
+                UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 0.8) {
                     headerView.layer.cornerRadius = PokedexCell.CornerRadius.large
                     headerView.frame = newRect
                     imageView.center = newPoint
                     imageView.frame.size = newSize
                 }
 
-                UIView.addKeyframe(withRelativeStartTime: 0.6, relativeDuration: 0.4) {
-                    headerView.alpha = 0.0
-                    imageView.alpha = 0.0
-                }
-
-                UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.8) {
+                UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 0.8) {
                     snap.frame = transitionContext.finalFrame(for: toViewController)
                 }
             })
@@ -87,6 +95,7 @@ final class TransitionAnimator: NSObject {
         animator.addCompletion { _ in
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
             headerView.removeFromSuperview()
+            imageView.removeFromSuperview()
             snap.removeFromSuperview()
             toView.isHidden = false
         }
@@ -108,33 +117,47 @@ final class TransitionAnimator: NSObject {
         snap.layer.cornerRadius = PokedexCell.CornerRadius.large
         containerView.addSubview(snap)
 
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 130.0, width: receivingFrame.width, height: receivingFrame.height))
+        var newRect = receivingFrame
+        newRect.size.height += receivingFrame.height / 2
+        newRect.origin.y -= 10.0
+
+        let headerView = UIView(frame: newRect)
+        headerView.layer.cornerRadius = PokedexCell.CornerRadius.large
+        headerView.backgroundColor = image?.dominantColor
+        headerView.alpha = 0.0
+        containerView.addSubview(headerView)
+
+        let imageView = UIImageView(frame: newRect)
+        imageView.contentMode = .scaleAspectFill
         imageView.image = image
         imageView.alpha = 0.0
-        imageView.transform = fromView.transform
-        imageView.contentMode = .scaleAspectFill
         containerView.addSubview(imageView)
 
-        let duration = transitionDuration(using: transitionContext)
+        let newPoint: CGPoint = CGPoint(x: newRect.midX, y: newRect.midY + 50.0)
+        let multiplier: CGFloat = 0.55
+        let newWidth: CGFloat = imageView.frame.size.width * multiplier
+        let newHeight: CGFloat = imageView.frame.size.height * multiplier
+        let newSize: CGSize = CGSize(width: newWidth, height: newHeight)
 
-        UIView.animateKeyframes(withDuration: duration, delay: 0.0, options: .allowUserInteraction, animations: {
-            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.5) {
+        imageView.frame.size = newSize
+        imageView.center = newPoint
+
+        UIView.animateKeyframes(withDuration: transitionDuration(using: transitionContext), delay: 0.0, options: .allowUserInteraction, animations: {
+            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.1) {
+                headerView.alpha = 1.0
                 imageView.alpha = 1.0
             }
 
-            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.9) {
-                imageView.frame = self.initialFrame
+            UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 0.8) {
+                imageView.frame = self.initialFrame.inset(by: .init(top: 0, left: 10, bottom: 15, right: 10))
+                headerView.layer.cornerRadius = PokedexCell.CornerRadius.small
+                headerView.frame = self.initialFrame
+            }
+
+            UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 0.8) {
                 snap.frame = self.initialFrame
-                snap.layer.cornerRadius = PokedexCell.CornerRadius.small
-
-                if let presentation = fromViewController.presentationController as? PresentationController {
-                    presentation.setAlpha(0.0)
-                }
             }
 
-            UIView.addKeyframe(withRelativeStartTime: 0.7, relativeDuration: 0.3) {
-                snap.alpha = 0.0
-            }
         }, completion: { _ in
             transitionContext.finishInteractiveTransition()
             transitionContext.completeTransition(true)
@@ -146,7 +169,7 @@ final class TransitionAnimator: NSObject {
 extension TransitionAnimator: UIViewControllerAnimatedTransitioning {
 
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        0.25
+        0.3
     }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {

@@ -34,7 +34,7 @@ final class InteractionController: NSObject {
     private weak var transitionContext: UIViewControllerContextTransitioning?
     private weak var viewController: PresentableView?
     private var transitionProgress: CGFloat = 0.0
-    private let animDuration: TimeInterval = 0.25
+    private let animDuration: TimeInterval = 0.3
 
     // MARK: - Public properties
     var interactionInProgress: Bool = false
@@ -100,31 +100,52 @@ final class InteractionController: NSObject {
         snap.transform = fromView.transform
         containerView.addSubview(snap)
 
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 130.0, width: receivingFrame.width, height: receivingFrame.height))
-        imageView.image = image
-        imageView.alpha = 0.0
+        var newRect = receivingFrame
+        newRect.size.height += receivingFrame.height / 2
+
+        let headerView = UIView(frame: newRect)
+        headerView.layer.cornerRadius = PokedexCell.CornerRadius.large
+        headerView.backgroundColor = image?.dominantColor
+        headerView.transform = fromView.transform
+        headerView.alpha = 0.0
+        containerView.addSubview(headerView)
+
+        let imageView = UIImageView(frame: newRect)
         imageView.transform = fromView.transform
         imageView.contentMode = .scaleAspectFill
+        imageView.image = image
+        imageView.alpha = 0.0
         containerView.addSubview(imageView)
 
-        UIView.animateKeyframes(withDuration: self.animDuration, delay: 0.0, options: .allowUserInteraction, animations: {
-            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.5) {
+        let newPoint: CGPoint = CGPoint(x: newRect.midX, y: newRect.midY + 50.0)
+        let multiplier: CGFloat = 0.55
+        let newWidth: CGFloat = imageView.frame.size.width * multiplier
+        let newHeight: CGFloat = imageView.frame.size.height * multiplier
+        let newSize: CGSize = CGSize(width: newWidth, height: newHeight)
+
+        imageView.frame.size = newSize
+        imageView.center = newPoint
+
+        UIView.animateKeyframes(withDuration: animDuration, delay: 0.0, options: .allowUserInteraction, animations: {
+            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.1) {
+                headerView.alpha = 1.0
                 imageView.alpha = 1.0
             }
 
-            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.9) {
-                imageView.frame = self.initialFrame
-                snap.frame = self.initialFrame
-                snap.layer.cornerRadius = PokedexCell.CornerRadius.small
+            UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 0.8) {
+                imageView.frame = self.initialFrame.inset(by: .init(top: 0, left: 10, bottom: 15, right: 10))
+                headerView.layer.cornerRadius = PokedexCell.CornerRadius.small
+                headerView.frame = self.initialFrame
 
                 if let presentation = fromViewController.presentationController as? PresentationController {
                     presentation.setAlpha(0.0)
                 }
             }
 
-            UIView.addKeyframe(withRelativeStartTime: 0.7, relativeDuration: 0.3) {
-                snap.alpha = 0.0
+            UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 0.8) {
+                snap.frame = self.initialFrame
             }
+
         }, completion: { _ in
             transitionContext.finishInteractiveTransition()
             transitionContext.completeTransition(true)
