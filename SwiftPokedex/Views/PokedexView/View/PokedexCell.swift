@@ -9,14 +9,15 @@ import UIKit
 
 final class PokedexCell: UICollectionViewCell {
 
-    // MARK: Public properties
-    lazy var imageView: UIImageView = {
+    // MARK: Private properties
+    private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.alpha = 0.0
         return imageView
     }()
 
+    // MARK: - Public properties
     lazy var indexLabel: UILabel = {
         let label = UILabel(useAutolayout: true)
         label.textAlignment = .right
@@ -44,7 +45,9 @@ final class PokedexCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
+        layer.cornerRadius = PokedexCell.CornerRadius.small
         backgroundColor = .darkGray
+        clipsToBounds = true
 
         contentView.addSubview(imageView)
         imageView.pinToSuperview(with: UIEdgeInsets(top: 0, left: 0, bottom: 14.0, right: 0), edges: .all)
@@ -65,34 +68,44 @@ final class PokedexCell: UICollectionViewCell {
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
-    // MARK: - Layout
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        layer.cornerRadius = PokedexCell.CornerRadius.small
-        clipsToBounds = true
-    }
-
+    // MARK: - Life cycle
     override func prepareForReuse() {
         super.prepareForReuse()
-        imageView.image = nil
+        prepareCellForReuse()
     }
 
     // MARK: - Public functions
+    /// Set the sprite image to the cell. Calculate the dominant color of the sprite on a background thread.
+    /// - parameter image: An optional image to set to the cell
     func setupImage(_ image: UIImage?) {
-        imageView.image = image
+        DispatchQueue.global(qos: .userInteractive).async {
+            let color = image?.dominantColor ?? .darkGray
+            
+            DispatchQueue.main.async {
+                self.imageView.image = image
 
-        let color = image?.dominantColor ?? .darkGray
-        titleLabel.textColor = color.isLight ? .black : .white
-        indexLabel.textColor = color.isLight ? .black : .white
-        imageView.image = image
-        backgroundColor = color
+                self.titleLabel.textColor = color.isLight ? .black : .white
+                self.indexLabel.textColor = color.isLight ? .black : .white
+                self.imageView.image = image
+                self.backgroundColor = color
 
-        guard imageView.alpha != 1.0 else { return }
+                guard self.imageView.alpha != 1.0 else { return }
 
-        UIView.animate(withDuration: 0.2) {
-            self.imageView.alpha = 1.0
-            self.indexLabel.alpha = 1.0
-            self.titleLabel.alpha = 1.0
+                UIView.animate(withDuration: 0.2) {
+                    self.imageView.alpha = 1.0
+                    self.indexLabel.alpha = 1.0
+                    self.titleLabel.alpha = 1.0
+                }
+            }
         }
+    }
+
+    // MARK: - Private functions
+    private func prepareCellForReuse() {
+        backgroundColor = .darkGray
+        indexLabel.alpha = 0.0
+        titleLabel.alpha = 0.0
+        imageView.alpha = 0.0
+        imageView.image = nil
     }
 }
