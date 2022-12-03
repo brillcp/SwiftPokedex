@@ -7,26 +7,6 @@
 
 import UIKit
 
-/// A protocol for the interactable transition
-protocol InteractableTransition: UIViewControllerInteractiveTransitioning {
-    /// A boolean that determines if a interaction is in progress.
-    var interactionInProgress: Bool { get }
-    /// The initial frame for the custom transition
-    var initialFrame: CGRect { get }
-    /// An optional image used for the custom transition
-    var image: UIImage? { get }
-}
-
-// MARK: -
-/// A protocol that makes a view controller a presentable view
-protocol PresentableView: UIViewController {
-    /// The transition delegate object for the presentable view
-    var transitionManager: UIViewControllerTransitioningDelegate? { get }
-    /// The final receiving frame of the custom transition
-    var receivingFrame: CGRect? { get }
-}
-
-// MARK: -
 extension Transition {
     /// An interaction controller object that handles the interaction for the custom transition
     final class Interaction: NSObject {
@@ -171,7 +151,7 @@ extension Transition {
     }
 }
 
-// MARK: -
+// MARK: - InteractableTransition delegate
 extension Transition.Interaction: InteractableTransition {
 
     func startInteractiveTransition(_ transitionContext: UIViewControllerContextTransitioning) {
@@ -182,7 +162,7 @@ extension Transition.Interaction: InteractableTransition {
     }
 }
 
-// MARK: -
+// MARK: - Gestures
 extension Transition.Interaction {
 
     @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
