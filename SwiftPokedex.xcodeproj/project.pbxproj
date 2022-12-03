@@ -364,7 +364,7 @@
 			children = (
 				D51C2CE3293901130081B053 /* App */,
 				6E9D559A263BFE1500D0DA9D /* Views */,
-				6E806798263BF5E600FD38F0 /* API */,
+				6E806798263BF5E600FD38F0 /* PokeAPI */,
 				D51C2CE42939014D0081B053 /* Miscellaneous */,
 				6E55386D26406FA10060C25B /* CustomUI */,
 				6E24A838263C11780013F7E4 /* Extensions */,
@@ -376,7 +376,7 @@
 			path = SwiftPokedex;
 			sourceTree = "<group>";
 		};
-		6E806798263BF5E600FD38F0 /* API */ = {
+		6E806798263BF5E600FD38F0 /* PokeAPI */ = {
 			isa = PBXGroup;
 			children = (
 				D58F7B3D26530F8D00FE841D /* APIModels.swift */,
@@ -384,7 +384,7 @@
 				6E24A83E263C11C10013F7E4 /* Pokemon */,
 				D58F7B4426530FAB00FE841D /* Items */,
 			);
-			path = API;
+			path = PokeAPI;
 			sourceTree = "<group>";
 		};
 		6E9D559A263BFE1500D0DA9D /* Views */ = {
