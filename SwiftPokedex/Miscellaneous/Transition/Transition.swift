@@ -15,7 +15,7 @@ final class Transition: NSObject {
     private let cell: UICollectionViewCell
 
     // MARK: - Init
-    /// Init the `TransitionController`
+    /// Init the `Transition`
     /// - parameters:
     ///     - interaction: An interactable transition object used to make the custom transition interactable
     ///     - cell: The given collection view cell that we want to transition from
