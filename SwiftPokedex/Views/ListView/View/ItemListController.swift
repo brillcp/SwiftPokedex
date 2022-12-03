@@ -8,12 +8,14 @@
 import UIKit
 import Combine
 
+/// A protocol for the `ItemListController` implementation
 protocol ItemListViewProtocol: AnyObject {
     var interaction: AnyPublisher<ItemListView.Interaction, Never> { get }
     var viewModel: ItemListView.ViewModel { get }
 }
 
 // MARK: -
+/// The `ItemListController` implementation
 final class ItemListController: ViewController<ItemListView>, ItemListViewProtocol {
 
     // MARK: Private properties
@@ -23,7 +25,11 @@ final class ItemListController: ViewController<ItemListView>, ItemListViewProtoc
     override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
 
     // MARK: - Init
-    init(interactor: ItemListInteractable, viewModel: ItemListView.ViewModel) {
+    /// Init the `ItemListController`
+    /// - parameters:
+    ///     - viewModel: The given view model for the view
+    ///     - interactor: The interactor object used to interact with the view
+    init(viewModel: ItemListView.ViewModel, interactor: ItemListInteractable) {
         self.interactor = interactor
         super.init(viewModel: viewModel)
     }

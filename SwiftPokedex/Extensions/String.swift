@@ -18,10 +18,8 @@ extension String {
     func lineHeight(_ height: CGFloat) -> NSAttributedString? {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = height
-
         let attributedString = NSMutableAttributedString(string: self)
         attributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
-
         return attributedString
     }
 

@@ -15,6 +15,7 @@ protocol PokedexViewProtocol: AnyObject {
 }
 
 // MARK: -
+/// The `PokedexController` implementation
 final class PokedexController: ViewController<PokedexView>, PokedexViewProtocol {
 
     // MARK: Private properties
@@ -24,6 +25,10 @@ final class PokedexController: ViewController<PokedexView>, PokedexViewProtocol 
     override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
 
     // MARK: - Init
+    /// Init the `PokedexController`
+    /// - parameters:
+    ///     - viewModel: The given view model for the view
+    ///     - interactor: The interactor object used to interact with the view
     init(viewModel: PokedexView.ViewModel, interactor: PokedexInteractable) {
         self.interactor = interactor
         super.init(viewModel: viewModel)

@@ -11,8 +11,7 @@ extension UITableView {
 
     typealias DetailViewDataSource = UITableViewDiffableDataSource<DetailView.Section, DetailView.Item>
 
-    /// A diffable data source object registered with a `DetailCell` cell.
-    /// Used in the table view in the `DetailView`.
+    /// A diffable data source object registered with `DetailCell` cells and `StatCell` cells. Used in the table view in the `DetailView`.
     /// - parameter viewModel: The view model of the view
     /// - returns: A diffable data source for the table view
     func detailViewDataSource(viewModel: DetailView.ViewModel) -> DetailViewDataSource {
@@ -37,7 +36,7 @@ extension UITableView {
             }
         }
 
-        var snapshot = NSDiffableDataSourceSnapshot<DetailView.Section, DetailView.Item>()
+        var snapshot = Snapshot<DetailView.Section, DetailView.Item>()
         snapshot.appendSections([.stats])
         snapshot.appendItems(viewModel.stats)
         snapshot.appendSections([.details])
@@ -53,8 +52,7 @@ extension UITableView {
 
     typealias ListViewDataSource = UITableViewDiffableDataSource<ItemListView.Section, ItemListView.Item>
 
-    /// A diffable data source object registered with a `RegularCell` cell.
-    /// Used in the table view in the `ListView`.
+    /// A diffable data source object registered with a `RegularCell` cell. Used in the table view in the `ListView`.
     /// - parameters:
     ///     - viewModel: The view model of the view
     ///     - delegate: The table view delegate
@@ -70,7 +68,7 @@ extension UITableView {
             return cell
         }
 
-        var snapshot = NSDiffableDataSourceSnapshot<ItemListView.Section, ItemListView.Item>()
+        var snapshot = Snapshot<ItemListView.Section, ItemListView.Item>()
         snapshot.appendSections(["main"])
         snapshot.appendItems(viewModel.categories)
         dataSource.apply(snapshot, animatingDifferences: false)
@@ -83,13 +81,12 @@ extension UITableView {
 
     typealias ItemsDataSource = UITableViewDiffableDataSource<ItemsView.Section, ItemsView.Item>
 
-    /// A diffable data source object registered with a `RegularCell` cell.
-    /// Used in the table view in the `ItemsView`.
+    /// A diffable data source object registered with a `ItemCell` cell. Used in the table view in the `ItemsView`.
     /// - parameter viewModel: The view model of the view
     /// - returns: A diffable data source for the table view
     func itemsDataSource(viewModel: ItemsView.ViewModel) -> ItemsDataSource {
-        registerCell(ItemCell.self)
         rowHeight = UITableView.automaticDimension
+        registerCell(ItemCell.self)
 
         let dataSource = ItemsDataSource(tableView: self) { tableView, indexPath, item in
             let cell = tableView.dequeueCell(for: ItemCell.self)
@@ -97,7 +94,7 @@ extension UITableView {
             return cell
         }
 
-        var snapshot = NSDiffableDataSourceSnapshot<ItemsView.Section, ItemsView.Item>()
+        var snapshot = Snapshot<ItemsView.Section, ItemsView.Item>()
         snapshot.appendSections(["main"])
         snapshot.appendItems(viewModel.items)
         dataSource.apply(snapshot, animatingDifferences: false)

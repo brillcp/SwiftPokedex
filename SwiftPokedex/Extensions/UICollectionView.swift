@@ -19,8 +19,13 @@ extension UICollectionView {
         register(cell.self, forCellWithReuseIdentifier: cell.identifier)
     }
 
-    func registerReusableFooterView<View: UICollectionReusableView>(_ view: View.Type) {
+    func registerFooterView<View: UICollectionReusableView>(_ view: View.Type) {
         register(view.self, forSupplementaryViewOfKind: UICollectionView.footer, withReuseIdentifier: view.identifier)
+    }
+
+    func dequeueCell<Cell: UICollectionViewCell>(_ cell: Cell.Type, at indexPath: IndexPath) -> Cell {
+        guard let cell = dequeueReusableCell(withReuseIdentifier: cell.identifier, for: indexPath) as? Cell else { fatalError("No way, Jose 🌮") }
+        return cell
     }
 
     func dequeueFooterView<View: UICollectionReusableView>(_ view: View.Type, at indexPath: IndexPath) -> UICollectionReusableView {

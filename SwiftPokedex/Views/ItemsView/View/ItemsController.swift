@@ -7,12 +7,15 @@
 
 import UIKit
 
+/// The `ItemsController` implementation
 final class ItemsController: ViewController<ItemsView> {
 
     // MARK: - Public properties
     override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
 
     // MARK: - Init
+    /// Init the `ItemsController`
+    /// - parameter viewModel: The given view model for the view
     override init(viewModel: ItemsView.ViewModel) {
         super.init(viewModel: viewModel)
     }
@@ -22,7 +25,6 @@ final class ItemsController: ViewController<ItemsView> {
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
         title = viewModel.cleanTitle
     }
 }

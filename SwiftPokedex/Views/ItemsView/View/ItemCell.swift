@@ -78,7 +78,7 @@ final class ItemCell: UITableViewCell {
         titleLabel.text = item.name.cleaned.capitalized
         detailLabel.attributedText = item.effect.first?.description.cleaned.lineHeight(4.0)
 
-        ImageCache.default.loadImage(from: item.sprites.default, item: item) { [weak self] currentItem, image in
+        ImageCache.default.loadImage(from: item.sprites.default, item: item) { [weak self] _, image in
             self?.itemImageView.image = image
         }
     }

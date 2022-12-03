@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// A custom presentation controller used when presenting the pokemon detail view
 final class PresentationController: UIPresentationController {
 
     // MARK: Private properties
@@ -18,12 +19,19 @@ final class PresentationController: UIPresentationController {
     }()
 
     // MARK: - Public properties
+    /// A static property for the final alpha value
     static let finalAlpha: CGFloat = 0.6
 
     // MARK: - Public functions
+    /// Set the alpha for the fade view
+    /// - parameter alpha: The given alpha value
     func setAlpha(_ alpha: CGFloat) {
         fadeView.alpha = alpha
     }
+}
+
+// MARK: - UIPresentationController delegate
+extension PresentationController {
 
     override func presentationTransitionWillBegin() {
         guard let container = containerView else { return }
@@ -32,12 +40,12 @@ final class PresentationController: UIPresentationController {
         fadeView.pinToSuperview()
 
         guard let coordinator = presentedViewController.transitionCoordinator else {
-            fadeView.alpha = PresentationController.finalAlpha
+            fadeView.alpha = Self.finalAlpha
             return
         }
 
         coordinator.animate(alongsideTransition: { _ in
-            self.fadeView.alpha = PresentationController.finalAlpha
+            self.fadeView.alpha = Self.finalAlpha
         })
     }
 

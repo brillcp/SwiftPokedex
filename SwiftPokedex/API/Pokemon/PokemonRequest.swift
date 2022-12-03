@@ -7,6 +7,7 @@
 
 import Networking
 
+/// An enum for requesting the pokemon data
 enum PokemonRequest: Requestable {
     case pokemon
 

@@ -8,7 +8,7 @@
 import UIKit
 
 extension DetailView {
-
+    /// A data structure for the detail view model
     struct ViewModel {
         let pokemon: PokemonDetails
         let color: UIColor

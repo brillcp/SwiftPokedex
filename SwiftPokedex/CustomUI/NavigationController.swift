@@ -44,4 +44,3 @@ extension UINavigationController {
         UINavigationBar.appearance().isTranslucent = false
     }
 }
-

@@ -7,14 +7,19 @@
 
 import UIKit
 
+/// An animation object for the custom interactive transition
 final class TransitionAnimator: NSObject {
 
     // MARK: Private properties
     private let initialFrame: CGRect
-    private let image: UIImage?
     private let isPresenting: Bool
+    private let image: UIImage?
 
     // MARK: - Init
+    /// Init the `TransitionAnimator`
+    /// - parameters:
+    ///     - isPresenting: A boolean value that determine if the transition is being presented or dismissed
+    ///     - interactionController: An interactable transition object used to make the custom transition interactable
     init(isPresenting: Bool, interactionController: InteractableTransition) {
         self.initialFrame = interactionController.initialFrame
         self.image = interactionController.image
@@ -88,7 +93,7 @@ final class TransitionAnimator: NSObject {
 
         animator.startAnimation()
     }
-    
+
     private func dismissAnimation(using transitionContext: UIViewControllerContextTransitioning) {
         guard let fromViewController = transitionContext.viewController(forKey: .from) as? PresentableView,
               let fromView = fromViewController.view,

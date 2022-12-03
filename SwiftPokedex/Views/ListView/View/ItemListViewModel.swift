@@ -8,7 +8,7 @@
 import UIKit
 
 extension ItemListView {
-
+    /// A data structure for the item list view model
     final class ViewModel {
         @Published var categories = [ItemData]()
     }

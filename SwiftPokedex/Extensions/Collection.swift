@@ -8,7 +8,6 @@
 import Foundation
 
 extension Collection where Element == ItemDetails {
-
     /// Filter an array of `ItemDetails` from a given string
     /// - parameter string: The strig value to filter the array with
     /// - returns: A new filtered array

@@ -9,11 +9,14 @@ import UIKit
 import Combine
 import Networking
 
+/// A protocol for the pokedex interactor implementation
 protocol PokedexInteractable {
+    /// Download pokemon from the backend
     func loadPokemon()
 }
 
 // MARK: -
+/// The `PokedexInteractor` implementation
 final class PokedexInteractor: PokedexInteractable {
 
     // MARK: Private properties
@@ -26,6 +29,10 @@ final class PokedexInteractor: PokedexInteractable {
     weak var view: PokedexViewProtocol? { didSet { setupInteractionPublisher() } }
 
     // MARK: - Init
+    /// Init the `PokedexInteractor`
+    /// - parameters:
+    ///     - router: A router object used to navigate from the view
+    ///     - service: A network service object used to make API calls
     init(router: PokedexRoutable, service: Network.Service) {
         self.router = router
         self.service = service
@@ -72,8 +79,8 @@ final class PokedexInteractor: PokedexInteractable {
     private func setupInteractionPublisher() {
         view?.interaction.sink { [weak self] interaction in
             switch interaction {
-            case .selectPokemon(let pokemon, let image, let frame, let color):
-                self?.router.routeToDetailView(pokemon: pokemon, cellImage: image, cellFrame: frame, color: color)
+            case .selectPokemon(let container):
+                self?.router.routeToDetailView(pokemon: container)
             case .scrollToBottom:
                 if self?.view?.viewModel.state == .idle {
                     self?.loadPokemon()

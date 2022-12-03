@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// A protocol for the item list router implementation
 protocol ItemListRoutable: Routable {
     /// Route to the item list
     /// - parameter data: The data item to show in the list
@@ -14,6 +15,7 @@ protocol ItemListRoutable: Routable {
 }
 
 // MARK: -
+/// The `ItemListRouter` implementation
 final class ItemListRouter: ItemListRoutable {
 
     // MARK: Public properties

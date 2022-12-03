@@ -7,6 +7,7 @@
 
 import Networking
 
+/// An enum for requesting pokemon detail data
 enum DetailRequest: Requestable {
     case details(String)
 

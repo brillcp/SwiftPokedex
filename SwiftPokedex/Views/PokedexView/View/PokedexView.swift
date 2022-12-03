@@ -27,7 +27,7 @@ final class PokedexView: UIView, ViewModable, Interactable, CollectionViewable {
     var dataSource: DiffableDataSource<Section, Item>!
 
     enum Interaction {
-        case selectPokemon(PokemonDetails, UIImage?, CGRect, UIColor)
+        case selectPokemon(PokemonContainer)
         case scrollToBottom
     }
 
@@ -67,10 +67,16 @@ extension PokedexView: UICollectionViewDelegate {
               let pokemon = dataSource.itemIdentifier(for: indexPath),
               let cellFrame = cell.layer.presentation()?.frame,
               let convertedFrame = cell.superview?.convert(cellFrame, to: nil),
-              let color = cell.backgroundColor
+              let color = cell.backgroundColor,
+              let cellImage = cell.asImage()
         else { return }
 
-        subject.send(.selectPokemon(pokemon, cell.asImage(), convertedFrame, color))
+        let container = PokemonContainer(pokemon: pokemon,
+                                           image: cellImage,
+                                           frame: convertedFrame,
+                                           color: color)
+
+        subject.send(.selectPokemon(container))
     }
 }
 

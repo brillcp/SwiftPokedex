@@ -7,21 +7,6 @@
 
 import UIKit
 
-struct StatItem {
-    let id = UUID()
-    let title: String
-    let value: Int
-    let color: UIColor
-}
-
-// MARK: -
-extension StatItem: Hashable {
-
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-}
-
 // MARK: -
 final class StatCell: UITableViewCell {
 

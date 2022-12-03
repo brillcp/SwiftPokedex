@@ -68,7 +68,6 @@ final class PokedexCell: UICollectionViewCell {
     // MARK: - Layout
     override func layoutSubviews() {
         super.layoutSubviews()
-
         layer.cornerRadius = PokedexCell.CornerRadius.small
         clipsToBounds = true
     }
@@ -95,6 +94,5 @@ final class PokedexCell: UICollectionViewCell {
             self.indexLabel.alpha = 1.0
             self.titleLabel.alpha = 1.0
         }
-
     }
 }

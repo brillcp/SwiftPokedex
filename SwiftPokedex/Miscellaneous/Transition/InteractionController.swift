@@ -7,20 +7,28 @@
 
 import UIKit
 
+/// A protocol for the interactable transition
 protocol InteractableTransition: UIViewControllerInteractiveTransitioning {
+    /// A boolean that determines if a interaction is in progress.
     var interactionInProgress: Bool { get }
+    /// The initial frame for the custom transition
     var initialFrame: CGRect { get }
+    /// An optional image used for the custom transition
     var image: UIImage? { get }
 }
 
 // MARK: -
+/// A protocol that makes a view controller a presentable view
 protocol PresentableView: UIViewController {
+    /// The transition delegate object for the presentable view
     var transitionManager: UIViewControllerTransitioningDelegate? { get }
+    /// The final receiving frame of the custom transition
     var receivingFrame: CGRect? { get }
 }
 
 // MARK: -
-final class InteractionController: NSObject, InteractableTransition {
+/// An interaction controller object that handles the interaction for the custom transition
+final class InteractionController: NSObject {
 
     // MARK: Private properties
     private weak var transitionContext: UIViewControllerContextTransitioning?
@@ -34,6 +42,11 @@ final class InteractionController: NSObject, InteractableTransition {
     var image: UIImage?
 
     // MARK: - Init
+    /// Init the `InteractionController`
+    /// - parameters:
+    ///     - viewController: The presentable view controller
+    ///     - initialFrame: The starting frame for the custom transition
+    ///     - image: An optional image used in the custom transition
     init(viewController: PresentableView, initialFrame: CGRect, image: UIImage?) {
         self.viewController = viewController
         self.initialFrame = initialFrame
@@ -43,14 +56,6 @@ final class InteractionController: NSObject, InteractableTransition {
 
         let gesture = HorizontalPanGesture(target: self, action: #selector(handlePan))
         viewController.view.addGestureRecognizer(gesture)
-    }
-
-    // MARK: - Public functions
-    func startInteractiveTransition(_ transitionContext: UIViewControllerContextTransitioning) {
-        guard let fromView = transitionContext.view(forKey: .from) else { return }
-
-        fromView.layer.cornerRadius = PokedexCell.CornerRadius.large
-        self.transitionContext = transitionContext
     }
 
     // MARK: - Private functions
@@ -150,6 +155,17 @@ final class InteractionController: NSObject, InteractableTransition {
         }
 
         cancelAnimator.startAnimation()
+    }
+}
+
+// MARK: -
+extension InteractionController: InteractableTransition {
+
+    func startInteractiveTransition(_ transitionContext: UIViewControllerContextTransitioning) {
+        guard let fromView = transitionContext.view(forKey: .from) else { return }
+
+        fromView.layer.cornerRadius = PokedexCell.CornerRadius.large
+        self.transitionContext = transitionContext
     }
 }
 

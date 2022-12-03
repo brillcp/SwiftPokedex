@@ -13,7 +13,6 @@ struct PokemonDetails: Decodable {
     let weight: Int
     let height: Int
     let baseExperience: Int
-    let forms: [APIItem]
     let sprite: Sprite
     let abilities: [Ability]
     let moves: [Move]
@@ -21,7 +20,7 @@ struct PokemonDetails: Decodable {
     let stats: [Stat]
 
     private enum CodingKeys: String, CodingKey {
-        case id, name, weight, height, forms, abilities, moves, types, stats
+        case id, name, weight, height, abilities, moves, types, stats
         case baseExperience = "base_experience"
         case sprite = "sprites"
     }

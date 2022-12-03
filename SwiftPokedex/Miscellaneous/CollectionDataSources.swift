@@ -15,19 +15,20 @@ extension UICollectionView {
 
     typealias SearchDataSource = DiffableDataSource<PokedexView.Section, PokedexView.Item>
 
-    /// A diffable data source object with `AgeRangeCell` and `CategoryCell` cells.
+    /// A diffable data source object with a `PokedexCell` cell and a `SpinnerFooterView` footer view.
     /// Used in the collection view in the `PokedexView`.
     /// - parameters:
+    ///     - data: The given pokemon array
     ///     - delegate: The collection view delegate
     /// - returns: A diffable data source for the collection view
     func pokedexDataSource(data: [PokemonDetails], delegate del: UICollectionViewDelegate) -> SearchDataSource {
         setCollectionViewLayout(.pokedexLayout, animated: false)
-        registerReusableFooterView(SpinnerFooterView.self)
+        registerFooterView(SpinnerFooterView.self)
         registerCell(PokedexCell.self)
         delegate = del
 
         let dataSource = SearchDataSource(collectionView: self) { collectionView, indexPath, pokemon in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PokedexCell.identifier, for: indexPath) as? PokedexCell else { fatalError("No way, Jose 🌮") }
+            let cell = collectionView.dequeueCell(PokedexCell.self, at: indexPath)
             cell.titleLabel.text = pokemon.name.capitalized
             cell.indexLabel.text = "#\(pokemon.id)"
 

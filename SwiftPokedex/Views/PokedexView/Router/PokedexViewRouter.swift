@@ -7,20 +7,28 @@
 
 import UIKit
 
+/// A protocol for the pokedex router implementation
 protocol PokedexRoutable: Routable {
-    func routeToDetailView(pokemon: PokemonDetails, cellImage: UIImage?, cellFrame: CGRect, color: UIColor)
+    /// Route to the detail view with the given pokemon details
+    /// - parameter pokemon: A pokemon container object with all the selection information
+    func routeToDetailView(pokemon container: PokemonContainer)
 }
 
 // MARK: -
+/// The `PokedexRouter` implementation
 final class PokedexRouter: PokedexRoutable {
-    
+
     // MARK: Public properties
     weak var navigationController: UINavigationController?
-    
+
     // MARK: - Public functions
-    func routeToDetailView(pokemon: PokemonDetails, cellImage: UIImage?, cellFrame: CGRect, color: UIColor) {
-        let detailView = DetailViewBuilder.build(from: pokemon, withColor: color)
-        let interaction = InteractionController(viewController: detailView, initialFrame: cellFrame, image: cellImage)
+    func routeToDetailView(pokemon container: PokemonContainer) {
+        let detailView = DetailBuilder.build(from: container.pokemon, withColor: container.color)
+
+        let interaction = InteractionController(viewController: detailView,
+                                                  initialFrame: container.frame,
+                                                         image: container.image)
+
         let transitionManager = TransitionController(interactionController: interaction)
         detailView.transitionManager = transitionManager
         detailView.transitioningDelegate = transitionManager

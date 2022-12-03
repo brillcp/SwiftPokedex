@@ -8,6 +8,7 @@
 import UIKit
 import Combine
 
+/// The `ItemListView` implementation
 final class ItemListView: UIView, ViewModable, Interactable, TableViewable {
 
     typealias Item = ItemData

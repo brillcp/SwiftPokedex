@@ -7,12 +7,16 @@
 
 import UIKit
 
+/// A transition controller object used to present and dismiss the custom transition
 final class TransitionController: NSObject {
 
     // MARK: Private properties
     private let interactionController: InteractableTransition
 
     // MARK: - Init
+    /// Init the `TransitionController`
+    /// - parameters:
+    ///     - interactionController: An interactable transition object used to make the custom transition interactable
     init(interactionController: InteractableTransition) {
         self.interactionController = interactionController
         super.init()

@@ -7,12 +7,12 @@
 
 import UIKit
 
+/// The header view for the detail view
 final class DetailHeaderView: UICollectionReusableView {
 
     // MARK: Private properties
     private lazy var stackView: UIStackView = {
         let stack = UIStackView(useAutolayout: true)
-
         let typeLabel = UILabel(useAutolayout: true)
         typeLabel.textAlignment = .center
         typeLabel.text = "Type\n\n\(String.types(from: pokemon.types))"
@@ -36,7 +36,6 @@ final class DetailHeaderView: UICollectionReusableView {
         heightLabel.textColor = isLight ? .black : .white
         heightLabel.font = typeLabel.font
         stack.addArrangedSubview(heightLabel)
-
         return stack
     }()
 
@@ -76,7 +75,7 @@ final class DetailHeaderView: UICollectionReusableView {
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
         ])
 
-        ImageCache.default.loadImage(from: pokemon.sprite.url, item: pokemon) { [weak self] item, image in
+        ImageCache.default.loadImage(from: pokemon.sprite.url, item: pokemon) { [weak self] _, image in
             self?.imageView.image = image
         }
     }

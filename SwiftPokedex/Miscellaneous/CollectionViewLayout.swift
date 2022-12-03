@@ -19,7 +19,7 @@ typealias Layout = UICollectionViewLayout
 
 // MARK: -
 extension Layout {
-
+    /// The collection view layout for the `PokedexView`
     static var pokedexLayout: Layout {
         let itemSize = Size(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = Item(layoutSize: itemSize)

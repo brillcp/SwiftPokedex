@@ -8,6 +8,7 @@
 import UIKit
 import Combine
 
+/// The `DetailView` implementation
 final class DetailView: UIView, ViewModable, Interactable, TableViewable {
 
     typealias Item = AnyHashable

@@ -7,22 +7,12 @@
 
 import UIKit
 
-struct ItemData {
-    var title: String? = nil
-    var items: [ItemDetails] = []
-}
-
-extension ItemData: Hashable {
-
-}
-
 // MARK: -
 final class RegularCell: UITableViewCell {
 
-    // MARK: - Init
+    // MARK: Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-
         accessoryView = UILabel.accessoryView
         backgroundColor = .clear
     }

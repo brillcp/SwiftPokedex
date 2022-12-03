@@ -7,6 +7,7 @@
 
 import Networking
 
+/// An enum for requesting items
 enum ItemRequest: Requestable {
     case items(limit: Int)
 

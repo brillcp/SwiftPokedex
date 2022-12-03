@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// A custom pan gesture class for horizontal panning
 final class HorizontalPanGesture: UIPanGestureRecognizer {
 
     // MARK: Private properties

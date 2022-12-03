@@ -6,10 +6,11 @@
 //
 
 import UIKit
-import Networking
 
+/// A builder object used for building the `PokedexView` with all its' dependencies
 final class PokedexViewBuilder {
-
+    /// Build a `PokedexController` wrapped in a `NavigationController`
+    /// - returns: A new navigation controller with the pokedex view controller as root controller
     static func build() -> NavigationController {
         let router = PokedexRouter()
         let interactor = PokedexInteractor(router: router, service: .default)

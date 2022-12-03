@@ -8,14 +8,13 @@
 import UIKit
 
 extension PokedexView {
-
+    /// A data structure for the pokedex view model
     final class ViewModel {
         @Published var pokemon = [PokemonDetails]()
         @Published var state: State = .idle
 
         enum State {
-            case idle
-            case loading
+            case idle, loading
         }
     }
 }

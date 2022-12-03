@@ -8,13 +8,8 @@
 import UIKit
 import Combine
 
-protocol DetailViewProtocol: AnyObject {
-    var interaction: AnyPublisher<DetailView.Interaction, Never> { get }
-    var viewModel: DetailView.ViewModel { get }
-}
-
-// MARK: -
-final class DetailController: ViewController<DetailView>, DetailViewProtocol {
+/// The `DetailController` implementation
+final class DetailController: ViewController<DetailView> {
 
     // MARK: Private properties
     private lazy var closeButton: UIBarButtonItem = {
@@ -37,6 +32,8 @@ final class DetailController: ViewController<DetailView>, DetailViewProtocol {
     }
 
     // MARK: - Init
+    /// Init the `DetailController`
+    /// - parameter viewModel: The given view model for the view
     override init(viewModel: DetailView.ViewModel) {
         super.init(viewModel: viewModel)
     }

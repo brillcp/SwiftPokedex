@@ -8,7 +8,7 @@
 import UIKit
 
 extension ItemsView {
-
+    /// A data structure for the items view model
     final class ViewModel {
         @Published var title: String? = nil
         @Published var items: [ItemDetails] = []

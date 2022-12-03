@@ -9,12 +9,14 @@ import UIKit
 import Combine
 import Networking
 
+/// A protocol for the item list interactor implementation
 protocol ItemListInteractable {
     /// Download items from the backend
     func loadItems()
 }
 
 // MARK: -
+/// The `ItemListInteractor` implementation
 final class ItemListInteractor: ItemListInteractable {
 
     // MARK: Private properties
@@ -26,6 +28,10 @@ final class ItemListInteractor: ItemListInteractable {
     weak var view: ItemListViewProtocol? { didSet { setupInteractionPublisher() } }
 
     // MARK: - Init
+    /// Init the `ItemListInteractor`
+    /// - parameters:
+    ///     - router: A router object used to navigate from the view
+    ///     - service: A network service object used to make API calls
     init(router: ItemListRoutable, service: Network.Service) {
         self.router = router
         self.service = service

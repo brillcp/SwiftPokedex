@@ -7,11 +7,12 @@
 
 import Networking
 
+/// An enumeration for all the possible endpoints for the backend
 enum Endpoint {
-    case pokemon
-    case details(String)
-    case items
     case itemDetails(String)
+    case details(String)
+    case pokemon
+    case items
 }
 
 // MARK: -
@@ -19,10 +20,10 @@ extension Endpoint: EndpointType {
 
     var path: String {
         switch self {
-        case .pokemon: return "pokemon"
-        case .details(let id): return "pokemon/\(id)"
-        case .items: return "item"
         case .itemDetails(let id): return "item/\(id)"
+        case .details(let id): return "pokemon/\(id)"
+        case .pokemon: return "pokemon"
+        case .items: return "item"
         }
     }
 }

@@ -7,6 +7,7 @@
 
 import Networking
 
+/// An enum for requesting the next pokemon data array
 enum NextPokemonRequest: Requestable {
     case next(offset: String, limit: String)
 

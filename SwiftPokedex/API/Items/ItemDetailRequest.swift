@@ -7,6 +7,7 @@
 
 import Networking
 
+/// An enum for requesting the item detail data
 enum ItemDetailRequest: Requestable {
     case item(String)
 

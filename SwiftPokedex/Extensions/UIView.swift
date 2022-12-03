@@ -8,7 +8,8 @@
 import UIKit
 
 extension UIView {
-
+    /// Create a view using auto layout
+    /// - parameter useAutolayout: A bool value that determines to use auto layout
     convenience init(useAutolayout: Bool) {
         self.init()
         translatesAutoresizingMaskIntoConstraints = !useAutolayout
@@ -25,18 +26,10 @@ extension UIView {
     func pinToSuperview(with insets: UIEdgeInsets = .zero, edges: UIRectEdge = .all) {
         guard let superview = superview else { return }
         translatesAutoresizingMaskIntoConstraints = false
-        if edges.contains(.top) {
-            topAnchor.constraint(equalTo: superview.topAnchor, constant: insets.top).isActive = true
-        }
-        if edges.contains(.bottom) {
-            bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: -insets.bottom).isActive = true
-        }
-        if edges.contains(.left) {
-            leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: insets.left).isActive = true
-        }
-        if edges.contains(.right) {
-            trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -insets.right).isActive = true
-        }
+        if edges.contains(.right) { trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -insets.right).isActive = true }
+        if edges.contains(.bottom) { bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: -insets.bottom).isActive = true }
+        if edges.contains(.left) { leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: insets.left).isActive = true }
+        if edges.contains(.top) { topAnchor.constraint(equalTo: superview.topAnchor, constant: insets.top).isActive = true }
     }
 
     static func tableHeader(title: String?, in tableView: UITableView) -> UIView {
