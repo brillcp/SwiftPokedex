@@ -1,5 +1,5 @@
 //
-//  ProgressBar.swift
+//  StatBar.swift
 //  SwiftPokedex
 //
 //  Created by Viktor Gidlöf on 2021-05-22.
