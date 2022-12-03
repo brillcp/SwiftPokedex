@@ -33,10 +33,8 @@ final class InteractionController: NSObject {
     // MARK: Private properties
     private weak var transitionContext: UIViewControllerContextTransitioning?
     private weak var viewController: PresentableView?
-    private var animator: UIViewPropertyAnimator?
     private let cell: UICollectionViewCell
 
-    private var interruptedTranslation: CGFloat = 0.0
     private var interactionDistance: CGFloat = 0.0
     private var transitionProgress: CGFloat = 0.0
     private let animDuration: TimeInterval = 0.3
@@ -121,9 +119,9 @@ final class InteractionController: NSObject {
         imageView.frame.size = imageView.size(fromMultiplier: 0.55)
         imageView.center = CGPoint(x: newRect.midX, y: newRect.midY + 50.0)
 
-        animator = .springAnimator(duration: animDuration, initialVelocity: min(0.0, velocity))
+        let animator: UIViewPropertyAnimator = .springAnimator(duration: animDuration, initialVelocity: min(0.0, velocity))
 
-        animator?.addAnimations {
+        animator.addAnimations {
             headerView.alpha = 1.0
             imageView.alpha = 1.0
             imageView.frame = self.initialFrame.imageInset()
@@ -138,14 +136,14 @@ final class InteractionController: NSObject {
             snapshot.frame = self.initialFrame
         }
 
-        animator?.addCompletion { _ in
+        animator.addCompletion { _ in
             transitionContext.finishInteractiveTransition()
             transitionContext.completeTransition(true)
             self.interactionInProgress = false
             self.cell.isHidden = false
         }
 
-        animator?.startAnimation()
+        animator.startAnimation()
     }
 
     private func gestureCancelled(translation: CGFloat, velocity: CGFloat) {
@@ -153,23 +151,22 @@ final class InteractionController: NSObject {
               let fromView = transitionContext.viewController(forKey: .from)
         else { return }
 
-        let spring = springVelocity(distanceToTravel: -translation, gestureVelocity: velocity)
-        animator = .springAnimator(duration: animDuration, initialVelocity: spring)
-        animator?.addAnimations {
+        let animator: UIViewPropertyAnimator = .springAnimator(duration: animDuration, initialVelocity: velocity)
+        animator.addAnimations {
             fromView.view.transform = .identity
         }
 
-        animator?.addCompletion { _ in
+        animator.addCompletion { _ in
             transitionContext.cancelInteractiveTransition()
             transitionContext.completeTransition(false)
             self.interactionInProgress = false
         }
 
-        animator?.startAnimation()
+        animator.startAnimation()
     }
 
-    private func springVelocity(distanceToTravel: CGFloat, gestureVelocity: CGFloat) -> CGFloat {
-        gestureVelocity / distanceToTravel
+    private func spring(withVelocity velocity: CGFloat, forDistance distance: CGFloat) -> CGFloat {
+        velocity / distance
     }
 }
 
@@ -192,6 +189,7 @@ extension InteractionController {
 
         let translation = gesture.translation(in: superview)
         let velocity = gesture.velocity(in: superview).x
+        let interruptedTranslation: CGFloat = 50.0
 
         switch gesture.state {
         case .began: beginGesture()
@@ -203,9 +201,6 @@ extension InteractionController {
     }
 
     private func beginGesture() {
-        animator?.stopAnimation(true)
-        interruptedTranslation = 50
-
         guard !interactionInProgress else { return }
 
         interactionInProgress = true
@@ -219,9 +214,11 @@ extension InteractionController {
 
     private func gestureEnded(translation: CGFloat, velocity: CGFloat) {
         if transitionProgress >= 0.7 || velocity > 300.0 {
-            finishTransition(initialVelocity: springVelocity(distanceToTravel: interactionDistance - translation, gestureVelocity: velocity))
+            let spring = spring(withVelocity: velocity, forDistance: interactionDistance - translation)
+            finishTransition(initialVelocity: spring)
         } else {
-            gestureCancelled(translation: translation, velocity: velocity)
+            let spring = spring(withVelocity: velocity, forDistance: -translation)
+            gestureCancelled(translation: translation, velocity: spring)
         }
     }
 }
