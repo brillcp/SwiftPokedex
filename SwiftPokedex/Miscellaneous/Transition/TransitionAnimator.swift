@@ -46,27 +46,16 @@ final class TransitionAnimator: NSObject {
         snap.alpha = 0.0
         containerView.addSubview(snap)
 
-        let headerView = UIView(frame: initialFrame)
-        headerView.layer.cornerRadius = PokedexCell.CornerRadius.small
-        headerView.backgroundColor = image?.dominantColor
-        headerView.alpha = 0.0
+        let headerView = Header(frame: initialFrame, image: image, cornerRadius: PokedexCell.CornerRadius.small)
         containerView.addSubview(headerView)
 
-        let imageView = UIImageView(frame: initialFrame.inset(by: .init(top: 0, left: 10, bottom: 15, right: 10)))
-        imageView.contentMode = .scaleAspectFill
-        imageView.image = image
-        imageView.alpha = 0.0
+        let imgFrame = initialFrame.imageInset()
+        let imageView = Image(frame: imgFrame, image: image)
         containerView.addSubview(imageView)
 
         var newRect = receivingFrame
         newRect.size.height += receivingFrame.height / 2
         newRect.origin.y -= 10.0
-
-        let newPoint: CGPoint = CGPoint(x: newRect.midX - 50.0, y: newRect.midY - 3.0)
-        let multiplier: CGFloat = 1.7
-        let newWidth: CGFloat = imageView.frame.size.width * multiplier
-        let newHeight: CGFloat = imageView.frame.size.height * multiplier
-        let newSize: CGSize = CGSize(width: newWidth, height: newHeight)
 
         let animator = UIViewPropertyAnimator(duration: transitionDuration(using: transitionContext), dampingRatio: 0.7) {
             UIView.animateKeyframes(withDuration: 0.0, delay: 0.0, options: .allowUserInteraction, animations: {
@@ -82,8 +71,8 @@ final class TransitionAnimator: NSObject {
                 UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 0.8) {
                     headerView.layer.cornerRadius = PokedexCell.CornerRadius.large
                     headerView.frame = newRect
-                    imageView.center = newPoint
-                    imageView.frame.size = newSize
+                    imageView.center = CGPoint(x: newRect.midX - 50.0, y: newRect.midY - 3.0)
+                    imageView.frame.size = imageView.size(fromMultiplier: 1.7)
                 }
 
                 UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 0.8) {
@@ -121,26 +110,14 @@ final class TransitionAnimator: NSObject {
         newRect.size.height += receivingFrame.height / 2
         newRect.origin.y -= 10.0
 
-        let headerView = UIView(frame: newRect)
-        headerView.layer.cornerRadius = PokedexCell.CornerRadius.large
-        headerView.backgroundColor = image?.dominantColor
-        headerView.alpha = 0.0
+        let headerView = Header(frame: newRect, image: image, cornerRadius: PokedexCell.CornerRadius.large)
         containerView.addSubview(headerView)
 
-        let imageView = UIImageView(frame: newRect)
-        imageView.contentMode = .scaleAspectFill
-        imageView.image = image
-        imageView.alpha = 0.0
+        let imageView = Image(frame: newRect, image: image)
         containerView.addSubview(imageView)
 
-        let newPoint: CGPoint = CGPoint(x: newRect.midX, y: newRect.midY + 50.0)
-        let multiplier: CGFloat = 0.55
-        let newWidth: CGFloat = imageView.frame.size.width * multiplier
-        let newHeight: CGFloat = imageView.frame.size.height * multiplier
-        let newSize: CGSize = CGSize(width: newWidth, height: newHeight)
-
-        imageView.frame.size = newSize
-        imageView.center = newPoint
+        imageView.frame.size = imageView.size(fromMultiplier: 0.55)
+        imageView.center = CGPoint(x: newRect.midX, y: newRect.midY + 50.0)
 
         UIView.animateKeyframes(withDuration: transitionDuration(using: transitionContext), delay: 0.0, options: .allowUserInteraction, animations: {
             UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.1) {
@@ -149,7 +126,7 @@ final class TransitionAnimator: NSObject {
             }
 
             UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 0.8) {
-                imageView.frame = self.initialFrame.inset(by: .init(top: 0, left: 10, bottom: 15, right: 10))
+                imageView.frame = self.initialFrame.imageInset()
                 headerView.layer.cornerRadius = PokedexCell.CornerRadius.small
                 headerView.frame = self.initialFrame
             }
@@ -157,7 +134,6 @@ final class TransitionAnimator: NSObject {
             UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 0.8) {
                 snap.frame = self.initialFrame
             }
-
         }, completion: { _ in
             transitionContext.finishInteractiveTransition()
             transitionContext.completeTransition(true)

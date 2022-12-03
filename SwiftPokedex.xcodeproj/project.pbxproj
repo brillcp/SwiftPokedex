@@ -80,6 +80,7 @@
 		D5791C44293AB04F00030D44 /* DetailItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5791C43293AB04F00030D44 /* DetailItem.swift */; };
 		D5791C47293AB08600030D44 /* ItemData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5791C46293AB08600030D44 /* ItemData.swift */; };
 		D5791C4B293AE5BC00030D44 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5791C4A293AE5BC00030D44 /* HeaderView.swift */; };
+		D5791C4D293AEEFB00030D44 /* CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5791C4C293AEEFB00030D44 /* CGRect.swift */; };
 		D57C6B882643359000A8D829 /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57C6B872643359000A8D829 /* UIScrollView.swift */; };
 		D57CFDF0267BE6CA00EF31D1 /* TransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57CFDEF267BE6CA00EF31D1 /* TransitionAnimator.swift */; };
 		D5846CD4267F6D0100542F8D /* InteractionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5846CD3267F6D0100542F8D /* InteractionController.swift */; };
@@ -169,6 +170,7 @@
 		D5791C43293AB04F00030D44 /* DetailItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailItem.swift; sourceTree = "<group>"; };
 		D5791C46293AB08600030D44 /* ItemData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemData.swift; sourceTree = "<group>"; };
 		D5791C4A293AE5BC00030D44 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		D5791C4C293AEEFB00030D44 /* CGRect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGRect.swift; sourceTree = "<group>"; };
 		D57C6B872643359000A8D829 /* UIScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollView.swift; sourceTree = "<group>"; };
 		D57CFDEF267BE6CA00EF31D1 /* TransitionAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionAnimator.swift; sourceTree = "<group>"; };
 		D5846CD3267F6D0100542F8D /* InteractionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionController.swift; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 				6E80678D263BF50900FD38F0 /* UITableView.swift */,
 				D53366A926486E8D00B5825D /* Collection.swift */,
 				D5BDD3C1267D6AB000F1303F /* CGFloat.swift */,
+				D5791C4C293AEEFB00030D44 /* CGRect.swift */,
 				6EEA69C0267206920004F7A6 /* UILabel.swift */,
 				6EFE1973263C8BB700FD0A19 /* UIColor.swift */,
 				6E170625263C4AF300B67F37 /* UIView.swift */,
@@ -636,6 +639,7 @@
 				6EFE1977263C8F0400FD0A19 /* UIImageColors.swift in Sources */,
 				6EF4633526791E50003B52C5 /* PresentationController.swift in Sources */,
 				6E55387026406FDB0060C25B /* Int.swift in Sources */,
+				D5791C4D293AEEFB00030D44 /* CGRect.swift in Sources */,
 				D5846CD4267F6D0100542F8D /* InteractionController.swift in Sources */,
 				6EA892272641C5AA00E4F269 /* RegularCell.swift in Sources */,
 				6E80676D263BF24300FD38F0 /* AppDelegate.swift in Sources */,

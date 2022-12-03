@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// A header view and an image view used in the custom interactive transition
 extension TransitionAnimator {
 
     final class Header: UIView {
@@ -34,11 +35,12 @@ extension TransitionAnimator {
 
 // MARK: -
 extension TransitionAnimator.Image {
-
-    func newSize(fromMultiplier multiplier: CGFloat) -> CGSize {
+    /// Create a new size from the given multiplier and current image view frame
+    /// - parameter multiplier: The multiplier to use for calculating the new size
+    /// - returns: A new size from the given multiplier
+    func size(fromMultiplier multiplier: CGFloat) -> CGSize {
         let newWidth: CGFloat = frame.size.width * multiplier
         let newHeight: CGFloat = frame.size.height * multiplier
-        let newSize: CGSize = CGSize(width: newWidth, height: newHeight)
-        return newSize
+        return CGSize(width: newWidth, height: newHeight)
     }
 }
