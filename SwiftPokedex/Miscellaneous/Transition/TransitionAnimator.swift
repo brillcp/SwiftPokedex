@@ -119,25 +119,31 @@ final class TransitionAnimator: NSObject {
         imageView.frame.size = imageView.size(fromMultiplier: 0.55)
         imageView.center = CGPoint(x: newRect.midX, y: newRect.midY + 50.0)
 
-        UIView.animateKeyframes(withDuration: transitionDuration(using: transitionContext), delay: 0.0, options: .allowUserInteraction, animations: {
-            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.1) {
-                headerView.alpha = 1.0
-                imageView.alpha = 1.0
-            }
+        let animator = UIViewPropertyAnimator(duration: transitionDuration(using: transitionContext), dampingRatio: 0.7) {
+            UIView.animateKeyframes(withDuration: 0.0, delay: 0.0, options: .allowUserInteraction, animations: {
+                UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.1) {
+                    headerView.alpha = 1.0
+                    imageView.alpha = 1.0
+                }
 
-            UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 0.8) {
-                imageView.frame = self.initialFrame.imageInset()
-                headerView.layer.cornerRadius = PokedexCell.CornerRadius.small
-                headerView.frame = self.initialFrame
-            }
+                UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 0.8) {
+                    imageView.frame = self.initialFrame.imageInset()
+                    headerView.layer.cornerRadius = PokedexCell.CornerRadius.small
+                    headerView.frame = self.initialFrame
+                }
 
-            UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 0.8) {
-                snap.frame = self.initialFrame
-            }
-        }, completion: { _ in
+                UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 0.8) {
+                    snap.frame = self.initialFrame
+                }
+            })
+        }
+
+        animator.addCompletion { _ in
             transitionContext.finishInteractiveTransition()
             transitionContext.completeTransition(true)
-        })
+        }
+
+        animator.startAnimation()
     }
 }
 
