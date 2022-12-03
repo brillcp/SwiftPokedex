@@ -39,6 +39,8 @@ final class ItemListInteractor: ItemListInteractable {
 
     // MARK: - Public functions
     func loadItems() {
+        view?.viewModel.state = .loading
+
         let request = ItemRequest.items(limit: 420)
         try! service.request(request, logResponse: true)
             .flatMap { (response: APIResponse) in
@@ -52,8 +54,8 @@ final class ItemListInteractor: ItemListInteractable {
             }
             .sink { [weak self] result in
                 switch result {
-                case .success(let items):
-                    self?.view?.viewModel.categories = items.categories
+                case .success(let data):
+                    self?.view?.viewModel.state = .loaded(data.categories)
                 case .failure(let error):
                     print(error.localizedDescription)
                     print()

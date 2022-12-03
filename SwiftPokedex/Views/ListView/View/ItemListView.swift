@@ -19,6 +19,13 @@ final class ItemListView: UIView, ViewModable, Interactable, TableViewable {
     private let subject: PassthroughSubject<Interaction, Never> = .init()
     private var cancellables = Set<AnyCancellable>()
 
+    private lazy var spinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView(style: .medium)
+        spinner.color = .white
+        spinner.hidesWhenStopped = true
+        return spinner
+    }()
+
     @IBOutlet private weak var listTableView: UITableView!
 
     // MARK: - Public properties
@@ -43,14 +50,36 @@ final class ItemListView: UIView, ViewModable, Interactable, TableViewable {
         dataSource = tableView.listViewDataSource(viewModel: viewModel, delegate: self)
         tableView.backgroundColor = .darkGrey
 
-        viewModel.$categories.sink { [weak self] newCategories in
+        viewModel.$state.sink { [weak self] state in
             guard let self = self else { return }
-            var snapshot = self.dataSource.snapshot()
-            var items = snapshot.itemIdentifiers
-            items.append(contentsOf: newCategories)
-            snapshot.appendItems(items)
-            self.dataSource.apply(snapshot, animatingDifferences: true)
+
+            self.spinner.stopAnimating()
+            switch state {
+            case .idle:
+                self.dataSource.apply(self.emptySnapshot(), animatingDifferences: false)
+            case .loading:
+                self.spinner.startAnimating()
+                self.tableView.backgroundView = self.spinner
+            case .loaded(let data):
+                self.dataSource.apply(self.updatedSnapshot(fromData: data), animatingDifferences: true)
+            }
         }.store(in: &cancellables)
+    }
+
+    // MARK: - Private functions
+    private func emptySnapshot() -> Snapshot<ItemListView.Section, ItemListView.Item> {
+        var snapshot = Snapshot<ItemListView.Section, ItemListView.Item>()
+        snapshot.appendSections(["main"])
+        snapshot.appendItems([])
+        return snapshot
+    }
+
+    private func updatedSnapshot(fromData data: [ItemData]) -> Snapshot<ItemListView.Section, ItemListView.Item> {
+        var snapshot = self.dataSource.snapshot()
+        var items = snapshot.itemIdentifiers
+        items.append(contentsOf: data)
+        snapshot.appendItems(items)
+        return snapshot
     }
 }
 
@@ -69,7 +98,8 @@ extension ItemListView: UITableViewDelegate {
 extension ItemListView: UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        let categories = viewModel.categories.flatMap { $0.items }
+        guard case let .loaded(data) = viewModel.state else { return }
+        let categories = data.flatMap { $0.items }
         let filter = categories.filtered(from: searchText)
         resultsViewController.viewModel.items = filter
     }

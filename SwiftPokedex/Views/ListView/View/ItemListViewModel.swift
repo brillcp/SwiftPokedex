@@ -10,7 +10,13 @@ import UIKit
 extension ItemListView {
     /// A data structure for the item list view model
     final class ViewModel {
-        @Published var categories = [ItemData]()
+        @Published var state: State = .idle
+        
+        enum State {
+            case idle
+            case loading
+            case loaded([ItemData])
+        }
     }
 }
 

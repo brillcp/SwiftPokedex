@@ -67,11 +67,6 @@ extension UITableView {
             cell.configure(with: item)
             return cell
         }
-
-        var snapshot = Snapshot<ItemListView.Section, ItemListView.Item>()
-        snapshot.appendSections(["main"])
-        snapshot.appendItems(viewModel.categories)
-        dataSource.apply(snapshot, animatingDifferences: false)
         return dataSource
     }
 }
