@@ -64,18 +64,11 @@ extension PokedexView: UICollectionViewDelegate {
         collectionView.deselectItem(at: indexPath, animated: true)
 
         guard let cell = collectionView.cell(at: indexPath) as? PokedexCell,
-              let pokemon = dataSource.itemIdentifier(for: indexPath),
-              let cellFrame = cell.layer.presentation()?.frame,
-              let convertedFrame = cell.superview?.convert(cellFrame, to: nil)
+              let pokemon = dataSource.itemIdentifier(for: indexPath)
         else { return }
 
         ImageCache.default.loadImage(from: pokemon.sprite.url, item: pokemon) { [weak self] _, image in
-            guard let image = image, let color = image.dominantColor else { return }
-            let container = PokemonContainer(pokemon: pokemon,
-                                               image: image,
-                                               frame: convertedFrame,
-                                               color: color)
-
+            let container = PokemonContainer(pokemon: pokemon, cell: cell, image: image)
             self?.subject.send(.selectPokemon(container))
         }
     }

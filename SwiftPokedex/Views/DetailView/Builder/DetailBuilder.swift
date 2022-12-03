@@ -14,8 +14,9 @@ final class DetailBuilder {
     ///     - pokemon: The given pokemon
     ///     - color: The dominant background color of the pokemon sprite
     /// - returns: A new navigation controller with the detail view controller as root controller
-    static func build(from pokemon: PokemonDetails, withColor color: UIColor) -> NavigationController {
-        let viewModel = DetailView.ViewModel(pokemon: pokemon, color: color)
+    static func build(fromContainer container: PokemonContainer) -> NavigationController {
+        let color = container.cell.backgroundColor ?? .clear
+        let viewModel = DetailView.ViewModel(pokemon: container.pokemon, color: color)
         let detailView = DetailController(viewModel: viewModel)
         let navigationController = NavigationController(rootViewController: detailView)
         navigationController.setNavbarApp(color: color)

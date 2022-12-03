@@ -8,7 +8,7 @@
 import UIKit
 
 /// A header view and an image view used in the custom interactive transition
-extension TransitionAnimator {
+extension Transition.Animator {
 
     final class Header: UIView {
         init(frame: CGRect, image: UIImage?, cornerRadius: CGFloat) {
@@ -34,7 +34,7 @@ extension TransitionAnimator {
 }
 
 // MARK: -
-extension TransitionAnimator.Image {
+extension Transition.Animator.Image {
     /// Create a new size from the given multiplier and current image view frame
     /// - parameter multiplier: The multiplier to use for calculating the new size
     /// - returns: A new size from the given multiplier

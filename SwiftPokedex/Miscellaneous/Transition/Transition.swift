@@ -1,5 +1,5 @@
 //
-//  TransitionController.swift
+//  Transition.swift
 //  SwiftPokedex
 //
 //  Created by Viktor Gidlöf on 2021-06-16.
@@ -8,38 +8,41 @@
 import UIKit
 
 /// A transition controller object used to present and dismiss the custom transition
-final class TransitionController: NSObject {
+final class Transition: NSObject {
 
     // MARK: Private properties
-    private let interactionController: InteractableTransition
+    private let interaction: InteractableTransition
+    private let cell: UICollectionViewCell
 
     // MARK: - Init
     /// Init the `TransitionController`
     /// - parameters:
-    ///     - interactionController: An interactable transition object used to make the custom transition interactable
-    init(interactionController: InteractableTransition) {
-        self.interactionController = interactionController
+    ///     - interaction: An interactable transition object used to make the custom transition interactable
+    ///     - cell: The given collection view cell that we want to transition from
+    init(interaction: InteractableTransition, cell: UICollectionViewCell) {
+        self.interaction = interaction
+        self.cell = cell
         super.init()
     }
 }
 
 // MARK: -
-extension TransitionController: UIViewControllerTransitioningDelegate {
+extension Transition: UIViewControllerTransitioningDelegate {
 
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         PresentationController(presentedViewController: presented, presenting: presenting)
     }
 
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        TransitionAnimator(isPresenting: true, interactionController: interactionController)
+        Animator(isPresenting: true, interaction: interaction, cell: cell)
     }
 
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        TransitionAnimator(isPresenting: false, interactionController: interactionController)
+        Animator(isPresenting: false, interaction: interaction, cell: cell)
     }
 
     func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        guard interactionController.interactionInProgress else { return nil }
-        return interactionController
+        guard interaction.interactionInProgress else { return nil }
+        return interaction
     }
 }

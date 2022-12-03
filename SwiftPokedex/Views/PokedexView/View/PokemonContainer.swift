@@ -10,7 +10,6 @@ import UIKit
 /// A container object used when selecting and transitioning to a pokemon detail view
 struct PokemonContainer {
     let pokemon: PokemonDetails
-    let image: UIImage
-    let frame: CGRect
-    let color: UIColor
+    let cell: PokedexCell
+    let image: UIImage?
 }

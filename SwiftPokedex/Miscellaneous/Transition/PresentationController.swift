@@ -44,9 +44,9 @@ extension PresentationController {
             return
         }
 
-        coordinator.animate(alongsideTransition: { _ in
+        coordinator.animate { _ in
             self.fadeView.alpha = Self.finalAlpha
-        })
+        }
     }
 
     override func dismissalTransitionWillBegin() {
@@ -55,8 +55,8 @@ extension PresentationController {
             return
         }
 
-        coordinator.animate(alongsideTransition: { _ in
+        coordinator.animate { _ in
             self.fadeView.alpha = 0.0
-        })
+        }
     }
 }
