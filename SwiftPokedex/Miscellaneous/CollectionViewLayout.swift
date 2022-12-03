@@ -25,7 +25,7 @@ extension Layout {
         let item = Item(layoutSize: itemSize)
         let groupSize = Size(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(160.0))
         let group = Group.horizontal(layoutSize: groupSize, subitem: item, count: 2)
-        let padding: CGFloat = 16.0
+        let padding: CGFloat = 20.0
         let spacing = CGFloat(padding)
         group.interItemSpacing = .fixed(spacing)
         let section = Section(group: group)
