@@ -28,7 +28,8 @@ final class DetailController: ViewController<DetailView> {
 
     // MARK: - Public properties
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        viewModel.isLight ? .default : .lightContent
+        guard let nav = navigationController else { fatalError("No navigation here, should never happen!") }
+        return nav.isBeingDismissed ? .lightContent : viewModel.isLight ? .darkContent : .lightContent
     }
 
     // MARK: - Init

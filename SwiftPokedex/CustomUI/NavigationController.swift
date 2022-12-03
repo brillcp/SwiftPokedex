@@ -16,15 +16,12 @@ final class NavigationController: UINavigationController, PresentableView {
         guard let detailView = topViewController as? DetailController else { return nil }
         return detailView.nib.tableView.tableHeaderView?.frame
     }
+}
 
-    override var childForStatusBarStyle: UIViewController? {
-        topViewController?.childForStatusBarStyle ?? topViewController
-    }
-
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        guard let top = topViewController as? DetailController else { return .default }
-        return top.preferredStatusBarStyle
-    }
+// MARK: -
+extension NavigationController {
+    override var preferredStatusBarStyle: UIStatusBarStyle { visibleViewController?.preferredStatusBarStyle ?? super.preferredStatusBarStyle }
+    override var childForStatusBarStyle: UIViewController? { visibleViewController }
 }
 
 // MARK: -
