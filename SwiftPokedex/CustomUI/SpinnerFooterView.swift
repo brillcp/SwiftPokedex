@@ -21,7 +21,7 @@ final class SpinnerFooterView: UICollectionReusableView {
         super.init(frame: frame)
 
         addSubview(spinner)
-        spinner.pinToSuperview()
+        spinner.pinToSuperview(with: .init(top: -30, left: 0, bottom: 0, right: 0))
         spinner.startAnimating()
     }
 
