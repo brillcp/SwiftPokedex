@@ -39,10 +39,10 @@ extension DetailView.ViewModel {
     }
 
     var moves: DetailItem {
-        let limit = 6
+        let limit = 16
         let tooMany = pokemon.moves.count > limit
         var values = tooMany ? Array(pokemon.moves[0 ..< limit]) : pokemon.moves
-        if tooMany { values.append(Move(move: APIItem(name: "...", url: ""))) }
+        if tooMany { values.append(Move(move: APIItem(name: ". . .", url: ""))) }
         let moves = values.map { $0.move.name.cleaned }.joined(separator: "\n\n")
         return DetailItem(title: "Moves", value: moves)
     }
