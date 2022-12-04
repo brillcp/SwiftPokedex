@@ -32,19 +32,21 @@ final class DetailCell: UITableViewCell {
 
         backgroundColor = .clear
 
+        let padding: CGFloat = 20.0
+
         contentView.addSubview(titleLabel)
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15.0),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15.0),
             titleLabel.widthAnchor.constraint(equalToConstant: 140.0)
         ])
 
         contentView.addSubview(valueLabel)
         NSLayoutConstraint.activate([
-            valueLabel.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 15.0),
-            valueLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15.0),
-            valueLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15.0),
-            valueLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15.0)
+            valueLabel.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: padding),
+            valueLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
+            valueLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -padding),
+            valueLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding)
         ])
     }
 

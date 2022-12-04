@@ -29,15 +29,34 @@ final class DetailView: UIView, ViewModable, Interactable, TableViewable {
 
     enum Section: Int {
         case stats, details
+
+        var description: String {
+            switch self {
+            case .stats: return "Base Stats"
+            case .details: return "Info"
+            }
+        }
     }
 
     // MARK: - Public functions
     func setViewModel(_ viewModel: ViewModel) {
-        dataSource = tableView.detailViewDataSource(viewModel: viewModel)
+        dataSource = tableView.detailViewDataSource(viewModel: viewModel, delegate: self)
         tableView.backgroundColor = .darkGrey
 
         let frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 300.0)
         let header = DetailHeaderView(frame: frame, pokemon: viewModel.pokemon, color: viewModel.color)
         tableView.tableHeaderView = header
+    }
+}
+
+// MARK: -
+extension DetailView: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        40.0
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        UIView.tableHeader(title: Section(rawValue: section)?.description, in: tableView)
     }
 }
