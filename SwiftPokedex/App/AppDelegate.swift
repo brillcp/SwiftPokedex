@@ -22,11 +22,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: -
     private func setTabbarApprearence() {
-        UITabBarItem.appearance().setTitleTextAttributes([.font: UIFont.pixel12], for: .normal)
-        let tabBarApperance = UITabBarAppearance()
-        tabBarApperance.configureWithOpaqueBackground()
-        tabBarApperance.backgroundColor = .darkGrey
-        UITabBar.appearance().scrollEdgeAppearance = tabBarApperance
-        UITabBar.appearance().standardAppearance = tabBarApperance
+        let appearance = UITabBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor.pokedexRed]
+        appearance.stackedLayoutAppearance.normal.titleTextAttributes = [.font: UIFont.pixel12]
+        appearance.stackedLayoutAppearance.selected.iconColor = .pokedexRed
+        appearance.backgroundColor = .darkGrey
+        UITabBar.appearance().scrollEdgeAppearance = appearance
+        UITabBar.appearance().standardAppearance = appearance
     }
 }
