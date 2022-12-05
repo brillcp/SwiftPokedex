@@ -98,7 +98,7 @@ final class ViewModel {
 }
 ```
 
-And by declearing the properties as `Published` we can utilized them as Combine publishers in the view implementation:
+And by declearing the properties as `Published` we can utilize them as Combine publishers in the view implementation:
 ```swift
 final class PokedexView: UIView, ViewModable {
 
