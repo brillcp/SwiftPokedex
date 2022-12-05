@@ -24,7 +24,7 @@ It downloads an array of Pokemon and displays them in a grid. The most dominant 
 
 # Architecture 🏛
 
-SwiftPokedex is written in my own interpretation of the RIB archtitecure created by Uber, called RIB+VVM. The name RIBs is short for Router, Interactor and Builder, which are the core components of the architecture. And VVM refers to `View` and `ViewModel`.
+SwiftPokedex is written in my own interpretation of the RIB archtitecure created by Uber, called RIB+VVM. RIBs is short for Router, Interactor and Builder, which are the core components of the architecture. And VVM refers to View and ViewModel.
 
 ## Builder 🛠
 
@@ -59,7 +59,7 @@ final class PokedexView: UIView, ViewModable {
 }
 ```
 
-All the views are also subscribing to the [Interactable](SwiftPokedex/Miscellaneous/Protocols/Interactable.swift) protocol, making them implement an interaction publisher that publishes all the interactions the view can make (user input, delegate calls, etc…):
+Views are also subscribing to the [Interactable](SwiftPokedex/Miscellaneous/Protocols/Interactable.swift) protocol, making them implement an interaction publisher that publish all the interactions the view can make (user input, delegate calls, etc…):
 ```swift
 final class PokedexView: UIView, Interactable {
 
@@ -83,7 +83,8 @@ final class PokedexView: UIView, Interactable {
     }
 }
 ```
-## View Model 
+
+## View Model 🧾
 
 The view model objects contains state and values:
 ```swift
@@ -96,6 +97,7 @@ final class ViewModel {
     }
 }
 ```
+
 And by declearing the properties as `Published` we can utilized them as Combine publishers in the view implementation:
 ```swift
 final class PokedexView: UIView, ViewModable {
@@ -113,7 +115,7 @@ final class PokedexView: UIView, ViewModable {
 
 ## Interactor 👇🏻
 
-The interactor is the link between the user input and the view and includes all the interactions that can happen in the view. Also any network calls, database communication and navigation. The interactor also changes the state of the view by calling the view's view model object directly.
+The interactor is the connection between the user input and the view and includes all the interactions that can happen in the view. Also any network calls, database communication and navigation. The interactor also changes the state of the view by calling the view's view model object directly.
 
 The interactor has a weak reference to the view protocol that contains an interaction publisher and the view model:
 ```swift
@@ -155,7 +157,6 @@ The router is in charge of navigation. And since routers are decoupled from view
 ```swift
 func routeToDetailView(withPokemonContainer container: PokemonContainer) {
     let detailView = DetailBuilder.build(fromContainer: container)
-    // ...
     navigationController?.present(detailView, animated: true)
 }
 ```
