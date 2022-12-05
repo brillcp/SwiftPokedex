@@ -80,7 +80,7 @@ final class PokedexInteractor: PokedexInteractable {
         view?.interaction.sink { [weak self] interaction in
             switch interaction {
             case .selectPokemon(let container):
-                self?.router.routeToDetailView(pokemon: container)
+                self?.router.routeToDetailView(withPokemonContainer: container)
             case .scrollToBottom:
                 if self?.view?.viewModel.state == .idle {
                     self?.loadPokemon()
