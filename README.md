@@ -24,7 +24,7 @@ It downloads an array of Pokemon and displays them in a grid. The most dominant 
 
 # Architecture 🏛
 
-SwiftPokedex is written in my own interpretation of the RIB archtitecure created by Uber. I call it RIBVVM. The name RIBs is short for Router, Interactor and Builder, which are the core components of the architecture. And VVM stanfds for View and ViewModel that is used views, states and data.
+SwiftPokedex is written in my own interpretation of the RIB archtitecure created by Uber, called RIB+VVM. The name RIBs is short for Router, Interactor and Builder, which are the core components of the architecture. And VVM refers to `View` and `ViewModel`.
 
 ## Builder 🛠
 
