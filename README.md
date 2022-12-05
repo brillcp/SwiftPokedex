@@ -163,21 +163,7 @@ func routeToDetailView(withPokemonContainer container: PokemonContainer) {
 
 # Networking ⚡️
 
-SwiftPokedex uses Combine for all the API calls to the PokeAPI. This small structure is all that's needed to make any type of request to the API. 
-The [PokemonAPI](SwiftPokedex/Networking/PokemonAPI/PokemonAPI.swift) and [ItemAPI](SwiftPokedex/Networking/ItemAPI/ItemAPI.swift) is then build around this network agent. It supports requesting pokemons and items at the moment.
-```swift
-struct NetworkAgent {
-    func execute<T: Decodable>(_ request: URLRequest, logJSON: Bool = false) -> AnyPublisher<T, Error> {
-        URLSession.shared.dataTaskPublisher(for: request)
-            .tryMap {
-                if logJSON { print($0.data.prettyJSON ?? "no json") }
-                return $0.data
-            }
-            .decode(type: T.self, decoder: JSONDecoder())
-            .eraseToAnyPublisher()
-    }
-}
-```
+SwiftPokedex uses the HTTP framework [Ntworking](https://github.com/brillcp/Networking) for all the API calls to the PokeAPI.
 
 # Todo 📝
 
