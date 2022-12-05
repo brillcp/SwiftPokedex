@@ -19,6 +19,11 @@ final class DetailBuilder {
         let viewModel = DetailView.ViewModel(pokemon: container.pokemon, color: color)
         let detailView = DetailController(viewModel: viewModel)
         let navigationController = NavigationController(rootViewController: detailView)
+        let interaction = Transition.Interaction(viewController: navigationController, cell: container.cell, image: container.image)
+        let transitionManager = Transition(interaction: interaction, cell: container.cell)
+        navigationController.transitioningDelegate = transitionManager
+        navigationController.transitionManager = transitionManager
+        navigationController.modalPresentationStyle = .custom
         navigationController.setNavbarApp(color: color)
         return navigationController
     }

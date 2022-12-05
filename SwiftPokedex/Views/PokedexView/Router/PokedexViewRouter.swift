@@ -24,11 +24,6 @@ final class PokedexRouter: PokedexRoutable {
     // MARK: - Public functions
     func routeToDetailView(withPokemonContainer container: PokemonContainer) {
         let detailView = DetailBuilder.build(fromContainer: container)
-        let interaction = Transition.Interaction(viewController: detailView, cell: container.cell, image: container.image)
-        let transitionManager = Transition(interaction: interaction, cell: container.cell)
-        detailView.transitionManager = transitionManager
-        detailView.transitioningDelegate = transitionManager
-        detailView.modalPresentationStyle = .custom
         navigationController?.present(detailView, animated: true)
     }
 }
