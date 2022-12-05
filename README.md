@@ -6,14 +6,14 @@ SwiftPokedex is a simple Pokedex app written by [Viktor Gidlöf](https://viktorg
 
 This sample app demonstrates:
 
-+ RIB architecture 🏛
++ Compositional layout for table and collection views 💾
 + Network capabilities using Combine ⚡️
-+ Data driven table and collection views 💾
 + Async image download and caching 🏞
-+ Swift dot syntax ✏️
-+ Custom navigation bar 🧭
-+ Custom fonts 📖
++ Custom navigation bar and tabbar 🧭
++ Custom view transition 📲
 + Infinite scrolling 📜
++ RIB architecture 🏛
++ Custom fonts 📖
 
 It downloads an array of Pokemon and displays them in a grid. The most dominant color of the Pokemon sprite is detected and shown in the UI. It also shows a list of the most common items.
 
@@ -24,25 +24,62 @@ It downloads an array of Pokemon and displays them in a grid. The most dominant 
 
 # Architecture 🏛
 
-SwiftPokedex is written in my own interpretation of the RIB archtitecure created by Uber. The name RIBs is short for Router, Interactor and Builder, which are core components of the architecture.
+SwiftPokedex is written in my own interpretation of the RIB archtitecure created by Uber. I call it RIBVVM. The name RIBs is short for Router, Interactor and Builder, which are the core components of the architecture. And then it uses a view and a view model for holding view states and other data.
 
 ## Builder 🛠
 
 The builder builds the views with all of their dependencies.
 ```swift
 final class PokedexViewBuilder {
-    
     static func build() -> NavigationController {
         let router = PokedexRouter()
-        let interactor = PokedexInteractor(router: router)
-        let viewController = PokedexViewController(interactor: interactor)
+        let interactor = PokedexInteractor(router: router, service: .default)
+        let viewController = PokedexController(viewModel: .init(), interactor: interactor)
         let navigationController = NavigationController(rootViewController: viewController)
-        
+        navigationController.setNavbarApp(color: .pokedexRed)
+        interactor.view = viewController
         router.navigationController = navigationController
         return navigationController
     }
 }
 ```
+
+## View
+The view is a regular `UIView` and is made with a xib in this project. The upside of using a xib is that the view layout can be adapted for iPad very easily. The potential downside is that you can't really pass any custom objects to the view. But that is fixed by making the views subsrcibe to the [ViewModable](https://github.com/brillcp/SwiftPokedex/blob/master/SwiftPokedex/Miscellaneous/Protocols/ViewModable.swift) protocol. That way all the objects and UI elements are set when the view model is set.
+```swift
+final class PokedexView: UIView, ViewModable {
+
+    // ...
+    var viewModel: ViewModel! { didSet { setViewModel(viewModel) } }
+ 
+    func setViewModel(_ viewModel: ViewModel) {
+        // Set all the data and state from the view model to the UI
+    }
+}
+```
+
+All the views are also subscribing to the [Interactable](https://github.com/brillcp/SwiftPokedex/blob/master/SwiftPokedex/Miscellaneous/Protocols/Interactable.swift) protocol, making them implement an interaction publisher that publishes all the interactions the view can make (user input, delegate calls, etc…):
+```swift
+final class PokedexView: UIView, Interactable {
+
+    // ...
+    private let subject: PassthroughSubject<Interaction, Never> = .init()
+ 
+    // ...
+    var interaction: AnyPublisher<Interaction, Never> { subject.eraseToAnyPublisher() }
+
+    // ...
+    enum Interaction {
+        case selectPokemon(PokemonContainer)
+    }
+}
+```
+
+
+
+
+
+
 
 ## Interactor 👇🏻
 The interactor is the link between the user input and the view and includes all the interations the user can make. It also contains a router object. So when the user interacts with the view we call the interactor to make the appropriate interaction.
