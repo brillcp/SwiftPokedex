@@ -152,7 +152,7 @@ func routeToDetailView(withPokemonContainer container: PokemonContainer) {
 ```
 
 # Networking ⚡️
-SwiftPokedex uses the HTTP framework [Networking](https://github.com/brillcp/Networking) for all the API calls to the PokeAPI.
+SwiftPokedex uses the HTTP framework [Networking](https://github.com/brillcp/Networking) for all the API calls to the PokeAPI. You can read more about that [here](https://github.com/brillcp/Networking#readme).
 
 # Todo 📝
 The PokeAPI is very extensive and it contains a lot of things. Here are some things that can be implemented further down the line:
