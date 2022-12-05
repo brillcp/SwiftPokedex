@@ -37,23 +37,18 @@ final class PokedexView: UIView, ViewModable, Interactable, CollectionViewable {
         collectionView.backgroundColor = .darkGrey
 
         viewModel.$pokemon.sink { [weak self] pokemon in
-            guard let self = self else { return }
-            var snapshot = self.dataSource.snapshot()
-            var items = snapshot.itemIdentifiers
-            items.append(contentsOf: pokemon)
-            items.sort(by: { $0.id < $1.id })
-            snapshot.appendItems(items)
-            self.dataSource.apply(snapshot, animatingDifferences: true)
+            self?.appendData(pokemon)
         }.store(in: &cancellables)
+    }
 
-        viewModel.$state.sink { state in
-            switch state {
-            case .idle:
-                ()
-            case .loading:
-                ()
-            }
-        }.store(in: &cancellables)
+    // MARK: - Private functions
+    private func appendData(_ data: [PokemonDetails]) {
+        var snapshot = dataSource.snapshot()
+        var items = snapshot.itemIdentifiers
+        items.append(contentsOf: data)
+        items.sort(by: { $0.id < $1.id })
+        snapshot.appendItems(items)
+        dataSource.apply(snapshot, animatingDifferences: true)
     }
 }
 
