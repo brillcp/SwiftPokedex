@@ -476,8 +476,8 @@
 				D5846CDA26812ADB00542F8D /* HorizontalPanGesture.swift */,
 				D53E93082937B8FB00AD415C /* CollectionViewLayout.swift */,
 				D5600F5D2937B5450053E332 /* TableDataSources.swift */,
+				D5F4D4B62679898D0052C79C /* CustomTransition */,
 				D53E9313293818A500AD415C /* ImageCache.swift */,
-				D5F4D4B62679898D0052C79C /* Transition */,
 				D5600F5C2937B5180053E332 /* Protocols */,
 			);
 			path = Miscellaneous;
@@ -540,7 +540,7 @@
 			path = Items;
 			sourceTree = "<group>";
 		};
-		D5F4D4B62679898D0052C79C /* Transition */ = {
+		D5F4D4B62679898D0052C79C /* CustomTransition */ = {
 			isa = PBXGroup;
 			children = (
 				D503146A293BCE9700581E7F /* InteractableTransition.swift */,
@@ -552,7 +552,7 @@
 				6EF4633026791E50003B52C5 /* Transition.swift */,
 				D57CFDEF267BE6CA00EF31D1 /* Animator.swift */,
 			);
-			path = Transition;
+			path = CustomTransition;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
