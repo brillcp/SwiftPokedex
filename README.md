@@ -7,12 +7,12 @@ SwiftPokedex is a simple Pokedex app written by [Viktor Gidlöf](https://viktorg
 This sample app demonstrates:
 
 + Compositional layout for table and collection views 💾
-+ Network capabilities using Combine ⚡️
 + Async image download and caching 🏞
++ Network capabilities using Combine ⚡️
 + Custom navigation bar and tabbar 🧭
 + Custom view transition 📲
-+ Infinite scrolling 📜
 + RIB architecture 🏛
++ Infinite scrolling 📜
 + Custom fonts 📖
 
 It downloads an array of Pokemon and displays them in a grid. The most dominant color of the Pokemon sprite is detected and shown in the UI. It also shows a list of the most common items.
@@ -24,7 +24,7 @@ It downloads an array of Pokemon and displays them in a grid. The most dominant 
 
 # Architecture 🏛
 
-SwiftPokedex is written in my own interpretation of the RIB archtitecure created by Uber. I call it RIBVVM. The name RIBs is short for Router, Interactor and Builder, which are the core components of the architecture. And then it uses a view and a view model for holding view states and other data.
+SwiftPokedex is written in my own interpretation of the RIB archtitecure created by Uber. I call it RIBVVM. The name RIBs is short for Router, Interactor and Builder, which are the core components of the architecture. And VVM stanfds for View and ViewModel that is used views, states and data.
 
 ## Builder 🛠
 
@@ -44,8 +44,9 @@ final class PokedexViewBuilder {
 }
 ```
 
-## View
-The view is a regular `UIView` and is made with a xib in this project. The upside of using a xib is that the view layout can be adapted for iPad very easily. The potential downside is that you can't really pass any custom objects to the view. But that is fixed by making the views subsrcibe to the [ViewModable](https://github.com/brillcp/SwiftPokedex/blob/master/SwiftPokedex/Miscellaneous/Protocols/ViewModable.swift) protocol. That way all the objects and UI elements are set when the view model is set.
+## View 📱
+
+The view is a regular `UIView` and is made with a xib in this project. The upside of using a xib is that the view layout can be adapted for iPad very easily. The potential downside is that you can't really pass any custom objects to the view. But that is fixed by making the views subsrcibe to the [ViewModable](SwiftPokedex/Miscellaneous/Protocols/ViewModable.swift) protocol. That way all the objects and UI elements are set when the view model is set.
 ```swift
 final class PokedexView: UIView, ViewModable {
 
@@ -58,45 +59,104 @@ final class PokedexView: UIView, ViewModable {
 }
 ```
 
-All the views are also subscribing to the [Interactable](https://github.com/brillcp/SwiftPokedex/blob/master/SwiftPokedex/Miscellaneous/Protocols/Interactable.swift) protocol, making them implement an interaction publisher that publishes all the interactions the view can make (user input, delegate calls, etc…):
+All the views are also subscribing to the [Interactable](SwiftPokedex/Miscellaneous/Protocols/Interactable.swift) protocol, making them implement an interaction publisher that publishes all the interactions the view can make (user input, delegate calls, etc…):
 ```swift
 final class PokedexView: UIView, Interactable {
 
-    // ...
     private let subject: PassthroughSubject<Interaction, Never> = .init()
  
-    // ...
     var interaction: AnyPublisher<Interaction, Never> { subject.eraseToAnyPublisher() }
 
-    // ...
     enum Interaction {
-        case selectPokemon(PokemonContainer)
+        case navigateSomewhere
+        case increaseValue(Int)
+    }
+
+    // ...
+
+    @IBAction private func buttonAction(_ sender: UIButton) {
+        subject.send(.navigateSomewhere)
+    }
+
+    @IBAction private func increaseAction(_ sender: UIButton) {
+        subject.send(.increaseValue(1))
+    }
+}
+```
+## View Model 
+
+The view model objects contains state and values:
+```swift
+final class ViewModel {
+    @Published var pokemon = [PokemonDetails]()
+    @Published var state: State = .idle
+
+    enum State {
+        case idle, loading
+    }
+}
+```
+And by declearing the properties as `Published` we can utilized them as Combine publishers in the view implementation:
+```swift
+final class PokedexView: UIView, ViewModable {
+
+    // ...
+ 
+    func setViewModel(_ viewModel: ViewModel) {
+        // ...
+        viewModel.$pokemon.sink { [weak self] pokemon in
+            self?.appendData(pokemon)
+        }.store(in: &cancellables)
     }
 }
 ```
 
-
-
-
-
-
-
 ## Interactor 👇🏻
-The interactor is the link between the user input and the view and includes all the interations the user can make. It also contains a router object. So when the user interacts with the view we call the interactor to make the appropriate interaction.
-```swift
-override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    collectionView.deselectItem(at: indexPath, animated: true)
 
-    interactor.selectPokemon(at: indexPath, in: collectionView)
+The interactor is the link between the user input and the view and includes all the interactions that can happen in the view. Also any network calls, database communication and navigation. The interactor also changes the state of the view by calling the view's view model object directly.
+
+The interactor has a weak reference to the view protocol that contains an interaction publisher and the view model:
+```swift
+protocol PokedexViewProtocol: AnyObject {
+    var interaction: AnyPublisher<PokedexView.Interaction, Never> { get }
+    var viewModel: PokedexView.ViewModel { get }
+}
+```
+
+This way the interactor can listen to any interactions and respond with the appropriate action:
+```swift
+final class PokedexInteractor {
+
+    // ...
+    private var cancellables = Set<AnyCancellable>()
+    private let router: Routable
+
+    weak var view: PokedexViewProtocol? { didSet { setupInteractionPublisher() } }
+
+    // ...
+    private func setupInteractionPublisher() {
+        view?.interaction.sink { [weak self] interaction in
+            // Respond to the interaction from the view
+            switch interaction {
+            case .navigateSomewhere:
+                self?.router.routeToSomeView()
+
+            case .increaseValue(let int):
+                self?.view?.viewModel.value += int
+            }
+        }.store(in: &cancellables)
+    }
 }
 ```
 
 ## Router 🕹
+
 The router is in charge of navigation. And since routers are decoupled from view controllers we can easily navigate to anywhere in the app.
 ```swift
-func routeToDetailView(pokemon: PokemonDetails, color: UIColor) {
-    let detailView = DetailViewBuilder.build(from: pokemon, withColor: color)
-    navigationController?.pushViewController(detailView, animated: true)
+func routeToDetailView(withPokemonContainer container: PokemonContainer) {
+    let detailView = DetailBuilder.build(fromContainer: container)
+    // ...
+    navigationController?.present(detailView, animated: true)
 }
 ```
 
@@ -118,20 +178,9 @@ struct NetworkAgent {
 }
 ```
 
-# Data driven tables and collection views 💾
-
-The table views and collection views are data driven and they setup their own UI based on the data they are given. So setting up a collection view data source is done like this:
-```swift
-let items = pokemon.map { CollectionCellConfiguration<PokedexCell, PokemonDetails>(data: $0) }
-let section = UICollectionView.Section(items: items)
-let collectionData = UICollectionView.DataSource(sections: [section])
-```
-
-By configuring the cells using `CollectionCellConfiguration` we tell the collection view that the data type we want to use is `PokemonDetails` and the custom cell is `PokedexCell`. This make setting up cells type safe as well. Then the collection view automatically renders that data with those cells. No need to implement any of the collection delegate or data source methods in the view controller. That is done with the [CollectionCellConfigurator](https://github.com/brillcp/SwiftPokedex/blob/493e4f78f46005da6ec6f8354888b32bccff31fa/SwiftPokedex/CustomUI/CollectionView/CollectionCellConfiguration.swift#L10) protocol and a subclass of [UICollectionViewController](https://github.com/brillcp/SwiftPokedex/blob/master/SwiftPokedex/CustomUI/CollectionView/CollectionViewController.swift).
-
 # Todo 📝
 
-The PokeAPI is very extensive and it contains a lot of things. Here are some things that I plan to implement further down the line:
+The PokeAPI is very extensive and it contains a lot of things. Here are some things that can be implemented further down the line:
 - [x] Request pokemon
 - [ ] Search pokemon
 - [x] Pokedex pagination
@@ -146,6 +195,6 @@ The PokeAPI is very extensive and it contains a lot of things. Here are some thi
 
 # Requirements ❗️
 
-+ Xcode 12.0+
-+ iOS 14.1+
-+ Swift 5+
++ Xcode 14.0.1+
++ iOS 15.0+
++ Swift 5.7+
