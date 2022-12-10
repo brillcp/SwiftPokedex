@@ -60,7 +60,6 @@
 		D53E93052937B86900AD415C /* CollectionViewable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53E93042937B86900AD415C /* CollectionViewable.swift */; };
 		D53E93072937B8A900AD415C /* CollectionDataSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53E93062937B8A900AD415C /* CollectionDataSources.swift */; };
 		D53E93092937B8FB00AD415C /* CollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53E93082937B8FB00AD415C /* CollectionViewLayout.swift */; };
-		D53E930C2937FD0400AD415C /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = D53E930B2937FD0400AD415C /* Networking */; };
 		D53E930E2937FEE700AD415C /* PokemonRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53E930D2937FEE700AD415C /* PokemonRequest.swift */; };
 		D53E93102937FF5200AD415C /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53E930F2937FF5200AD415C /* Endpoints.swift */; };
 		D53E931229380DD800AD415C /* DetailRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53E931129380DD800AD415C /* DetailRequest.swift */; };
@@ -93,6 +92,7 @@
 		D58F7B3E26530F8D00FE841D /* APIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58F7B3D26530F8D00FE841D /* APIModels.swift */; };
 		D59AE6932938EB0C0072F9A8 /* ItemRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59AE6922938EB0C0072F9A8 /* ItemRequest.swift */; };
 		D59AE6952938EEA30072F9A8 /* ItemDetailRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59AE6942938EEA30072F9A8 /* ItemDetailRequest.swift */; };
+		D5A8EF90293E8BAF005E134B /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = D5A8EF8F293E8BAF005E134B /* Networking */; };
 		D5BDD3C2267D6AB000F1303F /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BDD3C1267D6AB000F1303F /* CGFloat.swift */; };
 		D5E28D0C2938C15400C21828 /* ItemListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5E28D0B2938C15400C21828 /* ItemListView.xib */; };
 		D5E28D0E2938C15A00C21828 /* ItemListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E28D0D2938C15A00C21828 /* ItemListView.swift */; };
@@ -196,7 +196,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D53E930C2937FD0400AD415C /* Networking in Frameworks */,
+				D5A8EF90293E8BAF005E134B /* Networking in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -572,7 +572,7 @@
 			);
 			name = SwiftPokedex;
 			packageProductDependencies = (
-				D53E930B2937FD0400AD415C /* Networking */,
+				D5A8EF8F293E8BAF005E134B /* Networking */,
 			);
 			productName = CombineSample;
 			productReference = 6E806769263BF24300FD38F0 /* SwiftPokedex.app */;
@@ -602,7 +602,7 @@
 			);
 			mainGroup = 6E806760263BF24300FD38F0;
 			packageReferences = (
-				D53E930A2937FD0400AD415C /* XCRemoteSwiftPackageReference "Networking" */,
+				D5A8EF8E293E8BAF005E134B /* XCRemoteSwiftPackageReference "Networking" */,
 			);
 			productRefGroup = 6E80676A263BF24300FD38F0 /* Products */;
 			projectDirPath = "";
@@ -913,20 +913,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		D53E930A2937FD0400AD415C /* XCRemoteSwiftPackageReference "Networking" */ = {
+		D5A8EF8E293E8BAF005E134B /* XCRemoteSwiftPackageReference "Networking" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/brillcp/Networking.git";
 			requirement = {
-				branch = develop;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.8.8;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D53E930B2937FD0400AD415C /* Networking */ = {
+		D5A8EF8F293E8BAF005E134B /* Networking */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D53E930A2937FD0400AD415C /* XCRemoteSwiftPackageReference "Networking" */;
+			package = D5A8EF8E293E8BAF005E134B /* XCRemoteSwiftPackageReference "Networking" */;
 			productName = Networking;
 		};
 /* End XCSwiftPackageProductDependency section */
