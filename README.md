@@ -9,7 +9,7 @@ This sample app demonstrates:
 + Network capabilities using Combine ⚡️
 + Custom navigation bar and tabbar 🧭
 + Custom view transition 📲
-+ RIB architecture 🏛
++ RIB+VVM architecture 🏛
 + Infinite scrolling 📜
 + Custom fonts 📖
 
